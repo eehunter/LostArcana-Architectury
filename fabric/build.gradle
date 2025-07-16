@@ -1,6 +1,6 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
-    id 'org.jetbrains.kotlin.jvm'
+    id ("com.github.johnrengelman.shadow")
+    id ("org.jetbrains.kotlin.jvm")
 }
 
 architectury {
@@ -36,20 +36,22 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.13.4+kotlin.2.2.0")
+
     modImplementation "maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-fabric-mc$rootProject.fusion_mc_version"
 }
 
 processResources {
-    inputs.property 'version', project.version
+    inputs.property ("version"), project.version
 
-    filesMatching('fabric.mod.json') {
+    filesMatching("fabric.mod.json") {
         expand version: project.version
     }
 }
 
 shadowJar {
     configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+    archiveClassifier = "dev-shadow"
 }
 
 remapJar {

@@ -15,10 +15,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.oyosite.ticon.lostarcana.fabric.LostarcanaFabric"
+      {
+        "adapter": "kotlin",
+        "value": "com.oyosite.ticon.lostarcana.fabric.LostArcanaFabric"
+      }
     ],
     "client": [
-      "com.oyosite.ticon.lostarcana.fabric.client.LostarcanaFabricClient"
+      {
+        "adapter": "kotlin",
+        "value": "com.oyosite.ticon.lostarcana.fabric.client.LostArcanaFabricClient"
+      }
     ]
   },
   "mixins": [

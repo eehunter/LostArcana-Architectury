@@ -25,6 +25,12 @@
         "adapter": "kotlin",
         "value": "com.oyosite.ticon.lostarcana.fabric.client.LostArcanaFabricClient"
       }
+    ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "com.oyosite.ticon.lostarcana.fabric.datagen.LostArcanaDataGenerator"
+      }
     ]
   },
   "mixins": [

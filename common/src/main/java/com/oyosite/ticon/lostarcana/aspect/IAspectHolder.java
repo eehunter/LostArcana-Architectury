@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 @ApiStatus.Internal
 public interface IAspectHolder<T> {
-    Aspect[] lostarcana$getAspects(T context);
-    void lostarcana$setStaticAspects(Aspect[] aspects);
-    void lostarcana$setAspectGetter(Function<T, Aspect[]> getter);
+    AspectStack[] lostarcana$getAspects(T context);
+    void lostarcana$setStaticAspects(AspectStack[] aspects);
+    void lostarcana$setAspectGetter(Function<T, AspectStack[]> getter);
 }

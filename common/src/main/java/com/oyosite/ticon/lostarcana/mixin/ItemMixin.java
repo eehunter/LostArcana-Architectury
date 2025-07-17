@@ -1,6 +1,6 @@
 package com.oyosite.ticon.lostarcana.mixin;
 
-import com.oyosite.ticon.lostarcana.aspect.Aspect;
+import com.oyosite.ticon.lostarcana.aspect.AspectStack;
 import com.oyosite.ticon.lostarcana.aspect.IAspectHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,26 +13,26 @@ import java.util.function.Function;
 public class ItemMixin implements IAspectHolder<ItemStack> {
 
     @Unique
-    Aspect[] staticAspects = null;
+    AspectStack[] staticAspects = null;
 
     @Unique
-    Function<ItemStack, Aspect[]> aspectGetter = null;
+    Function<ItemStack, AspectStack[]> aspectGetter = null;
 
     @Override
-    public Aspect[] lostarcana$getAspects(ItemStack context) {
-        Aspect[] o = null;
+    public AspectStack[] lostarcana$getAspects(ItemStack context) {
+        AspectStack[] o = null;
         if(aspectGetter!=null) o = aspectGetter.apply(context);
         if(o == null) o = staticAspects;
         return o;
     }
 
     @Override
-    public void lostarcana$setStaticAspects(Aspect[] aspects) {
+    public void lostarcana$setStaticAspects(AspectStack[] aspects) {
         staticAspects = aspects;
     }
 
     @Override
-    public void lostarcana$setAspectGetter(Function<ItemStack, Aspect[]> getter) {
+    public void lostarcana$setAspectGetter(Function<ItemStack, AspectStack[]> getter) {
         aspectGetter = getter;
     }
 }

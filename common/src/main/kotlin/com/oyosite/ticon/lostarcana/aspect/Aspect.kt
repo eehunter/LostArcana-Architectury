@@ -1,3 +1,7 @@
 package com.oyosite.ticon.lostarcana.aspect
 
-data class Aspect(val name: String)
+import com.oyosite.ticon.lostarcana.Identifier
+
+data class Aspect(val id: Identifier, val color: UInt, val translationKey: String = "aspects.${id.namespace}.${id.path}.name") {
+
+}

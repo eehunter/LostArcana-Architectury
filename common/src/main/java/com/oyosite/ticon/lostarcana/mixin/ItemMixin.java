@@ -13,26 +13,26 @@ import java.util.function.Function;
 public class ItemMixin implements IAspectHolder<ItemStack> {
 
     @Unique
-    AspectStack[] staticAspects = null;
+    private AspectStack[] lostarcana$staticAspects = null;
 
     @Unique
-    Function<ItemStack, AspectStack[]> aspectGetter = null;
+    private Function<ItemStack, AspectStack[]> lostarcana$aspectGetter = null;
 
     @Override
     public AspectStack[] lostarcana$getAspects(ItemStack context) {
         AspectStack[] o = null;
-        if(aspectGetter!=null) o = aspectGetter.apply(context);
-        if(o == null) o = staticAspects;
+        if(lostarcana$aspectGetter !=null) o = lostarcana$aspectGetter.apply(context);
+        if(o == null) o = lostarcana$staticAspects;
         return o;
     }
 
     @Override
     public void lostarcana$setStaticAspects(AspectStack[] aspects) {
-        staticAspects = aspects;
+        lostarcana$staticAspects = aspects;
     }
 
     @Override
     public void lostarcana$setAspectGetter(Function<ItemStack, AspectStack[]> getter) {
-        aspectGetter = getter;
+        lostarcana$aspectGetter = getter;
     }
 }

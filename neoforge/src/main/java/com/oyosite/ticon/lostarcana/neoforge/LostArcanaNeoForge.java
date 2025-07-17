@@ -7,7 +7,7 @@ import net.neoforged.fml.common.Mod;
 @Mod(LostArcana.MOD_ID)
 public class LostArcanaNeoForge {
     public LostArcanaNeoForge(IEventBus modEventBus){
-        System.out.println("Hello world NeoForge");
-        LostArcana.init();
+        //System.out.println("Hello world NeoForge");
+        LostArcanaNeoForgeKt.INSTANCE.initialize(modEventBus);
     }
 }

@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana
 
+import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECTS
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
 
@@ -11,6 +12,7 @@ object LostArcana {
     @JvmStatic
     fun init() {
         println("Hello world")
+        ASPECTS.register()
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
     }

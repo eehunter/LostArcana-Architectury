@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.block
 
+import com.oyosite.ticon.lostarcana.BlockProperties
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.item.times
@@ -13,9 +14,12 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockBehaviour
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
+/** Returns a new instance of BlockBehaviour.Properties each time it is referenced.*/
+val prop: BlockProperties get() = BlockBehaviour.Properties.of()
 
 // Why do I make stuff so cursed?
-val TEST_BLOCK = "test_block" % { Block(BlockBehaviour.Properties.of()) } % {}
+val TEST_BLOCK = "test_block" % { Block(prop) } % {}
+
 
 
 

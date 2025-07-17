@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 //@Mod(LostArcana.MOD_ID)
 //@EventBusSubscriber(modid = LostArcana.MOD_ID)
+@Deprecated(forRemoval = true)
 public class LostArcanaNeoForge {
     public LostArcanaNeoForge(IEventBus modEventBus){
         //System.out.println("Hello world NeoForge");

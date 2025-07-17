@@ -7,4 +7,4 @@ import net.minecraft.world.level.block.state.BlockBehaviour
 typealias Identifier = ResourceLocation
 typealias BlockProperties = BlockBehaviour.Properties
 
-typealias AspectStacks = Array<AspectStack>
+typealias AspectStacks = List<AspectStack>

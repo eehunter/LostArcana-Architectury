@@ -1,2 +1,47 @@
 package com.oyosite.ticon.lostarcana.item
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.oyosite.ticon.lostarcana.AspectStacks
+import com.oyosite.ticon.lostarcana.Identifier
+import com.oyosite.ticon.lostarcana.aspect.AspectStack
+import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.aspect.times
+import net.minecraft.core.component.DataComponentType
+import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.codec.StreamCodec
+import net.minecraft.network.protocol.ProtocolCodecBuilder
+
+//val DATA_COMPONENTS: DeferredRegister.DataComponents
+
+val ASPECT_CODEC = RecordCodecBuilder.create<AspectStack>{ it.group(
+    Codec.STRING.fieldOf("aspect").forGetter{ it.aspect.id.toString() },
+        Codec.INT.fieldOf("amount").forGetter{ it.amount },
+    ).apply(it, ::AspectStack) }
+
+val ASPECTS_CODEC = Codec.list(ASPECT_CODEC)
+
+val ASPECT_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStack>({ buf, aspectStack ->
+    buf.writeInt(aspectStack.amount)
+    Identifier.STREAM_CODEC.encode(buf, aspectStack.aspect.id)
+}){ buf ->
+    val amount = buf.readInt()
+    val id = Identifier.STREAM_CODEC.decode(buf)
+    amount * buf.registryAccess().registry(AspectRegistry.ASPECT_REGISTRY_KEY).get().get(id)!!
+}
+
+val ASPECTS_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>({ buf, aspects ->
+    buf.writeInt(aspects.size)
+    for(aspect in aspects){
+        ASPECT_STREAM_CODEC.encode(buf, aspect)
+    }
+}){ buf ->
+    val aspects = mutableListOf<AspectStack>()
+    for(i in 0 until buf.readInt()){
+        aspects += ASPECT_STREAM_CODEC.decode(buf)
+    }
+    aspects
+}
+
+val ASPECT_COMPONENT = DataComponentType.builder<AspectStack>().networkSynchronized(ASPECT_STREAM_CODEC).persistent(ASPECT_CODEC).build()
+val ASPECTS_COMPONENT = DataComponentType.builder<AspectStacks>().networkSynchronized(ASPECTS_STREAM_CODEC).persistent(ASPECTS_CODEC).build()

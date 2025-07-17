@@ -1,4 +1,7 @@
 package com.oyosite.ticon.lostarcana.aspect
 
-interface ItemAspectHolder {
+import net.minecraft.world.item.ItemStack
+
+interface ItemAspectHolder: AspectHolder<ItemStack> {
+
 }

@@ -1,7 +1,10 @@
 package com.oyosite.ticon.lostarcana.aspect
 
-fun interface AspectHolder<T> {
+import com.oyosite.ticon.lostarcana.AspectStacks
 
-    fun getAspects(context: T): Array<AspectStack>
+interface AspectHolder<T> {
+
+    val staticAspects: AspectStacks? get() = null
+    fun getAspects(context: T): AspectStacks? = staticAspects
 
 }

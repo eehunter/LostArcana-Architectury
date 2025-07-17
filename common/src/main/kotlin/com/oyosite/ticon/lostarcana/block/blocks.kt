@@ -1,7 +1,6 @@
 package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.BlockProperties
-import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus

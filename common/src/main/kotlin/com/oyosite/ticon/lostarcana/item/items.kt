@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.item
 
-import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier

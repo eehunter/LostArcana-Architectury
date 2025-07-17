@@ -1,10 +1,10 @@
-modLoader = "kotlinforforge"
-loaderVersion = "[5.9,)"
+modLoader = "javafml"
+loaderVersion = "[1,)"
 #issueTrackerURL = ""
 license = "MIT"
 
 [[mods]]
-modId = "lostarcana"
+modId = "${mod_id}"
 version = "${version}"
 displayName = "Lost Arcana"
 authors = ""
@@ -13,24 +13,31 @@ description = '''
 '''
 #logoFile = ""
 
-[[dependencies.lostarcana]]
+[[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.lostarcana]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.lostarcana]]
+[[dependencies.${mod_id}]]
 modId = "architectury"
 type = "required"
 versionRange = "[13.0.8,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "kotlinforforge"
+mandatory = true
+versionRange = "[${kotlin_for_forge_version},)"
 ordering = "AFTER"
 side = "BOTH"
 

@@ -8,6 +8,7 @@ class LostArcanaDataGenerator : DataGeneratorEntrypoint {
         val pack: FabricDataGenerator.Pack = dataGenerator.createPack()
 
         pack.addProvider(::EnglishLangProvider)
+        pack.addProvider(::ModelProvider)
 
     }
 }

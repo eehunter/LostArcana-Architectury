@@ -52,6 +52,7 @@ subprojects {
                 includeGroup "maven.modrinth"
             }
         }
+        mavenCentral()
     }
 
     dependencies {

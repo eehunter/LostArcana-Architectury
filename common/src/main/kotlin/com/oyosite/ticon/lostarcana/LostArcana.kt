@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.aspect.registerAspectsForVanillaItems
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECTS
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
+import dev.architectury.platform.Platform
 
 object LostArcana {
     const val MOD_ID: String = "lostarcana"
@@ -14,7 +15,7 @@ object LostArcana {
     fun init() {
         println("Hello world")
         registerAspectsForVanillaItems()
-        ASPECTS.register()
+        if(Platform.isFabric())ASPECTS.register()//
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
     }

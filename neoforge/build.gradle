@@ -8,6 +8,22 @@ architectury {
     neoForge()
 }
 
+sourceSets {
+    java {
+        compileClasspath += main.output
+        //compileClasspath += kotlin.output
+        runtimeClasspath += main.output
+        //runtimeClasspath += kotlin.output
+        kotlin {
+
+        }
+    }
+    kotlin {
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+}
+
 configurations {
     common {
         canBeResolved = true
@@ -42,15 +58,15 @@ dependencies {
 
     modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
 
+
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation ("thedarkcolour:kotlinforforge-neoforge:$rootProject.kotlin_for_forge_version"){
         exclude(group: "net.neoforged")
         exclude(group: "net.neoforged.fancymodloader")
     }
-
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
-
 
     modImplementation ("maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-neoforge-mc$rootProject.fusion_mc_version")
 }

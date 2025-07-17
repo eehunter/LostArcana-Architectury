@@ -1,5 +1,5 @@
-modLoader = "javafml"
-loaderVersion = "[1,)"
+modLoader = "kotlinforforge"
+loaderVersion = "[5.9,)"
 #issueTrackerURL = ""
 license = "MIT"
 
@@ -38,7 +38,7 @@ side = "BOTH"
 modId = "kotlinforforge"
 mandatory = true
 versionRange = "[${kotlin_for_forge_version},)"
-ordering = "AFTER"
+ordering = "NONE"
 side = "BOTH"
 
 [[mixins]]

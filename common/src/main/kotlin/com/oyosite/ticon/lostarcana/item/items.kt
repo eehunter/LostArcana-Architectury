@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
+val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
 
 
 

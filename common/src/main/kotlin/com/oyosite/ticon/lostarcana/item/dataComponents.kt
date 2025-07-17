@@ -14,7 +14,7 @@ import net.minecraft.network.protocol.ProtocolCodecBuilder
 
 //val DATA_COMPONENTS: DeferredRegister.DataComponents
 
-val ASPECT_CODEC = RecordCodecBuilder.create<AspectStack>{ it.group(
+val ASPECT_CODEC: Codec<AspectStack> = RecordCodecBuilder.create { it.group(
     Codec.STRING.fieldOf("aspect").forGetter{ it.aspect.id.toString() },
         Codec.INT.fieldOf("amount").forGetter{ it.amount },
     ).apply(it, ::AspectStack) }
@@ -43,5 +43,5 @@ val ASPECTS_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>
     aspects
 }
 
-val ASPECT_COMPONENT = DataComponentType.builder<AspectStack>().networkSynchronized(ASPECT_STREAM_CODEC).persistent(ASPECT_CODEC).build()
-val ASPECTS_COMPONENT = DataComponentType.builder<AspectStacks>().networkSynchronized(ASPECTS_STREAM_CODEC).persistent(ASPECTS_CODEC).build()
+val ASPECT_COMPONENT: DataComponentType<AspectStack> = DataComponentType.builder<AspectStack>().networkSynchronized(ASPECT_STREAM_CODEC).persistent(ASPECT_CODEC).build()
+val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = DataComponentType.builder<AspectStacks>().networkSynchronized(ASPECTS_STREAM_CODEC).persistent(ASPECTS_CODEC).build()

@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.neoforge;
 
 import com.oyosite.ticon.lostarcana.LostArcana;
+import com.oyosite.ticon.lostarcana.LostArcanaNeoForgeKt;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 

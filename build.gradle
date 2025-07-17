@@ -10,6 +10,7 @@ buildscript {
 plugins {
     id 'dev.architectury.loom' version '1.10-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'org.jetbrains.kotlin.jvm' version '2.2.0' apply false
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 }
 apply plugin: 'kotlin'
@@ -27,6 +28,7 @@ subprojects {
     apply plugin: 'dev.architectury.loom'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
 
     base {
         // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
@@ -68,6 +70,24 @@ subprojects {
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 21
     }
+
+    /*tasks.withType(KotlinCompile.class).configureEach {
+        compilerOptions {
+            languageVersion = KotlinVersion.KOTLIN_2_0
+            apiVersion = KotlinVersion.KOTLIN_2_0
+
+            jvmTarget = JvmTarget.JVM_21
+            javaParameters = true
+            optIn.addAll(
+                    "kotlin.ExperimentalStdlibApi",
+                    "kotlin.ExperimentalUnsignedTypes",
+                    "kotlin.contracts.ExperimentalContracts",
+            )
+            freeCompilerArgs.addAll(
+                    "-Xjvm-default=all"
+            )
+        }
+    }*/
 
     // Configure Maven publishing.
     publishing {

@@ -18,6 +18,6 @@ fun Item.setStaticAspects(aspects: AspectStacks) = (this as IAspectHolder<ItemSt
 @ApiStatus.Experimental
 fun Item.setAspectGetter(aspectGetter: (ItemStack)->AspectStacks) = (this as IAspectHolder<ItemStack>).`lostarcana$setAspectGetter`(aspectGetter)
 
-fun ItemLike.setStaticAspects(vararg aspects: AspectStack) = this.asItem().setStaticAspects(arrayOf(*aspects))
+fun ItemLike.setStaticAspects(vararg aspects: AspectStack) = this.asItem().setStaticAspects(listOf(*aspects))
 
 operator fun Int.times(aspect: Aspect) = AspectStack(aspect, this)

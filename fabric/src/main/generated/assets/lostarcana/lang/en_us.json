@@ -5,5 +5,11 @@
   "aspects.lostarcana.ordo.name": "Ordo",
   "aspects.lostarcana.perditio.name": "Perditio",
   "aspects.lostarcana.terra.name": "Terra",
+  "block.lostarcana.aer_infused_stone": "Aer Infused Stone",
+  "block.lostarcana.aqua_infused_stone": "Aqua Infused Stone",
+  "block.lostarcana.ignis_infused_stone": "Ignis Infused Stone",
+  "block.lostarcana.ordo_infused_stone": "Ordo Infused Stone",
+  "block.lostarcana.perditio_infused_stone": "Perditio Infused Stone",
+  "block.lostarcana.terra_infused_stone": "Terra Infused Stone",
   "item.lostarcana.vis_crystal": "Vis Crystal"
 }

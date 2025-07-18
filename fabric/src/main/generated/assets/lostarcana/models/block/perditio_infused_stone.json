@@ -1,12 +1,6 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "lostarcana:block/tinted_cube_all",
   "textures": {
-    "down": "lostarcana:block/perditio_infused_stone_down",
-    "east": "lostarcana:block/perditio_infused_stone_east",
-    "north": "lostarcana:block/perditio_infused_stone_north",
-    "particle": "lostarcana:block/perditio_infused_stone_particle",
-    "south": "lostarcana:block/perditio_infused_stone_south",
-    "up": "lostarcana:block/perditio_infused_stone_up",
-    "west": "lostarcana:block/perditio_infused_stone_west"
+    "all": "minecraft:block/stone"
   }
 }

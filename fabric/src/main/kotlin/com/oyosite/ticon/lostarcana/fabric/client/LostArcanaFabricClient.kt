@@ -1,13 +1,20 @@
 package com.oyosite.ticon.lostarcana.fabric.client
 
+import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
+import net.minecraft.world.level.block.Block
 
 class LostArcanaFabricClient : ClientModInitializer {
     override fun onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
-        ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, VIS_CRYSTAL.get())
+        val infusedStoneBlocks: Array<Block> = INFUSED_STONES.map(RegistrySupplier<out Block>::get).toTypedArray()
+        println("Number of tinted infused stone blocks: ${infusedStoneBlocks.size}")
+        infusedStoneBlocks.forEach { println(it.name.toString()) }
+        ColorProviderRegistry.BLOCK.register(LostArcanaClient.INFUSED_STONE_BLOCK_COLOR, *infusedStoneBlocks)
+        ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, VIS_CRYSTAL.get(), *infusedStoneBlocks)
     }
 }

@@ -2,6 +2,8 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
+import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -21,6 +23,9 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(VIS_CRYSTAL, "Vis Crystal")
         AspectRegistry.ASPECTS.registrar.entrySet().forEach { (key, value) ->
             add(value.translationKey, value.id.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() })
+        }
+        INFUSED_STONES.forEach {
+            add(it, it.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
         }
     }
 

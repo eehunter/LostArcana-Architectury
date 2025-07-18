@@ -3,6 +3,8 @@ package com.oyosite.ticon.lostarcana.block
 import com.oyosite.ticon.lostarcana.BlockProperties
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
+import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
+import com.oyosite.ticon.lostarcana.aspect.times
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.DeferredRegister
@@ -22,7 +24,7 @@ val prop: BlockProperties get() = BlockBehaviour.Properties.of()
 val TEST_BLOCK = "test_block" % { Block(prop) } % {}
 
 val INFUSED_STONES = PRIMAL_ASPECTS.map {
-    "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE), it) } % {}
+    "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE), it) } % Pair({}, {setStaticAspects(4*it)})
 }
 
 
@@ -37,3 +39,6 @@ inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T)
 
 inline operator fun <reified T: Block> RegistrySupplier<T>.rem(noinline itemPropertiesConfig: Item.Properties.()->Unit): RegistrySupplier<T> =
     this.also { this.id.path * { BlockItem(+this, Item.Properties().apply(itemPropertiesConfig)) } }
+
+inline operator fun <reified T: Block> RegistrySupplier<T>.rem(configurators: Pair<Item.Properties.()->Unit, BlockItem.()->Unit>): RegistrySupplier<T> =
+    this.also { this.id.path * { BlockItem(+this, Item.Properties().apply(configurators.first)).apply(configurators.second) } }

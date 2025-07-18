@@ -10,5 +10,6 @@ class LostArcanaDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::EnglishLangProvider)
         pack.addProvider(::ModelProvider)
         pack.addProvider(::BlockLootTableProvider)
+        pack.addProvider(::BlockTagProvider)
     }
 }

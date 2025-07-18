@@ -44,7 +44,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
     companion object {
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
 
-        @SubscribeEvent 
+        @SubscribeEvent
         @JvmStatic
         fun registerRegistries(event: NewRegistryEvent) {
             platform_aspect_registry = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(id("none")).create()

@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.BlockProperties
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.DeferredRegister
@@ -10,6 +11,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockBehaviour
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
@@ -19,6 +21,9 @@ val prop: BlockProperties get() = BlockBehaviour.Properties.of()
 // Why do I make stuff so cursed?
 val TEST_BLOCK = "test_block" % { Block(prop) } % {}
 
+val INFUSED_STONES = PRIMAL_ASPECTS.map {
+    "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
+}
 
 
 

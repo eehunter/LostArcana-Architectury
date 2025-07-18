@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana
 
 import com.oyosite.ticon.lostarcana.aspect.registerAspectsForVanillaItems
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECTS
+import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
 import dev.architectury.platform.Platform
@@ -15,8 +16,9 @@ object LostArcana {
     fun init() {
         println("Hello world")
         registerAspectsForVanillaItems()
-        if(Platform.isFabric())ASPECTS.register()//
+        if(Platform.isFabric())ASPECTS.register()// NeoForge doesn't like calling Architectury DeferredRegisters from the mod's main entrypoint
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
+        ATTRIBUTE_REGISTRY.register()
     }
 }

@@ -2,7 +2,6 @@ package com.oyosite.ticon.lostarcana.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.init
-import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
@@ -10,7 +9,6 @@ import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute
-import net.minecraft.core.Registry
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
 

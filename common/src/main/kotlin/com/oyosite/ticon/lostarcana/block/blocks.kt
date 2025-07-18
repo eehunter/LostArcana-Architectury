@@ -22,7 +22,7 @@ val prop: BlockProperties get() = BlockBehaviour.Properties.of()
 val TEST_BLOCK = "test_block" % { Block(prop) } % {}
 
 val INFUSED_STONES = PRIMAL_ASPECTS.map {
-    "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
+    "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE), it) } % {}
 }
 
 

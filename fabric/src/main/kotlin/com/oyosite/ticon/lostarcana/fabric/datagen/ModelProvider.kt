@@ -3,7 +3,9 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
+import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -36,6 +38,8 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
     override fun generateItemModels(img: ItemModelGenerators) {
         img.generateFlatItem(+VIS_CRYSTAL, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)
     }
 
     inline operator fun <reified T> RegistrySupplier<T>.unaryPlus() = get()

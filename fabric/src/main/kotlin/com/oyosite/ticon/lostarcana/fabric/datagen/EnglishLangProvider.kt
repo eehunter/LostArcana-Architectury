@@ -4,7 +4,9 @@ import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
@@ -21,6 +23,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         translationBuilder: TranslationBuilder
     ) = translationBuilder.run{
         add(VIS_CRYSTAL, "Vis Crystal")
+        add(WAND_ITEM, "Wand")
+        add(SALIS_MUNDIS, "Salis Mundis")
         AspectRegistry.ASPECTS.registrar.entrySet().forEach { (key, value) ->
             add(value.translationKey, value.id.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() })
         }

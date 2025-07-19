@@ -27,14 +27,14 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
         val level = useOnContext.level
         val items = level.getEntities(player, AABB.ofSize(useOnContext.clickLocation, craftItemRange, craftItemRange, craftItemRange)){ it is ItemEntity }.mapNotNull{it as? ItemEntity}
         val crystals = items.filter { it.item.item is VisCrystalItem }
-        if(crystals.size == 3){
+        if(crystals.size == 3 && consumeVis(useOnContext.itemInHand, 10f, player)){
             val pos = crystals[0].position()
             level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(SALIS_MUNDIS)))
             for(i in 0..2) crystals[i].item.consume(1, player)
         } else if (crystals.size == 6 && PRIMAL_ASPECTS.all { aspect -> crystals.filter { c -> c.item.aspects.let{ it[0].aspect == aspect } }.size == 1 }){
             val gold = items.firstOrNull { it.item.`is`(COMMON_GOLD_INGOTS) }
             val pane = items.firstOrNull { it.item.`is`(COMMON_GLASS_PANES) }
-            if(gold!=null && pane!=null && consumeVis(useOnContext.itemInHand, 10f, player)){
+            if(gold!=null && pane!=null && consumeVis(useOnContext.itemInHand, 20f, player)){
                 val pos = crystals[0].position()
                 listOf(gold, pane, *crystals.toTypedArray()).forEach { it.item.consume(1, player) }
                 level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(THAUMOMETER as Holder<Item>)))

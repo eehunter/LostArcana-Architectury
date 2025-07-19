@@ -32,6 +32,8 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
 
     override fun tick() {
         super.tick()
+        if(!level().isClientSide) entityData.set(VIS_DATA, vis)
+        else vis = entityData.get(VIS_DATA)
         vis += .01f
         if (vis > maxVis) vis = maxVis
     }

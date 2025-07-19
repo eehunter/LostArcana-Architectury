@@ -6,7 +6,10 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.item.CRUDE_CASTER_GAUNTLET
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
+import com.oyosite.ticon.lostarcana.item.THAUMOMETER
+import com.oyosite.ticon.lostarcana.item.ThaumometerItem
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import dev.architectury.registry.registries.RegistrySupplier
@@ -26,7 +29,11 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
     ) = translationBuilder.run{
         add(VIS_CRYSTAL, "Vis Crystal")
         add(WAND_ITEM, "Wand")
+        add(CRUDE_CASTER_GAUNTLET, "Crude Caster Gauntlet")
         add(SALIS_MUNDIS, "Salis Mundis")
+        add(THAUMOMETER, "Thaumometer")
+        add(ThaumometerItem.AURA_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
+        add(ThaumometerItem.NO_AURA_TRANSLATION_KEY, "No Aura detected.")
         AspectRegistry.ASPECTS.registrar.entrySet().forEach { (key, value) ->
             add(value.translationKey, value.id.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() })
         }

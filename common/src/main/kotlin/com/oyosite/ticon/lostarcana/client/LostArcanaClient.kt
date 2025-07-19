@@ -13,10 +13,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation
 
 object LostArcanaClient {
     val VIS_CRYSTAL_ITEM_COLOR = ItemColor{ stack, _ -> (stack.aspects[0].aspect.color or 0xFF000000u).toInt()  }
+    val THAUMOMETER_ITEM_COLOR = ItemColor{ stack, tintIndex -> (if(tintIndex==1) 0xFFdb00ffu else 0xFFffffffu).toInt() }
 
     val INFUSED_STONE_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> ((state.block as InfusedStoneBlock).aspect.color).toInt() }
 
     val AURA_NODE_MODEL_LAYER = ModelLayerLocation(LostArcana.id("aura_node"), "cube")
+
 
     fun initClient(){
         EntityModelLayerRegistry.register(AURA_NODE_MODEL_LAYER, AuraNodeEntityRenderer::getTexturedModelData)

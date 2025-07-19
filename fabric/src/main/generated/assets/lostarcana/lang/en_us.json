@@ -13,7 +13,11 @@
   "block.lostarcana.ordo_infused_stone": "Ordo Infused Stone",
   "block.lostarcana.perditio_infused_stone": "Perditio Infused Stone",
   "block.lostarcana.terra_infused_stone": "Terra Infused Stone",
+  "info.lostarcana.thaumometer.aura_level": "%1$s μv",
+  "info.lostarcana.thaumometer.no_aura": "No Aura detected.",
+  "item.lostarcana.crude_caster_gauntlet": "Crude Caster Gauntlet",
   "item.lostarcana.salis_mundis": "Salis Mundis",
+  "item.lostarcana.thaumometer": "Thaumometer",
   "item.lostarcana.vis_crystal": "Vis Crystal",
   "item.lostarcana.wand": "Wand"
 }

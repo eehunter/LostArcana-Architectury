@@ -2,7 +2,9 @@ package com.oyosite.ticon.lostarcana.fabric.client
 
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
+import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
@@ -15,8 +17,8 @@ class LostArcanaFabricClient : ClientModInitializer {
         println("Number of tinted infused stone blocks: ${infusedStoneBlocks.size}")
         infusedStoneBlocks.forEach { println(it.name.toString()) }
         ColorProviderRegistry.BLOCK.register(LostArcanaClient.INFUSED_STONE_BLOCK_COLOR, *infusedStoneBlocks)
-        ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, VIS_CRYSTAL.get(), *infusedStoneBlocks)
-
+        ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, +VIS_CRYSTAL, *infusedStoneBlocks)
+        ColorProviderRegistry.ITEM.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER)
 
         LostArcanaClient.initClient()
     }

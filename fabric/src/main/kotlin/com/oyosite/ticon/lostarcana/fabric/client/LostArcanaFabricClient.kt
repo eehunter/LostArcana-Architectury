@@ -16,5 +16,8 @@ class LostArcanaFabricClient : ClientModInitializer {
         infusedStoneBlocks.forEach { println(it.name.toString()) }
         ColorProviderRegistry.BLOCK.register(LostArcanaClient.INFUSED_STONE_BLOCK_COLOR, *infusedStoneBlocks)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, VIS_CRYSTAL.get(), *infusedStoneBlocks)
+
+
+        LostArcanaClient.initClient()
     }
 }

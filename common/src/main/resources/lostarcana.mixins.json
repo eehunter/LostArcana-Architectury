@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "ItemMixin"
+    "ItemMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

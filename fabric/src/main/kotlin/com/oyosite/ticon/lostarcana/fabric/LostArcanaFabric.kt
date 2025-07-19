@@ -5,6 +5,7 @@ import com.oyosite.ticon.lostarcana.LostArcana.init
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
+import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
 import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
@@ -28,6 +29,7 @@ class LostArcanaFabric : ModInitializer {
 
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("vis_storage")) { VIS_STORAGE_COMPONENT }
         //Registry.register(Registries.DATA_COMPONENT_TYPE, "${LostArcana.MOD_ID}:aspect", ASPECT_COMPONENT)
         //Registry.register(Registries.DATA_COMPONENT_TYPE, LostArcana.id("aspects"), ASPECTS_COMPONENT)
 

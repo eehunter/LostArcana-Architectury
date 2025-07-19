@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
 val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
-
+val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 100f) }
 
 
 inline operator fun <reified T: Item> String.times(noinline itemSupplier: ()->T): RegistrySupplier<T> =

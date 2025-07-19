@@ -15,6 +15,7 @@ import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
 import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
@@ -59,6 +60,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
 
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
+        DATA_COMPONENT_REGISTRAR.register("vis_storage", Supplier { VIS_STORAGE_COMPONENT })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
 

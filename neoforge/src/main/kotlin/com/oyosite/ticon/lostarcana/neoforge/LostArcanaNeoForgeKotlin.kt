@@ -61,6 +61,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
 
+        NEOFORGE_ARMOR_MATERIALS.register(modEventBus)
 
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
@@ -77,6 +78,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
     companion object {
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, LostArcana.MOD_ID)
+        val NEOFORGE_ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic

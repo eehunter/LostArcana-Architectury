@@ -2,23 +2,18 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
+import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
-import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
-import com.oyosite.ticon.lostarcana.item.CRUDE_CASTER_GAUNTLET
-import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
-import com.oyosite.ticon.lostarcana.item.THAUMOMETER
-import com.oyosite.ticon.lostarcana.item.ThaumometerItem
-import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
-import com.oyosite.ticon.lostarcana.item.WAND_ITEM
+import com.oyosite.ticon.lostarcana.item.*
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
-import java.util.Locale
 import java.util.Locale.getDefault
 import java.util.concurrent.CompletableFuture
 
@@ -32,6 +27,7 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(CRUDE_CASTER_GAUNTLET, "Crude Caster Gauntlet")
         add(SALIS_MUNDIS, "Salis Mundis")
         add(THAUMOMETER, "Thaumometer")
+        add(GOGGLES_OF_REVEALING, "Goggles of Revealing")
         add(ThaumometerItem.AURA_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
         add(ThaumometerItem.NO_AURA_TRANSLATION_KEY, "No Aura detected.")
         AspectRegistry.ASPECTS.registrar.entrySet().forEach { (key, value) ->
@@ -40,6 +36,9 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         INFUSED_STONES.forEach {
             add(it, it.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
         }
+
+        add(ARCANE_SIGHT, "Arcane Sight")
+        add(ARCANE_INSIGHT, "Arcane Insight")
 
         add(ARCANE_STONE)
         add(ARCANE_STONE_TILES)

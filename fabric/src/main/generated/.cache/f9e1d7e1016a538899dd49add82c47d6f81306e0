@@ -1,7 +1,7 @@
-// 1.21.1	2025-07-19T16:20:47.581593665	Lost Arcana/Block Loot Tables
-ff51a08686028fbea21bb690cd71366f882353dd data/lostarcana/loot_table/blocks/ignis_infused_stone.json
+// 1.21.1	2025-07-19T17:14:02.53631537	Lost Arcana/Block Loot Tables
 184e16ae8e378f963755d1b389c3ac4241b833a6 data/lostarcana/loot_table/blocks/aqua_infused_stone.json
+ff51a08686028fbea21bb690cd71366f882353dd data/lostarcana/loot_table/blocks/ignis_infused_stone.json
 d6ff34a9ce37fef75e75701bf6d67388bd84e747 data/lostarcana/loot_table/blocks/aer_infused_stone.json
 0f4dfb2d62a3536137e3c82e16f00fb0c82257d8 data/lostarcana/loot_table/blocks/terra_infused_stone.json
-753498188c82f101245d0a45b41bbe3b4e5346ee data/lostarcana/loot_table/blocks/ordo_infused_stone.json
 7a6b0fe27cfb0347f175145fe9a8d76a7b037f7f data/lostarcana/loot_table/blocks/perditio_infused_stone.json
+753498188c82f101245d0a45b41bbe3b4e5346ee data/lostarcana/loot_table/blocks/ordo_infused_stone.json

@@ -1,11 +1,11 @@
-// 1.21.1	2025-07-19T16:20:47.582225205	Lost Arcana/Model Definitions
+// 1.21.1	2025-07-19T17:14:02.537236574	Lost Arcana/Model Definitions
 4dc972fd2db2aa5a1c978318f4d874cdb75ec5c2 assets/lostarcana/models/item/ignis_infused_stone.json
 9cf3654e3a9191b751648cc3a47d86556960d4bb assets/lostarcana/models/block/arcane_stone.json
 b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/ignis_infused_stone.json
 70131ef4f3b0fdc1c9886e768e52ba518ee8a2d3 assets/lostarcana/models/item/ordo_infused_stone.json
 b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/aer_infused_stone.json
-4192c6f8bc1f837aa53a64fc5d7223904b2d89ea assets/lostarcana/blockstates/arcane_stone.json
 462b25a1160576020be281d927894b84d583fe0f assets/lostarcana/blockstates/ignis_infused_stone.json
+4192c6f8bc1f837aa53a64fc5d7223904b2d89ea assets/lostarcana/blockstates/arcane_stone.json
 514387eb899756c7c0423041fd950beeb3a5425b assets/lostarcana/models/item/wand.json
 bfac9e8e4695bb736bc3b1ec54513c2804b537a4 assets/lostarcana/blockstates/aer_infused_stone.json
 5e857b1ce69926ea954e1044d05cfe0b47cc0f2c assets/lostarcana/blockstates/aqua_infused_stone.json
@@ -17,6 +17,7 @@ b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/ordo_inf
 b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/terra_infused_stone.json
 b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/aqua_infused_stone.json
 2b9e45db74e51605f4a58b6cbf43693435c63380 assets/lostarcana/models/item/aer_infused_stone.json
+dd13c1284875efb8ed53e06db417e76421f75e3e assets/lostarcana/models/item/goggles_of_revealing.json
 3dd8472792a5b4f23f7aaaa705bce4c950da0ca7 assets/lostarcana/models/item/terra_infused_stone.json
 73202b9c357d70dcc024afae2855807a38349fd0 assets/lostarcana/models/item/aqua_infused_stone.json
 619b3d7610d3eaf73e5b71ceaaabf8da3e0e3a17 assets/lostarcana/models/item/arcane_stone.json

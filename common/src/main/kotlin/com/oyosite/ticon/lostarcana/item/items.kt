@@ -1,10 +1,20 @@
 package com.oyosite.ticon.lostarcana.item
 
+import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
+import dev.architectury.injectables.annotations.ExpectPlatform
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
+import net.minecraft.Util
+import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.Ingredient
+import java.util.EnumMap
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
@@ -15,7 +25,22 @@ val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(
 val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1)) }
 val IRON_WAND_CAP = "iron_wand_cap" * { Item(Item.Properties()) }
 
+
+val COMMON_GOLD_INGOTS = TagKey.create(Registries.ITEM, LostArcana.id("c:gold_ingots"))
+val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
+    ArmorMaterial(Util.make(EnumMap(ArmorItem.Type::class.java)) {
+
+    }, 22, SoundEvents.ARMOR_EQUIP_LEATHER, { Ingredient.of(COMMON_GOLD_INGOTS) }, listOf(), 0f, 0f)
+}
+val GOGGLES_OF_REVEALING = "goggles_of_revealing" * { GogglesOfRevealingItem(Item.Properties().stacksTo(1), GOGGLES_OF_REVEALING_MATERIAL) }
+
 val THAUMOMETER = "thaumometer" * { ThaumometerItem(Item.Properties().stacksTo(1)) }
+
+@ExpectPlatform
+fun platformRegisterArmorMaterial(name: String, materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = throw AssertionError()
+
+operator fun String.rem(materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = platformRegisterArmorMaterial(this, materialSupplier)
+
 
 inline operator fun <reified T: Item> String.times(noinline itemSupplier: ()->T): RegistrySupplier<T> =
     ITEM_REGISTRY.register(this, itemSupplier)

@@ -27,6 +27,9 @@ val INFUSED_STONES = PRIMAL_ASPECTS.map {
     "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE), it) } % Pair({}, {setStaticAspects(4*it)})
 }
 
+val ARCANE_STONE = "arcane_stone" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
+val ARCANE_STONE_TILES = "arcane_stone_tiles" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
+
 
 
 

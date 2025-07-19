@@ -2,6 +2,8 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
@@ -31,7 +33,13 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         INFUSED_STONES.forEach {
             add(it, it.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
         }
+
+        add(ARCANE_STONE)
+        add(ARCANE_STONE_TILES)
     }
+
+
+    inline fun <reified T> TranslationBuilder.add(holder: RegistrySupplier<T>) = add(holder, holder.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
 
     inline fun <reified T> TranslationBuilder.add(holder: RegistrySupplier<T>, name: String) = holder.get().let {
         when (it) {

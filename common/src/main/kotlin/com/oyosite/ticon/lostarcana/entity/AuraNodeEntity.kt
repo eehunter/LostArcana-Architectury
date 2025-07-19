@@ -7,6 +7,9 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
 
 class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
+
+    var vis: Float = 0f
+
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         TODO("Not yet implemented")
     }

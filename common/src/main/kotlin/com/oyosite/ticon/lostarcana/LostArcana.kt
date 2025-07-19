@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.aspect.registerAspectsForVanillaItems
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECTS
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
+import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
 import dev.architectury.platform.Platform
 
@@ -20,5 +21,6 @@ object LostArcana {
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
         ATTRIBUTE_REGISTRY.register()
+        ENTITY_REGISTRY.register()
     }
 }

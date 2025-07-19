@@ -9,4 +9,14 @@ open class WandItem(properties: Properties) : CastingItem(properties) {
     open fun maxVis(stack: ItemStack): Float = 100f
 
     override fun availableVis(stack: ItemStack, entity: Entity?): Float = stack.components.get(VIS_STORAGE_COMPONENT)?:0f
+    override fun consumeVis(
+        stack: ItemStack,
+        amount: Float,
+        entity: Entity?
+    ): Boolean {
+        val available = availableVis(stack, entity)
+        if(available < amount)return false
+        stack.set(VIS_STORAGE_COMPONENT, available)
+        return true
+    }
 }

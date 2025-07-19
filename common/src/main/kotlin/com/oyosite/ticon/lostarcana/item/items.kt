@@ -27,6 +27,7 @@ val IRON_WAND_CAP = "iron_wand_cap" * { Item(Item.Properties()) }
 
 
 val COMMON_GOLD_INGOTS = TagKey.create(Registries.ITEM, LostArcana.id("c:gold_ingots"))
+val COMMON_GLASS_PANES = TagKey.create(Registries.ITEM, LostArcana.id("c:glass_panes"))
 val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
     ArmorMaterial(Util.make(EnumMap(ArmorItem.Type::class.java)) {
 

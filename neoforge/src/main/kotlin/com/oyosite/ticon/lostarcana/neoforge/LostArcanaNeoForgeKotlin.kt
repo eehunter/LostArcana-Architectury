@@ -53,9 +53,11 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
 
 
         platform_aspect_registry = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
-        ALL_ASPECTS.forEach { (name, aspect) -> NEOFORGE_ASPECTS.register(name, Supplier{ aspect }) }
+        //ALL_ASPECTS.forEach { (name, aspect) -> NEOFORGE_ASPECTS.register(name, Supplier{ aspect }) }
+
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
+        PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
 
 

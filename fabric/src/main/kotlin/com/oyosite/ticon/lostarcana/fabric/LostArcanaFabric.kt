@@ -33,8 +33,10 @@ class LostArcanaFabric : ModInitializer {
 
         // Run our common setup.
 
-        AspectRegistry.platform_aspect_registry = FabricRegistryBuilder.createSimple(AspectRegistry.ASPECT_REGISTRY_KEY).attribute(
-            RegistryAttribute.SYNCED).buildAndRegister()
+        AspectRegistry.platform_aspect_registry =
+            FabricRegistryBuilder.createSimple(AspectRegistry.ASPECT_REGISTRY_KEY)
+            .attribute(RegistryAttribute.SYNCED)
+            .buildAndRegister()
 
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }

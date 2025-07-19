@@ -17,6 +17,7 @@ import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
+import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
@@ -92,7 +93,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
         @JvmStatic
         fun onRegisterItemColorProviders(event: RegisterColorHandlersEvent.Item){
             event.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, +VIS_CRYSTAL, *infusedStoneBlocks)
-            event.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER)
+            event.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
         }
 
         @SubscribeEvent

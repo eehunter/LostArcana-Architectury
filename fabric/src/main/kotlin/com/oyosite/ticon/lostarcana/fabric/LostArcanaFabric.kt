@@ -8,8 +8,11 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
+import com.oyosite.ticon.lostarcana.worldgen.feature.INFUSED_STONE_FEATURES
 import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -20,6 +23,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes
+import net.minecraft.world.level.levelgen.GenerationStep
 
 class LostArcanaFabric : ModInitializer {
     val DATA_COMPONENT_REGISTRAR: DeferredRegister<DataComponentType<*>> = DeferredRegister.create(LostArcana.MOD_ID, Registries.DATA_COMPONENT_TYPE)
@@ -45,7 +49,9 @@ class LostArcanaFabric : ModInitializer {
         //Registry.register(Registries.DATA_COMPONENT_TYPE, LostArcana.id("aspects"), ASPECTS_COMPONENT)
 
 
-
+        INFUSED_STONE_FEATURES.forEach{
+            BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.UNDERGROUND_ORES, it)
+        }
 
         DATA_COMPONENT_REGISTRAR.register()
         init()

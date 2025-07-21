@@ -16,7 +16,7 @@ class GogglesOfRevealingItem(properties: Properties, material: Holder<ArmorMater
     }
 
     companion object{
-        val GOGGLES_SIGHT_MODIFIER = AttributeModifier(LostArcana.id("thaumometer.arcane_sight.main_hand"), 1.0, AttributeModifier.Operation.ADD_VALUE)
+        val GOGGLES_SIGHT_MODIFIER = AttributeModifier(LostArcana.id("goggles_of_revealing.arcane_sight"), 1.0, AttributeModifier.Operation.ADD_VALUE)
     }
 
 }

@@ -1,8 +1,13 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
+import com.oyosite.ticon.lostarcana.entity.AURA_NODE
+import com.oyosite.ticon.lostarcana.item.COMMON_GOLD_INGOTS
+import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
+import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -18,7 +23,16 @@ import net.minecraft.world.level.block.Blocks
 import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
+    @Suppress("KotlinUnreachableCode")
     override fun buildRecipes(exporter: RecipeOutput) {
+        shaped(RecipeCategory.TOOLS, +GOGGLES_OF_REVEALING, 1)
+            .pattern(" L ")
+            .pattern("TGT")
+            .define('L', Items.LEATHER)
+            .define('T', +THAUMOMETER)
+            .define('G', COMMON_GOLD_INGOTS)
+            .unlockedBy("scanned_aura_node", ThaumometerScanCriterionTrigger.scan(AURA_NODE.id, AURA_NODE.registryId))
+            .save(exporter)
         shaped(RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE, 8)
             .pattern("SSS")
             .pattern("SCS")

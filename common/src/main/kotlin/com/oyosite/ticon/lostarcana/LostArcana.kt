@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana
 
+import com.oyosite.ticon.lostarcana.advancement.THAUMOMETER_SCAN_TRIGGER
 import com.oyosite.ticon.lostarcana.aspect.registerAspectsForVanillaItems
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECTS
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
@@ -22,6 +23,7 @@ object LostArcana {
     fun init() {
         println("Hello world")
         registerAspectsForVanillaItems()
+        THAUMOMETER_SCAN_TRIGGER
         if(Platform.isFabric())ASPECTS.register()// NeoForge doesn't like calling Architectury DeferredRegisters from the mod's main entrypoint
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()

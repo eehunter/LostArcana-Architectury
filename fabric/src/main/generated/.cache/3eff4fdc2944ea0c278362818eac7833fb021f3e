@@ -1,9 +1,11 @@
-// 1.21.1	2025-07-19T20:44:52.566105713	Lost Arcana/Recipes
+// 1.21.1	2025-07-19T22:21:29.625097088	Lost Arcana/Recipes
 a8165c462b031bb4635c406dad3f60b9a3fe3956 data/lostarcana/recipe/arcane_stone.json
 996fd4a052299bec34d9fac7173d629103c097ec data/lostarcana/recipe/arcane_stone_tiles.json
 5d9eda13340b401a231021996bc8586ac8239d82 data/lostarcana/advancement/recipes/building_blocks/arcane_stone_tiles.json
+6d6dbd8ec105c8c60fc4a553faf57f11fe1cf78d data/lostarcana/recipe/goggles_of_revealing.json
 3327d074724b9b61b1615ab0194feb803be5d104 data/lostarcana/recipe/wand.json
 cb282c7206d730459beb8b81bf5fd26f3593cc91 data/lostarcana/advancement/recipes/tools/iron_wand_cap.json
 b72bc9262912b8008118c46ed34872c67c7ea14c data/lostarcana/advancement/recipes/tools/wand.json
 c08a4ae9a7779f3df7ad95c293acceb546dac6c0 data/lostarcana/recipe/iron_wand_cap.json
+8d1e89308b4a25b94b6abb1b15d506a7ec209856 data/lostarcana/advancement/recipes/tools/goggles_of_revealing.json
 3eed5d6ede7c1a743cc7601ebcc0de2b0ad3e82b data/lostarcana/advancement/recipes/building_blocks/arcane_stone.json

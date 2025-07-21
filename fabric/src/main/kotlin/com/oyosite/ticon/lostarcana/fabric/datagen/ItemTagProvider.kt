@@ -1,19 +1,25 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
-import com.oyosite.ticon.lostarcana.item.COMMON_GLASS_PANES
-import com.oyosite.ticon.lostarcana.item.COMMON_GOLD_INGOTS
+
+import com.oyosite.ticon.lostarcana.tag.*
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
-class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider<Item>(output, Registries.ITEM, registriesFuture) {
+class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider<Item>(output, Registries.ITEM, registriesFuture), LostArcanaTagProvider<Item> {
     override fun addTags(wrapperLookup: HolderLookup.Provider) {
-        getOrCreateTagBuilder(COMMON_GOLD_INGOTS).add(Items.GOLD_INGOT)
-        getOrCreateTagBuilder(COMMON_GLASS_PANES).add(
+        COMMON_GOLD_INGOTS(Items.GOLD_INGOT)
+        COMMON_IRON_INGOTS(Items.IRON_INGOT)
+        COMMON_IRON_NUGGETS(Items.IRON_NUGGET)
+        COMMON_LEATHERS(Items.LEATHER)
+        COMMON_QUARTZ(Items.QUARTZ)
+        COMMON_STICKS(Items.STICK)
+        COMMON_GLASS_PANES(
             Items.GLASS_PANE,
             Items.LIGHT_BLUE_STAINED_GLASS_PANE,
             Items.LIGHT_GRAY_STAINED_GLASS_PANE,
@@ -33,4 +39,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.PINK_STAINED_GLASS_PANE
         )
     }
+
+    override fun getTagBuilder(key: TagKey<Item>) = getOrCreateTagBuilder(key)
 }

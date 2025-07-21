@@ -1,0 +1,57 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lostarcana:crude_caster_gauntlet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "obtained_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/iron"
+          },
+          {
+            "items": "#c:nuggets/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "obtained_quartz": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:gems/quartz"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "obtained_vis_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lostarcana:vis_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "obtained_quartz",
+      "obtained_vis_crystal",
+      "obtained_iron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lostarcana:crude_caster_gauntlet"
+    ]
+  }
+}

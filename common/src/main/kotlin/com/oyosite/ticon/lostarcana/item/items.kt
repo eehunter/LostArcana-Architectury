@@ -2,6 +2,8 @@ package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
+import com.oyosite.ticon.lostarcana.itemTag
+import com.oyosite.ticon.lostarcana.tag.COMMON_GOLD_INGOTS
 import dev.architectury.injectables.annotations.ExpectPlatform
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
@@ -26,8 +28,11 @@ val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Prop
 val IRON_WAND_CAP = "iron_wand_cap" * { Item(Item.Properties()) }
 
 
-val COMMON_GOLD_INGOTS = TagKey.create(Registries.ITEM, LostArcana.id("c:gold_ingots"))
-val COMMON_GLASS_PANES = TagKey.create(Registries.ITEM, LostArcana.id("c:glass_panes"))
+
+
+val WOOD_PLANKS = itemTag("minecraft:planks")
+
+
 val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
     ArmorMaterial(Util.make(EnumMap(ArmorItem.Type::class.java)) {
 

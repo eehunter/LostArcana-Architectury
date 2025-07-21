@@ -2,14 +2,13 @@ package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.aspects
+import com.oyosite.ticon.lostarcana.tag.*
 import net.minecraft.core.Holder
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.phys.AABB
 

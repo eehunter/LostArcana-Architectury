@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "G": {
-      "tag": "c:gold_ingots"
+      "tag": "c:ingots/gold"
     },
     "L": {
-      "item": "minecraft:leather"
+      "tag": "c:leathers"
     },
     "T": {
       "item": "lostarcana:thaumometer"

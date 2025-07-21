@@ -4,31 +4,50 @@ import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
-import com.oyosite.ticon.lostarcana.item.COMMON_GOLD_INGOTS
+import com.oyosite.ticon.lostarcana.item.CRUDE_CASTER_GAUNTLET
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
+import com.oyosite.ticon.lostarcana.item.WOOD_PLANKS
+import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
+import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
     @Suppress("KotlinUnreachableCode")
     override fun buildRecipes(exporter: RecipeOutput) {
+        shaped(RecipeCategory.TOOLS, +CRUDE_CASTER_GAUNTLET, 1)
+            .pattern("NVN")
+            .pattern("SQS")
+            .pattern("SPS")
+            .define('N', COMMON_IRON_NUGGETS)
+            .define('V', +VIS_CRYSTAL)
+            .define('S', COMMON_STICKS)
+            .define('Q', COMMON_QUARTZ)
+            .define('P', WOOD_PLANKS)
+            .unlockedBy("obtained_quartz", hasItems(COMMON_QUARTZ))
+            .unlockedBy("obtained_vis_crystal", hasItems(+VIS_CRYSTAL))
+            .unlockedBy("obtained_iron", hasItems(COMMON_IRON_INGOTS, COMMON_IRON_NUGGETS))
+            .save(exporter)
         shaped(RecipeCategory.TOOLS, +GOGGLES_OF_REVEALING, 1)
             .pattern(" L ")
             .pattern("TGT")
-            .define('L', Items.LEATHER)
+            .define('L', COMMON_LEATHERS)
             .define('T', +THAUMOMETER)
             .define('G', COMMON_GOLD_INGOTS)
             .unlockedBy("scanned_aura_node", ThaumometerScanCriterionTrigger.scan(AURA_NODE.id, AURA_NODE.registryId))
@@ -63,4 +82,8 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .unlockedBy("got_wand_cap", InventoryChangeTrigger.TriggerInstance.hasItems(+IRON_WAND_CAP))
             .save(exporter)
     }
+
+    fun hasItems(vararg items: TagKey<Item>) = hasItems(*items.map { ItemPredicate.Builder.item().of(it).build() }.toTypedArray())
+    fun hasItems(vararg items: ItemPredicate) = InventoryChangeTrigger.TriggerInstance.hasItems(*items)
+    fun hasItems(vararg items: ItemLike) = InventoryChangeTrigger.TriggerInstance.hasItems(*items)
 }

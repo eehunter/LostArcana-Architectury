@@ -8,15 +8,18 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.BlockTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block
 import java.util.concurrent.CompletableFuture
 
 class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>
-) : FabricTagProvider<Block>(output, Registries.BLOCK, registriesFuture) {
+) : FabricTagProvider<Block>(output, Registries.BLOCK, registriesFuture), LostArcanaTagProvider<Block> {
     override fun addTags(wrapperLookup: HolderLookup.Provider) {
         val infusedStoneBlocks = INFUSED_STONES.map(RegistrySupplier<out Block>::get).toTypedArray()
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(*infusedStoneBlocks)
-        getOrCreateTagBuilder(COMMON_ORES).add(*infusedStoneBlocks)
+        BlockTags.MINEABLE_WITH_PICKAXE(*infusedStoneBlocks)
+        COMMON_ORES(*infusedStoneBlocks)
 
     }
+
+    override fun getTagBuilder(key: TagKey<Block>): FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(key)
 }

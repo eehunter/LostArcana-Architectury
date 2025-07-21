@@ -2,13 +2,22 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.unaryPlus
+import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
@@ -27,8 +36,24 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             val lootTable = LootTable.lootTable().withPool(explosionReduced)
             add(block, lootTable)
         }
+        listOf(
+            ARCANE_STONE,
+            ARCANE_STONE_TILES,
+            ARCANE_STONE_PILLAR,
+            ARCANE_STONE_STAIRS,
+            ARCANE_STONE_TILE_STAIRS,
+        ).allDropSelf
+
+        listOf(
+            ARCANE_STONE_SLAB,
+            ARCANE_STONE_TILE_SLAB
+        ).asBlocks.forEach(::createSlabItemTable)
+
     }
 
+    val Collection<RegistrySupplier<out Block>>.asBlocks get() = map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get)
+
+    val Collection<RegistrySupplier<out Block>>.allDropSelf get() = map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).forEach(::dropSelf)
 
     fun uniformRolls(min: Number, max: Number) = LootPool.lootPool().setRolls(UniformGenerator(ConstantValue(min.toFloat()), ConstantValue(max.toFloat())))
     fun applyAspectFunction(aspect: AspectStack) = SetComponentsFunction.setComponent(ASPECT_COMPONENT, aspect)

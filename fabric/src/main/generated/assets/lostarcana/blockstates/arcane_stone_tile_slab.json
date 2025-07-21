@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lostarcana:block/arcane_stone_tile_slab"
+    },
+    "type=double": {
+      "model": "lostarcana:block/arcane_stone_tiles"
+    },
+    "type=top": {
+      "model": "lostarcana:block/arcane_stone_tile_slab_top"
+    }
+  }
+}

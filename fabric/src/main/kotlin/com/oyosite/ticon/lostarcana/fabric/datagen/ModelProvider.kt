@@ -3,7 +3,12 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
@@ -17,6 +22,7 @@ import net.minecraft.client.model.Model
 import net.minecraft.client.renderer.block.model.BlockModel
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
+import net.minecraft.data.models.blockstates.BlockStateGenerator
 import net.minecraft.data.models.model.ModelLocationUtils
 import net.minecraft.data.models.model.ModelTemplate
 import net.minecraft.data.models.model.ModelTemplates
@@ -25,6 +31,9 @@ import net.minecraft.data.models.model.TextureSlot
 import net.minecraft.data.models.model.TexturedModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.SlabBlock
+import net.minecraft.world.level.block.StairBlock
 import java.util.Optional
 
 class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutput) {
@@ -32,7 +41,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
     val TINTED_CUBE_ALL = block("tinted_cube_all", TextureSlot.ALL)
     val TINTED_CUBE = block("tinted_cube", TextureSlot.UP, TextureSlot.DOWN, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST)
 
-    override fun generateBlockStateModels(bsmg: BlockModelGenerators) {
+    override fun generateBlockStateModels(bsmg: BlockModelGenerators) = bsmg.run{
 
 
         INFUSED_STONES.forEach {
@@ -41,6 +50,33 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
         bsmg.createTrivialCube(+ARCANE_STONE)
         bsmg.createTrivialCube(+ARCANE_STONE_TILES)
+        bsmg.createAxisAlignedPillarBlock(+ARCANE_STONE_PILLAR, TexturedModel.COLUMN)
+
+        bsmg.blockStateOutput.accept(ARCANE_STONE_SLAB.makeSlabOf(ARCANE_STONE))
+        bsmg.blockStateOutput.accept(ARCANE_STONE_TILE_SLAB.makeSlabOf(ARCANE_STONE_TILES))
+
+        bsmg.blockStateOutput.accept(ARCANE_STONE_STAIRS.makeStairOf(ARCANE_STONE))
+        bsmg.blockStateOutput.accept(ARCANE_STONE_TILE_STAIRS.makeStairOf(ARCANE_STONE_TILES))
+    }
+
+    context(bsmg: BlockModelGenerators)
+    private fun RegistrySupplier<out StairBlock>.makeStairOf(stairOf: RegistrySupplier<out Block>): BlockStateGenerator {
+        val texturedModel = TexturedModel.CUBE.get(stairOf.get());
+        val r1 = ModelTemplates.STAIRS_INNER.create(this.get(), texturedModel.mapping, bsmg.modelOutput)
+        val r2 = ModelTemplates.STAIRS_STRAIGHT.create(this.get(), texturedModel.mapping, bsmg.modelOutput)
+        val r3 = ModelTemplates.STAIRS_OUTER.create(this.get(), texturedModel.mapping, bsmg.modelOutput)
+        //bsmg.BlockFamilyProvider(TexturedModel.CUBE.get(stairOf.get()).mapping).stairs(this.get()).generateFor()
+
+        return BlockModelGenerators.createStairs(this.get(), r1, r2, r3)
+    }
+
+    context(bsmg: BlockModelGenerators)
+    private fun RegistrySupplier<out SlabBlock>.makeSlabOf(slabOf: RegistrySupplier<out Block>): BlockStateGenerator {
+        val r1 = slabOf.id.withPrefix("block/")
+        val texturedModel = TexturedModel.CUBE.get(slabOf.get());
+        val r2 = ModelTemplates.SLAB_BOTTOM.create(this.get(), texturedModel.mapping, bsmg.modelOutput)
+        val r3 = ModelTemplates.SLAB_TOP.create(this.get(), texturedModel.mapping, bsmg.modelOutput)
+        return BlockModelGenerators.createSlab(this.get(), r2, r3, r1)
     }
 
     private fun block(parent: String, vararg requiredTextureKeys: TextureSlot): ModelTemplate = ModelTemplate(Optional.of(LostArcana.id("block/$parent")), Optional.empty(), *requiredTextureKeys)

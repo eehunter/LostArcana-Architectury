@@ -14,6 +14,9 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.RotatedPillarBlock
+import net.minecraft.world.level.block.SlabBlock
+import net.minecraft.world.level.block.StairBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
@@ -29,7 +32,12 @@ val INFUSED_STONES = PRIMAL_ASPECTS.map {
 
 val ARCANE_STONE = "arcane_stone" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
 val ARCANE_STONE_TILES = "arcane_stone_tiles" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
+val ARCANE_STONE_PILLAR = "arcane_stone_pillar" % { RotatedPillarBlock(BlockProperties.of().strength(1.5F, 6.0F).requiresCorrectToolForDrops()) } % {}
 
+val ARCANE_STONE_SLAB = "arcane_stone_slab" % { SlabBlock(BlockProperties.ofFullCopy(Blocks.STONE_SLAB)) } % {}
+val ARCANE_STONE_TILE_SLAB = "arcane_stone_tile_slab" % { SlabBlock(BlockProperties.ofFullCopy(Blocks.STONE_SLAB)) } % {}
+val ARCANE_STONE_STAIRS = "arcane_stone_stairs" % { StairBlock((+ARCANE_STONE).defaultBlockState(), BlockProperties.ofFullCopy(Blocks.STONE_STAIRS)) } % {}
+val ARCANE_STONE_TILE_STAIRS = "arcane_stone_tile_stairs" % { StairBlock((+ARCANE_STONE_TILES).defaultBlockState(), BlockProperties.ofFullCopy(Blocks.STONE_STAIRS)) } % {}
 
 
 

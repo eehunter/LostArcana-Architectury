@@ -2,7 +2,12 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.CRUDE_CASTER_GAUNTLET
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
@@ -24,12 +29,12 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
-    @Suppress("KotlinUnreachableCode")
     override fun buildRecipes(exporter: RecipeOutput) {
         shaped(RecipeCategory.TOOLS, +CRUDE_CASTER_GAUNTLET, 1)
             .pattern("NVN")
@@ -58,20 +63,30 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .pattern("SSS")
             .define('S', Blocks.STONE)
             .define('C', +VIS_CRYSTAL)
-            .unlockedBy("got_vis_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(+VIS_CRYSTAL))
+            .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
             .save(exporter)
         shaped(RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE_TILES, 4)
             .pattern("AA")
             .pattern("AA")
             .define('A', +ARCANE_STONE)
-            .unlockedBy("got_vis_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(+VIS_CRYSTAL))
+            .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
             .save(exporter)
+        shaped(RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE_PILLAR, 2)
+            .pattern("A")
+            .pattern("A")
+            .define('A', +ARCANE_STONE)
+            .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
+            .save(exporter)
+        slab(exporter, RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE_SLAB, +ARCANE_STONE)
+        slab(exporter, RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE_TILE_SLAB, +ARCANE_STONE_TILES)
+        stair(exporter, +ARCANE_STONE_STAIRS, +ARCANE_STONE)
+        stair(exporter, +ARCANE_STONE_TILE_STAIRS, +ARCANE_STONE_TILES)
         shaped(RecipeCategory.TOOLS, +IRON_WAND_CAP)
             .pattern("NNN")
             .pattern("NCN")
             .define('N', Items.IRON_NUGGET)
             .define('C', +VIS_CRYSTAL)
-            .unlockedBy("got_vis_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(+VIS_CRYSTAL))
+            .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
             .save(exporter)
         shaped(RecipeCategory.TOOLS, +WAND_ITEM)
             .pattern("  C")
@@ -79,8 +94,12 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .pattern("C  ")
             .define('C', +IRON_WAND_CAP)
             .define('S', Items.STICK)
-            .unlockedBy("got_wand_cap", InventoryChangeTrigger.TriggerInstance.hasItems(+IRON_WAND_CAP))
+            .unlockedBy("got_wand_cap", hasItems(+IRON_WAND_CAP))
             .save(exporter)
+    }
+
+    fun stair(exporter: RecipeOutput, stair: ItemLike, block: ItemLike){
+        stairBuilder(stair, Ingredient.of(block)).unlockedBy("has_base_block", hasItems(block)).save(exporter)
     }
 
     fun hasItems(vararg items: TagKey<Item>) = hasItems(*items.map { ItemPredicate.Builder.item().of(it).build() }.toTypedArray())

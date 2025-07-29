@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.entity.AuraNodeEntity
+import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.phys.AABB
@@ -19,15 +20,13 @@ open class CasterGauntlet(properties: Properties): CastingItem(properties) {
         amount: Float,
         entity: Entity?
     ): Boolean {
-        entity?:return false
-        val nodes: List<AuraNodeEntity> = entity.level().getEntities(null, AABB.ofSize(entity.position(), AURA_RANGE, AURA_RANGE, AURA_RANGE)) { it is AuraNodeEntity } as List<AuraNodeEntity>
-        val node = nodes.minByOrNull { it.distanceToSqr(entity) }?: return false
+        val node = getNearestAuraSourceInRange(entity, AURA_RANGE)?:return false
         if(node.vis < amount)return false
         node.vis -= amount
         return true
     }
 
     companion object{
-        val AURA_RANGE = 20.0
+        val AURA_RANGE = 10.0
     }
 }

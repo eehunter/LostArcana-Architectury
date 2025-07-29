@@ -1,16 +1,21 @@
 package com.oyosite.ticon.lostarcana.entity
 
+import com.oyosite.ticon.lostarcana.aura.AuraSource
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 
-class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level) {
+class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level), AuraSource {
 
-    var vis: Float = 0f
+    override var vis: Float = 0f
     val maxVis = 100f
+
+    override val pos: Vec3
+        get() = eyePosition
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
 

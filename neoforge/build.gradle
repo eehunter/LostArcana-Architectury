@@ -69,6 +69,8 @@ dependencies {
     }
 
     modImplementation ("maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-neoforge-mc$rootProject.fusion_mc_version")
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 }
 
 processResources {

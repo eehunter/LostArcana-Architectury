@@ -45,6 +45,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:1.13.4+kotlin.2.2.0")
 
     modImplementation "maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-fabric-mc$rootProject.fusion_mc_version"
+
+    modRuntimeOnly "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 }

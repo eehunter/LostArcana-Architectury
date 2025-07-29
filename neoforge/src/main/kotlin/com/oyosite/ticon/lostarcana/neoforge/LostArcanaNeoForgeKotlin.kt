@@ -1,7 +1,6 @@
 package com.oyosite.ticon.lostarcana.neoforge
 
 import com.oyosite.ticon.lostarcana.LostArcana
-import com.oyosite.ticon.lostarcana.aspect.ALL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECT_REGISTRY_KEY
@@ -11,22 +10,20 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.MagicBricksBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
+import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
-import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
-import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
-import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
-import com.oyosite.ticon.lostarcana.item.THAUMOMETER
-import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
-import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
+import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.unaryPlus
-import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry
 import dev.architectury.registry.registries.RegistrySupplier
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
-import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.IEventBus
@@ -36,6 +33,7 @@ import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -59,6 +57,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
 
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
+        NEOFORGE_BLOCK_ENTITY_TYPES.register(modEventBus)
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
 
@@ -83,6 +82,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
         val NEOFORGE_ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, LostArcana.MOD_ID)
         val NEOFORGE_ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, LostArcana.MOD_ID)
         val NEOFORGE_ADVANCEMENT_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, LostArcana.MOD_ID)
+        val NEOFORGE_BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic
@@ -128,6 +128,11 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
         @JvmStatic
         fun onRegisterEntityModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions){
             event.registerLayerDefinition(AURA_NODE_MODEL_LAYER, AuraNodeEntityRenderer::getTexturedModelData)
+        }
+
+        @SubscribeEvent
+        fun registerRenderers(event: RegisterRenderers) {
+            event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
         }
 
         @SubscribeEvent

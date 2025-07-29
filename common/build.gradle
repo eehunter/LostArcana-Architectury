@@ -14,23 +14,12 @@ dependencies {
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    compileOnly "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
 
     modCompileOnly "dev.emi:emi-xplat-intermediary:${emi_version}:api"
 }
 repositories {
     mavenCentral()
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'GeckoLib'
-                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-            }
-        }
-        filter {
-            includeGroup('software.bernie.geckolib')
-        }
-    }
 }
 kotlin {
     jvmToolchain(21)

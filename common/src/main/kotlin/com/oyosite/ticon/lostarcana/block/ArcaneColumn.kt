@@ -36,7 +36,6 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
 
     override fun getRenderShape(blockState: BlockState): RenderShape = RenderShape.ENTITYBLOCK_ANIMATED
     override fun deconstruct(levelAccessor: LevelAccessor, blockPos: BlockPos, brokenFrom: BlockPos?) {
-        println("Deconstructing column")
         for(i in (-2..2).map { blockPos.above(it) }){
             val block = levelAccessor.getBlockState(i).block
             if(block is ArcaneColumn || block is MultiblockPlaceholder)levelAccessor.setBlock(i, Blocks.AIR.defaultBlockState(), 3)
@@ -63,8 +62,6 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
                 LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(LootContextParamSet.builder().build()))?.map { ItemEntity(level, x,y,z, it) }
             ?.forEach(level::addFreshEntity)
     }
-
-    override fun getLootTable(level: ServerLevel, pos: BlockPos) = multiblockLootTable
 
     override fun onRemove(
         blockState: BlockState,

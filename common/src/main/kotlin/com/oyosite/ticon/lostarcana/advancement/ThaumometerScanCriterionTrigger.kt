@@ -4,13 +4,11 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger.TriggerInstance
-import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.advancements.critereon.ContextAwarePredicate
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
-import java.util.Optional
+import java.util.*
 
 class ThaumometerScanCriterionTrigger: SimpleCriterionTrigger<TriggerInstance>() {
     override fun codec(): Codec<TriggerInstance> = CODEC

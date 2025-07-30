@@ -12,7 +12,6 @@ import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.MagicBricksBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
@@ -22,8 +21,6 @@ import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.entity.ai.attributes.Attribute
@@ -45,7 +42,7 @@ import java.util.function.Supplier
 
 
 @Mod(LostArcana.MOD_ID)
-class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
+class LostArcanaNeoForge(modEventBus: IEventBus) {
 
     val DATA_COMPONENT_REGISTRAR = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, LostArcana.MOD_ID)
 

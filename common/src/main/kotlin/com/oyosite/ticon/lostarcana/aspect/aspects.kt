@@ -1,8 +1,6 @@
 package com.oyosite.ticon.lostarcana.aspect
 
-import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import dev.architectury.injectables.annotations.ExpectPlatform
 
 val ALL_ASPECTS = mutableListOf<Pair<String, Aspect>>()

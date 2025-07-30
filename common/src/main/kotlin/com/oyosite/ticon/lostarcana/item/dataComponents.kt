@@ -11,9 +11,6 @@ import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.network.protocol.ProtocolCodecBuilder
-
-//val DATA_COMPONENTS: DeferredRegister.DataComponents
 
 val ASPECT_CODEC: Codec<AspectStack> = RecordCodecBuilder.create { it.group(
     Codec.STRING.fieldOf("aspect").forGetter{ it.aspect.id.toString() },

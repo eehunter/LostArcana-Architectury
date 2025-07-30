@@ -1,40 +1,21 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
-import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
-import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
-import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
-import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
-import com.oyosite.ticon.lostarcana.item.THAUMOMETER
-import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
-import com.oyosite.ticon.lostarcana.item.WAND_ITEM
+import com.oyosite.ticon.lostarcana.block.*
+import com.oyosite.ticon.lostarcana.item.*
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
-import net.minecraft.client.model.Model
-import net.minecraft.client.renderer.block.model.BlockModel
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.blockstates.BlockStateGenerator
-import net.minecraft.data.models.model.ModelLocationUtils
-import net.minecraft.data.models.model.ModelTemplate
-import net.minecraft.data.models.model.ModelTemplates
-import net.minecraft.data.models.model.TextureMapping
-import net.minecraft.data.models.model.TextureSlot
-import net.minecraft.data.models.model.TexturedModel
+import net.minecraft.data.models.model.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
-import java.util.Optional
+import java.util.*
 
 class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutput) {
 

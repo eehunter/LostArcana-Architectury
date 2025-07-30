@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.item
 
-import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.itemTag
 import com.oyosite.ticon.lostarcana.tag.COMMON_GOLD_INGOTS
@@ -11,12 +10,11 @@ import net.minecraft.Util
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
-import java.util.EnumMap
+import java.util.*
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 

@@ -3,7 +3,6 @@ package com.oyosite.ticon.lostarcana.blockentity
 import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
-import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder

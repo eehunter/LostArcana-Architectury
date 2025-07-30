@@ -41,8 +41,8 @@ val ARCANE_STONE_TILE_STAIRS = "arcane_stone_tile_stairs" % { StairBlock((+ARCAN
 
 
 
-val MAGIC_BRICKS = "magic_bricks" % { MagicBricksBlock(BlockProperties.of().isSuffocating { _,_,_ -> false }.isViewBlocking { _,_,_ -> false }.noOcclusion()) } % {}
-val ARCANE_COLUMN = "arcane_column" % { ArcaneColumn(BlockProperties.of().isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }.noOcclusion()) } % {}
+val MAGIC_BRICKS = "magic_bricks" % { MagicBricksBlock(prop.isSuffocating { _,_,_ -> false }.isViewBlocking { _,_,_ -> false }.noOcclusion()) } % {}
+val ARCANE_COLUMN = "arcane_column" % { ArcaneColumn(prop.isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }.noOcclusion()) } % {}
 
 val MULTIBLOCK_PLACEHOLDER = "multiblock_placeholder" % { MultiblockPlaceholder(prop.noOcclusion()) }
 

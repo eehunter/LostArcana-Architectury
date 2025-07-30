@@ -1,7 +1,7 @@
 @file:JvmName("CriteriaKtImpl")
 package com.oyosite.ticon.lostarcana.advancement.neoforge
 
-import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForgeKotlin.Companion.NEOFORGE_ADVANCEMENT_TRIGGERS
+import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge.Companion.NEOFORGE_ADVANCEMENT_TRIGGERS
 import net.minecraft.advancements.CriterionTrigger
 import net.minecraft.advancements.CriterionTriggerInstance
 import net.minecraft.core.Holder

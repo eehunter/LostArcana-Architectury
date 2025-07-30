@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
-import com.oyosite.ticon.lostarcana.blockentity.MagicBricksBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState

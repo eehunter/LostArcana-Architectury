@@ -1,21 +1,9 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
+import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
-import com.oyosite.ticon.lostarcana.item.CRUDE_CASTER_GAUNTLET
-import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
-import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
-import com.oyosite.ticon.lostarcana.item.THAUMOMETER
-import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
-import com.oyosite.ticon.lostarcana.item.WAND_ITEM
-import com.oyosite.ticon.lostarcana.item.WOOD_PLANKS
+import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput

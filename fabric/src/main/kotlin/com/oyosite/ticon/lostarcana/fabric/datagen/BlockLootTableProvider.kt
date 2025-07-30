@@ -45,7 +45,6 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_TILE_SLAB
         ).asBlocks.forEach(::createSlabItemTable)
 
-        //add(+ARCANE_COLUMN, dropsMultiplied(+ARCANE_STONE_PILLAR, 5))
     }
 
     override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {

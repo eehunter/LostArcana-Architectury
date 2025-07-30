@@ -2,15 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
-import com.oyosite.ticon.lostarcana.block.ArcaneColumn
-import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
+import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -53,7 +45,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_TILE_SLAB
         ).asBlocks.forEach(::createSlabItemTable)
 
-
+        //add(+ARCANE_COLUMN, dropsMultiplied(+ARCANE_STONE_PILLAR, 5))
     }
 
     override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
@@ -61,7 +53,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
         super.generate(biConsumer)
     }
 
-    fun dropsMultiplied(item: ItemLike, amount: Int) =
+    fun dropsMultiplied(item: ItemLike, amount: Int): LootTable.Builder =
         LootTable.lootTable().withPool(applyExplosionDecay(item, LootPool.lootPool().setRolls(ConstantValue(amount.toFloat())).add(LootItem.lootTableItem(item))))
 
 

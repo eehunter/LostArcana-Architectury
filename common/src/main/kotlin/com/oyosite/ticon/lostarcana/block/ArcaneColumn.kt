@@ -2,18 +2,19 @@ package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneColumnBlockEntity
-import com.oyosite.ticon.lostarcana.blockentity.PLACEHOLDER_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.PlaceholderBlockEntity
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
 import com.oyosite.ticon.lostarcana.util.component3
 import net.minecraft.core.BlockPos
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.stats.Stats
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -26,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet
-import kotlin.jvm.optionals.getOrNull
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 
 class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, MultiblockController {
 
@@ -34,23 +35,36 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
         ArcaneColumnBlockEntity(blockPos, blockState)
 
     override fun getRenderShape(blockState: BlockState): RenderShape = RenderShape.ENTITYBLOCK_ANIMATED
-    override fun deconstruct(levelAccessor: LevelAccessor, blockPos: BlockPos, brokenFrom: BlockPos?, bl: Boolean) {
+    override fun deconstruct(levelAccessor: LevelAccessor, blockPos: BlockPos, brokenFrom: BlockPos?) {
         println("Deconstructing column")
         for(i in (-2..2).map { blockPos.above(it) }){
             val block = levelAccessor.getBlockState(i).block
             if(block is ArcaneColumn || block is MultiblockPlaceholder)levelAccessor.setBlock(i, Blocks.AIR.defaultBlockState(), 3)
         }
-        val level = levelAccessor as? ServerLevel ?: return
-        val (x,y,z) = (brokenFrom?:blockPos).center
-
-
-        if(bl)
-            level.server.reloadableRegistries().getLootTable(multiblockLootTable).getRandomItems(
-                LootParams.Builder(level).create(LootContextParamSet.builder().build()))?.map { ItemEntity(level, x,y,z, it) }
-                ?.forEach(level::addFreshEntity)
-            //
-            // LootContext.Builder().create( Optional.of(multiblockLootTable.location())))
     }
+
+    override fun playerDestroy(
+        level: Level,
+        player: Player,
+        blockPos: BlockPos,
+        blockState: BlockState,
+        blockEntity: BlockEntity?,
+        itemStack: ItemStack
+    ) {
+        player.awardStat(Stats.BLOCK_MINED.get(this))
+        player.causeFoodExhaustion(0.005f)
+        if(level is ServerLevel) generateDrops(level, blockPos, blockPos, player, itemStack)
+    }
+
+    override fun generateDrops(level: ServerLevel, pos: BlockPos, corePos: BlockPos, player: Player, tool: ItemStack){
+        val (x,y,z) = pos.center
+        level.server.reloadableRegistries().getLootTable(multiblockLootTable).getRandomItems(
+            LootParams.Builder(level).withParameter(LootContextParams.ORIGIN, corePos.center).withParameter(LootContextParams.TOOL, tool).withOptionalParameter(LootContextParams.THIS_ENTITY, player).withOptionalParameter(
+                LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(LootContextParamSet.builder().build()))?.map { ItemEntity(level, x,y,z, it) }
+            ?.forEach(level::addFreshEntity)
+    }
+
+    override fun getLootTable(level: ServerLevel, pos: BlockPos) = multiblockLootTable
 
     override fun onRemove(
         blockState: BlockState,
@@ -59,7 +73,7 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
         blockState2: BlockState,
         bl: Boolean
     ) {
-        deconstruct(level, blockPos, blockPos, bl)
+        deconstruct(level, blockPos, blockPos)
         super.onRemove(blockState, level, blockPos, blockState2, bl)
     }
 
@@ -80,7 +94,7 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
             val newBlock = (if(i == 2) this else +MULTIBLOCK_PLACEHOLDER).defaultBlockState()
             level.setBlock(bottomPos.above(i), newBlock, 3)
             if(i!=2){
-                level.setBlockEntity(PlaceholderBlockEntity(bottomPos.above(i), (+MULTIBLOCK_PLACEHOLDER).defaultBlockState()).apply { linkedBlock = bottomPos.above(2) })
+                level.setBlockEntity(PlaceholderBlockEntity(bottomPos.above(i), (+MULTIBLOCK_PLACEHOLDER).defaultBlockState()).apply { linkedPos = bottomPos.above(2); linkedBlock = this@ArcaneColumn })
             }
         }
         return true

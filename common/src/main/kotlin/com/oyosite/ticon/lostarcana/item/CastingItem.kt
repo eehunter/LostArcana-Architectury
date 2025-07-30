@@ -2,7 +2,10 @@ package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.aspects
+import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
+import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
 import com.oyosite.ticon.lostarcana.tag.*
+import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.core.Holder
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -24,6 +27,11 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
     override fun useOn(useOnContext: UseOnContext): InteractionResult {
         val player = useOnContext.player
         val level = useOnContext.level
+
+        if(level.getBlockState(useOnContext.clickedPos) == (+ARCANE_STONE_PILLAR).defaultBlockState()){
+            if((+ARCANE_COLUMN).construct(useOnContext)) return InteractionResult.SUCCESS_NO_ITEM_USED
+        }
+
         val items = level.getEntities(player, AABB.ofSize(useOnContext.clickLocation, craftItemRange, craftItemRange, craftItemRange)){ it is ItemEntity }.mapNotNull{it as? ItemEntity}
         val crystals = items.filter { it.item.item is VisCrystalItem }
         if(crystals.size == 3 && consumeVis(useOnContext.itemInHand, 10f, player)){

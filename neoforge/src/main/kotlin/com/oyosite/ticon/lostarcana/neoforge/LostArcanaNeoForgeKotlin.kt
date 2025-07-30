@@ -10,10 +10,12 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MagicBricksBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
+import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
@@ -133,6 +135,7 @@ class LostArcanaNeoForgeKotlin(modEventBus: IEventBus) {
         @SubscribeEvent
         fun registerRenderers(event: RegisterRenderers) {
             event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
+            event.registerBlockEntityRenderer(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() }
         }
 
         @SubscribeEvent

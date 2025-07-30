@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
+import com.oyosite.ticon.lostarcana.block.ArcaneColumn
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
@@ -17,6 +18,8 @@ import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.resources.ResourceKey
+import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
@@ -25,6 +28,7 @@ import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.concurrent.CompletableFuture
+import java.util.function.BiConsumer
 
 class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) : FabricBlockLootTableProvider(dataOutput, registryLookup) {
     override fun generate() {
@@ -49,7 +53,17 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_TILE_SLAB
         ).asBlocks.forEach(::createSlabItemTable)
 
+
     }
+
+    override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+        biConsumer.accept(ArcaneColumn.multiblockLootTable, dropsMultiplied(+ARCANE_STONE_PILLAR, 5))
+        super.generate(biConsumer)
+    }
+
+    fun dropsMultiplied(item: ItemLike, amount: Int) =
+        LootTable.lootTable().withPool(applyExplosionDecay(item, LootPool.lootPool().setRolls(ConstantValue(amount.toFloat())).add(LootItem.lootTableItem(item))))
+
 
     val Collection<RegistrySupplier<out Block>>.asBlocks get() = map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get)
 

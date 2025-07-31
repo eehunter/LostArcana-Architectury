@@ -2,11 +2,15 @@
 package com.oyosite.ticon.lostarcana.util.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import dev.architectury.platform.Platform
+import dev.architectury.utils.Env
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.Container
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.item.crafting.RecipeSerializer
@@ -14,6 +18,10 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+
+fun <T: AbstractContainerMenu> platformRegisterMenuScreen(name: String, menuScreen: MenuType<T>): Holder<MenuType<T>>{
+    return Registry.registerForHolder(BuiltInRegistries.MENU, LostArcana.id(name), menuScreen) as Holder<MenuType<T>>
+}
 
 operator fun <T: Recipe<*>> RecipeType<T>.invoke(name: String): Unit{
     Registry.register(BuiltInRegistries.RECIPE_TYPE, LostArcana.id(name), this)

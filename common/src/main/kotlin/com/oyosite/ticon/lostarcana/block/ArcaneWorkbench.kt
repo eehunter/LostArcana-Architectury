@@ -1,5 +1,7 @@
 package com.oyosite.ticon.lostarcana.block
 
+import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchBlockEntity
+import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -10,10 +12,12 @@ import net.minecraft.world.SimpleMenuProvider
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
 
-class ArcaneWorkbench(properties: Properties) : Block(properties) {
+class ArcaneWorkbench(properties: Properties) : Block(properties), EntityBlock {
     override fun useWithoutItem(
         blockState: BlockState,
         level: Level,
@@ -30,9 +34,11 @@ class ArcaneWorkbench(properties: Properties) : Block(properties) {
         }
     }
 
-    override fun getMenuProvider(blockState: BlockState, level: Level, blockPos: BlockPos): MenuProvider? {
-        return SimpleMenuProvider(TODO(), TITLE)
-    }
+    override fun getMenuProvider(blockState: BlockState, level: Level, blockPos: BlockPos): MenuProvider? =
+        (level.getBlockEntity(blockPos) as? ArcaneWorkbenchBlockEntity)?.let { it::createMenu }?.let{SimpleMenuProvider(it, TITLE)}
+
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity? =
+        ArcaneWorkbenchBlockEntity(blockPos, blockState)
 
     companion object{
         val TITLE: MutableComponent = Component.translatable("container.lostarcana.arcane_workbench")

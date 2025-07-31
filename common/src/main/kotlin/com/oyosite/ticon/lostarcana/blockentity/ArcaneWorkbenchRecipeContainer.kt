@@ -9,12 +9,14 @@ import net.minecraft.world.inventory.CraftingContainer
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.RecipeInput
 
-class ArcaneWorkbenchRecipeContainer(val pos: BlockPos): Container, RecipeInput {
+interface ArcaneWorkbenchRecipeContainer: Container, RecipeInput {
 
-    val inputSlotCount = 15
-    val inputStacks = MutableList(inputSlotCount){ ItemStack.EMPTY }
+    val pos: BlockPos
 
-    val baseCraftingContainer = ArcaneWorkbenchBaseCraftingContainer(this)
+    val inputSlotCount: Int// = 15
+    val inputStacks: MutableList<ItemStack>// = MutableList(inputSlotCount){ ItemStack.EMPTY }
+
+    val baseCraftingContainer: CraftingContainer// = ArcaneWorkbenchBaseCraftingContainer(this)
 
 
     override fun getContainerSize(): Int = inputSlotCount
@@ -46,7 +48,7 @@ class ArcaneWorkbenchRecipeContainer(val pos: BlockPos): Container, RecipeInput 
     override fun clearContent() = (0 until containerSize).forEach { setItem(it, ItemStack.EMPTY) }
 
     fun updateMenu(){
-        TODO("Update menu")
+        //TODO("Update menu")
     }
 
 

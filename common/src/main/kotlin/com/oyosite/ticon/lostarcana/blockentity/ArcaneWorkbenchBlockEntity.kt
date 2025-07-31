@@ -1,16 +1,36 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
 import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
 import net.minecraft.world.Container
+import net.minecraft.world.MenuProvider
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.CraftingContainer
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.RecipeInput
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-class ArcaneWorkbenchBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(TODO(), pos, state)/*, Container, RecipeInput*/ {
+class ArcaneWorkbenchBlockEntity(override val pos: BlockPos, state: BlockState): BlockEntity(ARCANE_WORKBENCH_BLOCK_ENTITY.value(), pos, state), ArcaneWorkbenchRecipeContainer, MenuProvider/*, Container, RecipeInput*/ {
 
-    val container = ArcaneWorkbenchRecipeContainer(pos)
+    override val inputSlotCount: Int = 15
+    override val inputStacks: MutableList<ItemStack> = MutableList(inputSlotCount){ ItemStack.EMPTY }
+    override val baseCraftingContainer: CraftingContainer = ArcaneWorkbenchRecipeContainer.ArcaneWorkbenchBaseCraftingContainer(this)
+    override fun setChanged() = updateMenu()
+
+
+    override fun getDisplayName(): Component = blockState.block.name
+
+    override fun createMenu(
+        i: Int,
+        inventory: Inventory,
+        player: Player
+    ): AbstractContainerMenu = ArcaneWorkbenchMenu(i, inventory, ArcaneWorkbenchRecipeContainer.Wrapper(this, player))
+
+
+    //val container = ArcaneWorkbenchRecipeContainer(pos)
 
 
 

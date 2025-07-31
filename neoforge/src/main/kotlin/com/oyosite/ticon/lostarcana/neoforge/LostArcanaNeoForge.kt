@@ -11,10 +11,12 @@ import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
@@ -34,6 +36,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent
 import net.neoforged.neoforge.registries.DeferredRegister
 import net.neoforged.neoforge.registries.NewRegistryEvent
@@ -59,6 +62,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_BLOCK_ENTITY_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_SERIALIZERS.register(modEventBus)
+        NEOFORGE_MENU_SCREENS.register(modEventBus)
 
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
@@ -87,6 +91,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, LostArcana.MOD_ID)
+        val NEOFORGE_MENU_SCREENS = DeferredRegister.create(Registries.MENU, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic
@@ -138,6 +143,11 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         fun registerRenderers(event: RegisterRenderers) {
             event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
             event.registerBlockEntityRenderer(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() }
+        }
+
+        @SubscribeEvent
+        fun registerMenuScreens(event: RegisterMenuScreensEvent){
+            event.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
         }
 
         @SubscribeEvent

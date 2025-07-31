@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class ArcaneWorkbenchBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(TODO(), pos, state)/*, Container, RecipeInput*/ {
 
-
+    val container = ArcaneWorkbenchRecipeContainer(pos)
 
 
 

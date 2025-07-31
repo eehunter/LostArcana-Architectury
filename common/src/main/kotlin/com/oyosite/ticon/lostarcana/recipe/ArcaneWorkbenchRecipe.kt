@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.recipe
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
+import com.mojang.serialization.MapEncoder
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.block.ArcaneWorkbench
@@ -22,7 +23,7 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 
 @JvmRecord
-data class ArcaneWorkbenchRecipe<T: CraftingRecipe>(val base: T, val visCost: List<Int>, val auraCost: Float): Recipe<ArcaneWorkbenchRecipeContainer.Wrapper> {
+data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int>, val auraCost: Float): Recipe<ArcaneWorkbenchRecipeContainer.Wrapper> {
 
     override fun matches(
         recipeInput: ArcaneWorkbenchRecipeContainer.Wrapper,
@@ -48,17 +49,18 @@ data class ArcaneWorkbenchRecipe<T: CraftingRecipe>(val base: T, val visCost: Li
 
     override fun getResultItem(provider: HolderLookup.Provider): ItemStack = base.getResultItem(provider)
 
-    override fun getSerializer(): RecipeSerializer<ArcaneWorkbenchRecipe<*>> = Serializer[this] as RecipeSerializer<ArcaneWorkbenchRecipe<*>>
+    override fun getSerializer(): RecipeSerializer<ArcaneWorkbenchRecipe> = Serializer as RecipeSerializer<ArcaneWorkbenchRecipe>
 
-    override fun getType(): RecipeType<*>? {
-        TODO("Not yet implemented")
-    }
+    override fun getType(): RecipeType<*> = Type
 
-    class Serializer<T: CraftingRecipe>(base: T): RecipeSerializer<ArcaneWorkbenchRecipe<T>>{
+    object Type: RecipeType<ArcaneWorkbenchRecipe>
 
-        val CODEC: Codec<ArcaneWorkbenchRecipe<T>> = RecordCodecBuilder.create {
+    object Serializer: RecipeSerializer<ArcaneWorkbenchRecipe>{
+
+
+        val CODEC: Codec<ArcaneWorkbenchRecipe> = RecordCodecBuilder.create {
             it.group(
-                (base.serializer.codec() as MapCodec<T>).fieldOf("base").forGetter { it.base },
+                (CraftingRecipe.CODEC as Codec<CraftingRecipe>).fieldOf("base").forGetter { it.base },
                 Codec.list(Codec.INT).fieldOf("crystalCost").forGetter { it.visCost.toList() },
                 Codec.FLOAT.fieldOf("visCost").forGetter { it.auraCost }
             ).apply(it, ::ArcaneWorkbenchRecipe)
@@ -66,22 +68,20 @@ data class ArcaneWorkbenchRecipe<T: CraftingRecipe>(val base: T, val visCost: Li
 
         val MAP_CODEC = MapCodec.assumeMapUnsafe(CODEC)
 
-        override fun codec(): MapCodec<ArcaneWorkbenchRecipe<T>> = MAP_CODEC
+        override fun codec(): MapCodec<ArcaneWorkbenchRecipe> = MAP_CODEC
 
-        val STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, ArcaneWorkbenchRecipe<T>>({ buf, recipe ->
-            val baseSerializer = buf.registryAccess().registryOrThrow(Registries.RECIPE_SERIALIZER).getKey(recipe.base.serializer)!!
-            buf.writeResourceLocation(baseSerializer)
-            recipe.base.serializer.streamCodec().encode(buf, recipe.)
-            //buf.registryAccess().registryOrThrow(Registries.RECIPE_TYPE).get()
-        }){}
-
-        override fun streamCodec(): StreamCodec<RegistryFriendlyByteBuf, ArcaneWorkbenchRecipe<T>> {
-            TODO("Not yet implemented")
+        val STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, ArcaneWorkbenchRecipe>({ buf, recipe ->
+            CraftingRecipe.STREAM_CODEC.encode(buf, recipe.base)
+            recipe.visCost.forEach(buf::writeInt)
+            buf.writeFloat(recipe.auraCost)
+        }){ buf ->
+            val base = CraftingRecipe.STREAM_CODEC.decode(buf) as CraftingRecipe
+            val visCost = List(6){buf.readInt()}
+            val auraCost = buf.readFloat()
+            ArcaneWorkbenchRecipe(base,visCost,auraCost)
         }
 
-        companion object{
-            val SERIALIZERS = mutableMapOf<RecipeType<*>, Serializer<*>>()
-            operator fun get(recipe: ArcaneWorkbenchRecipe<*>): Serializer<*> = SERIALIZERS.getOrPut(recipe.base.type) { Serializer(recipe.base) }
-        }
+        override fun streamCodec(): StreamCodec<RegistryFriendlyByteBuf, ArcaneWorkbenchRecipe> = STREAM_CODEC
+
     }
 }

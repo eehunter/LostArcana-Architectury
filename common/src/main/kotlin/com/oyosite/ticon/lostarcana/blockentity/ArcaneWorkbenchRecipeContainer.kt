@@ -50,11 +50,14 @@ class ArcaneWorkbenchRecipeContainer(val pos: BlockPos): Container, RecipeInput 
     }
 
 
-    class Wrapper(val container: ArcaneWorkbenchRecipeContainer, val player: Player): Container by container, RecipeInput by container{
+    class Wrapper(val container: ArcaneWorkbenchRecipeContainer, val player: Player): Container by container, RecipeInput{
         override fun getItem(i: Int): ItemStack = container.getItem(i)
+        override fun size(): Int = container.size()
+
         val baseCraftingContainer by container::baseCraftingContainer
         val pos by container::pos
         operator fun get(slot: Int) = getItem(slot)
+        override fun isEmpty(): Boolean = container.isEmpty()
     }
 
     class ArcaneWorkbenchBaseCraftingContainer(val recipeContainer: ArcaneWorkbenchRecipeContainer): CraftingContainer{

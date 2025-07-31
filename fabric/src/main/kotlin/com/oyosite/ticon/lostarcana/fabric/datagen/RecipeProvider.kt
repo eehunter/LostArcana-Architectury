@@ -84,6 +84,17 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .define('S', Items.STICK)
             .unlockedBy("got_wand_cap", hasItems(+IRON_WAND_CAP))
             .save(exporter)
+        shaped(RecipeCategory.TOOLS, +THAUMOMETER)
+            .pattern(" N ")
+            .pattern("NGN")
+            .pattern(" N ")
+            .define('N', Items.GOLD_NUGGET)
+            .define('G', COMMON_GLASS_PANES)
+            .unlockedBy("got_thaumometer", hasItems(+THAUMOMETER))//TODO: Should be based on obtaining the Arcane Workbench
+            .arcaneWorkbench
+            .setCrystals(1,1,1,1,1,1)
+            .setVis(5f)
+            .save(exporter)
     }
 
     fun stair(exporter: RecipeOutput, stair: ItemLike, block: ItemLike){

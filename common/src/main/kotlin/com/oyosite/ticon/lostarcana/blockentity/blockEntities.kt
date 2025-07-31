@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
+import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
@@ -15,6 +16,8 @@ val MAGIC_BRICKS_BLOCK_ENTITY = "magic_bricks"(::MagicBricksBlockEntity, MAGIC_B
 val ARCANE_COLUMN_BLOCK_ENTITY = "arcane_column"(::ArcaneColumnBlockEntity, ARCANE_COLUMN)
 
 val PLACEHOLDER_BLOCK_ENTITY = "multiblock_placeholder"(::PlaceholderBlockEntity, MULTIBLOCK_PLACEHOLDER)
+
+val ARCANE_WORKBENCH_BLOCK_ENTITY = "arcane_workbench"(::ArcaneWorkbenchBlockEntity, ARCANE_WORKBENCH)
 
 operator fun <T: BlockEntity, R: BlockEntityType<T>> String.invoke(blockEntityFactory: (BlockPos, BlockState)->T, vararg blocks: Holder<out Block>): Holder<BlockEntityType<T>> =
     platformRegisterBlockEntity(this) { BlockEntityType.Builder.of(blockEntityFactory, *blocks.map(Holder<out Block>::value).toTypedArray()) }

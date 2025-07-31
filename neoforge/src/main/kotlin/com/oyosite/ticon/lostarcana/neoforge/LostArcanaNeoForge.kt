@@ -57,6 +57,9 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
         NEOFORGE_BLOCK_ENTITY_TYPES.register(modEventBus)
+        NEOFORGE_RECIPE_TYPES.register(modEventBus)
+        NEOFORGE_RECIPE_SERIALIZERS.register(modEventBus)
+
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
 
@@ -82,6 +85,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, LostArcana.MOD_ID)
         val NEOFORGE_ADVANCEMENT_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, LostArcana.MOD_ID)
+        val NEOFORGE_RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, LostArcana.MOD_ID)
+        val NEOFORGE_RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic

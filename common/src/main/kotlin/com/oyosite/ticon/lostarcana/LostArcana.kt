@@ -10,6 +10,8 @@ import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
+import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
+import com.oyosite.ticon.lostarcana.util.invoke
 import dev.architectury.platform.Platform
 import dev.architectury.registry.level.entity.EntityAttributeRegistry
 import net.minecraft.world.entity.EntityType
@@ -30,6 +32,9 @@ object LostArcana {
         ITEM_REGISTRY.register()
         if(Platform.isFabric())ATTRIBUTE_REGISTRY.register()
         ENTITY_REGISTRY.register()
+
+        ArcaneWorkbenchRecipe.Type("arcane_workbench")
+        ArcaneWorkbenchRecipe.Serializer("arcane_workbench")
 
         MAGIC_BRICKS_BLOCK_ENTITY
 

@@ -47,6 +47,8 @@ val ARCANE_COLUMN = "arcane_column" % { ArcaneColumn(prop.isSuffocating { _, _, 
 val MULTIBLOCK_PLACEHOLDER = "multiblock_placeholder" % { MultiblockPlaceholder(prop.noOcclusion()) }
 
 
+val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(prop) } % {}
+
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)
 

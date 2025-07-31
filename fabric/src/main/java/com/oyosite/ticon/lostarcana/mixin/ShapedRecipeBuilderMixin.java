@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Mixin(ShapedRecipeBuilder.class)
 public class ShapedRecipeBuilderMixin implements CraftingRecipeBuilder {
@@ -44,7 +45,7 @@ public class ShapedRecipeBuilderMixin implements CraftingRecipeBuilder {
 
     @Override
     public @NotNull ArcaneWorkbenchRecipeBuilder arcaneWorkbench() {
-        CraftingRecipe recipe = new ShapedRecipe(group, RecipeBuilder.determineBookCategory(category), ShapedRecipePattern.of(key, rows), new ItemStack(result, count), showNotification);
+        CraftingRecipe recipe = new ShapedRecipe(Objects.requireNonNullElse(group, ""), RecipeBuilder.determineBookCategory(category), ShapedRecipePattern.of(key, rows), new ItemStack(result, count), showNotification);
         return new ArcaneWorkbenchRecipeBuilder(result, recipe);
     }
 }

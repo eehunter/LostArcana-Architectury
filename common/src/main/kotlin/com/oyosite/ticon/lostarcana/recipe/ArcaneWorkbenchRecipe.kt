@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level
 
 @JvmRecord
 data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int>, val auraCost: Float): Recipe<ArcaneWorkbenchRecipeContainer.Wrapper> {
+    constructor(base: Recipe<*>, visCost: List<Int>, auraCost: Float): this(base  as? CraftingRecipe ?: throw IllegalArgumentException("Base recipe must be a crafting recipe."), visCost, auraCost)
 
     override fun matches(
         recipeInput: ArcaneWorkbenchRecipeContainer.Wrapper,
@@ -60,7 +61,7 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
 
         val CODEC: Codec<ArcaneWorkbenchRecipe> = RecordCodecBuilder.create {
             it.group(
-                (CraftingRecipe.CODEC as Codec<CraftingRecipe>).fieldOf("base").forGetter { it.base },
+                CraftingRecipe.CODEC.fieldOf("base").forGetter { it.base },
                 Codec.list(Codec.INT).fieldOf("crystalCost").forGetter { it.visCost.toList() },
                 Codec.FLOAT.fieldOf("visCost").forGetter { it.auraCost }
             ).apply(it, ::ArcaneWorkbenchRecipe)

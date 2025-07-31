@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-29T21:49:13.716760657	Lost Arcana/Model Definitions
+// 1.21.1	2025-07-31T13:22:33.957478463	Lost Arcana/Model Definitions
 65dcf85ac05c3e01744f8ebd7ccef98950e391ca assets/lostarcana/models/block/arcane_stone_tile_slab_top.json
 4dc972fd2db2aa5a1c978318f4d874cdb75ec5c2 assets/lostarcana/models/item/ignis_infused_stone.json
 9cf3654e3a9191b751648cc3a47d86556960d4bb assets/lostarcana/models/block/arcane_stone.json
@@ -38,10 +38,10 @@ a23139cae29e4f299f50a86e60a41b05415b9842 assets/lostarcana/blockstates/perditio_
 8fb5db3af123d99a58588a6126ba9a44074c2a01 assets/lostarcana/models/item/vis_crystal.json
 fa521b075e3562de66887d20b630329a31f1936c assets/lostarcana/blockstates/arcane_stone_stairs.json
 103c1cf646175193f4db9b4c8d397d16f55543ad assets/lostarcana/models/block/arcane_stone_stairs_inner.json
-c1f3b570eeb782f43820e9c99076725193d7fc34 assets/lostarcana/blockstates/arcane_stone_tile_stairs.json
 2b9e45db74e51605f4a58b6cbf43693435c63380 assets/lostarcana/models/item/aer_infused_stone.json
-dd13c1284875efb8ed53e06db417e76421f75e3e assets/lostarcana/models/item/goggles_of_revealing.json
+c1f3b570eeb782f43820e9c99076725193d7fc34 assets/lostarcana/blockstates/arcane_stone_tile_stairs.json
 d2decbaa5bd0967d47c0c66c4fa34dc0ed7a4782 assets/lostarcana/models/block/arcane_stone_slab_top.json
+dd13c1284875efb8ed53e06db417e76421f75e3e assets/lostarcana/models/item/goggles_of_revealing.json
 3dd8472792a5b4f23f7aaaa705bce4c950da0ca7 assets/lostarcana/models/item/terra_infused_stone.json
 73202b9c357d70dcc024afae2855807a38349fd0 assets/lostarcana/models/item/aqua_infused_stone.json
 5feeeffcb4fd446ad1268a9d6eed1eab4b89d58d assets/lostarcana/blockstates/terra_infused_stone.json

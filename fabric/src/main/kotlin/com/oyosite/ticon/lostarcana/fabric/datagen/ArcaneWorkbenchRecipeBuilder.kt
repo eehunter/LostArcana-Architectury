@@ -12,10 +12,11 @@ import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.CraftingRecipe
+import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.level.ItemLike
 
 class ArcaneWorkbenchRecipeBuilder(@get:JvmName("result") val result: Item, val baseRecipe: CraftingRecipe): RecipeBuilder {
-    constructor(result: ItemLike, baseRecipe: CraftingRecipe): this(result.asItem(), baseRecipe)
+    constructor(result: ItemLike, baseRecipe: Recipe<*>): this(result.asItem(), baseRecipe as? CraftingRecipe ?: throw IllegalArgumentException("Base recipe must be a crafting recipe."))
     lateinit var category: RecipeCategory
     val criteria: MutableMap<String, Criterion<*>> = LinkedHashMap()
     var group: String? = null

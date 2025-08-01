@@ -38,7 +38,7 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
         val crystals = items.filter { it.item.item is VisCrystalItem }
         if(crystals.size == 3 && consumeVis(useOnContext.itemInHand, level, useOnContext.clickLocation, 10f, player)){
             val pos = crystals[0].position()
-            level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(SALIS_MUNDIS)))
+            level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(+SALIS_MUNDIS)))
             for(i in 0..2) crystals[i].item.consume(1, player)
         } else if (crystals.size == 6 && PRIMAL_ASPECTS.all { aspect -> crystals.filter { c -> c.item.aspects.let{ it[0].aspect == aspect } }.size == 1 }){
             val gold = items.firstOrNull { it.item.`is`(COMMON_GOLD_INGOTS) }

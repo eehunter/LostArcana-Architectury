@@ -1,0 +1,10 @@
+{
+  "type": "lostarcana:basic_salis_mundis_transform",
+  "block": {
+    "properties": {}
+  },
+  "result": {
+    "count": 1,
+    "id": "lostarcana:arcane_workbench"
+  }
+}

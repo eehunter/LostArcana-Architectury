@@ -95,6 +95,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .setCrystals(1,1,1,1,1,1)
             .setVis(5f)
             .save(exporter)
+        BasicSalisMundisRecipeBuilder(+ARCANE_WORKBENCH, Blocks.CRAFTING_TABLE).save(exporter)
     }
 
     fun stair(exporter: RecipeOutput, stair: ItemLike, block: ItemLike){

@@ -1,4 +1,4 @@
-// 1.21.1	2025-07-31T13:22:33.957478463	Lost Arcana/Model Definitions
+// 1.21.1	2025-08-01T14:11:18.883859709	Lost Arcana/Model Definitions
 65dcf85ac05c3e01744f8ebd7ccef98950e391ca assets/lostarcana/models/block/arcane_stone_tile_slab_top.json
 4dc972fd2db2aa5a1c978318f4d874cdb75ec5c2 assets/lostarcana/models/item/ignis_infused_stone.json
 9cf3654e3a9191b751648cc3a47d86556960d4bb assets/lostarcana/models/block/arcane_stone.json
@@ -16,11 +16,13 @@ defbf326bddc6cd6eef53e61fcb0222514e6e728 assets/lostarcana/models/block/arcane_s
 f24a4e8bbbf82c415a05f1fb0aeade2c05a3127f assets/lostarcana/models/block/arcane_stone_stairs.json
 619b3d7610d3eaf73e5b71ceaaabf8da3e0e3a17 assets/lostarcana/models/item/arcane_stone.json
 b78a12c67cb8ac10dde6d0e6b923d8f6d4bab137 assets/lostarcana/blockstates/ordo_infused_stone.json
+8ecfb03e398b634e349d903d60b200326cb26ac4 assets/lostarcana/models/item/arcane_workbench.json
 47b38bcd49a6d489c83756925a410da9dd347e9e assets/lostarcana/models/item/arcane_stone_pillar.json
 7a089cc8e58b16891cd2ef71fcef836e1830aa9f assets/lostarcana/models/item/arcane_stone_tile_stairs.json
 650564334859656803cca258fceea01bc0723c5f assets/lostarcana/models/item/arcane_stone_slab.json
 b0a96f19b28f462424759533ca0734898fd4058a assets/lostarcana/models/item/arcane_stone_tile_slab.json
 173ae4615962866ace6c653bff3b32f92f1d3506 assets/lostarcana/models/item/salis_mundis.json
+9aa8d0277262bc5e2a5c067bde4c03b6157a0bf0 assets/lostarcana/models/block/arcane_workbench.json
 3955616391366f312ca2eab28efc9ea55a0c845d assets/lostarcana/models/block/arcane_stone_tiles.json
 bab9502ba4d0fa85738459151ae1066f55151ea7 assets/lostarcana/models/item/perditio_infused_stone.json
 eaa3cc01e9320f35832ae670db829186704e12e8 assets/lostarcana/blockstates/arcane_stone_pillar.json
@@ -33,6 +35,7 @@ b27f56f210f8a29487903b62c5c188ae88046703 assets/lostarcana/models/block/aer_infu
 53dd1ee57d4f976d1f65e0881dcc8a7ee275474d assets/lostarcana/models/block/arcane_stone_tile_stairs_outer.json
 514387eb899756c7c0423041fd950beeb3a5425b assets/lostarcana/models/item/wand.json
 541563a392ae9e34905e7c25fb8937548ccb608a assets/lostarcana/models/item/thaumometer.json
+cdd007da37a4e8ae4d502511500fd57a3f4bc642 assets/lostarcana/blockstates/arcane_workbench.json
 a23139cae29e4f299f50a86e60a41b05415b9842 assets/lostarcana/blockstates/perditio_infused_stone.json
 2d909be325f192864acd599c1119c355fa69edaf assets/lostarcana/blockstates/arcane_stone_tiles.json
 8fb5db3af123d99a58588a6126ba9a44074c2a01 assets/lostarcana/models/item/vis_crystal.json

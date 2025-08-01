@@ -6,13 +6,16 @@ import com.oyosite.ticon.lostarcana.item.*
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.core.Holder
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.blockstates.BlockStateGenerator
 import net.minecraft.data.models.model.*
+import net.minecraft.data.models.model.TextureSlot.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
 import java.util.*
@@ -22,8 +25,16 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
     val TINTED_CUBE_ALL = block("tinted_cube_all", TextureSlot.ALL)
     val TINTED_CUBE = block("tinted_cube", TextureSlot.UP, TextureSlot.DOWN, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST)
 
+    val arcaneWorkbenchTextureMap = TextureMapping()(TOP, ARCANE_WORKBENCH, "_top")(BOTTOM, Blocks.OAK_PLANKS)(SIDE, ARCANE_WORKBENCH, "_side")
+
+    operator fun TextureMapping.invoke(slot: TextureSlot, block: Holder<out Block>, suffix: String? = null) = invoke(slot, block.value(), suffix)
+    operator fun TextureMapping.invoke(slot: TextureSlot, block: Block, suffix: String? = null) = apply{
+        put(slot, suffix?.let { TextureMapping.getBlockTexture(block, it) }?: TextureMapping.getBlockTexture(block))
+    }
+
     override fun generateBlockStateModels(bsmg: BlockModelGenerators) = bsmg.run{
 
+        bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
         INFUSED_STONES.forEach {
             bsmg.createTrivialBlock(+it, TextureMapping.cube(ResourceLocation.parse("block/stone")), TINTED_CUBE_ALL)

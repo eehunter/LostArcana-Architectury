@@ -27,7 +27,7 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
         container.startOpen(player)
         addSlot(ArcaneWorkbenchResultSlot(player, container, container.result, 0, 124+23, 35))
 
-        listOf(10 to 10, 86 to 10, 89 to 35, 86 to 60, 10 to 60, 7 to 35).forEachIndexed{ i, coords ->
+        listOf(10 to 17, 86 to 17, 86 to 35, 86 to 53, 10 to 53, 10 to 35).forEachIndexed{ i, coords ->
             addSlot(FilteredSlot(container, 9+i, coords.first, coords.second, i::testCrystalInSlot){slotsChanged(container)})
         }
 

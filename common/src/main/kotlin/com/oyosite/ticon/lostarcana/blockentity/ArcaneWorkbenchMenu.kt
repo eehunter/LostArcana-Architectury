@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.block.entity.FilteredSlot
+import com.oyosite.ticon.lostarcana.item.CastingItem
 import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
 import com.oyosite.ticon.lostarcana.util.Slot
 import com.oyosite.ticon.lostarcana.util.testCrystalInSlot
@@ -30,6 +31,8 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
         listOf(10 to 17, 86 to 17, 86 to 35, 86 to 53, 10 to 53, 10 to 35).forEachIndexed{ i, coords ->
             addSlot(FilteredSlot(container, 9+i, coords.first, coords.second, i::testCrystalInSlot){slotsChanged(container)})
         }
+
+        addSlot(FilteredSlot(container, 15, 119, 53, { it.item is CastingItem }))
 
         //Crafting slots
         for(row in 0..2) for(col in 0..2)

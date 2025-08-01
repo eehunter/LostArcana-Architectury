@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
 import com.oyosite.ticon.lostarcana.item.CasterGauntlet
+import com.oyosite.ticon.lostarcana.item.CastingItem
 import com.oyosite.ticon.lostarcana.util.drainAuraAtLocation
 import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
 import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
@@ -22,7 +23,7 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
     var be: ArcaneWorkbenchBlockEntity? = null
     val pos: BlockPos? get() = be?.pos
 
-    val inputSlotCount: Int = 15
+    val inputSlotCount: Int = 16
     val inputStacks: NonNullList<ItemStack> = NonNullList.withSize(inputSlotCount, ItemStack.EMPTY)
 
     val baseCraftingContainer: CraftingContainer = ArcaneWorkbenchBaseCraftingContainer(this)
@@ -77,13 +78,15 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
             markDirtyCallback()
         }
 
-        fun getAura(level: Level): Float { return getAuraAtLocation(level, pos?.center ?: return 0f) }
-        fun drainAura(level: Level, amount: Float) { drainAuraAtLocation(level, pos?.center?: return, amount) }
+        fun getAura(level: Level): Float { return (castingItem.item as? CastingItem)?.availableVis(castingItem, level, pos?.center ?: return 0f, null)?:0f }
+        fun drainAura(level: Level, amount: Float) { (castingItem.item as? CastingItem)?.consumeVis(castingItem, level, pos?.center ?: return, amount, null) }
 
         val baseCraftingContainer by container::baseCraftingContainer
         val pos by container::pos
         operator fun get(slot: Int) = getItem(slot)
         override fun isEmpty(): Boolean = container.isEmpty()
+
+        val castingItem get() = this[15]
     }
 
     class ArcaneWorkbenchBaseCraftingContainer(val recipeContainer: ArcaneWorkbenchRecipeContainer): CraftingContainer{

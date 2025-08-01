@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchRecipeContainer
+import com.oyosite.ticon.lostarcana.item.CastingItem
 import net.minecraft.core.HolderLookup
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
@@ -22,13 +23,14 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
         recipeInput: ArcaneWorkbenchRecipeContainer.Wrapper,
         level: Level
     ): Boolean {
-        if(!base.matches(recipeInput.baseCraftingContainer.asCraftInput(), level))return false
+        val focus = recipeInput.castingItem
+        val castingItem = focus.item
 
+        if(auraCost != 0f && (focus.isEmpty || castingItem !is CastingItem))return false
         if(recipeInput.getAura(level) < auraCost) return false
-
         for(i in visCost.indices) if(visCost[i] > recipeInput[i+9].count)return false
 
-        return true
+        return base.matches(recipeInput.baseCraftingContainer.asCraftInput(), level)
     }
 
     override fun assemble(

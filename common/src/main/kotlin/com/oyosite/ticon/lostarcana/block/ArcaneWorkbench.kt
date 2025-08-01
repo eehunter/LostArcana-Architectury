@@ -41,6 +41,7 @@ class ArcaneWorkbench(properties: Properties) : Block(properties), EntityBlock {
         ArcaneWorkbenchBlockEntity(blockPos, blockState)
 
     companion object{
-        val TITLE: MutableComponent = Component.translatable("container.lostarcana.arcane_workbench")
+        val TITLE_KEY = "container.lostarcana.arcane_workbench"
+        val TITLE: MutableComponent = Component.translatable(TITLE_KEY)
     }
 }

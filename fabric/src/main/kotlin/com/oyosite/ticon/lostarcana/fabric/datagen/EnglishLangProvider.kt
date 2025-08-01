@@ -11,7 +11,11 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_STAIRS
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILES
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_SLAB
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_TILE_STAIRS
+import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
+import com.oyosite.ticon.lostarcana.block.ArcaneWorkbench
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
+import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchMenu
+import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
 import com.oyosite.ticon.lostarcana.item.*
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -41,6 +45,9 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(ARCANE_STONE_TILE_SLAB)
         add(ARCANE_STONE_STAIRS)
         add(ARCANE_STONE_TILE_STAIRS)
+
+        add(ARCANE_WORKBENCH)
+        add(ArcaneWorkbench.TITLE_KEY, "Arcane Workbench")
 
         add(ThaumometerItem.AURA_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
         add(ThaumometerItem.NO_AURA_TRANSLATION_KEY, "No Aura detected.")

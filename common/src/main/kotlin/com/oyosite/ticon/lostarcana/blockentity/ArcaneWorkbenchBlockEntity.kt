@@ -11,6 +11,7 @@ import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerLevelAccess
 import net.minecraft.world.inventory.CraftingContainer
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -78,7 +79,8 @@ class ArcaneWorkbenchBlockEntity(val pos: BlockPos, state: BlockState, val conta
         i: Int,
         inventory: Inventory,
         player: Player
-    ): AbstractContainerMenu = ArcaneWorkbenchMenu(i, inventory, ArcaneWorkbenchRecipeContainer.Wrapper(this.container, player))
+    ): AbstractContainerMenu = ArcaneWorkbenchMenu(i, inventory, ArcaneWorkbenchRecipeContainer.Wrapper(this.container, player),
+        level?.let{ ContainerLevelAccess.create(it, pos) } ?: ContainerLevelAccess.NULL)
 
     override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
         val list = NonNullList.withSize(container.inputSlotCount, ItemStack.EMPTY)

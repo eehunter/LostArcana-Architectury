@@ -26,8 +26,7 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
         recipeInput.getAuraSource(level)?.vis?.let {
             if(it < auraCost) return false
         }
-        for(i in visCost.indices)
-            if(visCost[i] < recipeInput[i+9].count)return false
+        for(i in visCost.indices) if(visCost[i] > recipeInput[i+9].count)return false
 
         return true
     }

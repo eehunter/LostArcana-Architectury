@@ -13,6 +13,9 @@ class ArcaneWorkbenchResultSlot(
     player, input.baseCraftingContainer, container, i, j, k
 ) {
 
+    override fun onQuickCraft(itemStack: ItemStack, i: Int) {
+        super.onQuickCraft(itemStack, i)
+    }
 
     override fun onTake(player: Player, stack: ItemStack) {
         val level = player.level()
@@ -31,18 +34,16 @@ class ArcaneWorkbenchResultSlot(
                 if(be.level==null)return@also
                 input.getAuraSource(level)!!.vis -= recipe.auraCost
             }
-            //remainder = recipe.getRemainingItems(input)
+            remainder = recipe.getRemainingItems(input)
         }
-        println(remainder)
-        val remIt = remainder.iterator()
-        //for(y in 0 until positioned.input.width())for (x in 0 until positioned.input.height())
-        for(i in 0 until 9){
+        for(ly in 0 until positioned.input.width())for (lx in 0 until positioned.input.height()) {
+            val i = lx + left + (ly + top) * input.baseCraftingContainer.width
             var stack1 = input[i]
+            val stack2 = remainder[lx + ly * input.baseCraftingContainer.width]
             if(!stack1.isEmpty){
                 input.removeItem(i, 1)
                 stack1 = input[i]
-            } else continue
-            val stack2 = remIt.next()
+            }
             if(stack2.isEmpty)continue
             if(stack1.isEmpty){
                 input.setItem(i, stack2)

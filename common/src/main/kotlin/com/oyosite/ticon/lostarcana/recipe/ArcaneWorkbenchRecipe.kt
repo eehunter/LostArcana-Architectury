@@ -2,19 +2,11 @@ package com.oyosite.ticon.lostarcana.recipe
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
-import com.mojang.serialization.MapEncoder
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import com.oyosite.ticon.lostarcana.Identifier
-import com.oyosite.ticon.lostarcana.block.ArcaneWorkbench
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchRecipeContainer
-import com.oyosite.ticon.lostarcana.item.CasterGauntlet
-import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
-import io.netty.buffer.ByteBuf
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingRecipe
 import net.minecraft.world.item.crafting.Recipe
@@ -31,8 +23,7 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
         level: Level
     ): Boolean {
         if(!base.matches(recipeInput.baseCraftingContainer.asCraftInput(), level))return false
-        //TODO: The Arcane Workbench should not draw directly from the nearest AuraSource, but from the item in its wand/gauntlet slot.
-        getNearestAuraSourceInRange(level, recipeInput.pos.center, CasterGauntlet.AURA_RANGE)?.vis?.let {
+        recipeInput.getAuraSource(level)?.vis?.let {
             if(it < auraCost) return false
         }
         for(i in visCost.indices)

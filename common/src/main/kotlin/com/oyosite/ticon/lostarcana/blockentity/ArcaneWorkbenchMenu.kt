@@ -1,16 +1,55 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
+import com.oyosite.ticon.lostarcana.block.entity.FilteredSlot
+import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
+import com.oyosite.ticon.lostarcana.util.Slot
+import com.oyosite.ticon.lostarcana.util.testCrystalInSlot
+import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.Container
-import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.entity.player.StackedContents
+import net.minecraft.world.inventory.*
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.*
+import net.minecraft.world.level.Level
 
-class ArcaneWorkbenchMenu(id: Int, val inventory: Inventory, val container: Container): AbstractContainerMenu(ARCANE_WORKBENCH_MENU_SCREEN.value(), id) {
-    constructor(id: Int, inventory: Inventory): this(id, inventory, SimpleContainer(15))
+class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: ArcaneWorkbenchRecipeContainer.Wrapper, val ctx: ContainerLevelAccess = ContainerLevelAccess.NULL): RecipeBookMenu<RecipeInput, Recipe<in RecipeInput>>(ARCANE_WORKBENCH_MENU_SCREEN.value(), id) {
+    constructor(id: Int, inventory: Inventory): this(id, inventory, ArcaneWorkbenchRecipeContainer().wrap(inventory.player))
 
-    
+    private val player = inventory.player
+
+    private val craftSlots: CraftingContainer = TransientCraftingContainer(this, 3, 3)
+
+    init {
+        container.markDirtyCallback = {slotsChanged(container)}
+        container.startOpen(player)
+        addSlot(ArcaneWorkbenchResultSlot(player, container, container.result, 0, 124+23, 35))
+
+        listOf(10 to 10, 86 to 10, 89 to 35, 86 to 60, 10 to 60, 7 to 35).forEachIndexed{ i, coords ->
+            addSlot(FilteredSlot(container, 9+i, coords.first, coords.second, i::testCrystalInSlot){slotsChanged(container)})
+        }
+
+        //Crafting slots
+        for(row in 0..2) for(col in 0..2)
+            addSlot(Slot(container, col+row*3, 30 + col * 18, 17 + row * 18){slotsChanged(container)})
+        //Inventory slots
+        for(row in 0..2) for(col in 0..8)
+            addSlot(Slot(inventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18))
+        //Hotbar slots
+        for(slot in 0..8)
+            addSlot(Slot(inventory, slot, 8 + slot * 18, 142))
+
+        slotsChanged(container)
+
+    }
+
+    override fun slotsChanged(container: Container) {
+        //ctx.execute { level, pos -> updateResult(this, level, player, this.container) }
+        updateResult(this, player.level(), player, this.container)
+        super.slotsChanged(container)
+    }
 
 
     override fun quickMoveStack(
@@ -34,4 +73,66 @@ class ArcaneWorkbenchMenu(id: Int, val inventory: Inventory, val container: Cont
     }
 
     override fun stillValid(player: Player): Boolean = container.stillValid(player)
+    override fun fillCraftSlotsStackedContents(stackedContents: StackedContents) {
+        craftSlots.fillStackedContents(stackedContents)
+    }
+
+    override fun clearCraftingContent() {
+        container.clearContent()
+        container.result.clearContent()
+    }
+
+    override fun recipeMatches(recipeHolder: RecipeHolder<Recipe<in RecipeInput>>): Boolean {
+        val recipe = recipeHolder.value
+        return when(recipeHolder.value.type){
+            ArcaneWorkbenchRecipe.Type -> recipe.matches(container, player.level())
+            RecipeType.CRAFTING -> recipe.matches(container.baseCraftingContainer.asCraftInput(), player.level())
+            else -> false
+        }
+        //return recipeHolder.value is ArcaneWorkbenchRecipe || recipeHolder.value is CraftingRecipe
+    }
+
+    override fun getResultSlotIndex(): Int = 0
+
+    override fun getGridWidth(): Int = 3
+
+    override fun getGridHeight(): Int = 3
+
+    override fun getSize(): Int = 10
+
+    override fun getRecipeBookType(): RecipeBookType = RecipeBookType.CRAFTING
+
+    override fun shouldMoveToInventory(i: Int): Boolean = i != resultSlotIndex
+
+    companion object{
+        protected fun updateResult(menu: ArcaneWorkbenchMenu, level: Level, player: Player, container: ArcaneWorkbenchRecipeContainer.Wrapper){
+            if(level.isClientSide)return
+            var recipe: RecipeHolder<ArcaneWorkbenchRecipe>? = null
+            assert(player is ServerPlayer) { "Player is not ServerPlayer on server. (This should not happen)" }
+            var itemStack = ItemStack.EMPTY
+            val optional = level.server!!.recipeManager.getRecipeFor(ArcaneWorkbenchRecipe.Type, container, level)
+            optional.ifPresent{
+                println("updating result")
+                recipe = it
+                if(container.result.setRecipeUsed(level, player as ServerPlayer, it)){
+                    itemStack = it.value.assemble(container, level.registryAccess()).takeIf { it.isItemEnabled(level.enabledFeatures()) } ?: ItemStack.EMPTY
+                }
+            }
+            if(recipe==null){
+                val optional = level.server!!.recipeManager.getRecipeFor(RecipeType.CRAFTING, container.baseCraftingContainer.asCraftInput(), level)
+                optional.ifPresent {
+                    if(container.result.setRecipeUsed(level, player as ServerPlayer, it)){
+                        itemStack = it.value.assemble(container.baseCraftingContainer.asCraftInput(), level.registryAccess()).takeIf { it.isItemEnabled(level.enabledFeatures()) } ?: ItemStack.EMPTY
+                    }
+                }
+            }
+
+            container.result.setItem(0, itemStack)
+            menu.setRemoteSlot(0, itemStack)
+            (player as ServerPlayer).connection.send(
+                ClientboundContainerSetSlotPacket(menu.id, menu.incrementStateId(), 0, itemStack)
+            )
+
+        }
+    }
 }

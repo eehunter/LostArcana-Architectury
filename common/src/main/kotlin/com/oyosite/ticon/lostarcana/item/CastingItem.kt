@@ -13,13 +13,15 @@ import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.Vec3
 
 abstract class CastingItem(properties: Properties) : Item(properties) {
     constructor(properties: Properties, defaultVisAmount: Float): this(properties.component(VIS_STORAGE_COMPONENT, defaultVisAmount))
 
-    abstract fun availableVis(stack: ItemStack, entity: Entity?): Float
-    abstract fun consumeVis(stack: ItemStack, amount: Float, entity: Entity?): Boolean
+    abstract fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float
+    abstract fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean
 
     open val craftItemRange: Double get() = .7
 
@@ -34,14 +36,14 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
 
         val items = level.getEntities(player, AABB.ofSize(useOnContext.clickLocation, craftItemRange, craftItemRange, craftItemRange)){ it is ItemEntity }.mapNotNull{it as? ItemEntity}
         val crystals = items.filter { it.item.item is VisCrystalItem }
-        if(crystals.size == 3 && consumeVis(useOnContext.itemInHand, 10f, player)){
+        if(crystals.size == 3 && consumeVis(useOnContext.itemInHand, level, useOnContext.clickLocation, 10f, player)){
             val pos = crystals[0].position()
             level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(SALIS_MUNDIS)))
             for(i in 0..2) crystals[i].item.consume(1, player)
         } else if (crystals.size == 6 && PRIMAL_ASPECTS.all { aspect -> crystals.filter { c -> c.item.aspects.let{ it[0].aspect == aspect } }.size == 1 }){
             val gold = items.firstOrNull { it.item.`is`(COMMON_GOLD_INGOTS) }
             val pane = items.firstOrNull { it.item.`is`(COMMON_GLASS_PANES) }
-            if(gold!=null && pane!=null && consumeVis(useOnContext.itemInHand, 20f, player)){
+            if(gold!=null && pane!=null && consumeVis(useOnContext.itemInHand, level, useOnContext.clickLocation, 20f, player)){
                 val pos = crystals[0].position()
                 listOf(gold, pane, *crystals.toTypedArray()).forEach { it.item.consume(1, player) }
                 level.addFreshEntity(ItemEntity(level, pos.x, pos.y, pos.z, ItemStack(THAUMOMETER as Holder<Item>)))

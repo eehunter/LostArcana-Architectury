@@ -32,7 +32,7 @@ class ArcaneWorkbenchResultSlot(
             recipe.visCost.forEachIndexed { i, amt -> input[9+i].shrink(amt) }
             input.container.be?.also{ be ->
                 if(be.level==null)return@also
-                input.getAuraSource(level)!!.vis -= recipe.auraCost
+                input.drainAura(be.level!!, recipe.auraCost)
             }
             remainder = recipe.getRemainingItems(input)
         }

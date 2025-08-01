@@ -1,7 +1,9 @@
 package com.oyosite.ticon.lostarcana.entity
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
+import com.oyosite.ticon.lostarcana.util.auraSources
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.entity.Entity
@@ -14,6 +16,19 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
     override var vis: Float = 0f
     val maxVis = 100f
 
+    override fun setLevel(level: Level) {
+        if(level!=this.level()) {
+            this.level()?.auraSources?.remove(this)
+            level.auraSources.add(this)
+        }
+        super.setLevel(level)
+    }
+
+    override fun remove(removalReason: RemovalReason) {
+        level().auraSources.remove(this)
+        super.remove(removalReason)
+    }
+
     override val pos: Vec3
         get() = eyePosition
 
@@ -24,6 +39,17 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
 
     override fun readAdditionalSaveData(compoundTag: CompoundTag) {
         vis = compoundTag.getFloat("storedVis")
+        level()?.auraSources?.add(this)
+    }
+
+    override fun onSyncedDataUpdated(list: List<SynchedEntityData.DataValue<*>>) {
+        super.onSyncedDataUpdated(list)
+        //list.forEach { if(it.id == VIS_DATA.id) vis = it.value as Float }
+        level()?.auraSources?.add(this)
+    }
+
+    override fun onSyncedDataUpdated(entityDataAccessor: EntityDataAccessor<*>) {
+        super.onSyncedDataUpdated(entityDataAccessor)
     }
 
     override fun addAdditionalSaveData(compoundTag: CompoundTag) {

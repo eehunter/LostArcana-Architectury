@@ -6,6 +6,8 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.util.ThaumometerScannable
+import com.oyosite.ticon.lostarcana.util.auraSources
+import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
 import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import com.oyosite.ticon.lostarcana.util.platformGetInventoryContentsIfPresent
 import net.minecraft.core.registries.BuiltInRegistries
@@ -64,9 +66,8 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
             }
         }
         if(!level.isClientSide)return super.useOn(context)
-        val vis = node?.vis?:0f
-        val sqdistf = sqdist?.toFloat()?:0f
-        val aura = vis - (sqdistf/THAUMOMETER_RANGE_SQUARED.toFloat() * vis)
+        println(level.auraSources)
+        val aura = getAuraAtLocation(level, pos)
         context.player?.sendSystemMessage(
             if(aura > 0) Component.translatable(AURA_LEVEL_TRANSLATION_KEY, AURA_LEVEL_FORMAT(aura))
             else Component.translatable(NO_AURA_TRANSLATION_KEY)

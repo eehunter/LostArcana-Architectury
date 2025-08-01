@@ -1,32 +1,29 @@
 package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.entity.AuraNodeEntity
+import com.oyosite.ticon.lostarcana.util.drainAuraAtLocation
+import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
 import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.Vec3
 
 open class CasterGauntlet(properties: Properties): CastingItem(properties) {
     @Suppress("unchecked_cast")
-    override fun availableVis(stack: ItemStack, entity: Entity?): Float {
-        entity?:return 0f
-        val nodes: List<AuraNodeEntity> = entity.level().getEntities(null, AABB.ofSize(entity.position(), 10.0, 10.0, 10.0)) { it is AuraNodeEntity } as List<AuraNodeEntity>
-        return nodes.minByOrNull { it.distanceToSqr(entity) }?.vis?:0f
+    override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float {
+        return getAuraAtLocation(level, pos)
     }
 
     @Suppress("unchecked_cast")
     override fun consumeVis(
-        stack: ItemStack,
+        stack: ItemStack, level: Level, pos: Vec3,
         amount: Float,
         entity: Entity?
     ): Boolean {
-        val node = getNearestAuraSourceInRange(entity, AURA_RANGE)?:return false
-        if(node.vis < amount)return false
-        node.vis -= amount
+        if(availableVis(stack, level, pos, entity) < amount) return false
+        drainAuraAtLocation(level, pos, amount)
         return true
-    }
-
-    companion object{
-        val AURA_RANGE = 10.0
     }
 }

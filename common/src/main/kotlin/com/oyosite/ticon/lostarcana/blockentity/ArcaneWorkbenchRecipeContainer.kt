@@ -2,6 +2,8 @@ package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
 import com.oyosite.ticon.lostarcana.item.CasterGauntlet
+import com.oyosite.ticon.lostarcana.util.drainAuraAtLocation
+import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
 import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.NonNullList
@@ -75,10 +77,8 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
             markDirtyCallback()
         }
 
-        fun getAuraSource(level: Level): AuraSource?{
-            //TODO: The Arcane Workbench should not draw directly from the nearest AuraSource, but from the item in its wand/gauntlet slot.
-            return getNearestAuraSourceInRange(level, pos?.center?:return null, CasterGauntlet.AURA_RANGE)
-        }
+        fun getAura(level: Level): Float { return getAuraAtLocation(level, pos?.center ?: return 0f) }
+        fun drainAura(level: Level, amount: Float) { drainAuraAtLocation(level, pos?.center?: return, amount) }
 
         val baseCraftingContainer by container::baseCraftingContainer
         val pos by container::pos

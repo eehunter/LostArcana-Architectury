@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
@@ -33,7 +34,7 @@ class BasicSalisMundisTransformRecipe(val block: Block, val result: ItemStack): 
     object Serializer: RecipeSerializer<BasicSalisMundisTransformRecipe>{
         val CODEC = RecordCodecBuilder.create {
             it.group(
-                Block.CODEC.fieldOf("block").forGetter(BasicSalisMundisTransformRecipe::block),
+                BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(BasicSalisMundisTransformRecipe::block),
                 ItemStack.CODEC.fieldOf("result").forGetter(BasicSalisMundisTransformRecipe::result)
             ).apply(it, ::BasicSalisMundisTransformRecipe)
         }

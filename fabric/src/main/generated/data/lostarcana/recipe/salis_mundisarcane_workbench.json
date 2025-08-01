@@ -1,8 +1,6 @@
 {
   "type": "lostarcana:basic_salis_mundis_transform",
-  "block": {
-    "properties": {}
-  },
+  "block": "minecraft:crafting_table",
   "result": {
     "count": 1,
     "id": "lostarcana:arcane_workbench"

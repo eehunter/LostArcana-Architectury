@@ -22,7 +22,7 @@ class ArcaneWorkbenchScreen(menu: ArcaneWorkbenchMenu, inventory: Inventory, nam
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         val x: Int = (width - imageWidth) / 2
-        val y: Int = (height - imageWidth) / 2
+        val y: Int = (height - imageWidth) / 2 + 5
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
 

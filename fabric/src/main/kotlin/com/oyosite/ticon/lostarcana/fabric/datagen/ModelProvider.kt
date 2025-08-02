@@ -11,6 +11,10 @@ import net.minecraft.core.Holder
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.blockstates.BlockStateGenerator
+import net.minecraft.data.models.blockstates.MultiVariantGenerator
+import net.minecraft.data.models.blockstates.Variant
+import net.minecraft.data.models.blockstates.VariantProperties
+import net.minecraft.data.models.blockstates.VariantProperty
 import net.minecraft.data.models.model.*
 import net.minecraft.data.models.model.TextureSlot.*
 import net.minecraft.resources.ResourceLocation
@@ -39,8 +43,11 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
         INFUSED_STONES.forEach {
+            val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
+            val bsg = MultiVariantGenerator.multiVariant(+it, v)
+            bsmg.blockStateOutput.accept(bsg)
             //bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
-            bsmg.createTrivialBlock(+it, TextureMapping()(ALL, Blocks.STONE), ModelTemplates.CUBE_ALL)
+            //bsmg.createTrivialBlock(+it, TextureMapping()(ALL, Blocks.STONE), ModelTemplates.CUBE_ALL)
         }
 
         bsmg.createTrivialCube(+ARCANE_STONE)
@@ -78,7 +85,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
 
     override fun generateItemModels(img: ItemModelGenerators) {
-        
+
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)
         img.register(+THAUMOMETER, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lens")

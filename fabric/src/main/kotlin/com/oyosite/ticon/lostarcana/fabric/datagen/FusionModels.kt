@@ -24,6 +24,18 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
                 .build()
             val instance = ModelInstance.of(DefaultModelTypes.CONNECTING, data)
             addModel(holder.id.withPrefix("block/").withSuffix("_overlay"), instance)
+            val data2 = BaseModelData.builder()
+                .parent(Identifier.parse("block/stone"))
+                .parent(LostArcana.id("block/infused_stone_fusion"))
+                .build()
+            val instance2 = ModelInstance.of(DefaultModelTypes.BASE, data2)
+            addModel(holder.id.withPrefix("block/"), instance2)
+            val data3 = BaseModelData.builder()
+                .parent(LostArcana.id("item/infused_stone"))
+                //.parent(LostArcana.id("block/infused_stone_fusion"))
+                .build()
+            val instance3 = ModelInstance.of(DefaultModelTypes.BASE, data3)
+            addModel(holder.id.withPrefix("item/"), instance3)
         }
 
         //val visCrystalData = BaseModelData.builder().parent(Identifier.parse("item/generated"))

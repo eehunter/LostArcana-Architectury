@@ -1,3 +1,5 @@
 {
-  "parent": "lostarcana:block/perditio_infused_stone"
+  "type": "fusion:base",
+  "parents": ["lostarcana:item/infused_stone"],
+  "loader": "fusion:model"
 }

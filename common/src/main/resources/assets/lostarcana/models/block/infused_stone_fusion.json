@@ -1,26 +1,12 @@
 {
   "loader": "fusion:model",
   "type": "base",
-  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/stone",
     "overlay": "lostarcana:block/infused_stone_overlay",
     "particle": "#overlay"
   },
   "render_type": "cutout",
   "elements": [
-    {
-      "from": [0, 0, 0],
-      "to": [16, 16, 16],
-      "faces": {
-        "up": { "texture": "#all", "cullface": "up" },
-        "down": { "texture": "#all", "cullface": "down" },
-        "north": { "texture": "#all", "cullface": "north" },
-        "east": { "texture": "#all", "cullface": "east" },
-        "south": { "texture": "#all", "cullface": "south" },
-        "west": { "texture": "#all", "cullface": "west" }
-      }
-    },
     {
       "from": [0, 0, 0],
       "to": [16, 16, 16],
@@ -32,7 +18,8 @@
         "east": { "texture": "#overlay", "cullface": "east", "tintindex": 0, "render_type": "cutout" },
         "south": { "texture": "#overlay", "cullface": "south", "tintindex": 0, "render_type": "cutout" },
         "west": { "texture": "#overlay", "cullface": "west", "tintindex": 0, "render_type": "cutout" }
-      }
+      },
+      "render_type": "cutout"
     }
   ]
 }

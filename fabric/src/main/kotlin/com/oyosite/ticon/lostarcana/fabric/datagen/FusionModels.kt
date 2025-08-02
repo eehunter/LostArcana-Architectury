@@ -2,18 +2,15 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
-import com.oyosite.ticon.lostarcana.block.ARCANE_STONE
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
-import com.oyosite.ticon.lostarcana.block.TEST_BLOCK
+import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.supermartijn642.fusion.api.model.DefaultModelTypes
 import com.supermartijn642.fusion.api.model.ModelInstance
+import com.supermartijn642.fusion.api.model.data.BaseModelData
 import com.supermartijn642.fusion.api.model.data.ConnectingModelData
 import com.supermartijn642.fusion.api.predicate.DefaultConnectionPredicates
 import com.supermartijn642.fusion.api.provider.FusionModelProvider
-import com.supermartijn642.fusion.api.texture.data.BaseTextureData
-import com.supermartijn642.fusion.api.texture.data.ConnectingTextureData
-import com.supermartijn642.fusion.api.texture.data.ConnectingTextureLayout
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MOD_ID, output, ) {
@@ -27,10 +24,13 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
                 .build()
             val instance = ModelInstance.of(DefaultModelTypes.CONNECTING, data)
             addModel(holder.id.withPrefix("block/").withSuffix("_overlay"), instance)
-
-
-
         }
+
+        //val visCrystalData = BaseModelData.builder().parent(Identifier.parse("item/generated"))
+        //    .texture("layer0", Identifier.parse("lostarcana:item/vis_crystal"))
+        //    .build()
+
+        //addModel(VIS_CRYSTAL.id.withPrefix("item/"), ModelInstance.of(DefaultModelTypes.BASE, visCrystalData))
 
         //val data = ConnectingModelData.builder().parent(LostArcana.id("minecraft:block/cube_all")).texture("all", Identifier.parse("block/stone")).texture("particle", Identifier.parse("block/stone_bricks"))
         //    .connection("all", DefaultConnectionPredicates.isSameBlock()).connection("particle", DefaultConnectionPredicates.matchBlock(+ARCANE_STONE)).build()

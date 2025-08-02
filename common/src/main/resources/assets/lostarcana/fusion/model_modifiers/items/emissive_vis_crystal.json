@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "lostarcana:vis_crystal"
+  ],
+  "models": [
+    {
+      "model": "lostarcana:vis_crystal_emissive"
+    }
+  ]
+}

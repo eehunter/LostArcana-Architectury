@@ -25,6 +25,7 @@ open class WandItem(properties: Properties) : CastingItem(properties), VisCharge
         return overflow
     }
 
+
     override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float = stack.get(VIS_STORAGE_COMPONENT)?:0f
     override fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean {
         val available = availableVis(stack, level, pos, entity)
@@ -47,5 +48,7 @@ open class WandItem(properties: Properties) : CastingItem(properties), VisCharge
 
     companion object{
         val STORED_VIS_TOOLTIP = "tooltip.item.wand.stored_vis"
+
+        fun getTintColor(stack: ItemStack, index: Int) = ((if(index==0) 0x75461fu else 0xAAAAAAu) or 0xFF000000u).toInt()
     }
 }

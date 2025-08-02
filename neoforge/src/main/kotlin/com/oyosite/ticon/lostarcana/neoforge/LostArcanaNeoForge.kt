@@ -106,6 +106,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         fun onRegisterItemColorProviders(event: RegisterColorHandlersEvent.Item){
             event.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, +VIS_CRYSTAL, *infusedStoneBlocks)
             event.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
+            event.register(LostArcanaClient.WAND_ITEM_COLOR, +WAND_ITEM)
         }
 
         @SubscribeEvent

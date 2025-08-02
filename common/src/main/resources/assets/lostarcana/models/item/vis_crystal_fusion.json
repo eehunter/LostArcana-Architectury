@@ -1,0 +1,5 @@
+{
+  "loader": "fusion:model",
+  "type": "base",
+  "parent": "lostarcana:item/vis_crystal_emissive"
+}

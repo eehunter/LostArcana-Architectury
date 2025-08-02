@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.*
+import com.supermartijn642.fusion.api.texture.data.ConnectingTextureLayout
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -24,6 +25,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
     val TINTED_CUBE_ALL = block("tinted_cube_all", TextureSlot.ALL)
     val TINTED_CUBE = block("tinted_cube", TextureSlot.UP, TextureSlot.DOWN, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST)
+    val INFUSED_STONE= block("infused_stone")
 
     val arcaneWorkbenchTextureMap = TextureMapping()(TOP, ARCANE_WORKBENCH, "_top")(BOTTOM, Blocks.OAK_PLANKS)(SIDE, ARCANE_WORKBENCH, "_side")
 
@@ -37,7 +39,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
         INFUSED_STONES.forEach {
-            bsmg.createTrivialBlock(+it, TextureMapping.cube(ResourceLocation.parse("block/stone")), TINTED_CUBE_ALL)
+            bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
         }
 
         bsmg.createTrivialCube(+ARCANE_STONE)

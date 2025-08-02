@@ -1,0 +1,21 @@
+{
+  "type": "fusion:connecting",
+  "parent": "minecraft:block/cube_all",
+  "connections": {
+    "type": "fusion:or",
+    "predicates": [
+      {
+        "type": "fusion:is_same_block"
+      },
+      {
+        "type": "fusion:match_block",
+        "block": "lostarcana:arcane_stone"
+      }
+    ]
+  },
+  "loader": "fusion:model",
+  "textures": {
+    "all": "minecraft:block/stone",
+    "particle": "minecraft:block/stone_bricks"
+  }
+}

@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.client
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.aspects
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
@@ -18,6 +19,7 @@ object LostArcanaClient {
     val WAND_ITEM_COLOR = ItemColor(WandItem::getTintColor)
 
     val INFUSED_STONE_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> ((state.block as InfusedStoneBlock).aspect.color).toInt() }
+    val STONE_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> PRIMAL_ASPECTS[i].color.toInt() }
 
     val AURA_NODE_MODEL_LAYER = ModelLayerLocation(LostArcana.id("aura_node"), "cube")
 

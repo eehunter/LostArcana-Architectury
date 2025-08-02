@@ -14,5 +14,6 @@ class LostArcanaDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::ItemTagProvider)
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::OreProvider)
+        pack.addProvider(::FusionModels)
     }
 }

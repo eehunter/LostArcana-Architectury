@@ -78,7 +78,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
 
     override fun generateItemModels(img: ItemModelGenerators) {
-        img.generateFlatItem(+VIS_CRYSTAL, ModelTemplates.FLAT_ITEM)
+        
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)
         img.register(+THAUMOMETER, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lens")

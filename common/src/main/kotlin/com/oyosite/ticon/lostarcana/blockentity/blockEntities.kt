@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
 import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
+import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterMenuScreen
 import net.minecraft.core.BlockPos
@@ -23,6 +24,8 @@ val PLACEHOLDER_BLOCK_ENTITY = "multiblock_placeholder"(::PlaceholderBlockEntity
 
 val ARCANE_WORKBENCH_BLOCK_ENTITY = "arcane_workbench"(::ArcaneWorkbenchBlockEntity, ARCANE_WORKBENCH)
 val ARCANE_WORKBENCH_MENU_SCREEN = "arcane_workbench"(::ArcaneWorkbenchMenu, FeatureFlagSet.of())
+
+val RECHARGE_PEDESTAL_BLOCK_ENTITY = "recharge_pedestal"(::RechargePedestalBlockEntity, RECHARGE_PEDESTAL)
 
 operator fun <T: BlockEntity, R: BlockEntityType<T>> String.invoke(blockEntityFactory: (BlockPos, BlockState)->T, vararg blocks: Holder<out Block>): Holder<BlockEntityType<T>> =
     platformRegisterBlockEntity(this) { BlockEntityType.Builder.of(blockEntityFactory, *blocks.map(Holder<out Block>::value).toTypedArray()) }

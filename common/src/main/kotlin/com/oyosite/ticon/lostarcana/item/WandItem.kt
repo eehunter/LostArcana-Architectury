@@ -7,12 +7,23 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 
-open class WandItem(properties: Properties) : CastingItem(properties) {
+open class WandItem(properties: Properties) : CastingItem(properties), VisChargeableItem {
     constructor(properties: Properties, defaultVisAmount: Float): this(properties.component(VIS_STORAGE_COMPONENT, defaultVisAmount))
 
-    open fun maxVis(stack: ItemStack): Float = 100f
-    open fun storedVis(stack: ItemStack): Float = stack.get(VIS_STORAGE_COMPONENT) ?: 0f
-    open fun addVis(stack: ItemStack, amount: Float) = stack.set(VIS_STORAGE_COMPONENT, (storedVis(stack)+amount).coerceIn(0f..maxVis(stack)))
+    override fun maxVis(stack: ItemStack): Float = 100f
+    override fun storedVis(stack: ItemStack): Float = stack.get(VIS_STORAGE_COMPONENT) ?: 0f
+    override fun addVis(stack: ItemStack, amount: Float): Float {
+        val oldAmount = storedVis(stack)
+        val max = maxVis(stack)
+        var newAmount = oldAmount+amount
+        var overflow = 0f
+        if(newAmount>max){
+            overflow = newAmount-max
+            newAmount = max
+        }
+        stack.set(VIS_STORAGE_COMPONENT, newAmount)
+        return overflow
+    }
 
     override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float = stack.get(VIS_STORAGE_COMPONENT)?:0f
     override fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean {

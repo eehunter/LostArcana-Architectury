@@ -24,7 +24,7 @@ val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Re
 val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
 val SALIS_MUNDIS = "salis_mundis" * { SalisMundisItem(Item.Properties()) }
 
-val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 100f) }
+val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
 val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1)) }
 val IRON_WAND_CAP = "iron_wand_cap" * { Item(Item.Properties()) }
 

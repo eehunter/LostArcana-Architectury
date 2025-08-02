@@ -1,7 +1,7 @@
 {
   "loader": "fusion:model",
   "type": "base",
-  "parent": "minecraft:block/stone",
+  "parent": "minecraft:block/cube_all",
   "textures": {
     "all": "minecraft:block/stone",
     "overlay": "lostarcana:block/infused_stone_overlay",
@@ -25,7 +25,6 @@
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "light_emission": 15,
-      "render_type": "cutout",
       "faces": {
         "up": { "texture": "#overlay", "cullface": "up", "tintindex": 0, "render_type": "cutout" },
         "down": { "texture": "#overlay", "cullface": "down", "tintindex": 0, "render_type": "cutout" },

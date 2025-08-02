@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "lostarcana:aer_infused_stone",
+    "lostarcana:aqua_infused_stone",
+    "lostarcana:ignis_infused_stone",
+    "lostarcana:ordo_infused_stone",
+    "lostarcana:perditio_infused_stone",
+    "lostarcana:terra_infused_stone"
+  ],
+  "append": [
+    "lostarcana:block/infused_stone_fusion"
+  ]
+}

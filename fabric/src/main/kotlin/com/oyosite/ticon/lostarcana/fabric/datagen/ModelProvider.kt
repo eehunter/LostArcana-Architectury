@@ -39,7 +39,8 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
         INFUSED_STONES.forEach {
-            bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
+            //bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
+            bsmg.createTrivialBlock(+it, TextureMapping()(ALL, Blocks.STONE), ModelTemplates.CUBE_ALL)
         }
 
         bsmg.createTrivialCube(+ARCANE_STONE)

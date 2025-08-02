@@ -38,6 +38,8 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_PILLAR,
             ARCANE_STONE_STAIRS,
             ARCANE_STONE_TILE_STAIRS,
+            ARCANE_WORKBENCH,
+            RECHARGE_PEDESTAL,
         ).allDropSelf
 
         listOf(

@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.stats.Stats
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.MenuProvider
 import net.minecraft.world.SimpleMenuProvider
@@ -39,6 +40,17 @@ class ArcaneWorkbench(properties: Properties) : Block(properties), EntityBlock {
 
     override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity? =
         ArcaneWorkbenchBlockEntity(blockPos, blockState)
+
+    override fun onRemove(
+        blockState: BlockState,
+        level: Level,
+        blockPos: BlockPos,
+        blockState2: BlockState,
+        bl: Boolean
+    ) {
+        Containers.dropContentsOnDestroy(blockState, blockState2, level, blockPos)
+        super.onRemove(blockState, level, blockPos, blockState2, bl)
+    }
 
     companion object{
         val TITLE_KEY = "container.lostarcana.arcane_workbench"

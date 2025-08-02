@@ -16,15 +16,19 @@ import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.unaryPlus
+import com.supermartijn642.fusion.api.texture.data.BaseTextureData
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.client.screen.v1.Screens
 import net.fabricmc.fabric.mixin.screen.HandledScreenMixin
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.client.gui.screens.inventory.ContainerScreen
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
+import net.minecraft.client.renderer.entity.layers.RenderLayer
 import net.minecraft.world.level.block.Block
 
 class LostArcanaFabricClient : ClientModInitializer {
@@ -40,6 +44,8 @@ class LostArcanaFabricClient : ClientModInitializer {
 
         BlockEntityRendererRegistry.register(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() as BlockEntityRenderer<MagicBricksBlockEntity> }
         BlockEntityRendererRegistry.register(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() as BlockEntityRenderer<ArcaneColumnBlockEntity> }
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
 
         MenuScreens.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
 

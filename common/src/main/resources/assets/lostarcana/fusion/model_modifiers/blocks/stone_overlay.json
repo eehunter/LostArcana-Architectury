@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "stone"
+  ],
+  "append": [
+    "lostarcana:block/aer_infused_stone_overlay",
+    "lostarcana:block/aqua_infused_stone_overlay",
+    "lostarcana:block/ignis_infused_stone_overlay",
+    "lostarcana:block/ordo_infused_stone_overlay",
+    "lostarcana:block/perditio_infused_stone_overlay",
+    "lostarcana:block/terra_infused_stone_overlay"
+  ]
+}

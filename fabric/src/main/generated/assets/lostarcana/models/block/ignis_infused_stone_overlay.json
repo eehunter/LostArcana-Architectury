@@ -1,0 +1,17 @@
+{
+  "type": "fusion:connecting",
+  "parent": "lostarcana:block/stone_overlay",
+  "connections": {
+    "type": "fusion:or",
+    "predicates": [
+      {
+        "type": "fusion:match_block",
+        "block": "lostarcana:ignis_infused_stone"
+      }
+    ]
+  },
+  "loader": "fusion:model",
+  "textures": {
+    "overlay": "lostarcana:block/infused_stone_edge_overlay_ignis"
+  }
+}

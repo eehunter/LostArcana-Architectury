@@ -1,29 +1,18 @@
 {
   "loader": "fusion:model",
   "type": "connecting",
-  "textures": {
-    "overlay": "lostarcana:block/infused_stone_edge_overlay"
-  },
-  "connections": [
-    {
-      "type": "and",
-      "predicates": [
-        {
-          "type": "match_block",
-          "block": "lostarcana:aer_infused_stone"
-        },
-        {
-          "type": "is_face_visible"
-        }
-      ]
-    }
-  ],
   "elements": [
     {
-      "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "light_emission": 15,
       "faces": {
-        "up": { "texture": "#overlay", "cullface": "up" }
+        "up": { "texture": "#overlay", "cullface": "up" },
+        "down": { "texture": "#overlay", "cullface": "down" },
+        "north": { "texture": "#overlay", "cullface": "north" },
+        "east": { "texture": "#overlay", "cullface": "east" },
+        "south": { "texture": "#overlay", "cullface": "south" },
+        "west": { "texture": "#overlay", "cullface": "west" }
       }
     }
   ]

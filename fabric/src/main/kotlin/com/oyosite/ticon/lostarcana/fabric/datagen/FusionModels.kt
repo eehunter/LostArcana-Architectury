@@ -11,6 +11,9 @@ import com.supermartijn642.fusion.api.model.ModelInstance
 import com.supermartijn642.fusion.api.model.data.ConnectingModelData
 import com.supermartijn642.fusion.api.predicate.DefaultConnectionPredicates
 import com.supermartijn642.fusion.api.provider.FusionModelProvider
+import com.supermartijn642.fusion.api.texture.data.BaseTextureData
+import com.supermartijn642.fusion.api.texture.data.ConnectingTextureData
+import com.supermartijn642.fusion.api.texture.data.ConnectingTextureLayout
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MOD_ID, output, ) {
@@ -18,12 +21,15 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
 
         INFUSED_STONES.forEachIndexed { i, holder ->
             val data = ConnectingModelData.builder()
-                .parent(Identifier.parse("block/cube_all"))
+                .parent(LostArcana.id("block/stone_overlay"))
                 .texture("overlay", LostArcana.id("block/infused_stone_edge_overlay_${holder.get().aspect.id.path}"))
                 .connection(DefaultConnectionPredicates.matchBlock(+holder))
                 .build()
             val instance = ModelInstance.of(DefaultModelTypes.CONNECTING, data)
-            addModel(holder.id.withPrefix("block/"), instance)
+            addModel(holder.id.withPrefix("block/").withSuffix("_overlay"), instance)
+
+
+
         }
 
         //val data = ConnectingModelData.builder().parent(LostArcana.id("minecraft:block/cube_all")).texture("all", Identifier.parse("block/stone")).texture("particle", Identifier.parse("block/stone_bricks"))

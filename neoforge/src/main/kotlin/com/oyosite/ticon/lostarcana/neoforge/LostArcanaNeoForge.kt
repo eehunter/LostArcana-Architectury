@@ -76,6 +76,10 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("vis_storage", Supplier { VIS_STORAGE_COMPONENT })
+        DATA_COMPONENT_REGISTRAR.register("wand_cap", Supplier { WAND_CAP })
+        DATA_COMPONENT_REGISTRAR.register("wand_cap_2", Supplier { WAND_CAP_2 })
+        DATA_COMPONENT_REGISTRAR.register("wand_cap_3", Supplier { WAND_CAP_3 })
+        DATA_COMPONENT_REGISTRAR.register("wand_core", Supplier { WAND_CORE })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
 

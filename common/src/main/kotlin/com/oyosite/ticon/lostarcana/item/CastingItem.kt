@@ -7,6 +7,7 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.core.Holder
+import net.minecraft.core.component.DataComponentType
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.item.ItemEntity
@@ -20,8 +21,18 @@ import net.minecraft.world.phys.Vec3
 abstract class CastingItem(properties: Properties) : Item(properties) {
     constructor(properties: Properties, defaultVisAmount: Float): this(properties.component(VIS_STORAGE_COMPONENT, defaultVisAmount))
 
+    abstract fun getPartComponents(stack: ItemStack): List<DataComponentType<CastingItemComponent>>
+
     abstract fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float
     abstract fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean
+
+    open fun visEfficiency(stack: ItemStack): Float{
+        val comps = getPartComponents(stack)
+        //val parts = comps.mapNotNull(stack::get).filter { it.item is ModularCastingItemPart }
+        //val partItems = parts.mapNotNull { it.item as? ModularCastingItemPart }
+        //return parts.mapIndexed { i, stack -> partItems[i].getEfficiencyMultiplier(stack) }.fold(1f){a,b->a*b}
+        return comps.mapNotNull(stack::get).map(CastingItemComponent::efficiency).fold(1f){a,b->a*b}
+    }
 
     open val craftItemRange: Double get() = .7
 

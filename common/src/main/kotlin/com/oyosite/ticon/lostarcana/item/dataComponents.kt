@@ -11,6 +11,7 @@ import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
+import net.minecraft.world.item.ItemStack
 
 val ASPECT_CODEC: Codec<AspectStack> = RecordCodecBuilder.create { it.group(
     Codec.STRING.fieldOf("aspect").forGetter{ it.aspect.id.toString() },
@@ -46,5 +47,10 @@ val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = DataComponentType.build
 
 val VIS_STORAGE_COMPONENT: DataComponentType<Float> = DataComponentType.builder<Float>().persistent(Codec.FLOAT).networkSynchronized(StreamCodec.of(ByteBuf::writeFloat, ByteBuf::readFloat)).build()
 
+val WAND_CAP: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
+val WAND_CAP_2: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
+val WAND_CAP_3: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 
+val WAND_CORE: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 
+//val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()

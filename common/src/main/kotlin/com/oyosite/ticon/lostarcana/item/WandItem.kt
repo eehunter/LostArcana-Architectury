@@ -1,5 +1,7 @@
 package com.oyosite.ticon.lostarcana.item
 
+import com.oyosite.ticon.lostarcana.unaryPlus
+import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.ItemStack
@@ -7,11 +9,9 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 
-open class WandItem(properties: Properties) : CastingItem(properties), VisChargeableItem {
+open class WandItem(properties: Properties) : VisStoringCastingItem(properties.component(WAND_CAP, (+IRON_WAND_CAP).castingItemComponent).component(WAND_CAP_2, (+IRON_WAND_CAP).castingItemComponent).component(WAND_CORE, (+WOOD_WAND_CORE).castingItemComponent)), VisChargeableItem {
     constructor(properties: Properties, defaultVisAmount: Float): this(properties.component(VIS_STORAGE_COMPONENT, defaultVisAmount))
 
-    override fun maxVis(stack: ItemStack): Float = 100f
-    override fun storedVis(stack: ItemStack): Float = stack.get(VIS_STORAGE_COMPONENT) ?: 0f
     override fun addVis(stack: ItemStack, amount: Float): Float {
         val oldAmount = storedVis(stack)
         val max = maxVis(stack)
@@ -24,6 +24,8 @@ open class WandItem(properties: Properties) : CastingItem(properties), VisCharge
         stack.set(VIS_STORAGE_COMPONENT, newAmount)
         return overflow
     }
+
+    override fun getPartComponents(stack: ItemStack): List<DataComponentType<CastingItemComponent>> = listOf(WAND_CAP, WAND_CORE, WAND_CAP_2)
 
 
     override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float = stack.get(VIS_STORAGE_COMPONENT)?:0f

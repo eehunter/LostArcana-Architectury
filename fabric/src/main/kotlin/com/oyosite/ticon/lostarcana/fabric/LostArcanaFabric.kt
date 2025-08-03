@@ -6,6 +6,10 @@ import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
+import com.oyosite.ticon.lostarcana.item.WAND_CAP
+import com.oyosite.ticon.lostarcana.item.WAND_CAP_2
+import com.oyosite.ticon.lostarcana.item.WAND_CAP_3
+import com.oyosite.ticon.lostarcana.item.WAND_CORE
 import com.oyosite.ticon.lostarcana.worldgen.feature.INFUSED_STONE_FEATURES
 import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
@@ -30,6 +34,10 @@ class LostArcanaFabric : ModInitializer {
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("vis_storage")) { VIS_STORAGE_COMPONENT }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_cap")) { WAND_CAP }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_cap_2")) { WAND_CAP_2 }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_cap_3")) { WAND_CAP_3 }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_core")) { WAND_CORE }
 
         INFUSED_STONE_FEATURES.forEach{
             BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.UNDERGROUND_ORES, it)

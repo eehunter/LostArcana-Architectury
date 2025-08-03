@@ -24,11 +24,12 @@ val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Re
 val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
 val SALIS_MUNDIS = "salis_mundis" * { SalisMundisItem(Item.Properties()) }
 
-val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
 val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1)) }
-val IRON_WAND_CAP = "iron_wand_cap" * { Item(Item.Properties()) }
+val IRON_WAND_CAP = "iron_wand_cap" * { WandCap(Item.Properties(), 0.95f, 0xAAAAAAu) }
+val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(Item.Properties(), 1f, 0xffdb05u) }
+val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(Item.Properties(), 25f, 0x75461fu) }
 
-
+val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
 
 
 val WOOD_PLANKS = itemTag("minecraft:planks")

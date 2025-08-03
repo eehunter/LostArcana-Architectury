@@ -51,6 +51,6 @@ open class WandItem(properties: Properties) : VisStoringCastingItem(properties.c
     companion object{
         val STORED_VIS_TOOLTIP = "tooltip.item.wand.stored_vis"
 
-        fun getTintColor(stack: ItemStack, index: Int) = ((if(index==0) 0x75461fu else 0xAAAAAAu) or 0xFF000000u).toInt()
+        fun getTintColor(stack: ItemStack, index: Int) = (((stack.get(when(index){0 -> WAND_CORE; 1 -> WAND_CAP; else -> WAND_CAP_2}))?.color?.toUInt()?:0xFFFFFFu) or 0xFF000000u).toInt()
     }
 }

@@ -7,6 +7,7 @@ import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.item.CastingItem
 import com.oyosite.ticon.lostarcana.item.CastingItemComponent
 import com.oyosite.ticon.lostarcana.item.ModularCastingItemPart
+import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
 import net.minecraft.core.component.DataComponentType
@@ -21,11 +22,14 @@ import net.minecraft.world.item.crafting.CraftingRecipe
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.Level
+import java.util.Optional
 
-class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingredient, val partSlot: Identifier, val relativeSlotId: Int): CraftingRecipe {
+class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingredient, val partSlot: Identifier, val relativeSlotId: Int, val clearVis: Optional<Boolean>): CraftingRecipe {
     override fun category(): CraftingBookCategory = CraftingBookCategory.EQUIPMENT
 
     val relativeSlot get() = listOf(-1 to -1, 0 to -1, 1 to -1, -1 to 0, 1 to 0, -1 to 1, 0 to 1, 1 to 1)[relativeSlotId]
+
+    val shouldClearVis: Boolean = clearVis.orElseGet { true }
 
     override fun matches(
         recipeInput: CraftingInput,
@@ -92,6 +96,7 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         assert(itemType is CastingItem)
         val otpt = stack.copy()
         otpt.set<CastingItemComponent>(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>, (augment.item as ModularCastingItemPart).castingItemComponent(augment))
+        if(shouldClearVis && otpt.has(VIS_STORAGE_COMPONENT))otpt.set(VIS_STORAGE_COMPONENT, 0f)
         return otpt
     }
 
@@ -122,7 +127,8 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
                 Ingredient.CODEC.fieldOf("castingItem").forGetter(CastingItemModificationRecipe::castingItem),
                 Ingredient.CODEC.fieldOf("part").forGetter(CastingItemModificationRecipe::part),
                 ResourceLocation.CODEC.fieldOf("partSlot").forGetter(CastingItemModificationRecipe::partSlot),
-                Codec.INT.fieldOf("relativeSlotId").forGetter(CastingItemModificationRecipe::relativeSlotId)
+                Codec.INT.fieldOf("relativeSlotId").forGetter(CastingItemModificationRecipe::relativeSlotId),
+                Codec.BOOL.optionalFieldOf("clearVis").forGetter(CastingItemModificationRecipe::clearVis)
             ).apply(it, ::CastingItemModificationRecipe)
         }
         val MAP_CODEC = MapCodec.assumeMapUnsafe(CODEC)
@@ -132,12 +138,14 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
             Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recp.part)
             ResourceLocation.STREAM_CODEC.encode(buf, recp.partSlot)
             buf.writeInt(recp.relativeSlotId)
+            buf.writeBoolean(recp.shouldClearVis)
         }){buf->
             CastingItemModificationRecipe(
                 Ingredient.CONTENTS_STREAM_CODEC.decode(buf),
                 Ingredient.CONTENTS_STREAM_CODEC.decode(buf),
                 ResourceLocation.STREAM_CODEC.decode(buf),
-                buf.readInt()
+                buf.readInt(),
+                Optional.of(buf.readBoolean())
             )
         }
 

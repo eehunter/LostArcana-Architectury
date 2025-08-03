@@ -23,6 +23,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
+import java.util.Optional
 import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
@@ -106,7 +107,8 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
                 Ingredient.of(+WAND_ITEM),
                 Ingredient.of(WAND_CAPS),
                 LostArcana.id("wand_cap"),
-                1
+                1,
+                Optional.empty()
             ),
             null
         )
@@ -116,7 +118,8 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             Ingredient.of(+WAND_ITEM),
             Ingredient.of(WAND_CAPS),
             LostArcana.id("wand_cap_2"),
-            6
+            6,
+            Optional.empty()
         ),
         null
         )

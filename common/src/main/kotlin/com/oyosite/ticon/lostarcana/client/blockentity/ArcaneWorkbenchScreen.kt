@@ -33,7 +33,6 @@ class ArcaneWorkbenchScreen(menu: ArcaneWorkbenchMenu, inventory: Inventory, nam
 
     override fun init() {
         super.init()
-        //titleLabelX = (imageWidth - title)
     }
 
     companion object{

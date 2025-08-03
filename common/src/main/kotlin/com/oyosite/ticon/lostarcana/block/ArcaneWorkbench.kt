@@ -1,7 +1,6 @@
 package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchBlockEntity
-import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent

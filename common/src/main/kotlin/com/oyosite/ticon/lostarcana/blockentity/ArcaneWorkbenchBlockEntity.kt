@@ -2,7 +2,6 @@ package com.oyosite.ticon.lostarcana.blockentity
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.world.Container
@@ -12,10 +11,8 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.CraftingContainer
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.RecipeInput
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import java.util.function.Predicate
@@ -25,9 +22,6 @@ class ArcaneWorkbenchBlockEntity(val pos: BlockPos, state: BlockState, val conta
         container.be = this
     }
 
-    //override val inputSlotCount: Int = 15
-    //override val inputStacks: MutableList<ItemStack> = MutableList(inputSlotCount){ ItemStack.EMPTY }
-    //override val baseCraftingContainer: CraftingContainer = ArcaneWorkbenchRecipeContainer.ArcaneWorkbenchBaseCraftingContainer(this)
     override fun getMaxStackSize(): Int {
         return container.getMaxStackSize()
     }
@@ -83,60 +77,11 @@ class ArcaneWorkbenchBlockEntity(val pos: BlockPos, state: BlockState, val conta
         level?.let{ ContainerLevelAccess.create(it, pos) } ?: ContainerLevelAccess.NULL)
 
     override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
-        //val list = NonNullList.withSize(container.inputSlotCount, ItemStack.EMPTY)
         ContainerHelper.loadAllItems(compoundTag, container.inputStacks, provider)
-        //for(i in 0 until containerSize) container.setItem(i, list[i])
     }
 
     override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
-        //val list = NonNullList.of(ItemStack.EMPTY, *container.inputStacks.toTypedArray())
         ContainerHelper.saveAllItems(compoundTag, container.inputStacks, provider)
     }
 
-    //val container = ArcaneWorkbenchRecipeContainer(pos)
-
-
-
-    /*
-    val inputSlotCount = 15
-    val inputStacks = MutableList(inputSlotCount){ ItemStack.EMPTY }
-
-    override fun getContainerSize(): Int = inputSlotCount
-
-    override fun isEmpty(): Boolean = inputStacks.any { !it.isEmpty }
-
-    override fun getItem(i: Int): ItemStack = inputStacks[i]
-
-    override fun removeItem(i: Int, amount: Int): ItemStack = inputStacks[i].split(amount)
-        /*val stack = inputStacks[i]
-        if(stack.isEmpty)return stack
-        if(stack.count<=amount){
-            inputStacks[i] = ItemStack.EMPTY
-            return stack
-        }
-        inputStacks[i] = stack.copyWithCount(stack.count-amount)
-        return stack.split()*/
-
-
-    override fun removeItemNoUpdate(i: Int): ItemStack? {
-        TODO("Not yet implemented")
-    }
-
-    override fun setItem(i: Int, itemStack: ItemStack) {
-        TODO("Not yet implemented")
-    }
-
-    override fun stillValid(player: Player): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun clearContent() {
-        TODO("Not yet implemented")
-    }
-
-    override fun size(): Int {
-        TODO("Not yet implemented")
-    }
-
-*/
 }

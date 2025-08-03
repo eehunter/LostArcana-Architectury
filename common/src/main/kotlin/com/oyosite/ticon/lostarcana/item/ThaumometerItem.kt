@@ -92,7 +92,6 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
         val AURA_LEVEL_FORMAT = { f: Float -> String.format("%.2f", f) }
 
         val THAUMOMETER_RANGE = 10.0
-        val THAUMOMETER_RANGE_SQUARED = THAUMOMETER_RANGE * THAUMOMETER_RANGE
         val THAUMOMETER_SCAN_RANGE = 0.75
     }
 }

@@ -1,11 +1,6 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
-import com.oyosite.ticon.lostarcana.aura.AuraSource
-import com.oyosite.ticon.lostarcana.item.CasterGauntlet
 import com.oyosite.ticon.lostarcana.item.CastingItem
-import com.oyosite.ticon.lostarcana.util.drainAuraAtLocation
-import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
-import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import net.minecraft.core.BlockPos
 import net.minecraft.core.NonNullList
 import net.minecraft.world.Container

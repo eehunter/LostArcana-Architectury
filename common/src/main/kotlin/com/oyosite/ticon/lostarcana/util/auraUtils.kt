@@ -21,10 +21,7 @@ fun drainAuraAtLocation(level: Level, pos: Vec3, amount: Float){
     }
 }
 
-fun getNearestAuraSourceInRange(entity: Entity?, range: Double): AuraSource? {
-    entity?: return null
-    return getNearestAuraSourceInRange(entity.level(), entity.position(), range)
-}
+
 fun getNearestAuraSourceInRange(level: Level, pos: Vec3, range: Double): AuraSource? {
     //TODO: Add a way for blocks to be usable AuraSources as well.
     val nodes: List<Entity> = level.getEntities(null, AABB.ofSize(pos, 2*range, 2*range, 2*range)) { it is AuraSource }

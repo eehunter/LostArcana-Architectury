@@ -1,11 +1,8 @@
 @file:JvmName("PlatformKtImpl")
 package com.oyosite.ticon.lostarcana.util.neoforge
 
-import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
-import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.entity.BlockEntityType
 import com.mojang.datafixers.types.Type
-import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -15,6 +12,8 @@ import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
 import java.util.function.Supplier

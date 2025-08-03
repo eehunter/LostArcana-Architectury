@@ -54,10 +54,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
     init {
         print("Hello world NeoForge")
 
-
-
         platform_aspect_registry = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
-        //ALL_ASPECTS.forEach { (name, aspect) -> NEOFORGE_ASPECTS.register(name, Supplier{ aspect }) }
 
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
@@ -82,8 +79,6 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         DATA_COMPONENT_REGISTRAR.register("wand_core", Supplier { WAND_CORE })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
-
-        //ATTRIBUTE_REGISTRY.register()
 
         LostArcana.init()
     }
@@ -136,7 +131,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
         @SubscribeEvent
         @JvmStatic
-        fun onRegisterEntityRenderers(event: EntityRenderersEvent.RegisterRenderers){
+        fun onRegisterEntityRenderers(event: RegisterRenderers){
             event.registerEntityRenderer(+AURA_NODE, ::AuraNodeEntityRenderer)
         }
 

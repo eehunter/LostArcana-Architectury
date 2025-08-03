@@ -3,7 +3,6 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
-import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.supermartijn642.fusion.api.model.DefaultModelTypes
 import com.supermartijn642.fusion.api.model.ModelInstance

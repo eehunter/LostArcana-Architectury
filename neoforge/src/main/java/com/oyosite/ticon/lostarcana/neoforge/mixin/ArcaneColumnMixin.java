@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.neoforge.mixin;
 
-import com.oyosite.ticon.lostarcana.block.ArcaneColumn;
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneColumnBlockEntity;
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer;
 import net.minecraft.world.phys.AABB;

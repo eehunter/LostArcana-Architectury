@@ -21,8 +21,6 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
 
     private val player = inventory.player
 
-    private val craftSlots: CraftingContainer = TransientCraftingContainer(this, 3, 3)
-
     init {
         container.markDirtyCallback = {slotsChanged(container)}
         container.startOpen(player)
@@ -49,7 +47,6 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
     }
 
     override fun slotsChanged(container: Container) {
-        //ctx.execute { level, pos -> updateResult(this, level, player, this.container) }
         updateResult(this, player.level(), player, this.container)
         super.slotsChanged(container)
     }
@@ -102,7 +99,6 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
             RecipeType.CRAFTING -> recipe.matches(container.baseCraftingContainer.asCraftInput(), player.level())
             else -> false
         }
-        //return recipeHolder.value is ArcaneWorkbenchRecipe || recipeHolder.value is CraftingRecipe
     }
 
     override fun getResultSlotIndex(): Int = 0

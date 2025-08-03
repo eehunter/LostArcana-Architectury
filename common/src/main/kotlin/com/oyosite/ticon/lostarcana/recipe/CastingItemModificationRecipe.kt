@@ -71,15 +71,10 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
             val item = recipeInput.getItem(i, j)
             if (castingItem.test(item)) {
-                //val itemType = item.item
-                //assert(itemType is CastingItem)
                 val x = relativeSlot.first + i
                 val y = relativeSlot.second + j
 
                 val augment = recipeInput.getItem(x,y)
-                /*val otpt = item.copy()
-                otpt.set<CastingItemComponent>(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>, (augment.item as ModularCastingItemPart).castingItemComponent(augment))
-                return otpt*/
                 return transformStack(recipeInput, provider, item, augment)
             }
         }

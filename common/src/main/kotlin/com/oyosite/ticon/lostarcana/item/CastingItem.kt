@@ -26,13 +26,8 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
     abstract fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float
     abstract fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean
 
-    open fun visEfficiency(stack: ItemStack): Float{
-        val comps = getPartComponents(stack)
-        //val parts = comps.mapNotNull(stack::get).filter { it.item is ModularCastingItemPart }
-        //val partItems = parts.mapNotNull { it.item as? ModularCastingItemPart }
-        //return parts.mapIndexed { i, stack -> partItems[i].getEfficiencyMultiplier(stack) }.fold(1f){a,b->a*b}
-        return comps.mapNotNull(stack::get).map(CastingItemComponent::efficiency).fold(1f){a,b->a*b}
-    }
+    open fun visEfficiency(stack: ItemStack): Float =
+        getPartComponents(stack).mapNotNull(stack::get).map(CastingItemComponent::efficiency).fold(1f){a,b->a*b}
 
     open val craftItemRange: Double get() = .7
 

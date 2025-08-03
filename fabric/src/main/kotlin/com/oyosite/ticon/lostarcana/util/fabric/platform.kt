@@ -2,8 +2,6 @@
 package com.oyosite.ticon.lostarcana.util.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
-import dev.architectury.platform.Platform
-import dev.architectury.utils.Env
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry

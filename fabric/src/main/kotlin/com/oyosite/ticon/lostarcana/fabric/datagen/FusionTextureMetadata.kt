@@ -5,7 +5,6 @@ import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.supermartijn642.fusion.api.provider.FusionTextureMetadataProvider
 import com.supermartijn642.fusion.api.texture.DefaultTextureTypes
-import com.supermartijn642.fusion.api.texture.TextureType
 import com.supermartijn642.fusion.api.texture.data.BaseTextureData
 import com.supermartijn642.fusion.api.texture.data.ConnectingTextureData
 import com.supermartijn642.fusion.api.texture.data.ConnectingTextureLayout

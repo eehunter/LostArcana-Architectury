@@ -126,10 +126,7 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
 
     object Serializer: RecipeSerializer<SpecialCastingItemModificationRecipe>{
         val CODEC: MapCodec<SpecialCastingItemModificationRecipe> = MapCodec.unit { SpecialCastingItemModificationRecipe() }
-        
-        //: Codec<SpecialCastingItemModificationRecipe> = Codec.unit { SpecialCastingItemModificationRecipe() }//RecordCodecBuilder.create { it.point(SpecialCastingItemModificationRecipe()) }
-        //val MAP_CODEC = MapCodec.assumeMapUnsafe(CODEC)
-        
+
         override fun codec(): MapCodec<SpecialCastingItemModificationRecipe> = CODEC
 
         val STREAM_CODEC = StreamCodec.unit<RegistryFriendlyByteBuf, SpecialCastingItemModificationRecipe> ( (SpecialCastingItemModificationRecipe()) )

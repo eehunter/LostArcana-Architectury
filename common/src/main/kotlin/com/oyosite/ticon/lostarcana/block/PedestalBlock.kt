@@ -5,12 +5,8 @@ import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
 import com.oyosite.ticon.lostarcana.util.component3
 import net.minecraft.core.BlockPos
-import net.minecraft.server.level.ServerLevel
-import net.minecraft.world.Container
-import net.minecraft.world.ContainerHelper
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
@@ -28,6 +24,8 @@ open class PedestalBlock(properties: Properties, val blockEntityFactory: (BlockP
         blockState: BlockState
     ): BlockEntity? = blockEntityFactory(blockPos, blockState)
 
+    open fun isItemAllowed(stack: ItemStack) = true
+
     override fun useItemOn(
         itemStack: ItemStack,
         blockState: BlockState,
@@ -39,12 +37,13 @@ open class PedestalBlock(properties: Properties, val blockEntityFactory: (BlockP
     ): ItemInteractionResult {
         if(interactionHand != InteractionHand.MAIN_HAND) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         if(level.isClientSide)return ItemInteractionResult.SUCCESS
-        val be = level.getBlockEntity(blockPos) as? RechargePedestalBlockEntity ?: return ItemInteractionResult.SUCCESS
+        val be = level.getBlockEntity(blockPos) as? RechargePedestalBlockEntity ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         if(!be.item.isEmpty && player.getItemInHand(interactionHand).isEmpty){
             val (x,y,z) = player.position()
             level.addFreshEntity(ItemEntity(level, x, y, z, be.item))
             be.item = ItemStack.EMPTY
         } else if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty) {
+            if(!isItemAllowed(player.getItemInHand(InteractionHand.MAIN_HAND)))return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
             if(!be.item.isEmpty){
                 val (x,y,z) = player.position()
                 level.addFreshEntity(ItemEntity(level, x, y, z, be.item))

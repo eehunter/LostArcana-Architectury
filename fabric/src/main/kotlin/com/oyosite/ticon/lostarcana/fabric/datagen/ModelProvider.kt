@@ -42,9 +42,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
-        INFUSED_STONES.forEach {
+        listOf(*INFUSED_STONES.toTypedArray(), RECHARGE_PEDESTAL).forEach {
             val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
-            val bsg = MultiVariantGenerator.multiVariant(+it, v)
+            val bsg = MultiVariantGenerator.multiVariant(it.get(), v)
             bsmg.blockStateOutput.accept(bsg)
             //bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
             //bsmg.createTrivialBlock(+it, TextureMapping()(ALL, Blocks.STONE), ModelTemplates.CUBE_ALL)
@@ -90,6 +90,8 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)
         img.register(+THAUMOMETER, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lens")
         img.register(+GOGGLES_OF_REVEALING, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lenses")
+
+        img.register(+RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("recharge_pedestal")), Optional.empty()))
     }
 
     fun ItemModelGenerators.register(item: ItemLike, model: ModelTemplate, vararg suffixes: String = arrayOf("")){

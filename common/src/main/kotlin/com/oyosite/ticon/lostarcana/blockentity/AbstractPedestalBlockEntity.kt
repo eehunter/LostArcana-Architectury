@@ -12,9 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
-abstract class AbstractPedestalBlockEntity(type: BlockEntityType<*>, blockPos: BlockPos, blockState: BlockState) : BlockEntity(type, blockPos, blockState), Container {
+abstract class AbstractPedestalBlockEntity(type: BlockEntityType<*>, blockPos: BlockPos, blockState: BlockState, val slotCount: Int = 1) : BlockEntity(type, blockPos, blockState), Container {
 
-    val inv: NonNullList<ItemStack> = NonNullList.withSize(1, ItemStack.EMPTY)
+    val inv: NonNullList<ItemStack> = NonNullList.withSize(slotCount, ItemStack.EMPTY)
 
     var item: ItemStack get() = getItem(0)
         set(value){
@@ -22,7 +22,7 @@ abstract class AbstractPedestalBlockEntity(type: BlockEntityType<*>, blockPos: B
             setChanged()
         }
 
-    override fun getContainerSize(): Int = 1
+    override fun getContainerSize(): Int = slotCount
 
     override fun getItem(i: Int): ItemStack = inv[i]
 
@@ -43,7 +43,7 @@ abstract class AbstractPedestalBlockEntity(type: BlockEntityType<*>, blockPos: B
 
     override fun removeItemNoUpdate(i: Int): ItemStack = ContainerHelper.takeItem(inv, i)
 
-    override fun isEmpty(): Boolean = inv[0].isEmpty
+    override fun isEmpty(): Boolean = inv.all(ItemStack::isEmpty)
 
     override fun stillValid(player: Player): Boolean = true
 }

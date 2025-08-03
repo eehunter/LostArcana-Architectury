@@ -95,9 +95,9 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
         override fun getHeight(): Int = 3
 
         override fun getItems(): List<ItemStack> =
-            //NonNullList.of(ItemStack.EMPTY, *
-                recipeContainer.inputStacks//.subList(0,9)
-                    //.toTypedArray())//.subList(0,9)
+            NonNullList.of(ItemStack.EMPTY, *
+                recipeContainer.inputStacks.subList(0,9)
+                    .toTypedArray())//.subList(0,9)
 
         override fun getContainerSize(): Int = 9
 

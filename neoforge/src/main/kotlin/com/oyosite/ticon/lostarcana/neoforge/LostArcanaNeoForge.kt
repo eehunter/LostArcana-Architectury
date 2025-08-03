@@ -13,11 +13,13 @@ import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.RECHARGE_PEDESTAL_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
@@ -144,6 +146,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         fun registerRenderers(event: RegisterRenderers) {
             event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
             event.registerBlockEntityRenderer(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() }
+            event.registerBlockEntityRenderer(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer() }
         }
 
         @SubscribeEvent

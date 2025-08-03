@@ -7,10 +7,13 @@ import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneColumnBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MagicBricksBlockEntity
+import com.oyosite.ticon.lostarcana.blockentity.RECHARGE_PEDESTAL_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.RechargePedestalBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
@@ -44,6 +47,7 @@ class LostArcanaFabricClient : ClientModInitializer {
 
         BlockEntityRendererRegistry.register(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() as BlockEntityRenderer<MagicBricksBlockEntity> }
         BlockEntityRendererRegistry.register(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() as BlockEntityRenderer<ArcaneColumnBlockEntity> }
+        BlockEntityRendererRegistry.register(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer<RechargePedestalBlockEntity>() }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
 

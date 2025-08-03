@@ -42,6 +42,7 @@ open class PedestalBlock(properties: Properties, val blockEntityFactory: (BlockP
             val (x,y,z) = player.position()
             level.addFreshEntity(ItemEntity(level, x, y, z, be.item))
             be.item = ItemStack.EMPTY
+            be.setChanged()
         } else if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty) {
             if(!isItemAllowed(player.getItemInHand(InteractionHand.MAIN_HAND)))return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
             if(!be.item.isEmpty){
@@ -49,6 +50,7 @@ open class PedestalBlock(properties: Properties, val blockEntityFactory: (BlockP
                 level.addFreshEntity(ItemEntity(level, x, y, z, be.item))
             }
             be.item = player.inventory.removeItem(player.inventory.selected, 1)
+            be.setChanged()
         }
         return ItemInteractionResult.SUCCESS
     }

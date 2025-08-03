@@ -39,8 +39,8 @@ val ARCANE_STONE_TILE_SLAB = "arcane_stone_tile_slab" % { SlabBlock(BlockPropert
 val ARCANE_STONE_STAIRS = "arcane_stone_stairs" % { StairBlock((+ARCANE_STONE).defaultBlockState(), BlockProperties.ofFullCopy(Blocks.STONE_STAIRS)) } % {}
 val ARCANE_STONE_TILE_STAIRS = "arcane_stone_tile_stairs" % { StairBlock((+ARCANE_STONE_TILES).defaultBlockState(), BlockProperties.ofFullCopy(Blocks.STONE_STAIRS)) } % {}
 
-val RECHARGE_PEDESTAL = "recharge_pedestal" % { RechargePedestal(prop) } % {}
-val MODULAR_RECHARGE_PEDESTAL = "modular_recharge_pedestal" % { RechargePedestal(prop, 2) } % {}
+val RECHARGE_PEDESTAL = "recharge_pedestal" % { RechargePedestal(prop.noOcclusion()) } % {}
+val MODULAR_RECHARGE_PEDESTAL = "modular_recharge_pedestal" % { RechargePedestal(prop.noOcclusion(), 2) } % {}
 
 val MAGIC_BRICKS = "magic_bricks" % { MagicBricksBlock(prop.isSuffocating { _,_,_ -> false }.isViewBlocking { _,_,_ -> false }.noOcclusion()) } % {}
 val ARCANE_COLUMN = "arcane_column" % { ArcaneColumn(prop.isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }.noOcclusion()) } % {}

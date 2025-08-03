@@ -91,7 +91,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.register(+THAUMOMETER, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lens")
         img.register(+GOGGLES_OF_REVEALING, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lenses")
 
-        img.register(+RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("recharge_pedestal")), Optional.empty()))
+        img.register(+RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("block/recharge_pedestal")), Optional.empty()))
     }
 
     fun ItemModelGenerators.register(item: ItemLike, model: ModelTemplate, vararg suffixes: String = arrayOf("")){

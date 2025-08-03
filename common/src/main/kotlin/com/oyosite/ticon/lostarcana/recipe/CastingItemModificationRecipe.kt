@@ -79,7 +79,7 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         for(i in 0 until list.size){
             val item = recipeInput.getItem(i)
             if(!castingItem.test(item))continue
-            list[i] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?: ItemStack.EMPTY
+            list[i] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy?: ItemStack.EMPTY
         }
         /*var item: ItemStack = ItemStack.EMPTY
         for(i in 0 until list.size){

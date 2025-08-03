@@ -32,18 +32,30 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         level: Level
     ): Boolean {
         if(recipeInput.items().filterNot(ItemStack::isEmpty).size != 2) return false
+        return matchesIgnoreOtherItems(recipeInput, level)
+    }
+
+    fun matchesIgnoreOtherItems(
+        recipeInput: CraftingInput,
+        level: Level
+    ): Boolean {
         for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()){
-            val item = recipeInput.getItem(i, j)
-            if(castingItem.test(item)){
-                val itemType = item.item
-                if(itemType !is CastingItem)return false
-                if(!itemType.getPartComponents(item).contains(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot))) return false
-                val x = relativeSlot.first + i
-                val y = relativeSlot.second + j
-                if(x !in 0 until recipeInput.width()) return false
-                if(y !in 0 until recipeInput.height()) return false
-                return part.test(recipeInput.getItem(x,y)) && recipeInput.getItem(x,y).item is ModularCastingItemPart
-            }
+            if(matchesSlot(recipeInput, level, i, j))return true
+        }
+        return false
+    }
+
+    fun matchesSlot(recipeInput: CraftingInput, level: Level, i: Int, j: Int): Boolean{
+        val item = recipeInput.getItem(i, j)
+        if(castingItem.test(item)){
+            val itemType = item.item
+            if(itemType !is CastingItem)return false
+            if(!itemType.getPartComponents(item).contains(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot))) return false
+            val x = relativeSlot.first + i
+            val y = relativeSlot.second + j
+            if(x !in 0 until recipeInput.width()) return false
+            if(y !in 0 until recipeInput.height()) return false
+            return part.test(recipeInput.getItem(x,y)) && recipeInput.getItem(x,y).item is ModularCastingItemPart
         }
         return false
     }

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.oyosite.ticon.lostarcana.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "ArcaneColumnMixin"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

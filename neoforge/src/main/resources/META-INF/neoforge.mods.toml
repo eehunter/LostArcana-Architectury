@@ -43,3 +43,6 @@ side = "BOTH"
 
 [[mixins]]
 config = "lostarcana.mixins.json"
+
+[[mixins]]
+config = "lostarcana.neoforge.mixins.json"

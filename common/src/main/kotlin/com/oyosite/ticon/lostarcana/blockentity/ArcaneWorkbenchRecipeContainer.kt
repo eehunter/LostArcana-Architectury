@@ -30,7 +30,7 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
 
     override fun getContainerSize(): Int = inputSlotCount
 
-    override fun isEmpty(): Boolean = inputStacks.all(ItemStack::isEmpty)
+    override fun isEmpty(): Boolean = (0 until containerSize ).map(::getItem).all(ItemStack::isEmpty)
 
     override fun getItem(i: Int): ItemStack = inputStacks[i]
     override fun size(): Int = inputSlotCount
@@ -42,7 +42,7 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
         return stack
     }
 
-    override fun removeItemNoUpdate(i: Int): ItemStack = ContainerHelper.takeItem(inputStacks, i).also { if(!it.isEmpty)this.setChanged() }
+    override fun removeItemNoUpdate(i: Int): ItemStack = ContainerHelper.takeItem(inputStacks, i)//.also { if(!it.isEmpty)this.setChanged() }
 
     override fun setItem(i: Int, stack: ItemStack) {
         inputStacks[i] = stack
@@ -94,11 +94,14 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
 
         override fun getHeight(): Int = 3
 
-        override fun getItems(): List<ItemStack> = NonNullList.of(ItemStack.EMPTY, *recipeContainer.inputStacks.subList(0,9).toTypedArray())//.subList(0,9)
+        override fun getItems(): List<ItemStack> =
+            //NonNullList.of(ItemStack.EMPTY, *
+                recipeContainer.inputStacks//.subList(0,9)
+                    //.toTypedArray())//.subList(0,9)
 
         override fun getContainerSize(): Int = 9
 
-        override fun isEmpty(): Boolean = items.all(ItemStack::isEmpty)
+        override fun isEmpty(): Boolean = (0 until containerSize ).map(::getItem).all(ItemStack::isEmpty)
 
         override fun getItem(i: Int): ItemStack = items[i]
 
@@ -117,8 +120,8 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
         }
 
         override fun fillStackedContents(stackedContents: StackedContents) {
-            for (itemStack in this.items) {
-                stackedContents.accountSimpleStack(itemStack)
+            for (i in 0 until containerSize) {
+                stackedContents.accountSimpleStack(getItem(i))
             }
         }
 

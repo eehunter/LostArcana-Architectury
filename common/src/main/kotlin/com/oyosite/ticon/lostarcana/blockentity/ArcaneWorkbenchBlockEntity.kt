@@ -83,14 +83,14 @@ class ArcaneWorkbenchBlockEntity(val pos: BlockPos, state: BlockState, val conta
         level?.let{ ContainerLevelAccess.create(it, pos) } ?: ContainerLevelAccess.NULL)
 
     override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
-        val list = NonNullList.withSize(container.inputSlotCount, ItemStack.EMPTY)
-        ContainerHelper.loadAllItems(compoundTag, list, provider)
-        list.forEachIndexed(container.inputStacks::set)
+        //val list = NonNullList.withSize(container.inputSlotCount, ItemStack.EMPTY)
+        ContainerHelper.loadAllItems(compoundTag, container.inputStacks, provider)
+        //for(i in 0 until containerSize) container.setItem(i, list[i])
     }
 
     override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
-        val list = NonNullList.of(ItemStack.EMPTY, *container.inputStacks.toTypedArray())
-        ContainerHelper.saveAllItems(compoundTag, list, provider)
+        //val list = NonNullList.of(ItemStack.EMPTY, *container.inputStacks.toTypedArray())
+        ContainerHelper.saveAllItems(compoundTag, container.inputStacks, provider)
     }
 
     //val container = ArcaneWorkbenchRecipeContainer(pos)

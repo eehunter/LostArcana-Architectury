@@ -86,7 +86,8 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
 
     override fun stillValid(player: Player): Boolean = container.stillValid(player)
     override fun fillCraftSlotsStackedContents(stackedContents: StackedContents) {
-        craftSlots.fillStackedContents(stackedContents)
+        container.baseCraftingContainer.fillStackedContents(stackedContents)
+        container.setChanged()
     }
 
     override fun clearCraftingContent() {
@@ -119,6 +120,7 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
     companion object{
         protected fun updateResult(menu: ArcaneWorkbenchMenu, level: Level, player: Player, container: ArcaneWorkbenchRecipeContainer.Wrapper){
             if(level.isClientSide)return
+            val craftingInput = container.baseCraftingContainer.asCraftInput()
             var recipe: RecipeHolder<ArcaneWorkbenchRecipe>? = null
             assert(player is ServerPlayer) { "Player is not ServerPlayer on server. (This should not happen)" }
             var itemStack = ItemStack.EMPTY
@@ -131,10 +133,10 @@ class ArcaneWorkbenchMenu(val id: Int, val inventory: Inventory, val container: 
                 }
             }
             if(recipe==null){
-                val optional = level.server!!.recipeManager.getRecipeFor(RecipeType.CRAFTING, container.baseCraftingContainer.asCraftInput(), level)
+                val optional = level.server!!.recipeManager.getRecipeFor(RecipeType.CRAFTING, craftingInput, level)
                 optional.ifPresent {
                     if(container.result.setRecipeUsed(level, player as ServerPlayer, it)){
-                        itemStack = it.value.assemble(container.baseCraftingContainer.asCraftInput(), level.registryAccess()).takeIf { it.isItemEnabled(level.enabledFeatures()) } ?: ItemStack.EMPTY
+                        itemStack = it.value.assemble(craftingInput, level.registryAccess()).takeIf { it.isItemEnabled(level.enabledFeatures()) } ?: ItemStack.EMPTY
                     }
                 }
             }

@@ -23,9 +23,10 @@ class ArcaneWorkbenchResultSlot(
         val opt = manager.getRecipeFor(ArcaneWorkbenchRecipe.Type, input, player.level())
         stack.onCraftedBy(player.level(), player, stack.count)
         val positioned = input.baseCraftingContainer.asPositionedCraftInput()
+        val craftInput = positioned.input
         val top = positioned.top
         val left = positioned.left
-        var remainder = manager.getRemainingItemsFor(RecipeType.CRAFTING, positioned.input, level)
+        val remainder = if(opt.isPresent) manager.getRemainingItemsFor(ArcaneWorkbenchRecipe.Type, input, level) else manager.getRemainingItemsFor(RecipeType.CRAFTING, craftInput, level)
 
         opt.ifPresent {
             val recipe = it.value
@@ -34,12 +35,12 @@ class ArcaneWorkbenchResultSlot(
                 if(be.level==null)return@also
                 input.drainAura(be.level!!, recipe.auraCost)
             }
-            remainder = recipe.getRemainingItems(input)
+            //remainder = recipe.getRemainingItems(input)
         }
-        for(ly in 0 until positioned.input.width())for (lx in 0 until positioned.input.height()) {
-            val i = lx + left + (ly + top) * input.baseCraftingContainer.width
+        for(ly in 0 until craftInput.height())for (lx in 0 until craftInput.width()) {
+            val i = lx + left + (ly + top) * 3
             var stack1 = input[i]
-            val stack2 = remainder[lx + ly * input.baseCraftingContainer.width]
+            val stack2 = remainder[lx + ly * craftInput.width()]
             if(!stack1.isEmpty){
                 input.removeItem(i, 1)
                 stack1 = input[i]

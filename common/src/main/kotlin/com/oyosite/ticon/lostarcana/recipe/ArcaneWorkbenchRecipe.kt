@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchRecipeContainer
 import com.oyosite.ticon.lostarcana.item.CastingItem
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
@@ -41,6 +42,10 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
     override fun canCraftInDimensions(i: Int, j: Int): Boolean = base.canCraftInDimensions(i, j)
 
     override fun getResultItem(provider: HolderLookup.Provider): ItemStack = base.getResultItem(provider)
+
+    override fun getRemainingItems(recipeInput: ArcaneWorkbenchRecipeContainer.Wrapper): NonNullList<ItemStack?>? {
+        return base.getRemainingItems(recipeInput.baseCraftingContainer.asCraftInput())
+    }
 
     override fun getSerializer(): RecipeSerializer<ArcaneWorkbenchRecipe> = Serializer as RecipeSerializer<ArcaneWorkbenchRecipe>
 

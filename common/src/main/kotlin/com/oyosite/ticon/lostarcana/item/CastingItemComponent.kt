@@ -3,12 +3,15 @@ package com.oyosite.ticon.lostarcana.item
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import io.netty.buffer.ByteBuf
+import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 
 @JvmRecord
-data class CastingItemComponent(val color: Int, val efficiency: Float = 1f, val storage: Float = 1f, val stack: ItemStack?){
-
+data class CastingItemComponent(val color: Int, val efficiency: Float = 1f, val storage: Float = 1f, val stack: ItemStack){
+    init {
+        assert(!stack.isEmpty)
+    }
 
 
     companion object{
@@ -20,10 +23,11 @@ data class CastingItemComponent(val color: Int, val efficiency: Float = 1f, val 
                 ItemStack.CODEC.fieldOf("stack").forGetter(CastingItemComponent::stack)
             ).apply(it, ::CastingItemComponent)
         }
-        val STREAM_CODEC = StreamCodec.of({buf: ByteBuf, obj: CastingItemComponent ->
+        val STREAM_CODEC = StreamCodec.of({buf: RegistryFriendlyByteBuf, obj: CastingItemComponent ->
             buf.writeInt(obj.color)
             buf.writeFloat(obj.efficiency)
             buf.writeFloat(obj.storage)
-        }){buf -> CastingItemComponent(buf.readInt(), buf.readFloat(), buf.readFloat(), null) }
+            ItemStack.STREAM_CODEC.encode(buf, obj.stack)
+        }){buf -> CastingItemComponent(buf.readInt(), buf.readFloat(), buf.readFloat(), ItemStack.STREAM_CODEC.decode(buf)) }
     }
 }

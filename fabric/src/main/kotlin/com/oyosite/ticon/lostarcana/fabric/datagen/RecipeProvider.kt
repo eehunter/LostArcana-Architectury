@@ -1,9 +1,11 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
+import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -96,6 +98,27 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .setVis(5f)
             .save(exporter)
         BasicSalisMundisRecipeBuilder(+ARCANE_WORKBENCH, Blocks.CRAFTING_TABLE).save(exporter)
+
+        exporter.accept(
+            LostArcana.id("wand_top_cap_exchange"),
+            CastingItemModificationRecipe(
+                Ingredient.of(+WAND_ITEM),
+                Ingredient.of(WAND_CAPS),
+                LostArcana.id("wand_cap"),
+                1
+            ),
+            null
+        )
+        exporter.accept(
+                LostArcana.id("wand_bottom_cap_exchange"),
+        CastingItemModificationRecipe(
+            Ingredient.of(+WAND_ITEM),
+            Ingredient.of(WAND_CAPS),
+            LostArcana.id("wand_cap_2"),
+            6
+        ),
+        null
+        )
     }
 
     fun stair(exporter: RecipeOutput, stair: ItemLike, block: ItemLike){

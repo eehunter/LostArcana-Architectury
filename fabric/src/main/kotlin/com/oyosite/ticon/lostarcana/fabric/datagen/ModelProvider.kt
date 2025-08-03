@@ -91,6 +91,10 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.register(+THAUMOMETER, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lens")
         img.register(+GOGGLES_OF_REVEALING, ModelTemplates.TWO_LAYERED_ITEM, "_frame", "_lenses")
 
+        img.generateFlatItem(+IRON_WAND_CAP, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+GOLD_WAND_CAP, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+WOOD_WAND_CORE, ModelTemplates.FLAT_ITEM)
+
         img.register(+RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("block/recharge_pedestal")), Optional.empty()))
         img.register(+MODULAR_RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("block/recharge_pedestal")), Optional.empty()))
     }

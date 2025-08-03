@@ -6,6 +6,7 @@ import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
+import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -118,6 +119,11 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             6
         ),
         null
+        )
+        exporter.accept(
+            LostArcana.id("special_casting_item_modification"),
+            SpecialCastingItemModificationRecipe(),
+            null
         )
     }
 

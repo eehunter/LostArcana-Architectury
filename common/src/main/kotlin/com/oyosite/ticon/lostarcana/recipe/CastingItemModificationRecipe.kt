@@ -45,7 +45,7 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         return false
     }
 
-    fun matchesSlot(recipeInput: CraftingInput, level: Level, i: Int, j: Int): Boolean{
+    fun matchesSlot(recipeInput: CraftingInput, level: Level?, i: Int, j: Int): Boolean{
         val item = recipeInput.getItem(i, j)
         if(castingItem.test(item)){
             val itemType = item.item
@@ -67,32 +67,51 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
             val item = recipeInput.getItem(i, j)
             if (castingItem.test(item)) {
-                val itemType = item.item
-                assert(itemType is CastingItem)
+                //val itemType = item.item
+                //assert(itemType is CastingItem)
                 val x = relativeSlot.first + i
                 val y = relativeSlot.second + j
 
-                val otpt = item.copy()
                 val augment = recipeInput.getItem(x,y)
+                /*val otpt = item.copy()
                 otpt.set<CastingItemComponent>(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>, (augment.item as ModularCastingItemPart).castingItemComponent(augment))
-                return otpt
+                return otpt*/
+                return transformStack(recipeInput, provider, item, augment)
             }
         }
         throw IllegalStateException("Recipe was assembled but doesn't match.")
+    }
+
+    fun transformStack(
+        recipeInput: CraftingInput,
+        provider: HolderLookup.Provider,
+        stack: ItemStack,
+        augment: ItemStack
+    ): ItemStack{
+        val itemType = stack.item
+        assert(itemType is CastingItem)
+        val otpt = stack.copy()
+        otpt.set<CastingItemComponent>(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>, (augment.item as ModularCastingItemPart).castingItemComponent(augment))
+        return otpt
     }
 
     @Suppress("KotlinUnreachableCode")
     override fun getRemainingItems(recipeInput: CraftingInput): NonNullList<ItemStack> {
         // AM CONFUSION
         //return super.getRemainingItems(recipeInput)
-        val list = NonNullList.withSize(2, ItemStack.EMPTY)
+        val list = NonNullList.withSize(recipeInput.size(), ItemStack.EMPTY)
         //return list
         //for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
-        for(i in 0 until list.size){
+        for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
+            val item = recipeInput.getItem(i, j)
+            if(!castingItem.test(item))continue
+            list[i + relativeSlot.first + (j + relativeSlot.second)*recipeInput.width()] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy?: ItemStack.EMPTY
+        }
+        /*for(i in 0 until list.size){
             val item = recipeInput.getItem(i)
             if(!castingItem.test(item))continue
             list[i] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy?: ItemStack.EMPTY
-        }
+        }*/
         /*var item: ItemStack = ItemStack.EMPTY
         for(i in 0 until list.size){
             item = recipeInput.getItem(i)

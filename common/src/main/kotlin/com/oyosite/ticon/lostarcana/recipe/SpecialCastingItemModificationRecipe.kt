@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.client.Minecraft
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
@@ -102,6 +103,25 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
 
     override fun equals(other: Any?): Boolean {
         return other is SpecialCastingItemModificationRecipe
+    }
+
+    override fun getRemainingItems(recipeInput: CraftingInput): NonNullList<ItemStack?>? {
+        val list = NonNullList.withSize(recipeInput.size(), ItemStack.EMPTY)
+        var (x, y) = -1 to -1
+        for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()){
+            recipeInput.getItem(i, j).takeIf { it.item is CastingItem }?.let {
+                x = i
+                y = j
+                break
+            }
+        }
+        val recipeManager = this.recipeManager?: Minecraft.getInstance().level?.recipeManager?:return list
+        val possibleMatches = recipeManager.getAllRecipesFor(RecipeType.CRAFTING).mapNotNull { it.value as? CastingItemModificationRecipe }
+        val relativeSlotIds = mutableSetOf<Int>()
+        val uniqueMatches = possibleMatches.filter { it.matchesSlot(recipeInput, null, x, y) }.filter { relativeSlotIds.add(it.relativeSlotId) }
+        return uniqueMatches.fold(list){list, recipe ->
+            recipe.getRemainingItems(recipeInput, list)
+        }
     }
 
     object Serializer: RecipeSerializer<SpecialCastingItemModificationRecipe>{

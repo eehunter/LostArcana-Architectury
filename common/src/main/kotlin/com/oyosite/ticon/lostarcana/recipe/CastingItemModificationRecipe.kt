@@ -95,32 +95,18 @@ class CastingItemModificationRecipe(val castingItem: Ingredient, val part: Ingre
         return otpt
     }
 
-    @Suppress("KotlinUnreachableCode")
+
     override fun getRemainingItems(recipeInput: CraftingInput): NonNullList<ItemStack> {
-        // AM CONFUSION
-        //return super.getRemainingItems(recipeInput)
         val list = NonNullList.withSize(recipeInput.size(), ItemStack.EMPTY)
-        //return list
-        //for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
+        return getRemainingItems(recipeInput, list)
+    }
+
+    fun getRemainingItems(recipeInput: CraftingInput, list: NonNullList<ItemStack>): NonNullList<ItemStack>{
         for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()) {
             val item = recipeInput.getItem(i, j)
             if(!castingItem.test(item))continue
             list[i + relativeSlot.first + (j + relativeSlot.second)*recipeInput.width()] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy?: ItemStack.EMPTY
         }
-        /*for(i in 0 until list.size){
-            val item = recipeInput.getItem(i)
-            if(!castingItem.test(item))continue
-            list[i] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy?: ItemStack.EMPTY
-        }*/
-        /*var item: ItemStack = ItemStack.EMPTY
-        for(i in 0 until list.size){
-            item = recipeInput.getItem(i)
-            if(castingItem.test(item))break
-        }
-        val i = if(relativeSlotId < 4) 0 else 1
-
-        list[i] = item.get(BuiltInRegistries.DATA_COMPONENT_TYPE.get(partSlot) as DataComponentType<CastingItemComponent>)?.stack?.copy()?: ItemStack.EMPTY
-        */
         return list
     }
 

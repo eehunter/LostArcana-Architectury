@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.util
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
@@ -9,12 +10,20 @@ import net.minecraft.world.item.ItemStack
 interface ImmutableItemStack {
     val copy: ItemStack
 
+    operator fun <T> get(component: DataComponentType<T>): T?
+
+    val count: Int
+
+    val isEmpty: Boolean
 
     companion object{
         val ItemStack.immutableCopy: ImmutableItemStack get() = object : ImmutableItemStack{
             val stack = this@immutableCopy.copy()
             override val copy: ItemStack
                 get() = stack.copy()
+            override fun <T> get(component: DataComponentType<T>) = stack[component]
+            override val count get() = stack.count
+            override val isEmpty: Boolean get() = stack.isEmpty
         }
 
         val CODEC: Codec<ImmutableItemStack> = RecordCodecBuilder.create {

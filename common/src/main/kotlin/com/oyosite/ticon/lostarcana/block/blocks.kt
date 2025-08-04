@@ -50,7 +50,7 @@ val MULTIBLOCK_PLACEHOLDER = "multiblock_placeholder" % { MultiblockPlaceholder(
 val GREATWOOD_LOG = "greatwood_log" % { RotatedPillarBlock(BlockProperties.ofFullCopy(Blocks.OAK_LOG)) } % {}
 val GREATWOOD_PLANKS = "greatwood_planks" % { Block(BlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) } % {}
 
-val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(prop) } % {}
+val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

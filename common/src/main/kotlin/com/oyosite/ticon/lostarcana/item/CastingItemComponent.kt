@@ -6,6 +6,7 @@ import com.oyosite.ticon.lostarcana.util.ImmutableItemStack
 import com.oyosite.ticon.lostarcana.util.ImmutableItemStack.Companion.immutableCopy
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
@@ -16,6 +17,10 @@ data class CastingItemComponent(val color: Int, val efficiency: Float = 1f, val 
     constructor(color: Int, efficiency: Float, storage: Float, stack: Optional<ImmutableItemStack>): this(color, efficiency, storage, stack.getOrNull())
 
     val optionalStack get() = Optional.ofNullable(stack)
+
+    val item: Item? get() = stack?.item
+
+    val resonator: Resonator? get() = item as? Resonator
 
     companion object{
         val CODEC = RecordCodecBuilder.create{

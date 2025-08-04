@@ -77,6 +77,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         DATA_COMPONENT_REGISTRAR.register("wand_cap_2", Supplier { WAND_CAP_2 })
         DATA_COMPONENT_REGISTRAR.register("wand_cap_3", Supplier { WAND_CAP_3 })
         DATA_COMPONENT_REGISTRAR.register("wand_core", Supplier { WAND_CORE })
+        DATA_COMPONENT_REGISTRAR.register("resonator", Supplier { RESONATOR })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
 

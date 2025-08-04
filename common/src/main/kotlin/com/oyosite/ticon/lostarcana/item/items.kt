@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.item
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.itemTag
 import com.oyosite.ticon.lostarcana.tag.COMMON_GOLD_INGOTS
+import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.injectables.annotations.ExpectPlatform
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
@@ -27,6 +28,7 @@ val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(Item.Properties(), 1f, 0xffdb05u
 val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(Item.Properties(), 25f, 0x75461fu) }
 
 val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
+val CASTER_GAUNTLET = "caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1).component(WAND_CAP, (+IRON_WAND_CAP).castingItemComponent)) }
 
 
 val WOOD_PLANKS = itemTag("minecraft:planks")

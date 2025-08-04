@@ -49,7 +49,6 @@ val VIS_STORAGE_COMPONENT: DataComponentType<Float> = DataComponentType.builder<
 val WAND_CAP: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 val WAND_CAP_2: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 val WAND_CAP_3: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-
 val WAND_CORE: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 
-//val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
+val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()

@@ -1,11 +1,11 @@
-// 1.21.1	2025-08-04T17:36:57.822524735	Lost Arcana/Recipes
+// 1.21.1	2025-08-04T18:40:28.398204223	Lost Arcana/Recipes
 cd3479166cab6f30fb6f3f66dda256f6b091f450 data/lostarcana/advancement/recipes/tools/crude_caster_gauntlet.json
 996fd4a052299bec34d9fac7173d629103c097ec data/lostarcana/recipe/arcane_stone_tiles.json
 4f68acd0455231e080a5480ccd9d36b146f52741 data/lostarcana/recipe/arcane_stone_tile_stairs.json
 fbdd53ebe3e97fe6a9d25ab91bf8189a27264636 data/lostarcana/recipe/goggles_of_revealing.json
 b00bab36f3be2c61b8f6d54d9d0d257c0e555888 data/lostarcana/recipe/wand.json
-45eaa01100ced4e06ff00c79c23fee25c666f9dd data/lostarcana/recipe/wand_bottom_cap_exchange.json
-09b2d49bd2c222563281c533f6706079277c2b70 data/lostarcana/recipe/wand_top_cap_exchange.json
+d2a9242dace6f2f7a25433addf817d4726bc568d data/lostarcana/recipe/wand_bottom_cap_exchange.json
+3b794f8b82e963d47679e3618fc9bd4a9abb9596 data/lostarcana/recipe/wand_top_cap_exchange.json
 c2be3c2ed9ff26df2259ea88962927020f1bade6 data/lostarcana/advancement/recipes/tools/wood_wand_core.json
 dc55dc7640237fb86aed905cba3c33e3554f64e5 data/lostarcana/recipe/special_casting_item_modification.json
 cb282c7206d730459beb8b81bf5fd26f3593cc91 data/lostarcana/advancement/recipes/tools/iron_wand_cap.json

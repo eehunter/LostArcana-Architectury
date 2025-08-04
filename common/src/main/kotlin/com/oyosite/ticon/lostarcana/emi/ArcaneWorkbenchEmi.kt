@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.emi
 
-import com.mojang.authlib.minecraft.client.MinecraftClient
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
@@ -13,9 +12,7 @@ import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import dev.emi.emi.api.widget.WidgetHolder
 import net.minecraft.client.Minecraft
-import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.crafting.RecipeManager
 
 class ArcaneWorkbenchEmi(@get:JvmName("getId1") val id: Identifier, val ingredients: List<EmiIngredient>, val output: EmiStack) : EmiRecipe {
     constructor(id: Identifier, recipe: ArcaneWorkbenchRecipe): this(

@@ -5,6 +5,7 @@ import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.block.*
+import com.oyosite.ticon.lostarcana.emi.LostArcanaEmiPlugin
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.tag.GREATWOOD_LOGS
 import com.oyosite.ticon.lostarcana.tag.WAND_CAPS
@@ -71,6 +72,11 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(GREATWOOD_LOGS)
         add(WAND_CAPS)
         add(WAND_CORES)
+
+        add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_1, "This replaces one or more parts of your wand.")
+        add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_2, "Old parts will be left behind in the crafting grid.")
+        add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_3, "You do not need to replace all three parts at once, as is shown here.")
+        add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_4, "Any Vis stored in the wand will be lost.")
     }
 
     inline fun <reified T> TranslationBuilder.add(tag: TagKey<T>) = add(tag, tag.location.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })

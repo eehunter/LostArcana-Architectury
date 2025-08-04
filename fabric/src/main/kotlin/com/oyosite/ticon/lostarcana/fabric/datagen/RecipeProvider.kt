@@ -140,7 +140,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
                 Ingredient.of(+WAND_ITEM),
                 Ingredient.of(WAND_CAPS),
                 LostArcana.id("wand_cap"),
-                1,
+                2,
                 Optional.empty()
             ),
             null
@@ -151,7 +151,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             Ingredient.of(+WAND_ITEM),
             Ingredient.of(WAND_CAPS),
             LostArcana.id("wand_cap_2"),
-            6,
+            5,
             Optional.empty()
         ),
         null

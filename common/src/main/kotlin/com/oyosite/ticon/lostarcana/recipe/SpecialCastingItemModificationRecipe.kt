@@ -3,13 +3,16 @@ package com.oyosite.ticon.lostarcana.recipe
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.item.CastingItem
+import com.oyosite.ticon.lostarcana.item.CastingItemComponent
 import com.oyosite.ticon.lostarcana.item.ModularCastingItemPart
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.client.Minecraft
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
+import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
@@ -118,7 +121,8 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
         val recipeManager = this.recipeManager?: Minecraft.getInstance().level?.recipeManager?:return list
         val possibleMatches = recipeManager.getAllRecipesFor(RecipeType.CRAFTING).mapNotNull { it.value as? CastingItemModificationRecipe }
         val relativeSlotIds = mutableSetOf<Int>()
-        val uniqueMatches = possibleMatches.filter { it.matchesSlot(recipeInput, null, x, y) }.filter { relativeSlotIds.add(it.relativeSlotId) }
+        val slotComponents = mutableSetOf<Identifier>()
+        val uniqueMatches = possibleMatches.filter { it.matchesSlot(recipeInput, null, x, y) }.filter { relativeSlotIds.add(it.relativeSlotId) }.filter { slotComponents.add(it.partSlot) }
         return uniqueMatches.fold(list){list, recipe ->
             recipe.getRemainingItems(recipeInput, list)
         }

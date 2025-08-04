@@ -30,5 +30,6 @@
   "item.lostarcana.thaumometer": "Thaumometer",
   "item.lostarcana.vis_crystal": "Vis Crystal",
   "item.lostarcana.wand": "Wand",
+  "tooltip.item.casting_item.vis_efficiency": "%1$s%%",
   "tooltip.item.wand.stored_vis": "%1$s Vis"
 }

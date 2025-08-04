@@ -8,11 +8,13 @@ import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
+import net.minecraft.network.chat.Component
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
@@ -27,7 +29,7 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
     abstract fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean
 
     open fun visEfficiency(stack: ItemStack): Float =
-        getPartComponents(stack).mapNotNull(stack::get).map(CastingItemComponent::efficiency).fold(1f){a,b->a*b}
+        getPartComponents(stack).mapNotNull(stack::get).map(CastingItemComponent::efficiency).fold(1f){a,b->a*b}.coerceIn(Float.MIN_VALUE, Float.POSITIVE_INFINITY)
 
     open val craftItemRange: Double get() = .7
 
@@ -59,5 +61,20 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
         return super.useOn(useOnContext)
     }
 
+    override fun appendHoverText(
+        itemStack: ItemStack,
+        tooltipContext: TooltipContext,
+        list: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
+        list.add(Component.translatable(VIS_EFFICIENCY_TOOLTIP, VIS_EFFICIENCY_FORMAT(visEfficiency(itemStack))))
+    }
 
+
+    companion object{
+        val VIS_EFFICIENCY_TOOLTIP = "tooltip.item.casting_item.vis_efficiency"
+
+        val VIS_EFFICIENCY_FORMAT = { f: Float -> String.format("%.1f", f * 100f) }
+    }
 }

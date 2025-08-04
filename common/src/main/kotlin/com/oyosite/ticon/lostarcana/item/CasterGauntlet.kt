@@ -13,7 +13,7 @@ open class CasterGauntlet(properties: Properties): CastingItem(properties) {
 
     @Suppress("unchecked_cast")
     override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float {
-        return getAuraAtLocation(level, pos)
+        return getAuraAtLocation(level, pos) * visEfficiency(stack)
     }
 
     @Suppress("unchecked_cast")
@@ -22,8 +22,9 @@ open class CasterGauntlet(properties: Properties): CastingItem(properties) {
         amount: Float,
         entity: Entity?
     ): Boolean {
-        if(availableVis(stack, level, pos, entity) < amount) return false
-        drainAuraAtLocation(level, pos, amount)
+        val amt = amount/visEfficiency(stack)
+        if(availableVis(stack, level, pos, entity) < amt) return false
+        drainAuraAtLocation(level, pos, amt)
         return true
     }
 }

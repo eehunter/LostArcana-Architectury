@@ -28,11 +28,12 @@ open class WandItem(properties: Properties) : VisStoringCastingItem(properties.c
     override fun getPartComponents(stack: ItemStack): List<DataComponentType<CastingItemComponent>> = listOf(WAND_CAP, WAND_CORE, WAND_CAP_2)
 
 
-    override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float = stack.get(VIS_STORAGE_COMPONENT)?:0f
+    override fun availableVis(stack: ItemStack, level: Level, pos: Vec3, entity: Entity?): Float = (stack.get(VIS_STORAGE_COMPONENT)?:0f) * visEfficiency(stack)
     override fun consumeVis(stack: ItemStack, level: Level, pos: Vec3, amount: Float, entity: Entity?): Boolean {
         val available = availableVis(stack, level, pos, entity)
-        if(available < amount)return false
-        stack.set(VIS_STORAGE_COMPONENT, available-amount)
+        val efficiency = visEfficiency(stack)
+        if(available < amount/efficiency)return false
+        stack.set(VIS_STORAGE_COMPONENT, available-amount/efficiency)
         return true
     }
 

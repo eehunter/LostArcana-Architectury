@@ -23,6 +23,7 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(VIS_CRYSTAL, "Vis Crystal")
         add(WAND_ITEM, "Wand")
         add(WandItem.STORED_VIS_TOOLTIP, $$"%1$s Vis")
+        add(CastingItem.VIS_EFFICIENCY_TOOLTIP, $$"%1$s%%")
         add(CRUDE_CASTER_GAUNTLET, "Crude Caster Gauntlet")
         add(SALIS_MUNDIS, "Salis Mundis")
         add(THAUMOMETER, "Thaumometer")

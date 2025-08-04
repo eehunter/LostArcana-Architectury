@@ -17,3 +17,5 @@ val COMMON_LEATHERS = itemTag("c:leathers")
 
 val WAND_CAPS = itemTag("lostarcana:wand_caps")
 val WAND_CORES = itemTag("lostarcana:wand_cores")
+
+val GREATWOOD_LOGS = itemTag("lostarcana:greatwood_logs")

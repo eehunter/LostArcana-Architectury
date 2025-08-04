@@ -40,6 +40,8 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_TILE_STAIRS,
             ARCANE_WORKBENCH,
             RECHARGE_PEDESTAL,
+            GREATWOOD_LOG,
+            GREATWOOD_PLANKS,
         ).allDropSelf
 
         listOf(

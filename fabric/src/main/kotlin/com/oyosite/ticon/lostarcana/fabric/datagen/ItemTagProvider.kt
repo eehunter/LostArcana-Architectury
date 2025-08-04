@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
 
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
 import com.oyosite.ticon.lostarcana.item.GOLD_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.GREATWOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
@@ -20,6 +21,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
     override fun addTags(wrapperLookup: HolderLookup.Provider) {
         WAND_CORES(+WOOD_WAND_CORE, +GREATWOOD_WAND_CORE)
         WAND_CAPS(+IRON_WAND_CAP, +GOLD_WAND_CAP)
+
+        GREATWOOD_LOGS(+GREATWOOD_LOG)
 
         COMMON_GOLD_INGOTS(Items.GOLD_INGOT)
         COMMON_GOLD_NUGGETS(Items.GOLD_NUGGET)

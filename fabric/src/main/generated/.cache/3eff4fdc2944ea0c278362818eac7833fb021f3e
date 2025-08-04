@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-04T00:24:02.449400002	Lost Arcana/Recipes
+// 1.21.1	2025-08-04T15:33:02.292249853	Lost Arcana/Recipes
 cd3479166cab6f30fb6f3f66dda256f6b091f450 data/lostarcana/advancement/recipes/tools/crude_caster_gauntlet.json
 996fd4a052299bec34d9fac7173d629103c097ec data/lostarcana/recipe/arcane_stone_tiles.json
 4f68acd0455231e080a5480ccd9d36b146f52741 data/lostarcana/recipe/arcane_stone_tile_stairs.json
@@ -22,6 +22,8 @@ b72bc9262912b8008118c46ed34872c67c7ea14c data/lostarcana/advancement/recipes/too
 b8c6b467e3a76d50b8d96d070b41b82853a46d4f data/lostarcana/advancement/recipes/arcane_workbench/thaumometer.json
 9514a3570575124aeb582a3d381a9bffc16fa819 data/lostarcana/recipe/salis_mundisarcane_workbench.json
 69a886165613c811f167854ecb7f5342741f1a96 data/lostarcana/recipe/gold_wand_cap.json
+e6a44d859de6b74901871cf458da16c8b248bb11 data/lostarcana/advancement/recipes/building_blocks/greatwood_planks.json
+d8446217a38e36c615fd7782b9545f6e9f71174d data/lostarcana/recipe/greatwood_planks.json
 9d76a79da2f6a031c42ad52990124de87d5f45e9 data/lostarcana/advancement/recipes/building_blocks/arcane_stone_tile_stairs.json
 5d9eda13340b401a231021996bc8586ac8239d82 data/lostarcana/advancement/recipes/building_blocks/arcane_stone_tiles.json
 4f397170f621f9f9a3bd628d5a98c09346ab9d08 data/lostarcana/recipe/arcane_stone_tile_slab.json

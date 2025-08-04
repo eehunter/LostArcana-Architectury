@@ -3,7 +3,6 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.*
-import com.supermartijn642.fusion.api.texture.data.ConnectingTextureLayout
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -14,10 +13,8 @@ import net.minecraft.data.models.blockstates.BlockStateGenerator
 import net.minecraft.data.models.blockstates.MultiVariantGenerator
 import net.minecraft.data.models.blockstates.Variant
 import net.minecraft.data.models.blockstates.VariantProperties
-import net.minecraft.data.models.blockstates.VariantProperty
 import net.minecraft.data.models.model.*
 import net.minecraft.data.models.model.TextureSlot.*
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -46,13 +43,13 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
             val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
             val bsg = MultiVariantGenerator.multiVariant(it.get(), v)
             bsmg.blockStateOutput.accept(bsg)
-            //bsmg.createTrivialBlock(+it, TextureMapping(), INFUSED_STONE)
-            //bsmg.createTrivialBlock(+it, TextureMapping()(ALL, Blocks.STONE), ModelTemplates.CUBE_ALL)
         }
 
         bsmg.createTrivialCube(+ARCANE_STONE)
         bsmg.createTrivialCube(+ARCANE_STONE_TILES)
         bsmg.createAxisAlignedPillarBlock(+ARCANE_STONE_PILLAR, TexturedModel.COLUMN)
+        bsmg.createAxisAlignedPillarBlock(+GREATWOOD_LOG, TexturedModel.COLUMN)
+        bsmg.createTrivialCube(+GREATWOOD_PLANKS)
 
         bsmg.blockStateOutput.accept(ARCANE_STONE_SLAB.makeSlabOf(ARCANE_STONE))
         bsmg.blockStateOutput.accept(ARCANE_STONE_TILE_SLAB.makeSlabOf(ARCANE_STONE_TILES))
@@ -94,6 +91,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+IRON_WAND_CAP, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+GOLD_WAND_CAP, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+WOOD_WAND_CORE, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+GREATWOOD_WAND_CORE, ModelTemplates.FLAT_ITEM)
 
         img.register(+RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("block/recharge_pedestal")), Optional.empty()))
         img.register(+MODULAR_RECHARGE_PEDESTAL, ModelTemplate(Optional.of(LostArcana.id("block/recharge_pedestal")), Optional.empty()))

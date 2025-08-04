@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "lostarcana:block/greatwood_log_top",
+    "side": "lostarcana:block/greatwood_log_side"
+  }
+}

@@ -37,6 +37,17 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(ARCANE_STONE_STAIRS)
         add(ARCANE_STONE_TILE_STAIRS)
 
+        add(GREATWOOD_PLANKS)
+        add(GREATWOOD_LOG)
+
+        add(WOOD_WAND_CORE)
+        add(GREATWOOD_WAND_CORE)
+
+        add(IRON_WAND_CAP)
+        add(GOLD_WAND_CAP)
+
+        add(CASTER_GAUNTLET)
+
         add(ARCANE_WORKBENCH)
         add(ArcaneWorkbench.TITLE_KEY, "Arcane Workbench")
 

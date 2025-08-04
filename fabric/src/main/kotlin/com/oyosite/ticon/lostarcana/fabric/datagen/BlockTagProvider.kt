@@ -1,7 +1,10 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_PLANKS
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.tag.COMMON_ORES
+import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -18,7 +21,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         val infusedStoneBlocks = INFUSED_STONES.map(RegistrySupplier<out Block>::get).toTypedArray()
         BlockTags.MINEABLE_WITH_PICKAXE(*infusedStoneBlocks)
         COMMON_ORES(*infusedStoneBlocks)
-
+        BlockTags.MINEABLE_WITH_AXE(+GREATWOOD_LOG, +GREATWOOD_PLANKS)
+        BlockTags.PLANKS(+GREATWOOD_PLANKS)
     }
 
     override fun getTagBuilder(key: TagKey<Block>): FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(key)

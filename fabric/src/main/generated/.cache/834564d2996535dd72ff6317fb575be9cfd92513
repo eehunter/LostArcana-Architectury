@@ -1,3 +1,5 @@
-// 1.21.1	2025-08-04T00:24:02.449302889	Lost Arcana/Tags for minecraft:block
+// 1.21.1	2025-08-04T15:33:02.292045114	Lost Arcana/Tags for minecraft:block
 ad7be10f1731406a9d55a1b0b51445299343065c data/minecraft/tags/block/mineable/pickaxe.json
+63e1a2010683766ccbcdcaf62f55b7cff28798e3 data/minecraft/tags/block/mineable/axe.json
+9ef70a83abb6e3515dd6c3f64794c2f570729818 data/minecraft/tags/block/planks.json
 ad7be10f1731406a9d55a1b0b51445299343065c data/c/tags/block/ores.json

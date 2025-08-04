@@ -31,6 +31,10 @@ import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
     override fun buildRecipes(exporter: RecipeOutput) {
+        shapeless(RecipeCategory.BUILDING_BLOCKS, +GREATWOOD_PLANKS, 4)
+            .requires(GREATWOOD_LOGS)
+            .unlockedBy("has_greatwood", hasItems(GREATWOOD_LOGS))
+            .save(exporter)
         shaped(RecipeCategory.TOOLS, +CRUDE_CASTER_GAUNTLET, 1)
             .pattern("NVN")
             .pattern("SQS")

@@ -67,6 +67,12 @@ subprojects {
                 includeGroup('software.bernie.geckolib')
             }
         }
+        maven {
+            url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
+            content {
+                includeGroup "com.klikli_dev"
+            }
+        }
         mavenCentral()
     }
 

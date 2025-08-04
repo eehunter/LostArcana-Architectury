@@ -17,6 +17,7 @@ dependencies {
     compileOnly "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
 
     modCompileOnly "dev.emi:emi-xplat-intermediary:${emi_version}:api"
+    compileOnly ("com.klikli_dev:modonomicon-${minecraft_version}-common:${modonomicon_version}"){transitive=false}
 }
 repositories {
     mavenCentral()

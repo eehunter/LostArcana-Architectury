@@ -31,6 +31,12 @@
         "adapter": "kotlin",
         "value": "com.oyosite.ticon.lostarcana.fabric.datagen.LostArcanaDataGenerator"
       }
+    ],
+    "emi": [
+      {
+        "adapter": "kotlin",
+        "value": "com.oyosite.ticon.lostarcana.emi.LostArcanaEmiPlugin"
+      }
     ]
   },
   "mixins": [

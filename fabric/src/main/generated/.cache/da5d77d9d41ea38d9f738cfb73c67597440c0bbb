@@ -1,8 +1,8 @@
-// 1.21.1	2025-08-04T15:33:02.292871454	Lost Arcana/Tags for minecraft:item
+// 1.21.1	2025-08-04T15:49:19.511613833	Lost Arcana/Tags for minecraft:item
 609213c3187d757f0c661276342971a39e706bc5 data/lostarcana/tags/item/wand_cores.json
 3263017a4b7198c634a3a4b12b7c64eb5267b8fd data/lostarcana/tags/item/wand_caps.json
-f2aa87f54e7951ea0cf81ac252c2abe279b0c936 data/c/tags/item/ingots/gold.json
 b5ba8bde0d20034f89fb652ba6df035b6aedbdfd data/lostarcana/tags/item/greatwood_logs.json
+f2aa87f54e7951ea0cf81ac252c2abe279b0c936 data/c/tags/item/ingots/gold.json
 64a5131137472b111eb62466b0b98a6cf19cd19c data/c/tags/item/leathers.json
 a600f08f3b82ea64e2da4220752cea0537967e95 data/c/tags/item/nuggets/iron.json
 88f523bb83f941dde5ffd78f318c979596a3242f data/c/tags/item/glass_panes.json

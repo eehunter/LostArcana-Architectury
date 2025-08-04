@@ -37,6 +37,9 @@
   "item.lostarcana.vis_crystal": "Vis Crystal",
   "item.lostarcana.wand": "Wand",
   "item.lostarcana.wood_wand_core": "Wood Wand Core",
+  "tag.item.lostarcana.greatwood_logs": "Greatwood Logs",
+  "tag.item.lostarcana.wand_caps": "Wand Caps",
+  "tag.item.lostarcana.wand_cores": "Wand Cores",
   "tooltip.item.casting_item.vis_efficiency": "%1$s%%",
   "tooltip.item.wand.stored_vis": "%1$s Vis"
 }

@@ -3,17 +3,22 @@ package com.oyosite.ticon.lostarcana.recipe
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.blockentity.ArcaneWorkbenchRecipeContainer
+import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.CastingItem
+import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.CraftingRecipe
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.RecipeType
+import net.minecraft.world.item.crafting.ShapedRecipe
 import net.minecraft.world.level.Level
 
 @JvmRecord
@@ -49,11 +54,34 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
         return base.getRemainingItems(recipeInput.baseCraftingContainer.asCraftInput())
     }
 
+    fun getAllIngredients(): NonNullList<Ingredient> {
+        val baseIngredients = base.ingredients
+        val positionedBasedIngredients = mutableListOf<Ingredient>()
+        if(base is ShapedRecipe){
+            for(j in 0 until 3)for(i in 0 until 3){
+                positionedBasedIngredients.add(if(i>=base.width) Ingredient.EMPTY else baseIngredients.getOrElse(i+j*base.width){ Ingredient.EMPTY })
+            }
+        } else positionedBasedIngredients.addAll(baseIngredients)
+        //if(base.canCraftInDimensions(2,3)){
+        //    if(base.canCraftInDimensions(1,3))baseIngredients.add(1, Ingredient.EMPTY)
+            //baseIngredients.add(1, Ingredient.EMPTY)
+            //if(!base.canCraftInDimensions(2,2))baseIngredients.add()
+        //}
+        val crystals = visCost.mapIndexed { i, count -> ItemStack(VIS_CRYSTAL.get(), count).apply { set(ASPECT_COMPONENT, +PRIMAL_ASPECTS[i]) } }
+
+        val i1 = MutableList(15){ if(it in 0 until 9)positionedBasedIngredients.getOrElse(it){ Ingredient.EMPTY } else Ingredient.of(crystals[it-9]) }
+        val i2 = NonNullList.withSize(15, Ingredient.EMPTY)
+        i1.forEachIndexed(i2::set)
+        return i2
+    }
+
     override fun getSerializer(): RecipeSerializer<ArcaneWorkbenchRecipe> = Serializer as RecipeSerializer<ArcaneWorkbenchRecipe>
 
     override fun getType(): RecipeType<*> = Type
 
-    object Type: RecipeType<ArcaneWorkbenchRecipe>
+    object Type: RecipeType<ArcaneWorkbenchRecipe>{
+        override fun toString(): String = "lostarcana:arcane_workbench"
+    }
 
     object Serializer: RecipeSerializer<ArcaneWorkbenchRecipe>{
 

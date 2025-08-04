@@ -6,10 +6,14 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.*
+import com.oyosite.ticon.lostarcana.tag.GREATWOOD_LOGS
+import com.oyosite.ticon.lostarcana.tag.WAND_CAPS
+import com.oyosite.ticon.lostarcana.tag.WAND_CORES
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import java.util.Locale.getDefault
@@ -63,8 +67,13 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(ARCANE_SIGHT, "Arcane Sight")
         add(ARCANE_INSIGHT, "Arcane Insight")
 
+
+        add(GREATWOOD_LOGS)
+        add(WAND_CAPS)
+        add(WAND_CORES)
     }
 
+    inline fun <reified T> TranslationBuilder.add(tag: TagKey<T>) = add(tag, tag.location.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
 
     inline fun <reified T> TranslationBuilder.add(holder: RegistrySupplier<T>) = add(holder, holder.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
 

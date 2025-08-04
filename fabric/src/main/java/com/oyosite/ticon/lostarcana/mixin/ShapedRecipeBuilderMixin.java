@@ -46,6 +46,10 @@ public class ShapedRecipeBuilderMixin implements CraftingRecipeBuilder {
     @Override
     public @NotNull ArcaneWorkbenchRecipeBuilder arcaneWorkbench() {
         CraftingRecipe recipe = new ShapedRecipe(Objects.requireNonNullElse(group, ""), RecipeBuilder.determineBookCategory(category), ShapedRecipePattern.of(key, rows), new ItemStack(result, count), showNotification);
-        return new ArcaneWorkbenchRecipeBuilder(result, recipe);
+        ArcaneWorkbenchRecipeBuilder builder = new ArcaneWorkbenchRecipeBuilder(result, recipe);
+        for(Map.Entry<String, Criterion<?>> criterionEntry : criteria.entrySet()){
+            builder.unlockedBy(criterionEntry.getKey(), criterionEntry.getValue());
+        }
+        return builder;
     }
 }

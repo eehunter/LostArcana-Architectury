@@ -26,6 +26,7 @@ val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Prop
 val IRON_WAND_CAP = "iron_wand_cap" * { WandCap(Item.Properties(), 0.95f, 0xAAAAAAu) }
 val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(Item.Properties(), 1f, 0xffdb05u) }
 val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(Item.Properties(), 25f, 0x75461fu) }
+val GREATWOOD_WAND_CORE = "greatwood_wand_core" * { WandCore(Item.Properties(), 50f, 0x503015u) }
 
 val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
 val CASTER_GAUNTLET = "caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1).component(WAND_CAP, (+IRON_WAND_CAP).castingItemComponent)) }

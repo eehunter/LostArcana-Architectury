@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 
 import com.oyosite.ticon.lostarcana.item.GOLD_WAND_CAP
+import com.oyosite.ticon.lostarcana.item.GREATWOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.WOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.tag.*
@@ -17,10 +18,11 @@ import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider<Item>(output, Registries.ITEM, registriesFuture), LostArcanaTagProvider<Item> {
     override fun addTags(wrapperLookup: HolderLookup.Provider) {
-        WAND_CORES(+WOOD_WAND_CORE)
+        WAND_CORES(+WOOD_WAND_CORE, +GREATWOOD_WAND_CORE)
         WAND_CAPS(+IRON_WAND_CAP, +GOLD_WAND_CAP)
 
         COMMON_GOLD_INGOTS(Items.GOLD_INGOT)
+        COMMON_GOLD_NUGGETS(Items.GOLD_NUGGET)
         COMMON_IRON_INGOTS(Items.IRON_INGOT)
         COMMON_IRON_NUGGETS(Items.IRON_NUGGET)
         COMMON_LEATHERS(Items.LEATHER)

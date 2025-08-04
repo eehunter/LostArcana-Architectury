@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.*
@@ -14,9 +15,11 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
+import net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -47,7 +50,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .define('L', COMMON_LEATHERS)
             .define('T', +THAUMOMETER)
             .define('G', COMMON_GOLD_INGOTS)
-            .unlockedBy("scanned_aura_node", ThaumometerScanCriterionTrigger.scan(AURA_NODE.id, AURA_NODE.registryId))
+            .unlockedBy("scanned_aura_node", ThaumometerScanCriterionTrigger.scan(AURA_NODE))
             .save(exporter)
         shaped(RecipeCategory.BUILDING_BLOCKS, +ARCANE_STONE, 8)
             .pattern("SSS")
@@ -80,19 +83,24 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .define('C', +VIS_CRYSTAL)
             .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
             .save(exporter)
+        shapeless(RecipeCategory.TOOLS, +WOOD_WAND_CORE)
+            .requires(+VIS_CRYSTAL)
+            .requires(Items.STICK)
+            .unlockedBy("got_vis_crystal", hasItems(+VIS_CRYSTAL))
+            .save(exporter)
         shaped(RecipeCategory.TOOLS, +WAND_ITEM)
             .pattern("  C")
             .pattern(" S ")
             .pattern("C  ")
             .define('C', +IRON_WAND_CAP)
-            .define('S', Items.STICK)
+            .define('S', +WOOD_WAND_CORE)
             .unlockedBy("got_wand_cap", hasItems(+IRON_WAND_CAP))
             .save(exporter)
         shaped(RecipeCategory.TOOLS, +THAUMOMETER)
             .pattern(" N ")
             .pattern("NGN")
             .pattern(" N ")
-            .define('N', Items.GOLD_NUGGET)
+            .define('N', COMMON_GOLD_NUGGETS)
             .define('G', COMMON_GLASS_PANES)
             .unlockedBy("got_thaumometer", hasItems(+THAUMOMETER))//TODO: Should be based on obtaining the Arcane Workbench
             .arcaneWorkbench
@@ -100,6 +108,27 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .setVis(5f)
             .save(exporter)
         BasicSalisMundisRecipeBuilder(+ARCANE_WORKBENCH, Blocks.CRAFTING_TABLE).save(exporter)
+
+        shaped(RecipeCategory.TOOLS, +GOLD_WAND_CAP)
+            .pattern("NNN")
+            .pattern("N N")
+            .define('N', COMMON_GOLD_NUGGETS)
+            .unlockedBy("scanned_arcane_workbench", ThaumometerScanCriterionTrigger.scan(ARCANE_WORKBENCH))
+            .unlockedBy("scanned_gold_ingot", ThaumometerScanCriterionTrigger.scanItem("gold_ingot"))
+            .arcaneWorkbench
+            .setCrystals(0,0,1,0,0,1)
+            .setVis(10f)
+            .save(exporter)
+        shaped(RecipeCategory.TOOLS, +GREATWOOD_WAND_CORE)
+            .pattern("W")
+            .pattern("W")
+            .define('W', +GREATWOOD_LOG)
+            .unlockedBy("scanned_arcane_workbench", ThaumometerScanCriterionTrigger.scan(ARCANE_WORKBENCH))
+            .unlockedBy("scanned_greatwood_log", ThaumometerScanCriterionTrigger.scan(GREATWOOD_LOG))
+            .arcaneWorkbench
+            .setCrystals(1,1,0,0,0,1)
+            .setVis(15f)
+            .save(exporter)
 
         exporter.accept(
             LostArcana.id("wand_top_cap_exchange"),
@@ -122,6 +151,17 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             Optional.empty()
         ),
         null
+        )
+        exporter.accept(
+            LostArcana.id("wand_core_exchange"),
+            CastingItemModificationRecipe(
+                Ingredient.of(+WAND_ITEM),
+                Ingredient.of(WAND_CORES),
+                LostArcana.id("wand_core"),
+                4,
+                Optional.empty()
+            ),
+            null
         )
         exporter.accept(
             LostArcana.id("special_casting_item_modification"),

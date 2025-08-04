@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "got_thaumometer": {
+    "got_vis_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "lostarcana:thaumometer"
+            "items": "lostarcana:vis_crystal"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lostarcana:thaumometer"
+        "recipe": "lostarcana:wood_wand_core"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "got_thaumometer"
+      "got_vis_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lostarcana:thaumometer"
+      "lostarcana:wood_wand_core"
     ]
   }
 }

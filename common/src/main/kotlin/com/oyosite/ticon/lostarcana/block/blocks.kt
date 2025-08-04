@@ -47,6 +47,7 @@ val ARCANE_COLUMN = "arcane_column" % { ArcaneColumn(prop.isSuffocating { _, _, 
 
 val MULTIBLOCK_PLACEHOLDER = "multiblock_placeholder" % { MultiblockPlaceholder(prop.noOcclusion()) }
 
+val GREATWOOD_LOG = "greatwood_log" % { Block(prop) } % {}
 
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(prop) } % {}
 

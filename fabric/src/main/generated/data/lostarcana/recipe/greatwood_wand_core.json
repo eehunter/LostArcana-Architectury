@@ -4,30 +4,26 @@
     "type": "minecraft:crafting_shaped",
     "category": "equipment",
     "key": {
-      "G": {
-        "tag": "c:glass_panes"
-      },
-      "N": {
-        "tag": "c:nuggets/gold"
+      "W": {
+        "item": "lostarcana:greatwood_log"
       }
     },
     "pattern": [
-      " N ",
-      "NGN",
-      " N "
+      "W",
+      "W"
     ],
     "result": {
       "count": 1,
-      "id": "lostarcana:thaumometer"
+      "id": "lostarcana:greatwood_wand_core"
     }
   },
   "crystalCost": [
     1,
     1,
-    1,
-    1,
-    1,
+    0,
+    0,
+    0,
     1
   ],
-  "visCost": 5.0
+  "visCost": 15.0
 }

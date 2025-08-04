@@ -7,6 +7,7 @@ val COMMON_ORES = blockTag("c:ores")
 
 
 val COMMON_GOLD_INGOTS = itemTag("c:ingots/gold")
+val COMMON_GOLD_NUGGETS = itemTag("c:nuggets/gold")
 val COMMON_IRON_INGOTS = itemTag("c:ingots/iron")
 val COMMON_IRON_NUGGETS = itemTag("c:nuggets/iron")
 val COMMON_QUARTZ = itemTag("c:gems/quartz")

@@ -22,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemAttributeModifiers
@@ -55,14 +56,19 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
             val state = level.getBlockState(context.clickedPos)
             (state.block as? ThaumometerScannable)?.onScan(context)
             THAUMOMETER_SCAN_TRIGGER.value().trigger(player, BuiltInRegistries.BLOCK.getKey(state.block), Registries.BLOCK.location())
+            THAUMOMETER_SCAN_TRIGGER.value().trigger(player, BuiltInRegistries.BLOCK.getKey(state.block), Registries.ITEM.location())
+            println(state)
 
             val itemEntities = level.getEntities(EntityType.ITEM, AABB.ofSize(pos, THAUMOMETER_SCAN_RANGE, THAUMOMETER_SCAN_RANGE, THAUMOMETER_SCAN_RANGE)){true}
             val items = mutableListOf<ItemStack>()
             items.addAll(itemEntities.map(ItemEntity::getItem))
             items.addAll(platformGetInventoryContentsIfPresent(level,context.clickedPos))
             items.forEach {
+                println(it)
                 (it.item as? ThaumometerScannable)?.onScan(context)
                 THAUMOMETER_SCAN_TRIGGER.value().trigger(player, BuiltInRegistries.ITEM.getKey(it.item), Registries.ITEM.location())
+                if(it.item is BlockItem)
+                    THAUMOMETER_SCAN_TRIGGER.value().trigger(player, BuiltInRegistries.BLOCK.getKey((it.item as BlockItem).block), Registries.BLOCK.location())
             }
         }
         if(!level.isClientSide)return super.useOn(context)
@@ -92,6 +98,6 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
         val AURA_LEVEL_FORMAT = { f: Float -> String.format("%.2f", f) }
 
         val THAUMOMETER_RANGE = 10.0
-        val THAUMOMETER_SCAN_RANGE = 0.75
+        val THAUMOMETER_SCAN_RANGE = 1.75
     }
 }

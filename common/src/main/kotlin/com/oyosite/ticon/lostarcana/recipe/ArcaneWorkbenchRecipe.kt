@@ -27,9 +27,11 @@ data class ArcaneWorkbenchRecipe(val base: CraftingRecipe, val visCost: List<Int
         val focus = recipeInput.castingItem
         val castingItem = focus.item
 
+        //println(base.matches(recipeInput.baseCraftingContainer.asCraftInput(), level))
+
         if(auraCost != 0f && (focus.isEmpty || castingItem !is CastingItem))return false
         if(recipeInput.getAura(level) < auraCost) return false
-        for(i in visCost.indices) if(visCost[i] > recipeInput[i+9].count)return false
+        for(i in 0 until 6) if(visCost[i]>0 && visCost[i] > recipeInput[i+9].count)return false
 
         return base.matches(recipeInput.baseCraftingContainer.asCraftInput(), level)
     }

@@ -1,5 +1,5 @@
 {
   "type": "fusion:base",
-  "parents": ["lostarcana:item/infused_stone"],
+  "parent": "lostarcana:item/infused_stone",
   "loader": "fusion:model"
 }

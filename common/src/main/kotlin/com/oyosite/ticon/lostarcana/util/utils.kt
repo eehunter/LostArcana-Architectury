@@ -1,5 +1,8 @@
 package com.oyosite.ticon.lostarcana.util
 
+import com.klikli_dev.modonomicon.registry.DataComponentRegistry
+import com.klikli_dev.modonomicon.registry.ItemRegistry
+import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.item.VisCrystalItem
 import net.minecraft.world.Container
@@ -21,3 +24,5 @@ fun Slot(inventory: Container, index: Int, x: Int, y: Int, markDirtyCallback: ()
         markDirtyCallback()
     }
 }
+
+val thaumonomiconStack get() = ItemStack(ItemRegistry.MODONOMICON.get()).apply{ set(DataComponentRegistry.BOOK_ID.get(), LostArcana.id("thaumonomicon")) }

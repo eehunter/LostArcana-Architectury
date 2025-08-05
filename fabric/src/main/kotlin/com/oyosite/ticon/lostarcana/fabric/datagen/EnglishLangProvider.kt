@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
@@ -20,7 +21,7 @@ import net.minecraft.world.level.block.Block
 import java.util.Locale.getDefault
 import java.util.concurrent.CompletableFuture
 
-class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(dataOutput, "en_us", registryLookup){
+class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: CompletableFuture<HolderLookup.Provider>, val cache: LanguageProviderCache) : FabricLanguageProvider(dataOutput, "en_us", registryLookup){
     override fun generateTranslations(
         registryLookup: HolderLookup.Provider,
         translationBuilder: TranslationBuilder
@@ -77,6 +78,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_2, "Old parts will be left behind in the crafting grid.")
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_3, "You do not need to replace all three parts at once, as is shown here.")
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_4, "Any Vis stored in the wand will be lost.")
+
+        cache.data(::add)
     }
 
     inline fun <reified T> TranslationBuilder.add(tag: TagKey<T>) = add(tag, tag.location.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })

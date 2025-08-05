@@ -33,8 +33,9 @@ class SalisMundisItem(properties: Properties) : Item(properties) {
                 } else {
                     val (x,y,z) = pos.center
                     level.addFreshEntity(ItemEntity(level, x,y,z, resultItem))
+                    if(!(player?.isCreative?:false))useOnContext.itemInHand.shrink(1)
                 }
-                return InteractionResult.CONSUME
+                return InteractionResult.SUCCESS
             }
         }
 

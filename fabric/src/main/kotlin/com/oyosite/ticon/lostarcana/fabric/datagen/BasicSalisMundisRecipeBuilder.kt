@@ -37,6 +37,6 @@ class BasicSalisMundisRecipeBuilder(@get:JvmName("result") val result: ItemStack
             .rewards(AdvancementRewards.Builder.recipe(resourceLocation))
             .requirements(AdvancementRequirements.Strategy.OR)
         criteria.forEach(builder::addCriterion)
-        recipeOutput.accept(resourceLocation.withPrefix("salis_mundis"), BasicSalisMundisTransformRecipe(block, result), builder.build(resourceLocation.withPrefix("recipes/salis_mundis/")))
+        recipeOutput.accept(resourceLocation.withPrefix("salis_mundis/"), BasicSalisMundisTransformRecipe(block, result), builder.build(resourceLocation.withPrefix("recipes/salis_mundis/")))
     }
 }

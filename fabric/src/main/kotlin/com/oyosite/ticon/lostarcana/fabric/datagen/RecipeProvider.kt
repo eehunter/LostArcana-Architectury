@@ -1,5 +1,9 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.klikli_dev.modonomicon.Modonomicon
+import com.klikli_dev.modonomicon.item.ModonomiconItem
+import com.klikli_dev.modonomicon.registry.DataComponentRegistry
+import com.klikli_dev.modonomicon.registry.ItemRegistry
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
@@ -10,6 +14,7 @@ import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
+import com.oyosite.ticon.lostarcana.util.thaumonomiconStack
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
@@ -22,6 +27,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
 import net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
@@ -112,6 +118,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .setVis(5f)
             .save(exporter)
         BasicSalisMundisRecipeBuilder(+ARCANE_WORKBENCH, Blocks.CRAFTING_TABLE).save(exporter)
+        BasicSalisMundisRecipeBuilder(thaumonomiconStack, Blocks.BOOKSHELF).save(exporter, LostArcana.id("thaumonomicon"))
 
         shaped(RecipeCategory.TOOLS, +GOLD_WAND_CAP)
             .pattern("NNN")

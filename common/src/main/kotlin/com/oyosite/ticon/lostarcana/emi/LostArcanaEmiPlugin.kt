@@ -1,10 +1,15 @@
 package com.oyosite.ticon.lostarcana.emi
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.Aspect
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
+import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
+import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
 import com.oyosite.ticon.lostarcana.recipe.SalisMundisTransformRecipe
+import com.oyosite.ticon.lostarcana.tag.COMMON_REDSTONE_DUSTS
 import com.oyosite.ticon.lostarcana.tag.WAND_CAPS
 import com.oyosite.ticon.lostarcana.tag.WAND_CORES
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -24,6 +29,9 @@ import net.minecraft.world.item.crafting.Ingredient
 
 @EmiEntrypoint
 class LostArcanaEmiPlugin: EmiPlugin {
+    val E = EmiIngredient.of(Ingredient.EMPTY)
+    val visCrystal = EmiIngredient.of(PRIMAL_ASPECTS.map(Aspect::unaryPlus).map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, it) } }.map{ Ingredient.of(it) }.map(EmiIngredient::of))
+
     override fun register(emiRegistry: EmiRegistry) {
         emiRegistry.addCategory(ArcaneWorkbenchEmi.CATEGORY)
         emiRegistry.addWorkstation(ArcaneWorkbenchEmi.CATEGORY, ArcaneWorkbenchEmi.WORKSTATION)
@@ -39,7 +47,19 @@ class LostArcanaEmiPlugin: EmiPlugin {
                 Minecraft.getInstance().level!!.registryAccess()))).build())
         }
 
-        val E = EmiIngredient.of(Ingredient.EMPTY)
+        registerModifyCastingItemRecipes(emiRegistry)
+
+        val salisMundisCraftingLore = ItemLore(listOf(
+            Component.translatable(SALIS_MUNDIS_TOOLTIP)
+        ))
+        emiRegistry.addRecipe(EmiCraftingRecipe(
+            listOf(visCrystal, visCrystal, visCrystal, EmiIngredient.of(COMMON_REDSTONE_DUSTS)),
+            EmiStack.of(ItemStack(SALIS_MUNDIS.get()).apply { set(DataComponents.LORE, salisMundisCraftingLore) }),
+            LostArcana.id("/crafting/salis_mundis")
+        ))
+    }
+
+    fun registerModifyCastingItemRecipes(emiRegistry: EmiRegistry){
         val wandCap = EmiIngredient.of(WAND_CAPS)
         val wand = EmiIngredient.of(Ingredient.of(WAND_ITEM.get()))
         val wandCore = EmiIngredient.of(WAND_CORES)
@@ -55,7 +75,7 @@ class LostArcanaEmiPlugin: EmiPlugin {
                 E,E,wandCap,
                 E,wand,wandCore,
                 wandCap,E,E
-                ),
+            ),
             modifiedWand,
             LostArcana.id("/crafting/modified_wand"),
             false
@@ -63,6 +83,8 @@ class LostArcanaEmiPlugin: EmiPlugin {
     }
 
     companion object{
+        val SALIS_MUNDIS_TOOLTIP = "tooltip.emi.salis_mundis"
+
         val MODIFIED_WAND_TOOLTIP_1 = "tooltip.emi.modified_wand_1"
         val MODIFIED_WAND_TOOLTIP_2 = "tooltip.emi.modified_wand_2"
         val MODIFIED_WAND_TOOLTIP_3 = "tooltip.emi.modified_wand_3"

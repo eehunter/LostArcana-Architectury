@@ -1,4 +1,4 @@
-package com.oyosite.ticon.lostarcana.fabric.datagen
+package com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder
 
 import com.oyosite.ticon.lostarcana.recipe.BasicSalisMundisTransformRecipe
 import net.minecraft.advancements.Advancement

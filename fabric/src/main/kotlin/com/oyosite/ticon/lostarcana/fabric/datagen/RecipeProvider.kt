@@ -1,14 +1,10 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
-import com.klikli_dev.modonomicon.Modonomicon
-import com.klikli_dev.modonomicon.item.ModonomiconItem
-import com.klikli_dev.modonomicon.registry.DataComponentRegistry
-import com.klikli_dev.modonomicon.registry.ItemRegistry
-import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.BasicSalisMundisRecipeBuilder
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
@@ -20,14 +16,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.Registries
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
 import net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
@@ -37,6 +31,9 @@ import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
     override fun buildRecipes(exporter: RecipeOutput) {
+        shapeless(RecipeCategory.MISC, +SALIS_MUNDIS)
+            .requires(+VIS_CRYSTAL, 3)
+            .requires(Items.REDSTONE)
         shapeless(RecipeCategory.BUILDING_BLOCKS, +GREATWOOD_PLANKS, 4)
             .requires(GREATWOOD_LOGS)
             .unlockedBy("has_greatwood", hasItems(GREATWOOD_LOGS))

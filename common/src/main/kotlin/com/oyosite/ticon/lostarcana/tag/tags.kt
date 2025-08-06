@@ -14,6 +14,7 @@ val COMMON_QUARTZ = itemTag("c:gems/quartz")
 val COMMON_STICKS = itemTag("c:rods/wooden")
 val COMMON_GLASS_PANES = itemTag("c:glass_panes")
 val COMMON_LEATHERS = itemTag("c:leathers")
+val COMMON_REDSTONE_DUSTS = itemTag("c:dusts/redstone")
 
 val WAND_CAPS = itemTag("lostarcana:wand_caps")
 val WAND_CORES = itemTag("lostarcana:wand_cores")

@@ -15,6 +15,7 @@ import com.oyosite.ticon.lostarcana.recipe.BasicSalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.SalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
+import com.oyosite.ticon.lostarcana.recipe.UniqueVisCrystalRecipe
 import com.oyosite.ticon.lostarcana.util.invoke
 import dev.architectury.platform.Platform
 import dev.architectury.registry.level.entity.EntityAttributeRegistry
@@ -45,6 +46,8 @@ object LostArcana {
 
         CastingItemModificationRecipe.Serializer("casting_item_modification")
         SpecialCastingItemModificationRecipe.Serializer("special_casting_item_modification")
+
+        UniqueVisCrystalRecipe.Serializer("unique_vis_crystal_shapeless_crafting")
 
         MAGIC_BRICKS_BLOCK_ENTITY
 

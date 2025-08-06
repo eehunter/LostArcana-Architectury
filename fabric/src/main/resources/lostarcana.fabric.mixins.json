@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "ShapedRecipeBuilderMixin"
+    "ShapedRecipeBuilderMixin",
+    "ShapelessRecipeBuilderAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

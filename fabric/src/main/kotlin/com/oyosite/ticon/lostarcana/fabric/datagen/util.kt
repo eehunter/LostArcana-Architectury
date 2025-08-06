@@ -1,10 +1,15 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.CraftingRecipeBuilder
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.UniqueVisCrystalRecipeBuilder
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.data.recipes.ShapedRecipeBuilder
+import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.ItemLike
+
+val ShapelessRecipeBuilder.uniqueVisCrystal get() = UniqueVisCrystalRecipeBuilder(this)
 
 val ShapedRecipeBuilder.arcaneWorkbench get() = (this as CraftingRecipeBuilder).arcaneWorkbench()
 

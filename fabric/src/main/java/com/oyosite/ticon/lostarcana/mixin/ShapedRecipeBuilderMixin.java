@@ -1,7 +1,7 @@
 package com.oyosite.ticon.lostarcana.mixin;
 
-import com.oyosite.ticon.lostarcana.fabric.datagen.ArcaneWorkbenchRecipeBuilder;
-import com.oyosite.ticon.lostarcana.fabric.datagen.CraftingRecipeBuilder;
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.ArcaneWorkbenchRecipeBuilder;
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.CraftingRecipeBuilder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;

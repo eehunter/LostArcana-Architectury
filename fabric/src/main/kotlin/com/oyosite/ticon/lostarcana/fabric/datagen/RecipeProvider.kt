@@ -119,6 +119,7 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
             .save(exporter)
         BasicSalisMundisRecipeBuilder(+ARCANE_WORKBENCH, Blocks.CRAFTING_TABLE).save(exporter)
         BasicSalisMundisRecipeBuilder(thaumonomiconStack, Blocks.BOOKSHELF).save(exporter, LostArcana.id("thaumonomicon"))
+        BasicSalisMundisRecipeBuilder(+CRUCIBLE, Blocks.CAULDRON).save(exporter)
 
         shaped(RecipeCategory.TOOLS, +GOLD_WAND_CAP)
             .pattern("NNN")

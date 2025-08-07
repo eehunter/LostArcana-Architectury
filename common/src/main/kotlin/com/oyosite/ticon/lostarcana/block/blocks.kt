@@ -51,6 +51,7 @@ val GREATWOOD_LOG = "greatwood_log" % { RotatedPillarBlock(BlockProperties.ofFul
 val GREATWOOD_PLANKS = "greatwood_planks" % { Block(BlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) } % {}
 
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
+val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }
 

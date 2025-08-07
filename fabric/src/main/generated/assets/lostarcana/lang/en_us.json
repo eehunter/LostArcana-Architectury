@@ -47,6 +47,7 @@
   "tooltip.emi.modified_wand_2": "Old parts will be left behind in the crafting grid.",
   "tooltip.emi.modified_wand_3": "You do not need to replace all three parts at once, as is shown here.",
   "tooltip.emi.modified_wand_4": "Any Vis stored in the wand will be lost.",
+  "tooltip.emi.unique_vis_crystal_recipe": "All crystals must be different aspects.",
   "tooltip.item.casting_item.vis_efficiency": "%1$s%%",
   "tooltip.item.wand.stored_vis": "%1$s Vis"
 }

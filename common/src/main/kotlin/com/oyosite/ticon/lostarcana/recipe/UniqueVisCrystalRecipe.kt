@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.item.VisCrystalItem
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.NonNullList
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
@@ -36,6 +37,8 @@ class UniqueVisCrystalRecipe(val base: ShapelessRecipe): CraftingRecipe {
     override fun canCraftInDimensions(i: Int, j: Int): Boolean = base.canCraftInDimensions(i,j)
 
     override fun getResultItem(provider: HolderLookup.Provider): ItemStack = base.getResultItem(provider)
+
+    override fun getIngredients(): NonNullList<Ingredient> = base.ingredients
 
     override fun getSerializer(): RecipeSerializer<*> = Serializer
 

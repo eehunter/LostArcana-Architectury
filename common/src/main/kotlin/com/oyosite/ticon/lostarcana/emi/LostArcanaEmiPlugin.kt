@@ -3,13 +3,15 @@ package com.oyosite.ticon.lostarcana.emi
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
+import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.item.VisCrystalItem
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
 import com.oyosite.ticon.lostarcana.recipe.SalisMundisTransformRecipe
-import com.oyosite.ticon.lostarcana.tag.COMMON_REDSTONE_DUSTS
+import com.oyosite.ticon.lostarcana.recipe.UniqueVisCrystalRecipe
 import com.oyosite.ticon.lostarcana.tag.WAND_CAPS
 import com.oyosite.ticon.lostarcana.tag.WAND_CORES
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -18,6 +20,7 @@ import dev.emi.emi.api.EmiPlugin
 import dev.emi.emi.api.EmiRegistry
 import dev.emi.emi.api.recipe.EmiCraftingRecipe
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe
+import dev.emi.emi.api.stack.Comparison
 import dev.emi.emi.api.stack.EmiIngredient
 import dev.emi.emi.api.stack.EmiStack
 import net.minecraft.client.Minecraft
@@ -26,11 +29,14 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.item.crafting.RecipeType
 
 @EmiEntrypoint
 class LostArcanaEmiPlugin: EmiPlugin {
     val E = EmiIngredient.of(Ingredient.EMPTY)
     val visCrystal = EmiIngredient.of(PRIMAL_ASPECTS.map(Aspect::unaryPlus).map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, it) } }.map{ Ingredient.of(it) }.map(EmiIngredient::of))
+
+    val allVisCrystals = AspectRegistry.ASPECT_REGISTRY.map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, +it) } }.map(EmiStack::of)
 
     override fun register(emiRegistry: EmiRegistry) {
         emiRegistry.addCategory(ArcaneWorkbenchEmi.CATEGORY)
@@ -47,16 +53,30 @@ class LostArcanaEmiPlugin: EmiPlugin {
                 Minecraft.getInstance().level!!.registryAccess()))).build())
         }
 
-        registerModifyCastingItemRecipes(emiRegistry)
+        var lastStack = EmiStack.of(ItemStack(+VIS_CRYSTAL))
+        allVisCrystals.filterNot{it.itemStack.get(ASPECT_COMPONENT) == lastStack.get(ASPECT_COMPONENT) }.forEach { emiRegistry.addEmiStackAfter(it, lastStack); lastStack = it }
 
-        val salisMundisCraftingLore = ItemLore(listOf(
-            Component.translatable(SALIS_MUNDIS_TOOLTIP)
+        emiRegistry.setDefaultComparison(+VIS_CRYSTAL, Comparison.DEFAULT_COMPARISON)
+        emiRegistry.setDefaultComparison(EmiStack.of(+VIS_CRYSTAL), Comparison.of { a, b -> a.itemStack.item is VisCrystalItem && b.itemStack.item is VisCrystalItem })
+
+        val uniqueVisCrystalRecipeLore = ItemLore(listOf(
+            Component.translatable(UNIQUE_VIS_CRYSTAL_TOOLTIP)
         ))
-        emiRegistry.addRecipe(EmiCraftingRecipe(
-            listOf(visCrystal, visCrystal, visCrystal, EmiIngredient.of(COMMON_REDSTONE_DUSTS)),
-            EmiStack.of(ItemStack(SALIS_MUNDIS.get()).apply { set(DataComponents.LORE, salisMundisCraftingLore) }),
-            LostArcana.id("/crafting/salis_mundis")
-        ))
+        for (recipe in recipeManager.getAllRecipesFor(RecipeType.CRAFTING).filter { it.value is UniqueVisCrystalRecipe }){
+            //if(recipe.value !is UniqueVisCrystalRecipe)continue
+            emiRegistry.removeRecipes(recipe.id)
+            emiRegistry.addDeferredRecipes{
+                it.accept(EmiCraftingRecipe(
+                    recipe.value.ingredients.map{ if(it.items.map(ItemStack::getItem).all { it is VisCrystalItem }) visCrystal else EmiIngredient.of(it) },
+                    EmiStack.of(recipe.value.getResultItem(Minecraft.getInstance().level!!.registryAccess()).copy().apply{ set(DataComponents.LORE, uniqueVisCrystalRecipeLore) }),
+                    recipe.id.withPrefix("/")
+                ))
+            }
+        }
+
+
+
+        registerModifyCastingItemRecipes(emiRegistry)
     }
 
     fun registerModifyCastingItemRecipes(emiRegistry: EmiRegistry){
@@ -83,7 +103,7 @@ class LostArcanaEmiPlugin: EmiPlugin {
     }
 
     companion object{
-        val SALIS_MUNDIS_TOOLTIP = "tooltip.emi.salis_mundis"
+        val UNIQUE_VIS_CRYSTAL_TOOLTIP = "tooltip.emi.unique_vis_crystal_recipe"
 
         val MODIFIED_WAND_TOOLTIP_1 = "tooltip.emi.modified_wand_1"
         val MODIFIED_WAND_TOOLTIP_2 = "tooltip.emi.modified_wand_2"

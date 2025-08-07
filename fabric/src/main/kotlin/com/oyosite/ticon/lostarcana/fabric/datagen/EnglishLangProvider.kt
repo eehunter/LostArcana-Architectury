@@ -74,6 +74,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(WAND_CAPS)
         add(WAND_CORES)
 
+        add(LostArcanaEmiPlugin.UNIQUE_VIS_CRYSTAL_TOOLTIP, "All crystals must be different aspects.")
+
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_1, "This replaces one or more parts of your wand.")
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_2, "Old parts will be left behind in the crafting grid.")
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_3, "You do not need to replace all three parts at once, as is shown here.")

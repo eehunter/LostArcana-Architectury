@@ -45,6 +45,6 @@ class UniqueVisCrystalRecipeBuilder(val base: ShapelessRecipeBuilder): RecipeBui
             stack?:ItemStack(result, accessor.count),
             accessor.ingredients
         ))
-
+        recipeOutput.accept(resourceLocation, recipe, builder.build(resourceLocation.withPrefix("recipes/crafting/")))
     }
 }

@@ -33,7 +33,10 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
     override fun buildRecipes(exporter: RecipeOutput) {
         shapeless(RecipeCategory.MISC, +SALIS_MUNDIS)
             .requires(+VIS_CRYSTAL, 3)
-            .requires(Items.REDSTONE)
+            .requires(COMMON_REDSTONE_DUSTS)
+            .unlockedBy("has_vis_crystal", hasItems(+VIS_CRYSTAL))
+            .uniqueVisCrystal
+            .save(exporter)
         shapeless(RecipeCategory.BUILDING_BLOCKS, +GREATWOOD_PLANKS, 4)
             .requires(GREATWOOD_LOGS)
             .unlockedBy("has_greatwood", hasItems(GREATWOOD_LOGS))

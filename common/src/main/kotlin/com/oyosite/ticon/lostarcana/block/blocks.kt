@@ -52,6 +52,8 @@ val GREATWOOD_PLANKS = "greatwood_planks" % { Block(BlockProperties.ofFullCopy(B
 
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
 
+val VIS_LIGHT = "vis_light" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }
+
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)
 

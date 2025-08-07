@@ -4,8 +4,12 @@ import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.aspects
 import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
 import com.oyosite.ticon.lostarcana.block.ARCANE_STONE_PILLAR
+import com.oyosite.ticon.lostarcana.item.focus.CastingContext
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
+import com.oyosite.ticon.lostarcana.util.component1
+import com.oyosite.ticon.lostarcana.util.component2
+import com.oyosite.ticon.lostarcana.util.component3
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.chat.Component
@@ -33,13 +37,25 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
 
     open val craftItemRange: Double get() = .7
 
+    open fun supportsFoci(stack: ItemStack) = true
+
     @Suppress("unchecked_cast")
     override fun useOn(useOnContext: UseOnContext): InteractionResult {
         val player = useOnContext.player
         val level = useOnContext.level
+        val ctx = CastingContext(useOnContext)
 
         if(level.getBlockState(useOnContext.clickedPos) == (+ARCANE_STONE_PILLAR).defaultBlockState()){
             if((+ARCANE_COLUMN).construct(useOnContext)) return InteractionResult.SUCCESS_NO_ITEM_USED
+        }
+
+        val castingItemStack = ctx.castingItem
+        val focusComp = castingItemStack?.get(FOCUS_COMPONENT)
+        if(player?.isCrouching == true && focusComp!=null){
+            val (x,y,z) = player.position()
+            level.addFreshEntity(ItemEntity(level, x, y, z, focusComp.stack.copy))
+            castingItemStack.set(FOCUS_COMPONENT, null)
+            return InteractionResult.SUCCESS
         }
 
         val items = level.getEntities(player, AABB.ofSize(useOnContext.clickLocation, craftItemRange, craftItemRange, craftItemRange)){ it is ItemEntity }.mapNotNull{it as? ItemEntity}
@@ -58,6 +74,8 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
             }
         }
 
+        if(ctx.tryCast())return InteractionResult.SUCCESS
+
         return super.useOn(useOnContext)
     }
 
@@ -68,6 +86,8 @@ abstract class CastingItem(properties: Properties) : Item(properties) {
         tooltipFlag: TooltipFlag
     ) {
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
+        val focus = itemStack.get(FOCUS_COMPONENT)?.stack?.copy
+        if(focus != null)list.add(focus.displayName)
         list.add(Component.translatable(VIS_EFFICIENCY_TOOLTIP, VIS_EFFICIENCY_FORMAT(visEfficiency(itemStack))))
     }
 

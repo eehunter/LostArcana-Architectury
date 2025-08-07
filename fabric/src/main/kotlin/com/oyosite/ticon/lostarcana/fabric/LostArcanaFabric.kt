@@ -5,12 +5,16 @@ import com.oyosite.ticon.lostarcana.LostArcana.init
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
+import com.oyosite.ticon.lostarcana.item.FOCUS_COMPONENT
+import com.oyosite.ticon.lostarcana.item.FOCUS_EFFECT
 import com.oyosite.ticon.lostarcana.item.RESONATOR
 import com.oyosite.ticon.lostarcana.item.VIS_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.WAND_CAP
 import com.oyosite.ticon.lostarcana.item.WAND_CAP_2
 import com.oyosite.ticon.lostarcana.item.WAND_CAP_3
 import com.oyosite.ticon.lostarcana.item.WAND_CORE
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
+import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
 import com.oyosite.ticon.lostarcana.worldgen.feature.INFUSED_STONE_FEATURES
 import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
@@ -32,6 +36,9 @@ class LostArcanaFabric : ModInitializer {
             .attribute(RegistryAttribute.SYNCED)
             .buildAndRegister()
 
+        CastingFocusEffectType.REGISTRY
+        registerBuiltinEffectTypes()
+
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("vis_storage")) { VIS_STORAGE_COMPONENT }
@@ -40,6 +47,8 @@ class LostArcanaFabric : ModInitializer {
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_cap_3")) { WAND_CAP_3 }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("wand_core")) { WAND_CORE }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("resonator")) { RESONATOR }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("focus_effect")) { FOCUS_EFFECT }
+        DATA_COMPONENT_REGISTRAR.register(LostArcana.id("focus")) { FOCUS_COMPONENT }
 
         INFUSED_STONE_FEATURES.forEach{
             BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.UNDERGROUND_ORES, it)

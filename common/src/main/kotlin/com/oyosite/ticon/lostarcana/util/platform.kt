@@ -1,8 +1,11 @@
 package com.oyosite.ticon.lostarcana.util
 
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import dev.architectury.injectables.annotations.ExpectPlatform
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.Registry
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
@@ -12,6 +15,12 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+
+@ExpectPlatform
+fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> = throw AssertionError("No platform implementation.")
+
+@ExpectPlatform
+fun <E: CastingFocusEffect, T: CastingFocusEffectType<E>> platformRegisterCastingFocusEffectType(name: String, effectType: ()->T): Holder<T> = throw AssertionError("No platform implementation.")
 
 @ExpectPlatform
 fun <T: AbstractContainerMenu> platformRegisterMenuScreen(name: String, menuScreen: MenuType<T>): Holder<MenuType<T>> = throw AssertionError("No platform implementation.")

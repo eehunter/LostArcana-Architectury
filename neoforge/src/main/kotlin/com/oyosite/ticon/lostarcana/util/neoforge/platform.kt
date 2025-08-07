@@ -2,9 +2,13 @@
 package com.oyosite.ticon.lostarcana.util.neoforge
 
 import com.mojang.datafixers.types.Type
+import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.Registry
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
@@ -16,8 +20,14 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
+import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
 
+fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> =
+    RegistryBuilder(CastingFocusEffectType.REGISTRY_KEY).sync(true).defaultKey(LostArcana.id("none")).create()
+
+fun <E: CastingFocusEffect, T: CastingFocusEffectType<E>> platformRegisterCastingFocusEffectType(name: String, effectType: ()->T): Holder<T> =
+    LostArcanaNeoForge.NEOFORGE_CASTING_EFFECT_TYPES.register(name, effectType) as Holder<T>
 
 fun <T: AbstractContainerMenu> platformRegisterMenuScreen(name: String, menuScreen: MenuType<T>): Holder<MenuType<T>> =
     LostArcanaNeoForge.NEOFORGE_MENU_SCREENS.register(name, Supplier{menuScreen}) as Holder<MenuType<T>>

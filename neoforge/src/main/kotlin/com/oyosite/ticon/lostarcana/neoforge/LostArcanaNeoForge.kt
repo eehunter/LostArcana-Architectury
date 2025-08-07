@@ -23,6 +23,8 @@ import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
+import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.Holder
@@ -56,12 +58,17 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
         platform_aspect_registry = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
 
+
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
         NEOFORGE_BLOCK_ENTITY_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_SERIALIZERS.register(modEventBus)
         NEOFORGE_MENU_SCREENS.register(modEventBus)
+        NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
+
+        CastingFocusEffectType.REGISTRY
+        registerBuiltinEffectTypes()
 
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
@@ -78,6 +85,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         DATA_COMPONENT_REGISTRAR.register("wand_cap_3", Supplier { WAND_CAP_3 })
         DATA_COMPONENT_REGISTRAR.register("wand_core", Supplier { WAND_CORE })
         DATA_COMPONENT_REGISTRAR.register("resonator", Supplier { RESONATOR })
+        DATA_COMPONENT_REGISTRAR.register("focus_effect", Supplier { FOCUS_EFFECT })
+        DATA_COMPONENT_REGISTRAR.register("focus", Supplier { FOCUS_COMPONENT })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
 
@@ -94,11 +103,13 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, LostArcana.MOD_ID)
         val NEOFORGE_MENU_SCREENS = DeferredRegister.create(Registries.MENU, LostArcana.MOD_ID)
+        val NEOFORGE_CASTING_EFFECT_TYPES = DeferredRegister.create(CastingFocusEffectType.REGISTRY_KEY, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic
         fun registerRegistries(event: NewRegistryEvent) {
             event.register(AspectRegistry.ASPECT_REGISTRY)
+            event.register(CastingFocusEffectType.REGISTRY)
         }
 
         private val infusedStoneBlocks get() = INFUSED_STONES.map(RegistrySupplier<InfusedStoneBlock>::get).toTypedArray()

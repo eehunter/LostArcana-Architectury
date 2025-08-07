@@ -7,6 +7,8 @@ import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusHolder
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -52,3 +54,7 @@ val WAND_CAP_3: DataComponentType<CastingItemComponent> = DataComponentType.buil
 val WAND_CORE: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
 
 val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
+
+val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = DataComponentType.builder<CastingFocusEffect>().persistent(CastingFocusEffect.CODEC).networkSynchronized(CastingFocusEffect.STREAM_CODEC).build()
+
+val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = DataComponentType.builder<CastingFocusHolder>().persistent(CastingFocusHolder.CODEC).networkSynchronized(CastingFocusHolder.STREAM_CODEC).build()

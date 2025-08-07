@@ -2,6 +2,11 @@
 package com.oyosite.ticon.lostarcana.util.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
+import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
+import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
+import net.fabricmc.fabric.api.event.registry.RegistryAttribute
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
@@ -16,6 +21,14 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+
+fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> =
+    FabricRegistryBuilder.createSimple(CastingFocusEffectType.REGISTRY_KEY)
+        .attribute(RegistryAttribute.SYNCED)
+        .buildAndRegister()
+
+fun <E: CastingFocusEffect, T: CastingFocusEffectType<E>> platformRegisterCastingFocusEffectType(name: String, effectType: ()->T): Holder<T> =
+    Registry.registerForHolder(CastingFocusEffectType.REGISTRY, LostArcana.id(name), effectType()) as Holder<T>
 
 fun <T: AbstractContainerMenu> platformRegisterMenuScreen(name: String, menuScreen: MenuType<T>): Holder<MenuType<T>>{
     return Registry.registerForHolder(BuiltInRegistries.MENU, LostArcana.id(name), menuScreen) as Holder<MenuType<T>>

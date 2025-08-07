@@ -74,6 +74,6 @@ data class VisLightEffect(val optionalLightLevel: Optional<Byte>, val optionalCo
     }
 
     companion object{
-        val DEFAULT_COLOR = 0xFFFFFFFFu
+        val DEFAULT_COLOR = 0xFFFFFF55u
     }
 }

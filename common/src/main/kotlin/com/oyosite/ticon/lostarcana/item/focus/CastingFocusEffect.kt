@@ -18,6 +18,8 @@ interface CastingFocusEffect {
             override fun isValidForContext(ctx: CastingContext): Boolean = false
             override fun use(ctx: CastingContext): Boolean = false
 
+            override val color: UInt = 0u
+
             override val type: CastingFocusEffectType<*> = object : CastingFocusEffectType<CastingFocusEffect>() {
                 override val codec: MapCodec<CastingFocusEffect> = MapCodec.unit { NONE }
                 override val streamCodec: StreamCodec<RegistryFriendlyByteBuf, CastingFocusEffect> by lazy { StreamCodec.unit ( NONE ) }

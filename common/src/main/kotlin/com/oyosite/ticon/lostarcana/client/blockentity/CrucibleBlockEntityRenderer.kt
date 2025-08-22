@@ -2,14 +2,18 @@ package com.oyosite.ticon.lostarcana.client.blockentity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.blockentity.CrucibleBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.platformGetWaterSprite
+import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition
 import net.minecraft.client.model.geom.builders.MeshDefinition
 import net.minecraft.client.model.geom.builders.PartDefinition
+import net.minecraft.client.multiplayer.ClientLevel
+import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
@@ -33,15 +37,49 @@ class CrucibleBlockEntityRenderer(val context: BlockEntityRendererProvider.Conte
         i: Int,
         j: Int
     ) {
+        val level = blockEntity.level as? ClientLevel ?: return
+        val baseColor = BiomeColors.getAverageWaterColor(level, blockEntity.blockPos).toUInt()
+
+        val br = baseColor shr 16 and 0xFFu
+        val bg = baseColor shr 8 and 0xFFu
+        val bb = baseColor shr 0 and 0xFFu
+
+        val aspects = blockEntity.aspects
+        val colors = aspects.keys.map(Aspect::color)
+        val stacking = aspects.values.toList()
+
+        val r = if(colors.isEmpty()) br else (weightedMeanColor(colors, 16, stacking::get) + br) / 2U
+        val g = if(colors.isEmpty()) bg else (weightedMeanColor(colors, 8, stacking::get) + bg) / 2U
+        val b = if(colors.isEmpty()) bb else (weightedMeanColor(colors, 0, stacking::get) + bb) / 2U
+
+        val color = (
+            0xFF000000u or
+            (r shl 16) or
+            (g shl 8) or
+            (b)
+        ).toInt()
+
         poseStack.pushPose()
         poseStack.translate(0f, blockEntity.fluidAmount/1000f, 0f)
 
-        root.render(poseStack, waterSprite.wrap(multiBufferSource.getBuffer(RenderType.entityTranslucent(waterSprite.atlasLocation()))), i, j, -1)
+        root.render(poseStack, waterSprite.wrap(multiBufferSource.getBuffer(RenderType.entityTranslucent(waterSprite.atlasLocation()))), i, j, color)
 
         poseStack.popPose()
     }
 
     companion object{
+        fun weightedMeanColor(colors: List<UInt>, bitShift: Int, weightGetter: (Int)->Int, mask: UInt = 0xFFu): UInt{
+            val comps = colors.map { (it shr bitShift) and mask }
+            var cumulative = 0u
+            var cumulativeWeight = 0u
+            comps.forEachIndexed { i, col ->
+                val w = weightGetter(i).toUInt()
+                cumulative += col * w
+                cumulativeWeight += w
+            }
+            return cumulative/cumulativeWeight
+        }
+
         @JvmStatic
         fun getTexturedModelData(): LayerDefinition {
             val modelData = MeshDefinition()

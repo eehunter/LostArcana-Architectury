@@ -12,12 +12,14 @@ import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
+import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.RECHARGE_PEDESTAL_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
+import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
@@ -151,6 +153,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @JvmStatic
         fun onRegisterEntityModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions){
             event.registerLayerDefinition(AURA_NODE_MODEL_LAYER, AuraNodeEntityRenderer::getTexturedModelData)
+            event.registerLayerDefinition(LostArcanaClient.CRUCIBLE_CONTENTS_MODEL_LAYER, CrucibleBlockEntityRenderer::getTexturedModelData)
         }
 
         @SubscribeEvent
@@ -158,6 +161,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
             event.registerBlockEntityRenderer(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() }
             event.registerBlockEntityRenderer(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer() }
+            event.registerBlockEntityRenderer(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
         }
 
         @SubscribeEvent

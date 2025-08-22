@@ -5,6 +5,7 @@ import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
+import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
@@ -36,6 +37,7 @@ class LostArcanaFabricClient : ClientModInitializer {
         BlockEntityRendererRegistry.register(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() as BlockEntityRenderer<MagicBricksBlockEntity> }
         BlockEntityRendererRegistry.register(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() as BlockEntityRenderer<ArcaneColumnBlockEntity> }
         BlockEntityRendererRegistry.register(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer<RechargePedestalBlockEntity>() }
+        BlockEntityRendererRegistry.register(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
 

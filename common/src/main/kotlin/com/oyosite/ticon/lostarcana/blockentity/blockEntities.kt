@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
 import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
+import com.oyosite.ticon.lostarcana.block.CRUCIBLE
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
@@ -24,6 +25,7 @@ val PLACEHOLDER_BLOCK_ENTITY = "multiblock_placeholder"(::PlaceholderBlockEntity
 
 val ARCANE_WORKBENCH_BLOCK_ENTITY = "arcane_workbench"(::ArcaneWorkbenchBlockEntity, ARCANE_WORKBENCH)
 val ARCANE_WORKBENCH_MENU_SCREEN = "arcane_workbench"(::ArcaneWorkbenchMenu, FeatureFlagSet.of())
+val CRUCIBLE_BLOCK_ENTITY = "crucible"(::CrucibleBlockEntity, CRUCIBLE)
 
 val RECHARGE_PEDESTAL_BLOCK_ENTITY = "recharge_pedestal"(::RechargePedestalBlockEntity, RECHARGE_PEDESTAL)
 

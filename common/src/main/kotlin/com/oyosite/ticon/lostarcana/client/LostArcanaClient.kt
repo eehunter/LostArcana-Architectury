@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.client
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.aspects
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.FOCUS_COMPONENT
@@ -21,10 +22,11 @@ object LostArcanaClient {
     val INFUSED_STONE_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> ((state.block as InfusedStoneBlock).aspect.color or 0xFF000000u).toInt() }
 
     val AURA_NODE_MODEL_LAYER = ModelLayerLocation(LostArcana.id("aura_node"), "cube")
-
+    val CRUCIBLE_CONTENTS_MODEL_LAYER = ModelLayerLocation(LostArcana.id("crucible_contents"), "main")
 
     fun initClient(){
         EntityModelLayerRegistry.register(AURA_NODE_MODEL_LAYER, AuraNodeEntityRenderer::getTexturedModelData)
+        EntityModelLayerRegistry.register(CRUCIBLE_CONTENTS_MODEL_LAYER, CrucibleBlockEntityRenderer::getTexturedModelData)
         EntityRendererRegistry.register(AURA_NODE, ::AuraNodeEntityRenderer)
     }
 }

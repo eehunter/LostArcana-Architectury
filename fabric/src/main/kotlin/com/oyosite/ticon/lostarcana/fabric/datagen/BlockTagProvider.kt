@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.fabric.datagen
 
+import com.oyosite.ticon.lostarcana.block.CRUCIBLE
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_PLANKS
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
@@ -19,7 +20,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 ) : FabricTagProvider<Block>(output, Registries.BLOCK, registriesFuture), LostArcanaTagProvider<Block> {
     override fun addTags(wrapperLookup: HolderLookup.Provider) {
         val infusedStoneBlocks = INFUSED_STONES.map(RegistrySupplier<out Block>::get).toTypedArray()
-        BlockTags.MINEABLE_WITH_PICKAXE(*infusedStoneBlocks)
+        BlockTags.MINEABLE_WITH_PICKAXE(*infusedStoneBlocks, +CRUCIBLE)
         COMMON_ORES(*infusedStoneBlocks)
         BlockTags.MINEABLE_WITH_AXE(+GREATWOOD_LOG, +GREATWOOD_PLANKS)
         BlockTags.PLANKS(+GREATWOOD_PLANKS)

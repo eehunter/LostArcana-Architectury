@@ -6,7 +6,6 @@ import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.blockentity.CrucibleBlockEntity
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.platformGetWaterSprite
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition
@@ -37,6 +36,17 @@ class CrucibleBlockEntityRenderer(val context: BlockEntityRendererProvider.Conte
         i: Int,
         j: Int
     ) {
+        if(blockEntity.waterColor==0)recomputeWaterColor(blockEntity)
+
+        poseStack.pushPose()
+        poseStack.translate(0f, blockEntity.fluidAmount/1000f, 0f)
+
+        root.render(poseStack, waterSprite.wrap(multiBufferSource.getBuffer(RenderType.entityTranslucent(waterSprite.atlasLocation()))), i, j, blockEntity.waterColor)
+
+        poseStack.popPose()
+    }
+
+    fun recomputeWaterColor(blockEntity: CrucibleBlockEntity){
         val level = blockEntity.level as? ClientLevel ?: return
         val baseColor = BiomeColors.getAverageWaterColor(level, blockEntity.blockPos).toUInt()
 
@@ -52,19 +62,12 @@ class CrucibleBlockEntityRenderer(val context: BlockEntityRendererProvider.Conte
         val g = if(colors.isEmpty()) bg else (weightedMeanColor(colors, 8, stacking::get) + bg) / 2U
         val b = if(colors.isEmpty()) bb else (weightedMeanColor(colors, 0, stacking::get) + bb) / 2U
 
-        val color = (
-            0xFF000000u or
-            (r shl 16) or
-            (g shl 8) or
-            (b)
-        ).toInt()
-
-        poseStack.pushPose()
-        poseStack.translate(0f, blockEntity.fluidAmount/1000f, 0f)
-
-        root.render(poseStack, waterSprite.wrap(multiBufferSource.getBuffer(RenderType.entityTranslucent(waterSprite.atlasLocation()))), i, j, color)
-
-        poseStack.popPose()
+        blockEntity.waterColor = (
+                0xFF000000u or
+                        (r shl 16) or
+                        (g shl 8) or
+                        (b)
+                ).toInt()
     }
 
     companion object{

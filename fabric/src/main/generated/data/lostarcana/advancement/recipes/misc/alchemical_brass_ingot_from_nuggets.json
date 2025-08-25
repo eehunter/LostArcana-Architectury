@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_thaumium": {
+    "has_alchemical_brass_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "lostarcana:thaumium_ingot"
+            "items": "lostarcana:alchemical_brass_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lostarcana:thaumium_from_nuggets"
+        "recipe": "lostarcana:alchemical_brass_ingot_from_nuggets"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_thaumium"
+      "has_alchemical_brass_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lostarcana:thaumium_from_nuggets"
+      "lostarcana:alchemical_brass_ingot_from_nuggets"
     ]
   }
 }

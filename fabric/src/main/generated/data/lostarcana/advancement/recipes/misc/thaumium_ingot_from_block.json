@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_thaumium": {
+    "has_thaumium_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lostarcana:thaumium_from_block"
+        "recipe": "lostarcana:thaumium_ingot_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_thaumium"
+      "has_thaumium_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lostarcana:thaumium_from_block"
+      "lostarcana:thaumium_ingot_from_block"
     ]
   }
 }

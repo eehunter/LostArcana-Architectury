@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_alchemical_brass": {
+    "has_alchemical_brass_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lostarcana:alchemical_brass_from_block"
+        "recipe": "lostarcana:alchemical_brass_ingot_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_alchemical_brass"
+      "has_alchemical_brass_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lostarcana:alchemical_brass_from_block"
+      "lostarcana:alchemical_brass_ingot_from_block"
     ]
   }
 }

@@ -6,6 +6,8 @@
     "lostarcana:terra_infused_stone",
     "lostarcana:aqua_infused_stone",
     "lostarcana:ordo_infused_stone",
-    "lostarcana:crucible"
+    "lostarcana:crucible",
+    "lostarcana:alchemical_brass_block",
+    "lostarcana:thaumium_block"
   ]
 }

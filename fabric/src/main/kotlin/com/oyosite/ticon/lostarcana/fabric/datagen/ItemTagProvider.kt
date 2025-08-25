@@ -2,9 +2,11 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_PLANKS
 import com.oyosite.ticon.lostarcana.item.GOLD_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.GREATWOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
+import com.oyosite.ticon.lostarcana.item.WOOD_PLANKS
 import com.oyosite.ticon.lostarcana.item.WOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.tag.*
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -23,6 +25,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         WAND_CAPS(+IRON_WAND_CAP, +GOLD_WAND_CAP)
 
         GREATWOOD_LOGS(+GREATWOOD_LOG)
+        WOOD_PLANKS(+GREATWOOD_PLANKS)
 
 
         COMMON_COPPER_INGOTS(Items.COPPER_INGOT)

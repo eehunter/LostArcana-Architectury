@@ -18,7 +18,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
+import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapedRecipeBuilder.shaped
@@ -34,39 +36,8 @@ import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
     override fun buildRecipes(exporter: RecipeOutput) {
-        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_INGOT)
-            .requires(+ALCHEMICAL_BRASS_NUGGET, 9)
-            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
-            .save(exporter, "${LostArcana.MOD_ID}:alchemical_brass_from_nuggets")
-        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_NUGGET, 9)
-            .requires(+ALCHEMICAL_BRASS_INGOT)
-            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
-            .save(exporter)
-        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_BLOCK)
-            .requires(+ALCHEMICAL_BRASS_INGOT, 9)
-            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
-            .save(exporter)
-        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_INGOT, 9)
-            .requires(+ALCHEMICAL_BRASS_BLOCK)
-            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
-            .save(exporter, "${LostArcana.MOD_ID}:alchemical_brass_from_block")
-
-        shapeless(RecipeCategory.MISC, +THAUMIUM_INGOT)
-            .requires(+THAUMIUM_NUGGET, 9)
-            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
-            .save(exporter, "${LostArcana.MOD_ID}:thaumium_from_nuggets")
-        shapeless(RecipeCategory.MISC, +THAUMIUM_NUGGET, 9)
-            .requires(+THAUMIUM_INGOT)
-            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
-            .save(exporter)
-        shapeless(RecipeCategory.MISC, +THAUMIUM_BLOCK)
-            .requires(+THAUMIUM_INGOT, 9)
-            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
-            .save(exporter)
-        shapeless(RecipeCategory.MISC, +THAUMIUM_INGOT, 9)
-            .requires(+THAUMIUM_BLOCK)
-            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
-            .save(exporter, "${LostArcana.MOD_ID}:thaumium_from_block")
+        nuggetIngotBlock(ALCHEMICAL_BRASS_INGOT, ALCHEMICAL_BRASS_NUGGET, ALCHEMICAL_BRASS_BLOCK, exporter)
+        nuggetIngotBlock(THAUMIUM_INGOT, THAUMIUM_NUGGET, THAUMIUM_BLOCK, exporter)
 
         CrucibleRecipeBuilder(+ALCHEMICAL_BRASS_INGOT)
             .catalyst(COMMON_COPPER_INGOTS)
@@ -229,7 +200,25 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
         stairBuilder(stair, Ingredient.of(block)).unlockedBy("has_base_block", hasItems(block)).save(exporter)
     }
 
-    fun nuggetIngotBlock() {TODO()}
+    fun nuggetIngotBlock(ingot: Holder<out ItemLike>, nugget: Holder<out ItemLike>, block: Holder<out ItemLike>, exporter: RecipeOutput) {
+        shapeless(RecipeCategory.MISC, ingot.value())
+            .requires(nugget.value(), 9)
+            .unlockedBy("has_${ingot.registeredName.split(":").last()}", hasItems(ingot.value()))
+            .save(exporter, RecipeBuilder.getDefaultRecipeId(ingot.value()).withSuffix("_from_nuggets"))
+        shapeless(RecipeCategory.MISC, nugget.value(), 9)
+            .requires(ingot.value())
+            .unlockedBy("has_${ingot.registeredName.split(":").last()}", hasItems(ingot.value()))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, block.value())
+            .requires(ingot.value(), 9)
+            .unlockedBy("has_${ingot.registeredName.split(":").last()}", hasItems(ingot.value()))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, ingot.value(), 9)
+            .requires(block.value())
+            .unlockedBy("has_${ingot.registeredName.split(":").last()}", hasItems(ingot.value()))
+            .save(exporter, RecipeBuilder.getDefaultRecipeId(ingot.value()).withSuffix("_from_block"))
+
+    }
 
     fun hasItems(vararg items: TagKey<Item>) = hasItems(*items.map { ItemPredicate.Builder.item().of(it).build() }.toTypedArray())
     fun hasItems(vararg items: ItemPredicate) = InventoryChangeTrigger.TriggerInstance.hasItems(*items)

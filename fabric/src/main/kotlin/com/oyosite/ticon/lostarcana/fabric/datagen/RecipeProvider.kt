@@ -2,9 +2,12 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.advancement.ThaumometerScanCriterionTrigger
+import com.oyosite.ticon.lostarcana.aspect.AER
+import com.oyosite.ticon.lostarcana.aspect.IGNIS
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.BasicSalisMundisRecipeBuilder
+import com.oyosite.ticon.lostarcana.fabric.datagen.recipe.builder.CrucibleRecipeBuilder
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
@@ -31,6 +34,46 @@ import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>): FabricRecipeProvider(output, registriesFuture) {
     override fun buildRecipes(exporter: RecipeOutput) {
+        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_INGOT)
+            .requires(+ALCHEMICAL_BRASS_NUGGET, 9)
+            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
+            .save(exporter, "${LostArcana.MOD_ID}:alchemical_brass_from_nuggets")
+        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_NUGGET, 9)
+            .requires(+ALCHEMICAL_BRASS_INGOT)
+            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_BLOCK)
+            .requires(+ALCHEMICAL_BRASS_INGOT, 9)
+            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, +ALCHEMICAL_BRASS_INGOT, 9)
+            .requires(+ALCHEMICAL_BRASS_BLOCK)
+            .unlockedBy("has_alchemical_brass", hasItems(+ALCHEMICAL_BRASS_INGOT))
+            .save(exporter, "${LostArcana.MOD_ID}:alchemical_brass_from_block")
+
+        shapeless(RecipeCategory.MISC, +THAUMIUM_INGOT)
+            .requires(+THAUMIUM_NUGGET, 9)
+            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
+            .save(exporter, "${LostArcana.MOD_ID}:thaumium_from_nuggets")
+        shapeless(RecipeCategory.MISC, +THAUMIUM_NUGGET, 9)
+            .requires(+THAUMIUM_INGOT)
+            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, +THAUMIUM_BLOCK)
+            .requires(+THAUMIUM_INGOT, 9)
+            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
+            .save(exporter)
+        shapeless(RecipeCategory.MISC, +THAUMIUM_INGOT, 9)
+            .requires(+THAUMIUM_BLOCK)
+            .unlockedBy("has_thaumium", hasItems(+THAUMIUM_INGOT))
+            .save(exporter, "${LostArcana.MOD_ID}:thaumium_from_block")
+
+        CrucibleRecipeBuilder(+ALCHEMICAL_BRASS_INGOT)
+            .catalyst(COMMON_COPPER_INGOTS)
+            .aspect(+AER)
+            .aspect(+IGNIS)
+            .save(exporter)
+
         shapeless(RecipeCategory.MISC, +SALIS_MUNDIS)
             .requires(+VIS_CRYSTAL, 3)
             .requires(COMMON_REDSTONE_DUSTS)
@@ -185,6 +228,8 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
     fun stair(exporter: RecipeOutput, stair: ItemLike, block: ItemLike){
         stairBuilder(stair, Ingredient.of(block)).unlockedBy("has_base_block", hasItems(block)).save(exporter)
     }
+
+    fun nuggetIngotBlock() {TODO()}
 
     fun hasItems(vararg items: TagKey<Item>) = hasItems(*items.map { ItemPredicate.Builder.item().of(it).build() }.toTypedArray())
     fun hasItems(vararg items: ItemPredicate) = InventoryChangeTrigger.TriggerInstance.hasItems(*items)

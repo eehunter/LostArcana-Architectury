@@ -8,7 +8,7 @@ import org.jetbrains.annotations.ApiStatus
 
 
 @Suppress("unchecked_cast")
-val ItemStack.aspects: AspectStacks get() = (this.item as IAspectHolder<ItemStack>).`lostarcana$getAspects`(this)
+val ItemStack.aspects: AspectStacks get() = (this.item as IAspectHolder<ItemStack>).`lostarcana$getAspects`(this)?: listOf()
 
 @Suppress("unchecked_cast")
 @ApiStatus.Experimental

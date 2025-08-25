@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alchemical_brass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lostarcana:alchemical_brass_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lostarcana:alchemical_brass_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_alchemical_brass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lostarcana:alchemical_brass_ingot"
+    ]
+  }
+}

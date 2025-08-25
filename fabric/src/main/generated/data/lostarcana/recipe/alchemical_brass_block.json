@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    },
+    {
+      "item": "lostarcana:alchemical_brass_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "lostarcana:alchemical_brass_block"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "lostarcana:block/alchemical_brass_block"
+  }
+}

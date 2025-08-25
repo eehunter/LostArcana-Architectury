@@ -24,6 +24,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         GREATWOOD_LOGS(+GREATWOOD_LOG)
 
+
+        COMMON_COPPER_INGOTS(Items.COPPER_INGOT)
         COMMON_REDSTONE_DUSTS(Items.REDSTONE)
         COMMON_GOLD_INGOTS(Items.GOLD_INGOT)
         COMMON_GOLD_NUGGETS(Items.GOLD_NUGGET)

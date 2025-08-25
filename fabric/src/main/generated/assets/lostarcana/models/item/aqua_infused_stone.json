@@ -1,5 +1,3 @@
 {
-  "type": "fusion:base",
-  "parent": "lostarcana:item/infused_stone",
-  "loader": "fusion:model"
+  "parent": "lostarcana:block/aqua_infused_stone"
 }

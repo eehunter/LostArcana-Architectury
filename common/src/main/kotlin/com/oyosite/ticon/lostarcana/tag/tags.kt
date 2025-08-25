@@ -6,6 +6,7 @@ import com.oyosite.ticon.lostarcana.itemTag
 val COMMON_ORES = blockTag("c:ores")
 
 
+val COMMON_COPPER_INGOTS = itemTag("c:ingots/copper")
 val COMMON_GOLD_INGOTS = itemTag("c:ingots/gold")
 val COMMON_GOLD_NUGGETS = itemTag("c:nuggets/gold")
 val COMMON_IRON_INGOTS = itemTag("c:ingots/iron")

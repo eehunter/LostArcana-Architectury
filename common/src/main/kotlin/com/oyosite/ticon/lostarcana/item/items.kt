@@ -21,12 +21,18 @@ import java.util.*
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
+val ALCHEMICAL_BRASS_INGOT = "alchemical_brass_ingot" * { Item(Item.Properties()) }
+val ALCHEMICAL_BRASS_NUGGET = "alchemical_brass_nugget" * { Item(Item.Properties()) }
+val THAUMIUM_INGOT = "thaumium_ingot" * { Item(Item.Properties()) }
+val THAUMIUM_NUGGET = "thaumium_nugget" * { Item(Item.Properties()) }
+
 val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
 val SALIS_MUNDIS = "salis_mundis" * { SalisMundisItem(Item.Properties()) }
 
 val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1)) }
 val IRON_WAND_CAP = "iron_wand_cap" * { WandCap(Item.Properties(), 0.95f, 0xAAAAAAu) }
 val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(Item.Properties(), 1f, 0xffdb05u) }
+val THAUMIUM_WAND_CAP = "thaumium_wand_cap" * { WandCap(Item.Properties(), 1.05f, 0x6e00a0u) }
 val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(Item.Properties(), 25f, 0x75461fu) }
 val GREATWOOD_WAND_CORE = "greatwood_wand_core" * { WandCore(Item.Properties(), 50f, 0x503015u) }
 

@@ -30,6 +30,9 @@ val INFUSED_STONES = PRIMAL_ASPECTS.map {
     "${it.id.path}_infused_stone" % { InfusedStoneBlock(BlockProperties.ofFullCopy(Blocks.STONE), it) } % Pair({}, {setStaticAspects(4*it)})
 }
 
+val ALCHEMICAL_BRASS_BLOCK = "alchemical_brass_block" % { Block(BlockProperties.ofFullCopy(Blocks.COPPER_BLOCK)) } % {}
+val THAUMIUM_BLOCK = "thaumium_block" % { Block(BlockProperties.ofFullCopy(Blocks.IRON_BLOCK)) } % {}
+
 val ARCANE_STONE = "arcane_stone" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
 val ARCANE_STONE_TILES = "arcane_stone_tiles" % { Block(BlockProperties.ofFullCopy(Blocks.STONE)) } % {}
 val ARCANE_STONE_PILLAR = "arcane_stone_pillar" % { RotatedPillarBlock(BlockProperties.of().strength(1.5F, 6.0F).requiresCorrectToolForDrops()) } % {}

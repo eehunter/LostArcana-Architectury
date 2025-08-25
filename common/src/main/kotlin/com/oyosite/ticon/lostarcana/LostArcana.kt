@@ -13,6 +13,7 @@ import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
 import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
 import com.oyosite.ticon.lostarcana.recipe.BasicSalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
+import com.oyosite.ticon.lostarcana.recipe.CrucibleRecipe
 import com.oyosite.ticon.lostarcana.recipe.SalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.UniqueVisCrystalRecipe
@@ -48,6 +49,9 @@ object LostArcana {
         SpecialCastingItemModificationRecipe.Serializer("special_casting_item_modification")
 
         UniqueVisCrystalRecipe.Serializer("unique_vis_crystal_shapeless_crafting")
+
+        CrucibleRecipe.Type("crucible")
+        CrucibleRecipe.Serializer("crucible")
 
         MAGIC_BRICKS_BLOCK_ENTITY
 

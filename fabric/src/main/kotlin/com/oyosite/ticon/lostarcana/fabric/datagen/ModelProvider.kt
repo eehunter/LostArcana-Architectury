@@ -39,6 +39,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
+        bsmg.createTrivialCube(+ALCHEMICAL_BRASS_BLOCK)
+        bsmg.createTrivialCube(+THAUMIUM_BLOCK)
+
         listOf(*INFUSED_STONES.toTypedArray(), RECHARGE_PEDESTAL).forEach {
             val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
             val bsg = MultiVariantGenerator.multiVariant(it.get(), v)
@@ -82,6 +85,10 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
 
     override fun generateItemModels(img: ItemModelGenerators) {
+        img.generateFlatItem(+ALCHEMICAL_BRASS_INGOT, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+ALCHEMICAL_BRASS_NUGGET, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
 
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)

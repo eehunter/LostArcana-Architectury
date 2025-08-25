@@ -42,6 +42,8 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             RECHARGE_PEDESTAL,
             GREATWOOD_LOG,
             GREATWOOD_PLANKS,
+            ALCHEMICAL_BRASS_BLOCK,
+            THAUMIUM_BLOCK,
         ).allDropSelf
 
         listOf(

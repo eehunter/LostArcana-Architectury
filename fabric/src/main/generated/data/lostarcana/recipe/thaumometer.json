@@ -1,0 +1,33 @@
+{
+  "type": "lostarcana:arcane_workbench",
+  "base": {
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "G": {
+        "tag": "c:glass_panes"
+      },
+      "N": {
+        "tag": "c:nuggets/gold"
+      }
+    },
+    "pattern": [
+      " N ",
+      "NGN",
+      " N "
+    ],
+    "result": {
+      "count": 1,
+      "id": "lostarcana:thaumometer"
+    }
+  },
+  "crystalCost": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "visCost": 5.0
+}

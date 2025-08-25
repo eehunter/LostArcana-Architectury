@@ -1,3 +1,5 @@
 {
-  "parent": "lostarcana:block/aer_infused_stone"
+  "type": "fusion:base",
+  "parent": "lostarcana:item/infused_stone",
+  "loader": "fusion:model"
 }

@@ -1,0 +1,29 @@
+{
+  "type": "lostarcana:arcane_workbench",
+  "base": {
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "N": {
+        "tag": "c:nuggets/gold"
+      }
+    },
+    "pattern": [
+      "NNN",
+      "N N"
+    ],
+    "result": {
+      "count": 1,
+      "id": "lostarcana:gold_wand_cap"
+    }
+  },
+  "crystalCost": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1
+  ],
+  "visCost": 10.0
+}

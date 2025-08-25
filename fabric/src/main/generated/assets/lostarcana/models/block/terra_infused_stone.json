@@ -1,0 +1,8 @@
+{
+  "type": "fusion:base",
+  "loader": "fusion:model",
+  "parents": [
+    "minecraft:block/stone",
+    "lostarcana:block/infused_stone_fusion"
+  ]
+}

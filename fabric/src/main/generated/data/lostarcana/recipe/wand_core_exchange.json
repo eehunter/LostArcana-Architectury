@@ -1,0 +1,11 @@
+{
+  "type": "lostarcana:casting_item_modification",
+  "castingItem": {
+    "item": "lostarcana:wand"
+  },
+  "part": {
+    "tag": "lostarcana:wand_cores"
+  },
+  "partSlot": "lostarcana:wand_core",
+  "relativeSlotId": 4
+}

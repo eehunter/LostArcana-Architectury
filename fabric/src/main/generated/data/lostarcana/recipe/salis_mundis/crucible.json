@@ -1,0 +1,8 @@
+{
+  "type": "lostarcana:basic_salis_mundis_transform",
+  "block": "minecraft:cauldron",
+  "result": {
+    "count": 1,
+    "id": "lostarcana:crucible"
+  }
+}

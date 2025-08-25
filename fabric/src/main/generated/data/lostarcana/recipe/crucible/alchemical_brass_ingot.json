@@ -1,0 +1,20 @@
+{
+  "type": "lostarcana:crucible",
+  "aspects": [
+    {
+      "amount": 1,
+      "aspect": "lostarcana:aer"
+    },
+    {
+      "amount": 1,
+      "aspect": "lostarcana:ignis"
+    }
+  ],
+  "catalyst": {
+    "tag": "c:ingots/copper"
+  },
+  "result": {
+    "count": 1,
+    "id": "lostarcana:alchemical_brass_ingot"
+  }
+}

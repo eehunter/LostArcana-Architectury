@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "got_vis_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lostarcana:vis_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lostarcana:arcane_stone_tiles"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "got_vis_crystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lostarcana:arcane_stone_tiles"
+    ]
+  }
+}

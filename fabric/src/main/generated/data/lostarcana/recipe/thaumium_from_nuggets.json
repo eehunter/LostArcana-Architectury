@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    },
+    {
+      "item": "lostarcana:thaumium_nugget"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "lostarcana:thaumium_ingot"
+  }
+}

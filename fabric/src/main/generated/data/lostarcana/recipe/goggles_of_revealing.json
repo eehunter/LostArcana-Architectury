@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "T": {
+      "item": "lostarcana:thaumometer"
+    }
+  },
+  "pattern": [
+    " L ",
+    "TGT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lostarcana:goggles_of_revealing"
+  }
+}

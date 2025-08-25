@@ -1,0 +1,29 @@
+{
+  "type": "lostarcana:arcane_workbench",
+  "base": {
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "W": {
+        "item": "lostarcana:greatwood_log"
+      }
+    },
+    "pattern": [
+      "W",
+      "W"
+    ],
+    "result": {
+      "count": 1,
+      "id": "lostarcana:greatwood_wand_core"
+    }
+  },
+  "crystalCost": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+  ],
+  "visCost": 15.0
+}

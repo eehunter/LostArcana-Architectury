@@ -62,8 +62,8 @@ val GREATWOOD_SAPLING = "greatwood_sapling" % { SaplingBlock(GREATWOOD_GROWER, B
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
 
-val VIS_LIGHT = "vis_light" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }
-val NITOR = ("nitor" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
+val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
+val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

@@ -14,7 +14,9 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.LeavesBlock
 import net.minecraft.world.level.block.RotatedPillarBlock
+import net.minecraft.world.level.block.SaplingBlock
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -52,6 +54,8 @@ val MULTIBLOCK_PLACEHOLDER = "multiblock_placeholder" % { MultiblockPlaceholder(
 
 val GREATWOOD_LOG = "greatwood_log" % { RotatedPillarBlock(BlockProperties.ofFullCopy(Blocks.OAK_LOG)) } % {}
 val GREATWOOD_PLANKS = "greatwood_planks" % { Block(BlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) } % {}
+val GREATWOOD_LEAVES = "greatwood_leaves" % { LeavesBlock(BlockProperties.ofFullCopy(Blocks.OAK_LEAVES)) } % {}
+val GREATWOOD_SAPLING = "greatwood_sapling" % { SaplingBlock(GREATWOOD_GROWER, BlockProperties.ofFullCopy(Blocks.OAK_SAPLING)) } % {}
 
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}

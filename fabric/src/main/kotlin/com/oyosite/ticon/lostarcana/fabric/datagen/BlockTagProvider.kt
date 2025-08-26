@@ -26,6 +26,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         COMMON_ORES(*infusedStoneBlocks)
         BlockTags.MINEABLE_WITH_AXE(+GREATWOOD_LOG, +GREATWOOD_PLANKS)
         BlockTags.PLANKS(+GREATWOOD_PLANKS)
+        BlockTags.LOGS(+GREATWOOD_LOG)
     }
 
     override fun getTagBuilder(key: TagKey<Block>): FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(key)

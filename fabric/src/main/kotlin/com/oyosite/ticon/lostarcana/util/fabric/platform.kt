@@ -21,6 +21,12 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
+
+operator fun <T: LootItemFunction> LootItemFunctionType<T>.invoke(name: String): Unit{
+    Registry.register(BuiltInRegistries.LOOT_FUNCTION_TYPE, LostArcana.id(name), this)
+}
 
 fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> =
     FabricRegistryBuilder.createSimple(CastingFocusEffectType.REGISTRY_KEY)

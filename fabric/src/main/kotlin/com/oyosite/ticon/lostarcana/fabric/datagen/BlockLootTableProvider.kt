@@ -5,6 +5,7 @@ import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
+import com.oyosite.ticon.lostarcana.loot.CopyDyedBlockColorFunction
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -16,9 +17,12 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
@@ -32,6 +36,9 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             val lootTable = LootTable.lootTable().withPool(explosionReduced)
             add(block, lootTable)
         }
+        //dropSelf(+NITOR)
+        dropSelfWithFunction(+NITOR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
+        //dropSelfWithFunction(+NITOR, CopyDyedBlockColorFunction(listOf()))
         listOf(
             ARCANE_STONE,
             ARCANE_STONE_TILES,
@@ -60,6 +67,8 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
 
     fun dropsMultiplied(item: ItemLike, amount: Int): LootTable.Builder =
         LootTable.lootTable().withPool(applyExplosionDecay(item, LootPool.lootPool().setRolls(ConstantValue(amount.toFloat())).add(LootItem.lootTableItem(item))))
+
+    fun dropSelfWithFunction(block: Block, function: LootItemFunction) = add(block, createSingleItemTable(block).apply(function))
 
 
     val Collection<RegistrySupplier<out Block>>.asBlocks get() = map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get)

@@ -15,6 +15,11 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
+
+@ExpectPlatform
+operator fun <T: LootItemFunction> LootItemFunctionType<T>.invoke(name: String): Unit = throw AssertionError("No platform implementation.")
 
 @ExpectPlatform
 fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> = throw AssertionError("No platform implementation.")

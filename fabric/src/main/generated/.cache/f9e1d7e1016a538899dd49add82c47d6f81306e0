@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-25T21:45:29.130247879	Lost Arcana/Block Loot Tables
+// 1.21.1	2025-08-26T14:09:16.660860432	Lost Arcana/Block Loot Tables
 0751637753153935cab0bfab60daed615324aa2e data/lostarcana/loot_table/blocks/greatwood_log.json
 06b3eff914df3e3ad24039487f2190fb77140200 data/lostarcana/loot_table/blocks/arcane_stone_tiles.json
 184e16ae8e378f963755d1b389c3ac4241b833a6 data/lostarcana/loot_table/blocks/aqua_infused_stone.json
@@ -8,6 +8,7 @@
 b9c9516bd33268455c56fb9acced91600dbce42e data/lostarcana/loot_table/blocks/arcane_stone_tile_stairs.json
 d6ff34a9ce37fef75e75701bf6d67388bd84e747 data/lostarcana/loot_table/blocks/aer_infused_stone.json
 053a7e3dcf91cc6d0cea296462744217b60228de data/lostarcana/loot_table/blocks/recharge_pedestal.json
+02ea7cdda9be8d6f1d1e9a38c8705f94aea9fa1e data/lostarcana/loot_table/blocks/nitor.json
 753498188c82f101245d0a45b41bbe3b4e5346ee data/lostarcana/loot_table/blocks/ordo_infused_stone.json
 2e0c80d6774742f3f8f565d4413d75a93f004f10 data/lostarcana/loot_table/blocks/arcane_stone.json
 6305eaefb35de715626278c3ac4bb8df1be24290 data/lostarcana/loot_table/blocks/arcane_workbench.json

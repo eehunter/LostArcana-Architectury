@@ -1,0 +1,20 @@
+{
+  "type": "lostarcana:crucible",
+  "aspects": [
+    {
+      "amount": 2,
+      "aspect": "lostarcana:aer"
+    },
+    {
+      "amount": 2,
+      "aspect": "lostarcana:ignis"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "lostarcana:nitor"
+  }
+}

@@ -5,13 +5,16 @@ import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.item.NitorItem
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.component.DyedItemColor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
@@ -61,9 +64,14 @@ val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.of
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }
+val NITOR = ("nitor" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }).customItem(::NitorItem){component(
+    DataComponents.DYED_COLOR, DyedItemColor(NitorItem.DEFAULT_COLOR.toInt(), false))}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)
+
+inline fun <reified T: Block> RegistrySupplier<T>.customItem(noinline blockItemSupplier: (Block, Item.Properties) -> BlockItem, noinline itemPropertiesConfig: Item.Properties.()->Unit)=
+    this.also { it.id.path * { blockItemSupplier(+this, Item.Properties().apply(itemPropertiesConfig)) } }
 
 inline operator fun <reified T: Block> RegistrySupplier<T>.rem(noinline itemPropertiesConfig: Item.Properties.()->Unit): RegistrySupplier<T> =
     this.also { this.id.path * { BlockItem(+this, Item.Properties().apply(itemPropertiesConfig)) } }

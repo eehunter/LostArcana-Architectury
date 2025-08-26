@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-25T21:45:29.13303704	Lost Arcana/Recipes
+// 1.21.1	2025-08-26T14:09:16.662321432	Lost Arcana/Recipes
 b00bab36f3be2c61b8f6d54d9d0d257c0e555888 data/lostarcana/recipe/wand.json
 d2a9242dace6f2f7a25433addf817d4726bc568d data/lostarcana/recipe/wand_bottom_cap_exchange.json
 c312dc07405de5ffd75c20c60f8c53f245c8725f data/lostarcana/advancement/recipes/misc/thaumium_block.json
@@ -11,6 +11,7 @@ cb282c7206d730459beb8b81bf5fd26f3593cc91 data/lostarcana/advancement/recipes/too
 6f8e30bddf6b7d7464bc56bd0568baa4e8b5e3d9 data/lostarcana/advancement/recipes/building_blocks/arcane_stone_pillar.json
 77a6d460896c9093db7386ce76cc3dc5e07c987f data/lostarcana/advancement/recipes/crafting/salis_mundis.json
 f06a867cabf0968b1e166f0c016f8e4dfdda7453 data/lostarcana/recipe/arcane_stone_slab.json
+d64d3a5e2329e930b57fdaa6ef6acf5439489a4f data/lostarcana/advancement/recipes/crucible/nitor.json
 96e4f55d188f25167dae929eca502d9902b65f51 data/lostarcana/recipe/arcane_stone_pillar.json
 b61a1b02950660b311749080376e153ac4ef1416 data/lostarcana/advancement/recipes/salis_mundis/crucible.json
 6406900bf3b14f5ae61f599369b7a84f8dafab5b data/lostarcana/advancement/recipes/building_blocks/arcane_stone_tile_slab.json
@@ -26,6 +27,7 @@ e6a44d859de6b74901871cf458da16c8b248bb11 data/lostarcana/advancement/recipes/bui
 538c1bb91bdb5c492f31fda2d52e55e2df0f637f data/lostarcana/advancement/recipes/misc/alchemical_brass_block.json
 4f397170f621f9f9a3bd628d5a98c09346ab9d08 data/lostarcana/recipe/arcane_stone_tile_slab.json
 e8085725dc789cca43da38e74e258793a360ed81 data/lostarcana/recipe/alchemical_brass_block.json
+db21059169ad76fffcf54d0bd3a2e3c3e5952363 data/lostarcana/recipe/crucible/nitor.json
 5d148f755386e6274b7ff82771e12241abefed07 data/lostarcana/advancement/recipes/arcane_workbench/greatwood_wand_core.json
 b14171ea0ac82e56f9eaec0d22ffff8e4afe7164 data/lostarcana/advancement/recipes/salis_mundis/arcane_workbench.json
 0a48dfcd7c782b989c0e542de3bad7b61c65c278 data/lostarcana/recipe/crude_caster_gauntlet.json

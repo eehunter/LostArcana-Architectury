@@ -51,7 +51,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialCube(+ARCANE_STONE)
         bsmg.createTrivialCube(+ARCANE_STONE_TILES)
         bsmg.createAxisAlignedPillarBlock(+ARCANE_STONE_PILLAR, TexturedModel.COLUMN)
-        
+
         bsmg.createAxisAlignedPillarBlock(+GREATWOOD_LOG, TexturedModel.COLUMN)
         bsmg.createTrivialCube(+GREATWOOD_PLANKS)
         bsmg.createTrivialCube(+GREATWOOD_LEAVES)
@@ -92,6 +92,8 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+ALCHEMICAL_BRASS_NUGGET, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
+
+        img.generateFlatItem((+NITOR).asItem(), ModelTemplates.FLAT_ITEM)
 
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)

@@ -16,9 +16,10 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
 
 class CrucibleRecipeBuilder(@get:JvmName("result") val result: ItemStack): RecipeBuilder {
-    constructor(result: Item): this(ItemStack(result))
+    constructor(result: ItemLike): this(ItemStack(result))
 
     val criteria: MutableMap<String, Criterion<*>> = LinkedHashMap()
     var group: String? = null

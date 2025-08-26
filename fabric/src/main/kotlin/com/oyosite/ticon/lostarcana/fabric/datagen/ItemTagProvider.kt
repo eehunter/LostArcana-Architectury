@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_PLANKS
+import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.item.GOLD_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.GREATWOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
@@ -14,6 +15,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
+import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -27,6 +29,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         GREATWOOD_LOGS(+GREATWOOD_LOG)
         WOOD_PLANKS(+GREATWOOD_PLANKS)
 
+        ItemTags.DYEABLE(+NITOR)
 
         COMMON_COPPER_INGOTS(Items.COPPER_INGOT)
         COMMON_REDSTONE_DUSTS(Items.REDSTONE)

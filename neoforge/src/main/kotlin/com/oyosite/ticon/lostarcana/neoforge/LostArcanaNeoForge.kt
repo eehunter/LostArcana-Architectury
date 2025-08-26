@@ -68,6 +68,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_RECIPE_SERIALIZERS.register(modEventBus)
         NEOFORGE_MENU_SCREENS.register(modEventBus)
         NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
+        NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
 
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
@@ -106,6 +107,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, LostArcana.MOD_ID)
         val NEOFORGE_MENU_SCREENS = DeferredRegister.create(Registries.MENU, LostArcana.MOD_ID)
         val NEOFORGE_CASTING_EFFECT_TYPES = DeferredRegister.create(CastingFocusEffectType.REGISTRY_KEY, LostArcana.MOD_ID)
+        val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic

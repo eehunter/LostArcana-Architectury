@@ -5,7 +5,9 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
 import com.oyosite.ticon.lostarcana.block.CRUCIBLE
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
+import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
+import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterMenuScreen
 import net.minecraft.core.BlockPos
@@ -28,6 +30,7 @@ val ARCANE_WORKBENCH_MENU_SCREEN = "arcane_workbench"(::ArcaneWorkbenchMenu, Fea
 val CRUCIBLE_BLOCK_ENTITY = "crucible"(::CrucibleBlockEntity, CRUCIBLE)
 
 val RECHARGE_PEDESTAL_BLOCK_ENTITY = "recharge_pedestal"(::RechargePedestalBlockEntity, RECHARGE_PEDESTAL)
+val VIS_LIGHT_BLOCK_ENTITY = "vis_light_block_entity"(::VisLightBlockEntity, VIS_LIGHT, NITOR)
 
 operator fun <T: BlockEntity, R: BlockEntityType<T>> String.invoke(blockEntityFactory: (BlockPos, BlockState)->T, vararg blocks: Holder<out Block>): Holder<BlockEntityType<T>> =
     platformRegisterBlockEntity(this) { BlockEntityType.Builder.of(blockEntityFactory, *blocks.map(Holder<out Block>::value).toTypedArray()) }

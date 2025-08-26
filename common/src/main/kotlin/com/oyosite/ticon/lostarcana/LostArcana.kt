@@ -10,6 +10,7 @@ import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
+import com.oyosite.ticon.lostarcana.loot.CopyDyedBlockColorFunction
 import com.oyosite.ticon.lostarcana.recipe.ArcaneWorkbenchRecipe
 import com.oyosite.ticon.lostarcana.recipe.BasicSalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.CastingItemModificationRecipe
@@ -52,6 +53,8 @@ object LostArcana {
 
         CrucibleRecipe.Type("crucible")
         CrucibleRecipe.Serializer("crucible")
+
+        CopyDyedBlockColorFunction.TYPE("copy_dyed_block_color")
 
         MAGIC_BRICKS_BLOCK_ENTITY
 

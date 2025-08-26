@@ -39,6 +39,12 @@ class RecipeProvider(output: FabricDataOutput, registriesFuture: CompletableFutu
         nuggetIngotBlock(ALCHEMICAL_BRASS_INGOT, ALCHEMICAL_BRASS_NUGGET, ALCHEMICAL_BRASS_BLOCK, exporter)
         nuggetIngotBlock(THAUMIUM_INGOT, THAUMIUM_NUGGET, THAUMIUM_BLOCK, exporter)
 
+        CrucibleRecipeBuilder(+NITOR)
+            .catalyst(Items.GLOWSTONE_DUST)
+            .aspect(AER * 2)
+            .aspect(IGNIS * 2)
+            .save(exporter)
+
         CrucibleRecipeBuilder(+ALCHEMICAL_BRASS_INGOT)
             .catalyst(COMMON_COPPER_INGOTS)
             .aspect(+AER)

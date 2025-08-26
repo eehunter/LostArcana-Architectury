@@ -18,10 +18,16 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
+
+operator fun <T: LootItemFunction> LootItemFunctionType<T>.invoke(name: String): Unit{
+    LostArcanaNeoForge.NEOFORGE_LOOT_FUNCTIONS.register(name) { _ -> this }
+}
 
 fun platformCreateCastingFocusEffectTypeRegistry(): Registry<CastingFocusEffectType<*>> =
     RegistryBuilder(CastingFocusEffectType.REGISTRY_KEY).sync(true).defaultKey(LostArcana.id("none")).create()

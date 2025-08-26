@@ -38,50 +38,12 @@ class VisLight(properties: Properties) : Block(properties), EntityBlock {
     ): VoxelShape = SHAPE
 
     override fun animateTick(blockState: BlockState, level: Level, blockPos: BlockPos, randomSource: RandomSource) {
-        //if(level.gameTime%3L != 0L)return
         val color = (level.getBlockEntity(blockPos) as? VisLightBlockEntity)?.components()?.get(DataComponents.DYED_COLOR)?: (blockState.block as VisLight).defaultColor
-
         level.addParticle(DustParticleOptions(Vec3.fromRGB24(color.rgb).toVector3f(), 1f), blockPos.x + .5, blockPos.y + .5, blockPos.z + .5, .01, .01, .01)
-    }
-
-    override fun randomTick(
-        blockState: BlockState,
-        level: ServerLevel,
-        blockPos: BlockPos,
-        randomSource: RandomSource
-    ) {
-
-
-    }
-
-    override fun <T : BlockEntity?> getTicker(
-        level: Level,
-        blockState: BlockState,
-        type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return if(type == VIS_LIGHT_BLOCK_ENTITY) BlockEntityTicker(VisLight::tick) as BlockEntityTicker<T> else null
     }
 
     companion object{
         val DEFAULT_COLOR = -1
-
         val SHAPE = box(5.0,5.0,5.0,11.0,11.0,11.0)
-
-        fun tick(level: Level, blockPos: BlockPos, blockState: BlockState, entity: VisLightBlockEntity) {
-            //super.tick(blockState, level, blockPos, randomSource)
-            //val level = world as? ServerLevel ?: return
-            //if(!level.isClientSide) return
-            //if(level.gameTime%10L != 0L)return
-            //println("ticking VisLight")
-
-            //val color = (level.getBlockEntity(blockPos) as? VisLightBlockEntity)?.components()?.get(DataComponents.DYED_COLOR)?: (blockState.block as VisLight).defaultColor
-            //level.addParticle(DustParticleOptions(Vec3.fromRGB24(color.rgb).toVector3f(), 1f), blockPos.x + .5, blockPos.y + .5, blockPos.z + .5, .01, .01, .01)
-
-
-            /*val color = (level.getBlockEntity(blockPos) as? VisLightBlockEntity)?.components()?.get(DataComponents.DYED_COLOR)?: (blockState.block as VisLight).defaultColor
-            level.getPlayers{ it.shouldRenderAtSqrDistance(blockPos.center.distanceToSqr(it.position())) }.forEach {
-                level.sendParticles(it, DustParticleOptions(Vec3.fromRGB24(color.rgb).toVector3f(), 1f), false, blockPos.x + .5, blockPos.y + .5, blockPos.z + .5, 1, .01, .01, .01, .1)
-            }*/
-        }
     }
 }

@@ -5,7 +5,6 @@ import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
 import com.oyosite.ticon.lostarcana.aspect.times
-import com.oyosite.ticon.lostarcana.item.NitorItem
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.DeferredRegister
@@ -64,8 +63,7 @@ val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.of
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }
-val NITOR = ("nitor" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }).customItem(::NitorItem){component(
-    DataComponents.DYED_COLOR, DyedItemColor(NitorItem.DEFAULT_COLOR.toInt(), false))}
+val NITOR = ("nitor" % { VisLight(prop.noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

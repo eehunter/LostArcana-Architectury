@@ -36,9 +36,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             val lootTable = LootTable.lootTable().withPool(explosionReduced)
             add(block, lootTable)
         }
-        //dropSelf(+NITOR)
         dropSelfWithFunction(+NITOR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
-        //dropSelfWithFunction(+NITOR, CopyDyedBlockColorFunction(listOf()))
         listOf(
             ARCANE_STONE,
             ARCANE_STONE_TILES,

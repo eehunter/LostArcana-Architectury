@@ -16,4 +16,7 @@ class VisLight(properties: Properties) : Block(properties), EntityBlock {
     ): BlockEntity = VisLightBlockEntity(blockPos, blockState)
 
 
+    companion object{
+        val DEFAULT_COLOR = -1
+    }
 }

@@ -51,8 +51,11 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialCube(+ARCANE_STONE)
         bsmg.createTrivialCube(+ARCANE_STONE_TILES)
         bsmg.createAxisAlignedPillarBlock(+ARCANE_STONE_PILLAR, TexturedModel.COLUMN)
+        
         bsmg.createAxisAlignedPillarBlock(+GREATWOOD_LOG, TexturedModel.COLUMN)
         bsmg.createTrivialCube(+GREATWOOD_PLANKS)
+        bsmg.createTrivialCube(+GREATWOOD_LEAVES)
+        bsmg.createCrossBlock(+GREATWOOD_SAPLING, BlockModelGenerators.TintState.NOT_TINTED)
 
         bsmg.blockStateOutput.accept(ARCANE_STONE_SLAB.makeSlabOf(ARCANE_STONE))
         bsmg.blockStateOutput.accept(ARCANE_STONE_TILE_SLAB.makeSlabOf(ARCANE_STONE_TILES))

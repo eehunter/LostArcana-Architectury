@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "lostarcana:block/greatwood_sapling"
+  }
+}

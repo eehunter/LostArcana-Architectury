@@ -16,6 +16,7 @@ import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.valueproviders.ConstantInt
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
@@ -24,8 +25,10 @@ import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSize
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
+import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter
@@ -40,8 +43,8 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
     override fun run(cachedOutput: CachedOutput): CompletableFuture<*> = cachedOutput.run {
         createTree(
             "greatwood",
-            straightTreeTrunk(4, 3, 0),
-            basicTreeFoliage(2, 3),
+            giantTreeTrunk(32, 8, 0),
+            coniferFoliagePlacer(1, 5, 1, 20),
             GREATWOOD_LEAVES.get().defaultBlockState(),
             GREATWOOD_LOG.get().defaultBlockState(),
             GREATWOOD_SAPLING.get().defaultBlockState(),
@@ -98,8 +101,14 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
     fun basicTreeFoliage(radius: Int, height: Int): JsonElement = FoliagePlacer.CODEC.encodeStart(JsonOps.INSTANCE,
         BlobFoliagePlacer(ConstantInt.of(radius), ConstantInt.of(0), height)).orThrow
 
+    fun coniferFoliagePlacer(minRadius: Int, maxRadius: Int, int2: Int, int3: Int): JsonElement = FoliagePlacer.CODEC.encodeStart(JsonOps.INSTANCE,
+        MegaPineFoliagePlacer(UniformInt.of(minRadius, maxRadius), ConstantInt.of(int2), ConstantInt.of(int3))).orThrow
+
     fun straightTreeTrunk(height: Int, rand1: Int, rand2: Int): JsonElement = TrunkPlacer.CODEC.encodeStart(JsonOps.INSTANCE,
         StraightTrunkPlacer(height, rand1, rand2)).orThrow
+
+    fun giantTreeTrunk(height: Int, rand1: Int, rand2: Int): JsonElement = TrunkPlacer.CODEC.encodeStart(JsonOps.INSTANCE,
+        GiantTrunkPlacer(height, rand1, rand2)).orThrow
 
     private fun getConfiguredFeaturePath(name: String): Path {
         return dataOutput

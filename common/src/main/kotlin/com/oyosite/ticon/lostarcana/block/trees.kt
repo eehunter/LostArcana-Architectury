@@ -11,4 +11,4 @@ val GREATWOOD_FEATURE = ResourceKey.create(
     ResourceLocation.withDefaultNamespace("greatwood")
 )
 
-val GREATWOOD_GROWER = TreeGrower("greatwood", Optional.empty(), Optional.of(GREATWOOD_FEATURE), Optional.empty())
+val GREATWOOD_GROWER = TreeGrower("greatwood", Optional.of(GREATWOOD_FEATURE), Optional.empty(), Optional.empty())

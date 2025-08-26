@@ -10,6 +10,7 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
+import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
@@ -124,6 +125,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, +VIS_CRYSTAL, *infusedStoneBlocks)
             event.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
             event.register(LostArcanaClient.WAND_ITEM_COLOR, +WAND_ITEM)
+            event.register(LostArcanaClient.NITOR_ITEM_COLOR, +NITOR)
         }
 
         @SubscribeEvent

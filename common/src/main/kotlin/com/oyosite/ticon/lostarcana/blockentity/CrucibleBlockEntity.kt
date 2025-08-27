@@ -120,11 +120,6 @@ class CrucibleBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEnt
     companion object{
         fun tick(level: Level, blockPos: BlockPos, blockState: BlockState, blockEntity: CrucibleBlockEntity?){
             blockEntity?:return
-            //CRUCIBLE_HEAT_SOURCES
-            //level.registryAccess()
-            //BlockTags.LEAVES
-
-            //level.getBlockState(blockPos.below()).block
             if(level.isStateAtPosition(blockPos.below()) {it.`is`(CRUCIBLE_HEAT_SOURCES)}) {
                 if (blockEntity.heatLevel < 600) blockEntity.heatLevel += 1
             } else if (blockEntity.heatLevel > 0) blockEntity.heatLevel -= 1

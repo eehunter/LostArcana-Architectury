@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.aspects
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.VisLight
+import com.oyosite.ticon.lostarcana.blockentity.VisLightBlockEntity
 import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
@@ -14,6 +15,7 @@ import net.minecraft.client.color.block.BlockColor
 import net.minecraft.client.color.item.ItemColor
 import net.minecraft.client.color.item.ItemColors
 import net.minecraft.client.model.geom.ModelLayerLocation
+import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.component.DyedItemColor
 
 object LostArcanaClient {
@@ -23,6 +25,7 @@ object LostArcanaClient {
     val NITOR_ITEM_COLOR = ItemColor{ stack, i -> if(i==0) DyedItemColor.getOrDefault(stack, VisLight.DEFAULT_COLOR) else -1 }
 
     val INFUSED_STONE_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> ((state.block as InfusedStoneBlock).aspect.color or 0xFF000000u).toInt() }
+    val NITOR_BLOCK_COLOR = BlockColor{ state, getter, pos, i -> (getter?.getBlockEntity(pos ?: return@BlockColor -1) as? VisLightBlockEntity)?.components()?.get(DataComponents.DYED_COLOR)?.rgb ?: -1}
 
     val AURA_NODE_MODEL_LAYER = ModelLayerLocation(LostArcana.id("aura_node"), "cube")
     val CRUCIBLE_CONTENTS_MODEL_LAYER = ModelLayerLocation(LostArcana.id("crucible_contents"), "main")

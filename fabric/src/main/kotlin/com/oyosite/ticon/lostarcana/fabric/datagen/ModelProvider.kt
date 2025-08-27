@@ -42,6 +42,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialCube(+ALCHEMICAL_BRASS_BLOCK)
         bsmg.createTrivialCube(+THAUMIUM_BLOCK)
 
+        bsmg.createTrivialBlock(+NITOR, TextureMapping.particle(LostArcana.id("item/nitor_flame")), ModelTemplate(Optional.of(LostArcana.id("item/nitor")), Optional.empty()))
+        bsmg.createTrivialBlock(+VIS_LIGHT, TextureMapping.particle(LostArcana.id("item/nitor_flame")), ModelTemplate(Optional.of(LostArcana.id("item/nitor")), Optional.empty()))
+
         listOf(*INFUSED_STONES.toTypedArray(), RECHARGE_PEDESTAL).forEach {
             val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
             val bsg = MultiVariantGenerator.multiVariant(it.get(), v)
@@ -93,7 +96,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
 
-        img.generateFlatItem((+NITOR).asItem(), ModelTemplates.FLAT_ITEM)
+        img.register((+NITOR).asItem(), ModelTemplates.TWO_LAYERED_ITEM, "_flame", "_dot")
 
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)

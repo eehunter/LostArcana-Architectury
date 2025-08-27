@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric.client
 
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.NITOR
+import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
@@ -31,6 +32,7 @@ class LostArcanaFabricClient : ClientModInitializer {
 
         infusedStoneBlocks.forEach { println(it.name.toString()) }
         ColorProviderRegistry.BLOCK.register(LostArcanaClient.INFUSED_STONE_BLOCK_COLOR, *infusedStoneBlocks)
+        ColorProviderRegistry.BLOCK.register(LostArcanaClient.NITOR_BLOCK_COLOR, +NITOR, +VIS_LIGHT)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.VIS_CRYSTAL_ITEM_COLOR, +VIS_CRYSTAL, *infusedStoneBlocks)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.WAND_ITEM_COLOR, +WAND_ITEM)

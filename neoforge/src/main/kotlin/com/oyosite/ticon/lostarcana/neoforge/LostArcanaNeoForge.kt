@@ -11,6 +11,7 @@ import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.NITOR
+import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
@@ -132,6 +133,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @JvmStatic
         fun onRegisterBlockColorProviders(event: RegisterColorHandlersEvent.Block){
             event.register(LostArcanaClient.INFUSED_STONE_BLOCK_COLOR, *infusedStoneBlocks)
+            event.register(LostArcanaClient.NITOR_BLOCK_COLOR, +NITOR, +VIS_LIGHT)
         }
 
 

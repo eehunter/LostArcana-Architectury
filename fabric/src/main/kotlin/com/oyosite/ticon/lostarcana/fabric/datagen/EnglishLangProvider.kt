@@ -33,6 +33,9 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(THAUMIUM_NUGGET)
         add(THAUMIUM_BLOCK)
 
+        add(NITOR)
+        add(VIS_LIGHT)
+
         add(VIS_CRYSTAL, "Vis Crystal")
         add(WAND_ITEM, "Wand")
         add(WandItem.STORED_VIS_TOOLTIP, $$"%1$s Vis")

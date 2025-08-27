@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
+import com.oyosite.ticon.lostarcana.block.WARDED_JAR
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterMenuScreen
 import net.minecraft.core.BlockPos
@@ -30,6 +31,7 @@ val ARCANE_WORKBENCH_BLOCK_ENTITY = "arcane_workbench"(::ArcaneWorkbenchBlockEnt
 val ARCANE_WORKBENCH_MENU_SCREEN = "arcane_workbench"(::ArcaneWorkbenchMenu, FeatureFlagSet.of())
 val CRUCIBLE_BLOCK_ENTITY = "crucible"(::CrucibleBlockEntity, CRUCIBLE)
 val ARCANE_PEDESTAL_BLOCK_ENTITY = "arcane_pedestal"(::ArcanePedestalBlockEntity, ARCANE_PEDESTAL)
+val WARDED_JAR_BLOCK_ENTITY = "warded_jar"(::WardedJarBlockEntity, WARDED_JAR)
 
 val RECHARGE_PEDESTAL_BLOCK_ENTITY = "recharge_pedestal"(::RechargePedestalBlockEntity, RECHARGE_PEDESTAL)
 val VIS_LIGHT_BLOCK_ENTITY = "vis_light_block_entity"(::VisLightBlockEntity, VIS_LIGHT, NITOR)

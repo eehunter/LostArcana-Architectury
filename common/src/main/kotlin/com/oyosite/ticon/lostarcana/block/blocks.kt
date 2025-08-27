@@ -63,6 +63,8 @@ val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.of
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
 val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(prop.noOcclusion()) } % {}
 
+val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(prop) } % {}
+
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
 

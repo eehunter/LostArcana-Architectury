@@ -61,9 +61,9 @@ val GREATWOOD_SAPLING = "greatwood_sapling" % { SaplingBlock(GREATWOOD_GROWER, B
 
 val ARCANE_WORKBENCH = "arcane_workbench" % { ArcaneWorkbench(BlockProperties.ofFullCopy(Blocks.CRAFTING_TABLE)) } % {}
 val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRON)) } % {}
-val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(prop.noOcclusion()) } % {}
+val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(BlockProperties.ofFullCopy(Blocks.STONE).noOcclusion()) } % {}
 
-val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(prop) } % {}
+val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(BlockProperties.ofFullCopy(Blocks.FURNACE)) } % {}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}

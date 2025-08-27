@@ -21,3 +21,5 @@ val WAND_CAPS = itemTag("lostarcana:wand_caps")
 val WAND_CORES = itemTag("lostarcana:wand_cores")
 
 val GREATWOOD_LOGS = itemTag("lostarcana:greatwood_logs")
+
+val CRUCIBLE_HEAT_SOURCES = blockTag("lostarcana:crucible_heat_sources")

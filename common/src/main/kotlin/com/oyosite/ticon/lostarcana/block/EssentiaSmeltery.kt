@@ -10,7 +10,5 @@ class EssentiaSmeltery(properties: Properties) : Block(properties), EntityBlock 
     override fun newBlockEntity(
         blockPos: BlockPos,
         blockState: BlockState
-    ): BlockEntity? {
-        TODO("Not yet implemented")
-    }
+    ): BlockEntity? = null
 }

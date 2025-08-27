@@ -13,6 +13,7 @@ import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.ARCANE_PEDESTAL_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
 import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
@@ -167,6 +168,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.registerBlockEntityRenderer(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() }
             event.registerBlockEntityRenderer(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() }
             event.registerBlockEntityRenderer(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer() }
+            event.registerBlockEntityRenderer(ARCANE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer() }
             event.registerBlockEntityRenderer(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
         }
 

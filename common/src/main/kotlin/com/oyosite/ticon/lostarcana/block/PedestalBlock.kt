@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.block
 
+import com.oyosite.ticon.lostarcana.blockentity.AbstractPedestalBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.RechargePedestalBlockEntity
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
@@ -37,7 +38,7 @@ open class PedestalBlock(properties: Properties, val blockEntityFactory: (BlockP
     ): ItemInteractionResult {
         if(interactionHand != InteractionHand.MAIN_HAND) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         if(level.isClientSide)return ItemInteractionResult.SUCCESS
-        val be = level.getBlockEntity(blockPos) as? RechargePedestalBlockEntity ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+        val be = level.getBlockEntity(blockPos) as? AbstractPedestalBlockEntity ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         if(!be.item.isEmpty && player.getItemInHand(interactionHand).isEmpty){
             val (x,y,z) = player.position()
             level.addFreshEntity(ItemEntity(level, x, y, z, be.item))

@@ -66,6 +66,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
 
         add(ARCANE_WORKBENCH)
         add(ArcaneWorkbench.TITLE_KEY, "Arcane Workbench")
+        add(ARCANE_PEDESTAL)
+        add(RECHARGE_PEDESTAL)
 
         add(ThaumometerItem.AURA_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
         add(ThaumometerItem.NO_AURA_TRANSLATION_KEY, "No Aura detected.")

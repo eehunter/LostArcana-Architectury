@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-26T21:51:05.257106583	Lost Arcana/Block Loot Tables
+// 1.21.1	2025-08-27T14:04:41.128772769	Lost Arcana/Block Loot Tables
 0751637753153935cab0bfab60daed615324aa2e data/lostarcana/loot_table/blocks/greatwood_log.json
 06b3eff914df3e3ad24039487f2190fb77140200 data/lostarcana/loot_table/blocks/arcane_stone_tiles.json
 184e16ae8e378f963755d1b389c3ac4241b833a6 data/lostarcana/loot_table/blocks/aqua_infused_stone.json
@@ -12,6 +12,7 @@ d6ff34a9ce37fef75e75701bf6d67388bd84e747 data/lostarcana/loot_table/blocks/aer_i
 753498188c82f101245d0a45b41bbe3b4e5346ee data/lostarcana/loot_table/blocks/ordo_infused_stone.json
 2e0c80d6774742f3f8f565d4413d75a93f004f10 data/lostarcana/loot_table/blocks/arcane_stone.json
 6305eaefb35de715626278c3ac4bb8df1be24290 data/lostarcana/loot_table/blocks/arcane_workbench.json
+5ae44b3c85e5a64189239933ac00e3b43d0d2b08 data/lostarcana/loot_table/blocks/arcane_pedestal.json
 ff51a08686028fbea21bb690cd71366f882353dd data/lostarcana/loot_table/blocks/ignis_infused_stone.json
 e212e4a3ee7b84842e88c186b70aee227a3b0b6f data/lostarcana/loot_table/blocks/alchemical_brass_block.json
 a1745851b313ed8bf84640b68019a99401eba09c data/lostarcana/loot_table/blocks/multiblock/arcane_column.json

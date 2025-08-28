@@ -95,6 +95,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         DATA_COMPONENT_REGISTRAR.register("resonator", Supplier { RESONATOR })
         DATA_COMPONENT_REGISTRAR.register("focus_effect", Supplier { FOCUS_EFFECT })
         DATA_COMPONENT_REGISTRAR.register("focus", Supplier { FOCUS_COMPONENT })
+        DATA_COMPONENT_REGISTRAR.register("single_fluid_stack", Supplier { SINGLE_FLUID_STORAGE_COMPONENT })
 
         DATA_COMPONENT_REGISTRAR.register(modEventBus)
 

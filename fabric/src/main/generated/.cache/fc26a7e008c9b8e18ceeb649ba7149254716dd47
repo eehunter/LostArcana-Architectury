@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-28T13:53:15.019575867	Lost Arcana/Model Definitions
+// 1.21.1	2025-08-28T15:35:31.276084988	Lost Arcana/Model Definitions
 65dcf85ac05c3e01744f8ebd7ccef98950e391ca assets/lostarcana/models/block/arcane_stone_tile_slab_top.json
 f1c7c83c62bc8f90282a1bd5af9a43e33e872105 assets/lostarcana/models/block/vis_light.json
 6a12c4a8e3e8fedd4573890d07d213e82678119b assets/lostarcana/blockstates/greatwood_planks.json
@@ -43,8 +43,8 @@ bbf43abff47944d5435dbc1f7fd6bcadceb018b8 assets/lostarcana/blockstates/alchemica
 f1c7c83c62bc8f90282a1bd5af9a43e33e872105 assets/lostarcana/models/block/nitor.json
 31623be51cce3a013001893658d1d5bbe0595f09 assets/lostarcana/models/item/alchemical_brass_nugget.json
 13431ae2d1c467a27f4d7c6fcad6d126904be546 assets/lostarcana/models/block/arcane_stone_pillar.json
-4192c6f8bc1f837aa53a64fc5d7223904b2d89ea assets/lostarcana/blockstates/arcane_stone.json
 462b25a1160576020be281d927894b84d583fe0f assets/lostarcana/blockstates/ignis_infused_stone.json
+4192c6f8bc1f837aa53a64fc5d7223904b2d89ea assets/lostarcana/blockstates/arcane_stone.json
 53dd1ee57d4f976d1f65e0881dcc8a7ee275474d assets/lostarcana/models/block/arcane_stone_tile_stairs_outer.json
 14855c187ccf0f14ed5bed208b60ff501bfe00b7 assets/lostarcana/models/item/greatwood_log.json
 16dfcd5eca8515d62d1e921e44e59da0ad755ebb assets/lostarcana/models/item/thaumium_block.json

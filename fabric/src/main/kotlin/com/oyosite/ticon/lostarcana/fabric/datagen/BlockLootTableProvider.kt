@@ -37,6 +37,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             add(block, lootTable)
         }
         dropSelfWithFunction(+NITOR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
+        dropSelfWithFunction(+WARDED_JAR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
         listOf(
             ARCANE_STONE,
             ARCANE_STONE_TILES,

@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.aspect.times
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusHolder
+import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -58,3 +59,5 @@ val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.build
 val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = DataComponentType.builder<CastingFocusEffect>().persistent(CastingFocusEffect.CODEC).networkSynchronized(CastingFocusEffect.STREAM_CODEC).build()
 
 val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = DataComponentType.builder<CastingFocusHolder>().persistent(CastingFocusHolder.CODEC).networkSynchronized(CastingFocusHolder.STREAM_CODEC).build()
+
+val SINGLE_FLUID_STORAGE_COMPONENT: DataComponentType<ImmutableFluidStack> = DataComponentType.builder<ImmutableFluidStack>().persistent(ImmutableFluidStack.CODEC).networkSynchronized(ImmutableFluidStack.STREAM_CODEC).build()

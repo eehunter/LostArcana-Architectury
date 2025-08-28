@@ -5,8 +5,11 @@ import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
+import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack.Companion.immutableCopy
+import dev.architectury.fluid.FluidStack
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.component.DataComponents
@@ -64,7 +67,7 @@ val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRO
 val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(BlockProperties.ofFullCopy(Blocks.STONE).noOcclusion()) } % {}
 
 val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(BlockProperties.ofFullCopy(Blocks.FURNACE)) } % {}
-val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion().isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }) } % {}
+val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion().isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }) } % {component(SINGLE_FLUID_STORAGE_COMPONENT, FluidStack.empty().immutableCopy)}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}

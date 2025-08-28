@@ -64,7 +64,7 @@ val CRUCIBLE = "crucible" % { Crucible(BlockProperties.ofFullCopy(Blocks.CAULDRO
 val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(BlockProperties.ofFullCopy(Blocks.STONE).noOcclusion()) } % {}
 
 val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(BlockProperties.ofFullCopy(Blocks.FURNACE)) } % {}
-val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion()) }
+val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion().isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }) } % {}
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}

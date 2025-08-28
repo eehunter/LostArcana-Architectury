@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.fabric.client
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
+import com.oyosite.ticon.lostarcana.block.WARDED_JAR
 import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
@@ -10,6 +11,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
 import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
@@ -43,8 +45,10 @@ class LostArcanaFabricClient : ClientModInitializer {
         BlockEntityRendererRegistry.register(RECHARGE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer<RechargePedestalBlockEntity>() }
         BlockEntityRendererRegistry.register(ARCANE_PEDESTAL_BLOCK_ENTITY.value()) { PedestalRenderer<ArcanePedestalBlockEntity>() }
         BlockEntityRendererRegistry.register(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
+        BlockEntityRendererRegistry.register(WARDED_JAR_BLOCK_ENTITY.value()) { WardedJarRenderer() }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), WARDED_JAR.value())
 
         MenuScreens.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
 

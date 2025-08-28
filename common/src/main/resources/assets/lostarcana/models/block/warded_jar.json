@@ -4,9 +4,10 @@
 	"parent": "minecraft:block/cube",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "gimp:block/warded_jar",
-		"particle": "gimp:block/warded_jar"
+		"0": "lostarcana:block/warded_jar",
+		"particle": "lostarcana:block/warded_jar"
 	},
+    "render_type": "translucent",
 	"elements": [
 		{
 			"from": [3, 0, 3],

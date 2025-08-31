@@ -49,6 +49,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_PEDESTAL,
             GREATWOOD_LOG,
             GREATWOOD_PLANKS,
+            GREATWOOD_SAPLING,
             ALCHEMICAL_BRASS_BLOCK,
             THAUMIUM_BLOCK,
         ).allDropSelf
@@ -58,6 +59,8 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             ARCANE_STONE_TILE_SLAB
         ).asBlocks.forEach(::createSlabItemTable)
 
+
+        add(+GREATWOOD_LEAVES, createLeavesDrops(+GREATWOOD_LEAVES, +GREATWOOD_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f))
     }
 
     override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {

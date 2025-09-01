@@ -26,6 +26,8 @@ class WardedJarBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEn
             setChanged()
         }
 
+    var virtualContents: FluidStack? = null
+
     val maxFluidAmount get() = CAPACITY * FluidStackHooks.bucketAmount()
 
     fun isFluidValid(fluid: FluidStack) = true

@@ -9,6 +9,9 @@ import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.ItemInteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
@@ -18,12 +21,28 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
+import net.minecraft.world.phys.BlockHitResult
 import net.neoforged.neoforge.capabilities.Capabilities
+import net.neoforged.neoforge.fluids.FluidUtil
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
+
+fun handleTankBucketInteraction(
+    itemStack: ItemStack,
+    blockState: BlockState,
+    level: Level,
+    blockPos: BlockPos,
+    player: Player,
+    interactionHand: InteractionHand,
+    blockHitResult: BlockHitResult
+): ItemInteractionResult {
+    //val cap = Capabilities.FluidHandler.ITEM.getCapability(itemStack, null)?:return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+    return if(FluidUtil.interactWithFluidHandler(player, interactionHand, level, blockPos, blockHitResult.direction)) ItemInteractionResult.SUCCESS else ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+}
 
 operator fun <T: LootItemFunction> LootItemFunctionType<T>.invoke(name: String): Unit{
     LostArcanaNeoForge.NEOFORGE_LOOT_FUNCTIONS.register(name) { _ -> this }

@@ -32,6 +32,7 @@ import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
+import com.oyosite.ticon.lostarcana.neoforge.block.WardedJarFluidHandler
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.Holder
@@ -44,6 +45,8 @@ import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
+import net.neoforged.neoforge.capabilities.Capabilities
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
@@ -179,6 +182,11 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @SubscribeEvent
         fun registerMenuScreens(event: RegisterMenuScreensEvent){
             event.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
+        }
+
+        @SubscribeEvent
+        fun registerCapabilities(event: RegisterCapabilitiesEvent){
+            event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, WARDED_JAR_BLOCK_ENTITY.value()){ be, dir -> WardedJarFluidHandler(be) }
         }
 
         @SubscribeEvent

@@ -24,6 +24,7 @@ class WardedJarRenderer: BlockEntityRenderer<WardedJarBlockEntity> {
         j: Int
     ) {
         val fluidStack = blockEntity.fluidContents
+        if(fluidStack.isEmpty)return
         val level = blockEntity.level
         val color = FluidStackHooks.getColor(fluidStack)
         val sprite = FluidStackHooks.getStillTexture(blockEntity.fluidContents)?:return

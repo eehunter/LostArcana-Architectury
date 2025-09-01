@@ -3,15 +3,21 @@ package com.oyosite.ticon.lostarcana.util.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.blockentity.WardedJarBlockEntity
+import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.Container
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.ItemInteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
@@ -21,8 +27,26 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
+import net.minecraft.world.phys.BlockHitResult
+
+fun handleTankBucketInteraction(
+    itemStack: ItemStack,
+    blockState: BlockState,
+    level: Level,
+    blockPos: BlockPos,
+    player: Player,
+    interactionHand: InteractionHand,
+    blockHitResult: BlockHitResult
+): ItemInteractionResult{
+    return if(FluidStorageUtil.interactWithFluidStorage(
+        ((level.getBlockEntity(blockPos) as? WardedJarBlockEntity)?:return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION).let(::WardedJarFluidStorage),
+        player,
+        interactionHand
+    )) ItemInteractionResult.SUCCESS else ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+}
 
 operator fun <T: LootItemFunction> LootItemFunctionType<T>.invoke(name: String): Unit{
     Registry.register(BuiltInRegistries.LOOT_FUNCTION_TYPE, LostArcana.id(name), this)

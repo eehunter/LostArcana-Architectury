@@ -3,6 +3,8 @@ package com.oyosite.ticon.lostarcana.fabric
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.init
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.blockentity.WARDED_JAR_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
 import com.oyosite.ticon.lostarcana.item.ASPECTS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.FOCUS_COMPONENT
@@ -23,6 +25,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.level.levelgen.GenerationStep
@@ -59,6 +62,7 @@ class LostArcanaFabric : ModInitializer {
         DATA_COMPONENT_REGISTRAR.register()
         init()
 
+        FluidStorage.SIDED.registerForBlockEntity({be, dir -> WardedJarFluidStorage(be)}, WARDED_JAR_BLOCK_ENTITY.value())
 
     }
 }

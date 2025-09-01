@@ -1,6 +1,7 @@
 package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.blockentity.WardedJarBlockEntity
+import com.oyosite.ticon.lostarcana.util.handleTankBucketInteraction
 import dev.architectury.fluid.FluidStack
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionHand
@@ -35,12 +36,12 @@ class WardedJar(properties: Properties) : Block(properties), EntityBlock {
         interactionHand: InteractionHand,
         blockHitResult: BlockHitResult
     ): ItemInteractionResult {
-        val be = (level.getBlockEntity(blockPos) as? WardedJarBlockEntity)?:return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+        /*val be = (level.getBlockEntity(blockPos) as? WardedJarBlockEntity)?:return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         val heldStack = player.getItemInHand(interactionHand)
         if(heldStack.item == Items.BUCKET){
 
-        }
-        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult)
+        }*/
+        return handleTankBucketInteraction(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult)
     }
 
     override fun getVisualShape(

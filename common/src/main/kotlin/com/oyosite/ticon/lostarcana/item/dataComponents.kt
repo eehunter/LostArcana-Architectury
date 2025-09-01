@@ -1,9 +1,11 @@
 package com.oyosite.ticon.lostarcana.item
 
+import com.klikli_dev.modonomicon.util.StreamCodecs
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.AspectStacks
 import com.oyosite.ticon.lostarcana.Identifier
+import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.aspect.times
@@ -46,6 +48,10 @@ val ASPECTS_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>
 
 val ASPECT_COMPONENT: DataComponentType<AspectStack> = DataComponentType.builder<AspectStack>().networkSynchronized(ASPECT_STREAM_CODEC).persistent(ASPECT_CODEC).build()
 val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = DataComponentType.builder<AspectStacks>().networkSynchronized(ASPECTS_STREAM_CODEC).persistent(ASPECTS_CODEC).build()
+
+val RAW_ASPECT_CODEC = AspectRegistry.ASPECT_REGISTRY.byNameCodec()
+val RAW_ASPECT_STREAM_CODEC = StreamCodec.composite(Identifier.STREAM_CODEC, AspectRegistry.ASPECT_REGISTRY::getKey, AspectRegistry.ASPECT_REGISTRY::get)
+val RAW_ASPECT_COMPONENT: DataComponentType<Aspect> = DataComponentType.builder<Aspect>().persistent(RAW_ASPECT_CODEC).networkSynchronized(RAW_ASPECT_STREAM_CODEC).build()
 
 val VIS_STORAGE_COMPONENT: DataComponentType<Float> = DataComponentType.builder<Float>().persistent(Codec.FLOAT).networkSynchronized(StreamCodec.of(ByteBuf::writeFloat, ByteBuf::readFloat)).build()
 

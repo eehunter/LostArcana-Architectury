@@ -11,6 +11,9 @@ import kotlin.math.min
 
 @JvmInline
 value class WardedJarFluidStorage(val be: WardedJarBlockEntity): Storage<FluidVariant>, StorageView<FluidVariant> {
+
+    //WARNING: This is probably a little broken. I don't think it can currently handle more than one fluid interaction occurring in a single transaction.
+
     override fun insert(
         variant: FluidVariant,
         amount: Long,

@@ -3,9 +3,8 @@ package com.oyosite.ticon.lostarcana.util.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
 import com.oyosite.ticon.lostarcana.blockentity.WardedJarBlockEntity
-import com.oyosite.ticon.lostarcana.fabric.LostArcanaFabric
 import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
@@ -34,7 +33,9 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
 
-val platformAspectRegistry: Registry<Aspect> get() = LostArcanaFabric.FABRIC_ASPECT_REGISTRY
+fun platformCreateAspectRegistry(): Registry<Aspect> = FabricRegistryBuilder.createSimple(ASPECT_REGISTRY_KEY)
+    .attribute(RegistryAttribute.SYNCED)
+    .buildAndRegister()
 
 fun handleTankBucketInteraction(
     itemStack: ItemStack,

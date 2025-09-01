@@ -1,9 +1,9 @@
 package com.oyosite.ticon.lostarcana.emi
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.SALIS_MUNDIS
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
@@ -36,7 +36,7 @@ class LostArcanaEmiPlugin: EmiPlugin {
     val E = EmiIngredient.of(Ingredient.EMPTY)
     val visCrystal = EmiIngredient.of(PRIMAL_ASPECTS.map(Aspect::unaryPlus).map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, it) } }.map{ Ingredient.of(it) }.map(EmiIngredient::of))
 
-    val allVisCrystals = AspectRegistry.ASPECT_REGISTRY.map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, +it) } }.map(EmiStack::of)
+    val allVisCrystals = ASPECT_REGISTRY.map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, +it) } }.map(EmiStack::of)
 
     override fun register(emiRegistry: EmiRegistry) {
         emiRegistry.addCategory(ArcaneWorkbenchEmi.CATEGORY)

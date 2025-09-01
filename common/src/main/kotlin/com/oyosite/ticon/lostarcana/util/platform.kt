@@ -24,8 +24,8 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
 
-@get:ExpectPlatform
-val platformAspectRegistry: Registry<Aspect> get() = throw AssertionError("No platform implementation.")
+@ExpectPlatform
+fun platformCreateAspectRegistry(): Registry<Aspect> = throw AssertionError("No platform implementation.")
 
 @ExpectPlatform
 fun handleTankBucketInteraction(

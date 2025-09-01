@@ -1,10 +1,10 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.Identifier
+import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.aspects
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.recipe.CrucibleRecipe
 import com.oyosite.ticon.lostarcana.tag.CRUCIBLE_HEAT_SOURCES
 import net.minecraft.core.BlockPos
@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.tags.BlockTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.item.ItemEntity
@@ -89,7 +88,7 @@ class CrucibleBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEnt
         val aspectsTag = compoundTag.getCompound("aspects")
         aspects.clear()
         aspectsTag.allKeys.forEach {
-            val aspect = AspectRegistry.ASPECT_REGISTRY.get(Identifier.parse(it)) ?: return@forEach println("Aspect $it was not registered, discarding")
+            val aspect = ASPECT_REGISTRY.get(Identifier.parse(it)) ?: return@forEach println("Aspect $it was not registered, discarding")
             aspects[aspect] = aspectsTag.getInt(it)
         }
         heatLevel = compoundTag.getInt("heat")
@@ -99,7 +98,7 @@ class CrucibleBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEnt
     override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
         compoundTag.putLong("water", fluidAmount)
         val aspectsTag = CompoundTag()
-        aspects.forEach { (aspect, amt) -> aspectsTag.putInt(AspectRegistry.ASPECT_REGISTRY.getKey(aspect)?.toString() ?: return@forEach println("Aspect $aspect was not registered, discarding") , amt) }
+        aspects.forEach { (aspect, amt) -> aspectsTag.putInt(ASPECT_REGISTRY.getKey(aspect)?.toString() ?: return@forEach println("Aspect $aspect was not registered, discarding") , amt) }
         compoundTag.put("aspects", aspectsTag)
         compoundTag.putInt("heat", heatLevel)
         waterColor = 0

@@ -1,10 +1,10 @@
 package com.oyosite.ticon.lostarcana.neoforge
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.ASPECT_REGISTRY_KEY
-import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry.platform_aspect_registry
+import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
+import com.oyosite.ticon.lostarcana.aspect.registerBuiltinAspects
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
@@ -54,7 +54,6 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent
 import net.neoforged.neoforge.registries.DeferredRegister
 import net.neoforged.neoforge.registries.NewRegistryEvent
-import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
 
 
@@ -65,18 +64,20 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
     init {
         print("Hello world NeoForge")
 
+        //NEOFORGE_ASPECT_REGISTRY
 
-        NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_ATTRIBUTES.register(modEventBus)
         NEOFORGE_BLOCK_ENTITY_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_TYPES.register(modEventBus)
         NEOFORGE_RECIPE_SERIALIZERS.register(modEventBus)
         NEOFORGE_MENU_SCREENS.register(modEventBus)
+        NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
         NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
 
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
+        registerBuiltinAspects()
 
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
@@ -87,6 +88,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
+        DATA_COMPONENT_REGISTRAR.register("raw_aspect", Supplier { RAW_ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("vis_storage", Supplier { VIS_STORAGE_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("wand_cap", Supplier { WAND_CAP })
         DATA_COMPONENT_REGISTRAR.register("wand_cap_2", Supplier { WAND_CAP_2 })
@@ -104,9 +106,9 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
     @EventBusSubscriber(modid = LostArcana.MOD_ID)
     companion object {
-        val NEOFORGE_ASPECT_REGISTRY = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
 
-        val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
+        //val NEOFORGE_ASPECT_REGISTRY = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
+
         val NEOFORGE_ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, LostArcana.MOD_ID)
         val NEOFORGE_ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, LostArcana.MOD_ID)
         val NEOFORGE_ADVANCEMENT_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, LostArcana.MOD_ID)
@@ -115,12 +117,13 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, LostArcana.MOD_ID)
         val NEOFORGE_MENU_SCREENS = DeferredRegister.create(Registries.MENU, LostArcana.MOD_ID)
         val NEOFORGE_CASTING_EFFECT_TYPES = DeferredRegister.create(CastingFocusEffectType.REGISTRY_KEY, LostArcana.MOD_ID)
+        val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic
         fun registerRegistries(event: NewRegistryEvent) {
-            event.register(AspectRegistry.ASPECT_REGISTRY)
+            event.register(ASPECT_REGISTRY)
             event.register(CastingFocusEffectType.REGISTRY)
         }
 

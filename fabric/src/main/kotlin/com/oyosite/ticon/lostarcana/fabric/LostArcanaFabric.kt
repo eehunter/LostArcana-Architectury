@@ -65,8 +65,5 @@ class LostArcanaFabric : ModInitializer {
     }
 
     companion object{
-        val FABRIC_ASPECT_REGISTRY = FabricRegistryBuilder.createSimple(AspectRegistry.ASPECT_REGISTRY_KEY)
-            .attribute(RegistryAttribute.SYNCED)
-            .buildAndRegister()
     }
 }

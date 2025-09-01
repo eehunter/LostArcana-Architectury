@@ -34,7 +34,7 @@ object LostArcana {
         println("Hello world")
         registerAspectsForVanillaItems()
         THAUMOMETER_SCAN_TRIGGER
-        if(Platform.isFabric())ASPECTS.register()// NeoForge doesn't like calling Architectury DeferredRegisters from the mod's main entrypoint
+        if(Platform.isFabric()) ASPECTS.register()// NeoForge doesn't like calling Architectury DeferredRegisters from the mod's main entrypoint
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
         if(Platform.isFabric())ATTRIBUTE_REGISTRY.register()

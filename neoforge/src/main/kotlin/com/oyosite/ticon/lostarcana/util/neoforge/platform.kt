@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.util.neoforge
 
 import com.mojang.datafixers.types.Type
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
@@ -30,6 +31,8 @@ import net.neoforged.neoforge.fluids.FluidUtil
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
+
+val platformAspectRegistry: Registry<Aspect> get() = LostArcanaNeoForge.NEOFORGE_ASPECT_REGISTRY
 
 fun handleTankBucketInteraction(
     itemStack: ItemStack,

@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.util
 
+import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import dev.architectury.injectables.annotations.ExpectPlatform
@@ -22,6 +23,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
+
+@get:ExpectPlatform
+val platformAspectRegistry: Registry<Aspect> get() = throw AssertionError("No platform implementation.")
 
 @ExpectPlatform
 fun handleTankBucketInteraction(

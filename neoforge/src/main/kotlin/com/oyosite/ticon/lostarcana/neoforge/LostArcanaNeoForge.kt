@@ -62,11 +62,8 @@ import java.util.function.Supplier
 class LostArcanaNeoForge(modEventBus: IEventBus) {
 
     val DATA_COMPONENT_REGISTRAR = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, LostArcana.MOD_ID)
-
     init {
         print("Hello world NeoForge")
-
-        platform_aspect_registry = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
 
 
         NEOFORGE_ASPECTS.register(modEventBus)
@@ -107,6 +104,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
     @EventBusSubscriber(modid = LostArcana.MOD_ID)
     companion object {
+        val NEOFORGE_ASPECT_REGISTRY = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()
+
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, LostArcana.MOD_ID)
         val NEOFORGE_ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, LostArcana.MOD_ID)

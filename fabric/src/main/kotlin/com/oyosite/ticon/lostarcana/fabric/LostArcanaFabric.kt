@@ -35,10 +35,8 @@ class LostArcanaFabric : ModInitializer {
 
     @Suppress("unchecked_cast")
     override fun onInitialize() {
-        AspectRegistry.platform_aspect_registry =
-            FabricRegistryBuilder.createSimple(AspectRegistry.ASPECT_REGISTRY_KEY)
-            .attribute(RegistryAttribute.SYNCED)
-            .buildAndRegister()
+        //AspectRegistry.platform_aspect_registry =
+
 
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
@@ -64,5 +62,11 @@ class LostArcanaFabric : ModInitializer {
 
         FluidStorage.SIDED.registerForBlockEntity({be, dir -> WardedJarFluidStorage(be)}, WARDED_JAR_BLOCK_ENTITY.value())
 
+    }
+
+    companion object{
+        val FABRIC_ASPECT_REGISTRY = FabricRegistryBuilder.createSimple(AspectRegistry.ASPECT_REGISTRY_KEY)
+            .attribute(RegistryAttribute.SYNCED)
+            .buildAndRegister()
     }
 }

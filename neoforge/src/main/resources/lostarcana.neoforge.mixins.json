@@ -7,6 +7,9 @@
     "ArcaneColumnMixin"
   ],
   "mixins": [
+    "EssentiaBucketItemMixin",
+    "EssentiaFlowMixin",
+    "EssentiaSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

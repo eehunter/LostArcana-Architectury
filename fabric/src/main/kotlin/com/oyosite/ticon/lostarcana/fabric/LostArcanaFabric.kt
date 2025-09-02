@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.LostArcana.init
+import com.oyosite.ticon.lostarcana.aspect.registerBuiltinAspects
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
 import com.oyosite.ticon.lostarcana.blockentity.WARDED_JAR_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
@@ -40,6 +41,7 @@ class LostArcanaFabric : ModInitializer {
 
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
+        registerBuiltinAspects()
 
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }

@@ -25,5 +25,6 @@ class LostArcanaDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::FusionModels)
         pack.addProvider(::FusionTextureMetadata)
         pack.addProvider(::FeatureProvider)
+        pack.addProvider(::FluidTagProvider)
     }
 }

@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.blockentity.VisLightBlockEntity
 import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
+import com.oyosite.ticon.lostarcana.item.RAW_ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.WandItem
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry
@@ -20,6 +21,7 @@ import net.minecraft.world.item.component.DyedItemColor
 
 object LostArcanaClient {
     val VIS_CRYSTAL_ITEM_COLOR = ItemColor{ stack, _ -> (stack.aspects[0].aspect.color or 0xFF000000u).toInt()  }
+    val RAW_ASPECTED_ITEM_COLOR = ItemColor{ stack, i -> (if(i==1) (stack[RAW_ASPECT_COMPONENT]?.color?:0xFFFFFFFFu) or 0xFF000000u else 0xFFFFFFFFu).toInt()  }
     val THAUMOMETER_ITEM_COLOR = ItemColor{ stack, tintIndex -> (if(tintIndex==1) 0xFFdb00ffu else 0xFFffffffu).toInt() }
     val WAND_ITEM_COLOR = ItemColor(WandItem::getTintColor)
     val NITOR_ITEM_COLOR = ItemColor{ stack, i -> if(i==0) DyedItemColor.getOrDefault(stack, VisLight.DEFAULT_COLOR) else -1 }

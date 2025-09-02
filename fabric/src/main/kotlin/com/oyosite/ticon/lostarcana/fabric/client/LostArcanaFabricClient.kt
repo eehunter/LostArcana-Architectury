@@ -12,6 +12,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRender
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
+import com.oyosite.ticon.lostarcana.item.ESSENTIA_BUCKET_ITEM
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
@@ -39,6 +40,7 @@ class LostArcanaFabricClient : ClientModInitializer {
         ColorProviderRegistry.ITEM.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.WAND_ITEM_COLOR, +WAND_ITEM)
         ColorProviderRegistry.ITEM.register(LostArcanaClient.NITOR_ITEM_COLOR, +NITOR)
+        ColorProviderRegistry.ITEM.register(LostArcanaClient.RAW_ASPECTED_ITEM_COLOR, +ESSENTIA_BUCKET_ITEM)
 
         BlockEntityRendererRegistry.register(MAGIC_BRICKS_BLOCK_ENTITY.value()) { MagicBricksBlockEntityRenderer() as BlockEntityRenderer<MagicBricksBlockEntity> }
         BlockEntityRendererRegistry.register(ARCANE_COLUMN_BLOCK_ENTITY.value()) { ArcaneColumnRenderer() as BlockEntityRenderer<ArcaneColumnBlockEntity> }

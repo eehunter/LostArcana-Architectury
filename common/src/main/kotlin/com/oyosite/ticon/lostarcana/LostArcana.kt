@@ -7,6 +7,7 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
+import com.oyosite.ticon.lostarcana.block.fluid.FLUID_REGISTRY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
@@ -32,9 +33,11 @@ object LostArcana {
     @JvmStatic
     fun init() {
         println("Hello world")
+        FLUID_REGISTRY
         registerAspectsForVanillaItems()
         THAUMOMETER_SCAN_TRIGGER
         if(Platform.isFabric()) ASPECTS.register()// NeoForge doesn't like calling Architectury DeferredRegisters from the mod's main entrypoint
+        FLUID_REGISTRY.register()
         BLOCK_REGISTRY.register()
         ITEM_REGISTRY.register()
         if(Platform.isFabric())ATTRIBUTE_REGISTRY.register()

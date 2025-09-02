@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lostarcana:item/essentia_bucket",
+    "layer1": "lostarcana:item/essentia_bucket_liquid"
+  }
+}

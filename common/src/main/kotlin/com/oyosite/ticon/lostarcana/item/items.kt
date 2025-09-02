@@ -1,11 +1,14 @@
 package com.oyosite.ticon.lostarcana.item
 
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
+import com.oyosite.ticon.lostarcana.aspect.AER
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusItem
 import com.oyosite.ticon.lostarcana.item.focus.VisLightEffect
 import com.oyosite.ticon.lostarcana.itemTag
 import com.oyosite.ticon.lostarcana.tag.COMMON_GOLD_INGOTS
 import com.oyosite.ticon.lostarcana.unaryPlus
+import dev.architectury.core.item.ArchitecturyBucketItem
 import dev.architectury.injectables.annotations.ExpectPlatform
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
@@ -44,6 +47,7 @@ val TEST_FOCUS = "test_light_focus" * { CastingFocusItem(Item.Properties().stack
 
 val WOOD_PLANKS = itemTag("minecraft:planks")
 
+val ESSENTIA_BUCKET_ITEM = "essentia_bucket" * { EssentiaBucketItem(ESSENTIA_FLUID::get, Item.Properties().component(RAW_ASPECT_COMPONENT, AER)) }
 
 val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
     ArmorMaterial(Util.make(EnumMap(ArmorItem.Type::class.java)) {

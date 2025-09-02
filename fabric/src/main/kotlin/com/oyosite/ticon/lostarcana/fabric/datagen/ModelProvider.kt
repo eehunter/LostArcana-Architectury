@@ -97,6 +97,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
 
         img.register((+NITOR).asItem(), ModelTemplates.TWO_LAYERED_ITEM, "_flame", "_dot")
+        img.register(+ESSENTIA_BUCKET_ITEM, ModelTemplates.TWO_LAYERED_ITEM, "", "_liquid")
 
         img.generateFlatItem(+SALIS_MUNDIS, ModelTemplates.FLAT_ITEM)
         //img.generateFlatItem(+WAND_ITEM, ModelTemplates.FLAT_ITEM)

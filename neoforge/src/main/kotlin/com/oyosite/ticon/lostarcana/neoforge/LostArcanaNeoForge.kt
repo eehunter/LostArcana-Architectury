@@ -12,6 +12,8 @@ import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID_ATTRIBUTES
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_PEDESTAL_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
@@ -32,12 +34,19 @@ import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
+import com.oyosite.ticon.lostarcana.neoforge.block.EssentiaFluidType
 import com.oyosite.ticon.lostarcana.neoforge.block.WardedJarFluidHandler
 import com.oyosite.ticon.lostarcana.unaryPlus
+import dev.architectury.hooks.fluid.LiquidBlockHooks
+import dev.architectury.hooks.fluid.forge.FluidStackHooksForge
 import dev.architectury.registry.registries.RegistrySupplier
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.ai.attributes.Attribute
+import net.minecraft.world.level.BlockAndTintGetter
+import net.minecraft.world.level.material.FluidState
 import net.neoforged.bus.api.EventPriority
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.bus.api.SubscribeEvent
@@ -51,8 +60,13 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent
+import net.neoforged.neoforge.fluids.FluidStack
+import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.registries.DeferredRegister
+import net.neoforged.neoforge.registries.NeoForgeRegistries
 import net.neoforged.neoforge.registries.NewRegistryEvent
 import java.util.function.Supplier
 
@@ -75,6 +89,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
         NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
 
+        FLUID_TYPES.register(modEventBus)
+
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
         registerBuiltinAspects()
@@ -85,6 +101,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_ARMOR_MATERIALS.register(modEventBus)
 
         NEOFORGE_ADVANCEMENT_TRIGGERS.register(modEventBus)
+
+
 
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
@@ -120,6 +138,10 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
 
+        val FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, LostArcana.MOD_ID)
+
+        val ESSENTIA_FLUID_TYPE = FLUID_TYPES.register("essentia_fluid") { -> EssentiaFluidType(FluidType.Properties.create(), ESSENTIA_FLUID_ATTRIBUTES) }
+
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         @JvmStatic
         fun registerRegistries(event: NewRegistryEvent) {
@@ -136,6 +158,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.register(LostArcanaClient.THAUMOMETER_ITEM_COLOR, +THAUMOMETER, +GOGGLES_OF_REVEALING)
             event.register(LostArcanaClient.WAND_ITEM_COLOR, +WAND_ITEM)
             event.register(LostArcanaClient.NITOR_ITEM_COLOR, +NITOR)
+            event.register(LostArcanaClient.RAW_ASPECTED_ITEM_COLOR, +ESSENTIA_BUCKET_ITEM)
         }
 
         @SubscribeEvent
@@ -189,7 +212,24 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @SubscribeEvent
         fun registerCapabilities(event: RegisterCapabilitiesEvent){
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, WARDED_JAR_BLOCK_ENTITY.value()){ be, dir -> WardedJarFluidHandler(be) }
+            //event.registerItem(Capabilities.FluidHandler.ITEM, , ESSENTIA_BUCKET_ITEM.get())
         }
+
+        @SubscribeEvent
+        fun registerClientExtensions(event: RegisterClientExtensionsEvent){
+            println(ESSENTIA_FLUID.value().fluidType)
+            event.registerFluidType(object : IClientFluidTypeExtensions{
+                override fun getTintColor(stack: FluidStack): Int = ESSENTIA_FLUID_ATTRIBUTES.getColor(FluidStackHooksForge.fromForge(stack))
+                override fun getTintColor(state: FluidState, getter: BlockAndTintGetter, pos: BlockPos): Int = ESSENTIA_FLUID_ATTRIBUTES.getColor(state, getter, pos)
+                override fun getFlowingTexture(): ResourceLocation = ESSENTIA_FLUID_ATTRIBUTES.flowingTexture
+                override fun getStillTexture(): ResourceLocation = ESSENTIA_FLUID_ATTRIBUTES.sourceTexture
+                override fun getOverlayTexture(): ResourceLocation? = ESSENTIA_FLUID_ATTRIBUTES.overlayTexture
+            }, ESSENTIA_FLUID.value().fluidType)
+        }
+
+        //fun registerCommonExtensions(event: )
+
+        //fun registerFluidTypes(event: FluidType)
 
         @SubscribeEvent
         @JvmStatic

@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Block
 fun itemTag(id: String): TagKey<Item> = TagKey.create(Registries.ITEM, LostArcana.id(id))
 fun blockTag(id: String): TagKey<Block> = TagKey.create(Registries.BLOCK, LostArcana.id(id))
 
-inline operator fun <reified T> RegistrySupplier<T>.unaryPlus(): T = get()
+operator fun <T> RegistrySupplier<T>.unaryPlus(): T = get()
 
 
 @Suppress("unchecked_cast")

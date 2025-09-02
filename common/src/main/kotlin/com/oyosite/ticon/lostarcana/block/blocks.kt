@@ -5,10 +5,13 @@ import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
+import com.oyosite.ticon.lostarcana.block.fluid.EssentiaLiquidBlock
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack.Companion.immutableCopy
+import dev.architectury.core.block.ArchitecturyLiquidBlock
 import dev.architectury.fluid.FluidStack
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
@@ -68,6 +71,7 @@ val ARCANE_PEDESTAL = "arcane_pedestal" % { ArcanePedestal(BlockProperties.ofFul
 
 val ESSENTIA_SMELTERY = "essentia_smeltery" % { EssentiaSmeltery(BlockProperties.ofFullCopy(Blocks.FURNACE)) } % {}
 val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion().isSuffocating { _, _, _ -> false }.isViewBlocking { _, _, _ -> false }) } % {component(SINGLE_FLUID_STORAGE_COMPONENT, FluidStack.empty().immutableCopy)}
+val ESSENTIA_FLUID_BLOCK = "essentia_fluid" % { EssentiaLiquidBlock(ESSENTIA_FLUID::get, BlockProperties.ofFullCopy(Blocks.WATER)) }
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}

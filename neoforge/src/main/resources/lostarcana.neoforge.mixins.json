@@ -9,7 +9,8 @@
   "mixins": [
     "EssentiaBucketItemMixin",
     "EssentiaFlowMixin",
-    "EssentiaSourceMixin"
+    "EssentiaSourceMixin",
+    "FluidBucketWrapperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

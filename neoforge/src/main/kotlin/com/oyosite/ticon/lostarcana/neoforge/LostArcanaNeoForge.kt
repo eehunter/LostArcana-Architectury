@@ -34,6 +34,7 @@ import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
+import com.oyosite.ticon.lostarcana.item.neoforge.EssentiaBucketWrapper
 import com.oyosite.ticon.lostarcana.neoforge.block.EssentiaFluidType
 import com.oyosite.ticon.lostarcana.neoforge.block.WardedJarFluidHandler
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -212,7 +213,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @SubscribeEvent
         fun registerCapabilities(event: RegisterCapabilitiesEvent){
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, WARDED_JAR_BLOCK_ENTITY.value()){ be, dir -> WardedJarFluidHandler(be) }
-            //event.registerItem(Capabilities.FluidHandler.ITEM, , ESSENTIA_BUCKET_ITEM.get())
+            //event.registerItem(Capabilities.FluidHandler.ITEM, { stack, _ -> EssentiaBucketWrapper(stack) }, ESSENTIA_BUCKET_ITEM.get())
         }
 
         @SubscribeEvent

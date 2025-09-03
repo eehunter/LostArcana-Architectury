@@ -9,6 +9,7 @@
   ],
   "mixins": [
     "EmptyBucketStorageMixin",
+    "FluidStackImplMixin",
     "FluidStorageMixin",
     "ShapedRecipeBuilderMixin",
     "ShapelessRecipeBuilderAccessor"

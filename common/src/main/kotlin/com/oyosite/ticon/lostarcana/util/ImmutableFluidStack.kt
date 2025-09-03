@@ -51,11 +51,12 @@ interface ImmutableFluidStack {
             override fun toString(): String = stack.components.toString()
         }
 
-        val CODEC: Codec<ImmutableFluidStack> = RecordCodecBuilder.create {
+        val CODEC: Codec<ImmutableFluidStack> = FluidStack.CODEC.xmap({it.immutableCopy}, ImmutableFluidStack::copy)
+            /*RecordCodecBuilder.create {
             it.group(
                 FluidStack.CODEC.fieldOf("stack").forGetter(ImmutableFluidStack::copy)
             ).apply(it){ stack: FluidStack -> stack.immutableCopy }
-        }
+        }*/
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ImmutableFluidStack> = StreamCodec.of<RegistryFriendlyByteBuf, ImmutableFluidStack>({ buf, immutableStack ->
             FluidStack.STREAM_CODEC.encode(buf, immutableStack.copy)

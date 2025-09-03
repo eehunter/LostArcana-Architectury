@@ -23,7 +23,9 @@ value class WardedJarFluidStorage(val be: WardedJarBlockEntity): Storage<FluidVa
         if(!stack.isEmpty && variant != FluidStackHooksFabric.toFabric(stack)) return 0L
         if(stack.amount + amount < be.maxFluidAmount){
             ctx.addOuterCloseCallback { r ->
+                println(variant)
                 val s = if(stack.isEmpty) FluidStackHooksFabric.fromFabric(variant, amount) else stack.apply{grow(amount)}
+                println(s.components)
                 if(r.wasCommitted()) be.fluidContents = s
             }
 
@@ -31,6 +33,7 @@ value class WardedJarFluidStorage(val be: WardedJarBlockEntity): Storage<FluidVa
         } else {
             val amt = min(amount, be.maxFluidAmount-stack.amount)
             ctx.addOuterCloseCallback { r ->
+                println(variant)
                 val s = if(stack.isEmpty) FluidStackHooksFabric.fromFabric(variant, amt) else stack.apply{grow(amt)}
                 if(r.wasCommitted()) be.fluidContents = s
             }

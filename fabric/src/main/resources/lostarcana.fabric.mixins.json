@@ -8,6 +8,8 @@
     "LiquidBlockRendererAccessor"
   ],
   "mixins": [
+    "EmptyBucketStorageMixin",
+    "FluidStorageMixin",
     "ShapedRecipeBuilderMixin",
     "ShapelessRecipeBuilderAccessor"
   ],

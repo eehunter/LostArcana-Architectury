@@ -1,5 +1,9 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
+import com.mojang.serialization.JsonOps
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack.Companion.immutableCopy
 import dev.architectury.fluid.FluidStack
@@ -23,6 +27,10 @@ class WardedJarBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEn
         set(value) {
             //field = value
             applyComponents(components(), DataComponentPatch.builder().set(SINGLE_FLUID_STORAGE_COMPONENT, value.immutableCopy).build())
+
+            println(value.patch)
+            //println(FluidStack.CODEC.encode(value, JsonOps.INSTANCE, JsonObject()))
+            //println(components())
             setChanged()
         }
 
@@ -39,13 +47,13 @@ class WardedJarBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEn
         //applyComponents(components(), DataComponentPatch.builder().set(SINGLE_FLUID_STORAGE_COMPONENT, fluidContents.immutableCopy).build())
     }
 
-    override fun collectImplicitComponents(builder: DataComponentMap.Builder) {
+    /*override fun collectImplicitComponents(builder: DataComponentMap.Builder) {
         //builder.set(SINGLE_FLUID_STORAGE_COMPONENT, fluidContents.immutableCopy)
     }
 
     override fun applyImplicitComponents(dataComponentInput: DataComponentInput) {
         //fluidContents = dataComponentInput.get(SINGLE_FLUID_STORAGE_COMPONENT)?.copy ?: FluidStack.empty()
-    }
+    }*/
 
     override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
 

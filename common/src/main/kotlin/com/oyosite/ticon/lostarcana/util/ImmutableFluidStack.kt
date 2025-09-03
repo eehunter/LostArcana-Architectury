@@ -58,10 +58,11 @@ interface ImmutableFluidStack {
             ).apply(it){ stack: FluidStack -> stack.immutableCopy }
         }*/
 
-        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ImmutableFluidStack> = StreamCodec.of<RegistryFriendlyByteBuf, ImmutableFluidStack>({ buf, immutableStack ->
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ImmutableFluidStack> = FluidStack.STREAM_CODEC.map({ it.immutableCopy }, ImmutableFluidStack::copy)
+            /*StreamCodec.of<RegistryFriendlyByteBuf, ImmutableFluidStack>({ buf, immutableStack ->
             FluidStack.STREAM_CODEC.encode(buf, immutableStack.copy)
         }){ buf ->
             FluidStack.STREAM_CODEC.decode(buf).immutableCopy
-        }
+        }*/
     }
 }

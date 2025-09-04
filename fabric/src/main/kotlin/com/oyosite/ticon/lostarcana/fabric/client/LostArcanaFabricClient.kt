@@ -64,16 +64,6 @@ class LostArcanaFabricClient : ClientModInitializer {
 
         MenuScreens.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
 
-        //FluidVariantRendering.register(+ESSENTIA_FLUID, EssentiaVariantRenderHandler)
-        //FluidVariantRendering.register(+ESSENTIA_FLUID_FLOWING, EssentiaVariantRenderHandler)
-        //FluidRenderHandlerRegistry.INSTANCE.register(+ESSENTIA_FLUID, +ESSENTIA_FLUID_FLOWING, { variant, _, _ -> variant })
-
         LostArcanaClient.initClient()
-    }
-
-    object EssentiaVariantRenderHandler : FluidVariantRenderHandler{
-        override fun getColor(fluidVariant: FluidVariant?, view: BlockAndTintGetter?, pos: BlockPos?): Int {
-            return fluidVariant?.components?.get(RAW_ASPECT_COMPONENT)?.getOrNull()?.color?.or(0xFF000000u)?.toInt()?:super.getColor(fluidVariant, view, pos)
-        }
     }
 }

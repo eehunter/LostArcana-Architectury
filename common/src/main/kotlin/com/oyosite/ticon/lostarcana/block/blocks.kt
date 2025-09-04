@@ -74,7 +74,7 @@ val WARDED_JAR = "warded_jar" % { WardedJar(prop.noOcclusion().isSuffocating { _
 val ESSENTIA_FLUID_BLOCK = "essentia_fluid" % { EssentiaLiquidBlock(ESSENTIA_FLUID::get, BlockProperties.ofFullCopy(Blocks.WATER)) }
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
-val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
+val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {}//{component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

@@ -15,6 +15,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.core.Direction
 
 class WardedJarRenderer: BlockEntityRenderer<WardedJarBlockEntity> {
+    var t = 0
+
     override fun render(
         blockEntity: WardedJarBlockEntity,
         f: Float,
@@ -29,6 +31,10 @@ class WardedJarRenderer: BlockEntityRenderer<WardedJarBlockEntity> {
         val color = FluidStackHooks.getColor(fluidStack)
         val sprite = FluidStackHooks.getStillTexture(blockEntity.fluidContents)?:return
         val buffer = multiBufferSource.getBuffer(RenderType.translucent())
+
+        t++
+        t%=60
+        if(t==0)println("color:  $color")
 
         val height = fluidStack.amount.toFloat()/blockEntity.maxFluidAmount * (14f/16)
         val topUV = floatArrayOf(

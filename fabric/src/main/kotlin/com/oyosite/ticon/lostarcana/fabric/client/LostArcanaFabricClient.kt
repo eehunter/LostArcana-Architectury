@@ -4,6 +4,8 @@ import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.block.WARDED_JAR
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
+import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID_FLOWING
 import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
@@ -14,6 +16,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
 import com.oyosite.ticon.lostarcana.item.ESSENTIA_BUCKET_ITEM
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
+import com.oyosite.ticon.lostarcana.item.RAW_ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.THAUMOMETER
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
@@ -22,11 +25,18 @@ import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRenderHandler
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.block.Block
+import kotlin.jvm.optionals.getOrNull
 
 class LostArcanaFabricClient : ClientModInitializer {
     override fun onInitializeClient() {
@@ -54,6 +64,16 @@ class LostArcanaFabricClient : ClientModInitializer {
 
         MenuScreens.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
 
+        //FluidVariantRendering.register(+ESSENTIA_FLUID, EssentiaVariantRenderHandler)
+        //FluidVariantRendering.register(+ESSENTIA_FLUID_FLOWING, EssentiaVariantRenderHandler)
+        //FluidRenderHandlerRegistry.INSTANCE.register(+ESSENTIA_FLUID, +ESSENTIA_FLUID_FLOWING, { variant, _, _ -> variant })
+
         LostArcanaClient.initClient()
+    }
+
+    object EssentiaVariantRenderHandler : FluidVariantRenderHandler{
+        override fun getColor(fluidVariant: FluidVariant?, view: BlockAndTintGetter?, pos: BlockPos?): Int {
+            return fluidVariant?.components?.get(RAW_ASPECT_COMPONENT)?.getOrNull()?.color?.or(0xFF000000u)?.toInt()?:super.getColor(fluidVariant, view, pos)
+        }
     }
 }

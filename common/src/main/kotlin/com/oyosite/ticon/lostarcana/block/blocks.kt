@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.SaplingBlock
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.material.MapColor
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
 /** Returns a new instance of BlockBehaviour.Properties each time it is referenced.*/
@@ -75,6 +76,11 @@ val ESSENTIA_FLUID_BLOCK = "essentia_fluid" % { EssentiaLiquidBlock(ESSENTIA_FLU
 
 val VIS_LIGHT = "vis_light" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }
 val NITOR = ("nitor" % { VisLight(prop.noCollission().noOcclusion().lightLevel { 15 }) }) % {}//{component(DataComponents.DYED_COLOR, DyedItemColor(VisLight.DEFAULT_COLOR, false))}
+
+val ELEMENTAL_GEODE_MAP_COLORS = listOf(MapColor.SAND, MapColor.FIRE, MapColor.COLOR_GRAY, MapColor.GRASS, MapColor.COLOR_LIGHT_BLUE, MapColor.CLAY)
+val ELEMENTAL_GEODE_MATERIALS = List(PRIMAL_ASPECTS.size){
+    CustomBuddingBlockCollection("${PRIMAL_ASPECTS[it].id.path}_crystal", ELEMENTAL_GEODE_MAP_COLORS[it])
+}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

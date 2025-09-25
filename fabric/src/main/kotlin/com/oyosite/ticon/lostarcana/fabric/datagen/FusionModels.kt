@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.block.ELEMENTAL_GEODE_MATERIALS
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.supermartijn642.fusion.api.model.DefaultModelTypes
@@ -35,6 +36,29 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
                 .build()
             val instance3 = ModelInstance.of(DefaultModelTypes.BASE, data3)
             addModel(holder.id.withPrefix("item/"), instance3)
+        }
+
+        ELEMENTAL_GEODE_MATERIALS.forEach { geode ->
+            val data = ConnectingModelData.builder()
+                .parent(LostArcana.id("block/stone_overlay"))
+                .texture("overlay", LostArcana.id("block/infused_edge_overlay_${geode.block.id.path}"))
+                .connection(DefaultConnectionPredicates.matchBlock(+geode.block).or(DefaultConnectionPredicates.matchBlock(+geode.buddingBlock)))
+                .build()
+            val instance = ModelInstance.of(DefaultModelTypes.CONNECTING, data)
+            addModel(geode.block.id.withPrefix("block/").withSuffix("_overlay"), instance)
+
+            val data2 = BaseModelData.builder()
+                //.parent(Identifier.parse("block/cube_all"))
+                .parent(LostArcana.id("block/infused_crystal_block"))
+                .texture("all", geode.block.id.withPrefix("block/"))
+                .build()
+            val instance2 = ModelInstance.of(DefaultModelTypes.BASE, data2)
+            addModel(geode.block.id.withPrefix("block/"), instance2)
+            val data3 = BaseModelData.builder()
+                .parent(geode.block.id.withPrefix("block/"))
+                .build()
+            val instance3 = ModelInstance.of(DefaultModelTypes.BASE, data3)
+            addModel(geode.block.id.withPrefix("item/"), instance3)
         }
 
         //val visCrystalData = BaseModelData.builder().parent(Identifier.parse("item/generated"))

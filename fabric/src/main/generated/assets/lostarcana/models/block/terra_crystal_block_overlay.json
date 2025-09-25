@@ -1,0 +1,26 @@
+{
+  "type": "fusion:connecting",
+  "parent": "lostarcana:block/stone_overlay",
+  "connections": {
+    "type": "fusion:or",
+    "predicates": [
+      {
+        "type": "fusion:or",
+        "predicates": [
+          {
+            "type": "fusion:match_block",
+            "block": "lostarcana:terra_crystal_block"
+          },
+          {
+            "type": "fusion:match_block",
+            "block": "lostarcana:budding_terra_crystal"
+          }
+        ]
+      }
+    ]
+  },
+  "loader": "fusion:model",
+  "textures": {
+    "overlay": "lostarcana:block/infused_edge_overlay_terra_crystal_block"
+  }
+}

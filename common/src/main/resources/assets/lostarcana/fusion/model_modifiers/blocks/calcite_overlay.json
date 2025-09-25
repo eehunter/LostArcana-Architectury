@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "calcite"
+  ],
+  "append": [
+    "lostarcana:block/aer_crystal_block_overlay",
+    "lostarcana:block/aqua_crystal_block_overlay",
+    "lostarcana:block/ignis_crystal_block_overlay",
+    "lostarcana:block/ordo_crystal_block_overlay",
+    "lostarcana:block/perditio_crystal_block_overlay",
+    "lostarcana:block/terra_crystal_block_overlay"
+  ]
+}

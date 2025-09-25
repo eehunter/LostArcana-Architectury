@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 
 class CustomBuddingBlockCollection(baseName: String, mapColor: MapColor) {
-    val block = "${baseName}_block" % { Block(BlockProperties.ofFullCopy(Blocks.AMETHYST_BLOCK)) } % {}
+    val block = "${baseName}_block" % { Block(BlockProperties.ofFullCopy(Blocks.AMETHYST_BLOCK).lightLevel { 7 }) } % {}
     val cluster = "${baseName}_cluster" % { ClusterBlock(7.0F, 3.0F, prop
 				.mapColor(mapColor)
 				.forceSolidOn()

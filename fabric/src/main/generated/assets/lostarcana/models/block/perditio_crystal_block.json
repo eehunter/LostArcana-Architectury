@@ -1,0 +1,8 @@
+{
+  "type": "fusion:base",
+  "parent": "lostarcana:block/infused_crystal_block",
+  "loader": "fusion:model",
+  "textures": {
+    "all": "lostarcana:block/perditio_crystal_block"
+  }
+}

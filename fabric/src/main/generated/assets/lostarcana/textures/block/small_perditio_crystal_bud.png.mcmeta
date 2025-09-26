@@ -1,0 +1,7 @@
+{
+  "fusion": {
+    "type": "fusion:base",
+    "emissive": true,
+    "render_type": "cutout"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "type": "fusion:base",
+  "parent": "lostarcana:block/ignis_crystal_cluster",
+  "loader": "fusion:model"
+}

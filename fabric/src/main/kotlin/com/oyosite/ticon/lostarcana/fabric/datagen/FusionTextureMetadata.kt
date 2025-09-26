@@ -22,9 +22,14 @@ class FusionTextureMetadata(output: FabricDataOutput) : FusionTextureMetadataPro
         addTextureMetadata(VIS_CRYSTAL.id.withPrefix("item/"), DefaultTextureTypes.BASE,visCrystalTexData)
 
         val infusedCrystalBorderTexData = ConnectingTextureData.builder().layout(ConnectingTextureLayout.OVERLAY).renderType(BaseTextureData.RenderType.CUTOUT).build()
+        val infusedCrystalTexData = BaseTextureData.builder().emissive(true).renderType(BaseTextureData.RenderType.CUTOUT).build()
         ELEMENTAL_GEODE_MATERIALS.forEach { geode ->
             addTextureMetadata(LostArcana.id("block/infused_edge_overlay_${geode.block.id.path}"),
                 DefaultTextureTypes.CONNECTING, infusedCrystalBorderTexData)
+            listOf(geode.smallBud, geode.mediumBud, geode.largeBud, geode.cluster).forEach {
+                addTextureMetadata(it.id.withPrefix("block/"),
+                    DefaultTextureTypes.BASE, infusedCrystalTexData)
+            }
         }
     }
 }

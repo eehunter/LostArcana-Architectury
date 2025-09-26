@@ -37,14 +37,19 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
     override fun generateBlockStateModels(bsmg: BlockModelGenerators) = bsmg.run{
 
-        /*ELEMENTAL_GEODE_MATERIALS.forEach { geode ->
-            bsmg.createTrivialCube(+geode.block)
-            bsmg.createTrivialCube(+geode.buddingBlock)
-            bsmg.createAmethystCluster(+geode.smallBud)
-            bsmg.createAmethystCluster(+geode.mediumBud)
-            bsmg.createAmethystCluster(+geode.largeBud)
-            bsmg.createAmethystCluster(+geode.cluster)
-        }*/
+        ELEMENTAL_GEODE_MATERIALS.forEach { geode ->
+            //bsmg.createTrivialCube(+geode.block)
+            //bsmg.createTrivialCube(+geode.buddingBlock)
+            //bsmg.createAmethystCluster(+geode.smallBud)
+            //bsmg.createAmethystCluster(+geode.mediumBud)
+            //bsmg.createAmethystCluster(+geode.largeBud)
+            //bsmg.createAmethystCluster(+geode.cluster)
+            blockStateOutput.accept(MultiVariantGenerator.multiVariant(+geode.smallBud, Variant.variant().with(VariantProperties.MODEL, geode.smallBud.id.withPrefix("block/"))).with(createColumnWithFacing()))
+            blockStateOutput.accept(MultiVariantGenerator.multiVariant(+geode.mediumBud, Variant.variant().with(VariantProperties.MODEL, geode.mediumBud.id.withPrefix("block/"))).with(createColumnWithFacing()))
+            blockStateOutput.accept(MultiVariantGenerator.multiVariant(+geode.largeBud, Variant.variant().with(VariantProperties.MODEL, geode.largeBud.id.withPrefix("block/"))).with(createColumnWithFacing()))
+            blockStateOutput.accept(MultiVariantGenerator.multiVariant(+geode.cluster, Variant.variant().with(VariantProperties.MODEL, geode.cluster.id.withPrefix("block/"))).with(createColumnWithFacing()))
+
+        }
 
         bsmg.createTrivialBlock(+ARCANE_WORKBENCH, arcaneWorkbenchTextureMap, ModelTemplates.CUBE_BOTTOM_TOP)
 
@@ -54,7 +59,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createTrivialBlock(+NITOR, TextureMapping.particle(LostArcana.id("item/nitor_flame")), ModelTemplate(Optional.of(LostArcana.id("item/nitor")), Optional.empty()))
         bsmg.createTrivialBlock(+VIS_LIGHT, TextureMapping.particle(LostArcana.id("item/nitor_flame")), ModelTemplate(Optional.of(LostArcana.id("item/nitor")), Optional.empty()))
 
-        listOf(*INFUSED_STONES.toTypedArray(), RECHARGE_PEDESTAL, *ELEMENTAL_GEODE_MATERIALS.map(CustomBuddingBlockCollection::block).toTypedArray()).forEach {
+        listOf(*INFUSED_STONES.toTypedArray(), RECHARGE_PEDESTAL,
+            *ELEMENTAL_GEODE_MATERIALS.map(CustomBuddingBlockCollection::block).toTypedArray(),
+            *ELEMENTAL_GEODE_MATERIALS.map(CustomBuddingBlockCollection::buddingBlock).toTypedArray()).forEach {
             val v = Variant.variant().with(VariantProperties.MODEL, it.id.withPrefix("block/"))
             val bsg = MultiVariantGenerator.multiVariant(it.get(), v)
             bsmg.blockStateOutput.accept(bsg)

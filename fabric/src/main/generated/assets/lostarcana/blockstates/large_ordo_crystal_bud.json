@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "lostarcana:block/large_ordo_crystal_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "lostarcana:block/large_ordo_crystal_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lostarcana:block/large_ordo_crystal_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "lostarcana:block/large_ordo_crystal_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "lostarcana:block/large_ordo_crystal_bud"
+    },
+    "facing=west": {
+      "model": "lostarcana:block/large_ordo_crystal_bud",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

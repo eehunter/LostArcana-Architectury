@@ -11,7 +11,9 @@ import com.supermartijn642.fusion.api.model.data.BaseModelData
 import com.supermartijn642.fusion.api.model.data.ConnectingModelData
 import com.supermartijn642.fusion.api.predicate.DefaultConnectionPredicates
 import com.supermartijn642.fusion.api.provider.FusionModelProvider
+import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.minecraft.world.level.block.Block
 
 class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MOD_ID, output, ) {
     override fun generate() {
@@ -48,7 +50,6 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
             addModel(geode.block.id.withPrefix("block/").withSuffix("_overlay"), instance)
 
             val data2 = BaseModelData.builder()
-                //.parent(Identifier.parse("block/cube_all"))
                 .parent(LostArcana.id("block/infused_crystal_block"))
                 .texture("all", geode.block.id.withPrefix("block/"))
                 .build()
@@ -59,6 +60,25 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
                 .build()
             val instance3 = ModelInstance.of(DefaultModelTypes.BASE, data3)
             addModel(geode.block.id.withPrefix("item/"), instance3)
+
+            val data4 = BaseModelData.builder()
+                .parent(LostArcana.id("block/infused_crystal_block"))
+                .texture("all", geode.buddingBlock.id.withPrefix("block/"))
+                .build()
+            val instance4 = ModelInstance.of(DefaultModelTypes.BASE, data4)
+            addModel(geode.buddingBlock.id.withPrefix("block/"), instance4)
+            val data5 = BaseModelData.builder()
+                .parent(geode.buddingBlock.id.withPrefix("block/"))
+                .build()
+            val instance5 = ModelInstance.of(DefaultModelTypes.BASE, data5)
+            addModel(geode.buddingBlock.id.withPrefix("item/"), instance5)
+
+            geode.smallBud.cross()
+            geode.mediumBud.cross()
+            geode.largeBud.cross()
+            geode.cluster.cross()
+
+
         }
 
         //val visCrystalData = BaseModelData.builder().parent(Identifier.parse("item/generated"))
@@ -71,5 +91,20 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
         //    .connection("all", DefaultConnectionPredicates.isSameBlock()).connection("particle", DefaultConnectionPredicates.matchBlock(+ARCANE_STONE)).build()
         //val instance = ModelInstance.of(DefaultModelTypes.CONNECTING, data)
         //addModel(TEST_BLOCK.id, instance)
+    }
+
+    fun <T: Block> RegistrySupplier<T>.cross(){
+        val data = BaseModelData.builder()
+            .parent(Identifier.parse("block/cross"))
+            .texture("cross", id.withPrefix("block/"))
+            .build()
+        val instance = ModelInstance.of(DefaultModelTypes.BASE, data)
+        addModel(id.withPrefix("block/"), instance)
+
+        val data1 = BaseModelData.builder()
+            .parent(id.withPrefix("block/"))
+            .build()
+        val instance1 = ModelInstance.of(DefaultModelTypes.BASE, data1)
+        addModel(id.withPrefix("item/"), instance1)
     }
 }

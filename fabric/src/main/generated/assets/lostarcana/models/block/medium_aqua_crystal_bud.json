@@ -1,0 +1,8 @@
+{
+  "type": "fusion:base",
+  "parent": "minecraft:block/cross",
+  "loader": "fusion:model",
+  "textures": {
+    "cross": "lostarcana:block/medium_aqua_crystal_bud"
+  }
+}

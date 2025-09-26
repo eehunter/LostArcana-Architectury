@@ -1,5 +1,8 @@
 {
   "type": "fusion:base",
-  "parent": "lostarcana:block/aer_crystal_cluster",
-  "loader": "fusion:model"
+  "parent": "lostarcana:item/generated",
+  "loader": "fusion:model",
+  "textures": {
+    "base": "lostarcana:block/aer_crystal_cluster"
+  }
 }

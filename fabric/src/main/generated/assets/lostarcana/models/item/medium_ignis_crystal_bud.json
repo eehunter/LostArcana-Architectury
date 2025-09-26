@@ -1,5 +1,8 @@
 {
   "type": "fusion:base",
-  "parent": "lostarcana:block/medium_ignis_crystal_bud",
-  "loader": "fusion:model"
+  "parent": "lostarcana:item/generated",
+  "loader": "fusion:model",
+  "textures": {
+    "base": "lostarcana:block/medium_ignis_crystal_bud"
+  }
 }

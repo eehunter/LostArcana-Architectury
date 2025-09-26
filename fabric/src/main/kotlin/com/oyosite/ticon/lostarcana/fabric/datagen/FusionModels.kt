@@ -102,7 +102,8 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
         addModel(id.withPrefix("block/"), instance)
 
         val data1 = BaseModelData.builder()
-            .parent(id.withPrefix("block/"))
+            .parent(LostArcana.id("item/generated"))
+            .texture("base", id.withPrefix("block/"))
             .build()
         val instance1 = ModelInstance.of(DefaultModelTypes.BASE, data1)
         addModel(id.withPrefix("item/"), instance1)

@@ -1,0 +1,8 @@
+{
+  "loader": "fusion:model",
+  "type": "base",
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "#base"
+  }
+}

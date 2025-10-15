@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-25T21:37:13.728817356	Lost Arcana/Fusion Model Provider: Lost Arcana
+// 1.21.1	2025-09-26T02:29:09.844045777	Lost Arcana/Fusion Model Provider: Lost Arcana
 005a4302c92a888779c9e6043b92dd513a24c5bb assets/lostarcana/models/block/perditio_crystal_block.json
 4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/ignis_infused_stone.json
 4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/ordo_infused_stone.json
@@ -83,8 +83,8 @@ cd9835f3889c0d60bd627e7cf0592a14b1afde98 assets/lostarcana/models/block/ordo_inf
 bdbb2fb16548e2a0ab5f5761db51f6b2afa36648 assets/lostarcana/models/block/small_ignis_crystal_bud.json
 69c659622d07fa9237e360d00502a6e2f86814b1 assets/lostarcana/models/item/medium_terra_crystal_bud.json
 a2d4712cf163c05dccd504cdaa7a5fc12271e4c6 assets/lostarcana/models/block/terra_crystal_cluster.json
-4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/terra_infused_stone.json
 233c289171f6d2486ef668ec554e63ff1f3efada assets/lostarcana/models/block/budding_aer_crystal.json
+4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/terra_infused_stone.json
 71891063bd21b008cd4b4b9d7232f2adec1bb4c3 assets/lostarcana/models/block/terra_crystal_block.json
 0dd5a44aafca72b8f2ce41df56e3fbe5d5b97cbe assets/lostarcana/models/block/aqua_crystal_block.json
 c4e9264f30ea4983f1cc860e2491fdb520cb52e9 assets/lostarcana/models/block/perditio_infused_stone_overlay.json

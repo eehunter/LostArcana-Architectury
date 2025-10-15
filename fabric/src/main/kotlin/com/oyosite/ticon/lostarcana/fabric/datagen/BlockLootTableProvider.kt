@@ -2,10 +2,10 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
-import com.oyosite.ticon.lostarcana.loot.CopyDyedBlockColorFunction
 import com.oyosite.ticon.lostarcana.unaryPlus
 import dev.architectury.registry.registries.RegistrySupplier
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -22,7 +22,6 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
-import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
@@ -35,6 +34,15 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
             val explosionReduced = applyExplosionDecay(block, crystals)
             val lootTable = LootTable.lootTable().withPool(explosionReduced)
             add(block, lootTable)
+        }
+        ELEMENTAL_GEODE_MATERIALS.map(CustomBuddingBlockCollection::block).allDropSelf
+        ELEMENTAL_GEODE_MATERIALS.forEachIndexed { i, geode ->
+            add(+geode.buddingBlock, createSilkTouchDispatchTable(+geode.buddingBlock, LootItem.lootTableItem(+geode.block)))
+            val aspect = PRIMAL_ASPECTS[i]
+            geode.smallBud.crystalDropTable(aspect, 1, 0)
+            geode.mediumBud.crystalDropTable(aspect, 2)
+            geode.largeBud.crystalDropTable(aspect, 3)
+            geode.cluster.crystalDropTable(aspect, 4, 3)
         }
         dropSelfWithFunction(+NITOR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
         dropSelfWithFunction(+WARDED_JAR, CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).build())
@@ -61,6 +69,15 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
 
 
         add(+GREATWOOD_LEAVES, createLeavesDrops(+GREATWOOD_LEAVES, +GREATWOOD_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f))
+    }
+
+    fun <T: Block> RegistrySupplier<T>.crystalDropTable(aspect: Aspect, max: Int = 1, min: Int = 1){
+        val block = +this
+        val crystal = aspect.lootItem
+        val crystals = uniformRolls(min,max).add(crystal)
+        val explosionReduced = applyExplosionDecay(block, crystals)
+        val lootTable = LootTable.lootTable().withPool(explosionReduced)
+        add(block, lootTable)
     }
 
     override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {

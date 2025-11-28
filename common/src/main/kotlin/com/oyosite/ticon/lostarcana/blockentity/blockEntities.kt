@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_COLUMN
 import com.oyosite.ticon.lostarcana.block.ARCANE_PEDESTAL
 import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
 import com.oyosite.ticon.lostarcana.block.CRUCIBLE
+import com.oyosite.ticon.lostarcana.block.DISSOLVER_BLOCK
 import com.oyosite.ticon.lostarcana.block.ESSENTIA_FLUID_BLOCK
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
@@ -11,6 +12,7 @@ import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.block.WARDED_JAR
+import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterMenuScreen
 import net.minecraft.core.BlockPos
@@ -38,6 +40,8 @@ val RECHARGE_PEDESTAL_BLOCK_ENTITY = "recharge_pedestal"(::RechargePedestalBlock
 val VIS_LIGHT_BLOCK_ENTITY = "vis_light_block_entity"(::VisLightBlockEntity, VIS_LIGHT, NITOR)
 
 val ESSENTIA_LIQUID_BLOCK_ENTITY = "essentia_liquid"(::EssentiaLiquidBlockEntity, ESSENTIA_FLUID_BLOCK)
+
+val DISSOLVER_BLOCK_ENTITY = "dissolver"(::DissolverBlockEntity, DISSOLVER_BLOCK)
 
 operator fun <T: BlockEntity, R: BlockEntityType<T>> String.invoke(blockEntityFactory: (BlockPos, BlockState)->T, vararg blocks: Holder<out Block>): Holder<BlockEntityType<T>> =
     platformRegisterBlockEntity(this) { BlockEntityType.Builder.of(blockEntityFactory, *blocks.map(Holder<out Block>::value).toTypedArray()) }

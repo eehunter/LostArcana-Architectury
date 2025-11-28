@@ -4,6 +4,7 @@ import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.block.*
+import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlock
 import com.oyosite.ticon.lostarcana.item.ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -82,6 +83,7 @@ class BlockLootTableProvider(dataOutput: FabricDataOutput, registryLookup: Compl
 
     override fun generate(biConsumer: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         biConsumer.accept(ArcaneColumn.multiblockLootTable, dropsMultiplied(+ARCANE_STONE_PILLAR, 5))
+        biConsumer.accept(DissolverBlock.multiblockLootTable, dropsMultiplied(+DISSOLVER_BLOCK, 1))
         super.generate(biConsumer)
     }
 

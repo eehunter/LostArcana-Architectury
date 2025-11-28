@@ -5,6 +5,8 @@ import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.setStaticAspects
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlock
+import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlockItem
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.EssentiaLiquidBlock
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
@@ -81,6 +83,8 @@ val ELEMENTAL_GEODE_MAP_COLORS = listOf(MapColor.SAND, MapColor.FIRE, MapColor.C
 val ELEMENTAL_GEODE_MATERIALS = List(PRIMAL_ASPECTS.size){
     CustomBuddingBlockCollection("${PRIMAL_ASPECTS[it].id.path}_crystal", ELEMENTAL_GEODE_MAP_COLORS[it])
 }
+
+val DISSOLVER_BLOCK = ("dissolver" % { DissolverBlock(prop.noOcclusion().isViewBlocking { _, _, _ -> false }) }).customItem<DissolverBlock>(::DissolverBlockItem){}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

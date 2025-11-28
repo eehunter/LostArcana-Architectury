@@ -1,7 +1,9 @@
 package com.oyosite.ticon.lostarcana.blockentity
 
 import com.oyosite.ticon.lostarcana.Identifier
+import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.MultiblockController
+import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
@@ -10,7 +12,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-class PlaceholderBlockEntity(pos: BlockPos, state: BlockState): BlockEntity(PLACEHOLDER_BLOCK_ENTITY.value(), pos, state) {
+class PlaceholderBlockEntity(pos: BlockPos, state: BlockState = (+MULTIBLOCK_PLACEHOLDER).defaultBlockState()): BlockEntity(PLACEHOLDER_BLOCK_ENTITY.value(), pos, state) {
 
     var linkedPos: BlockPos = pos
         set(value) {

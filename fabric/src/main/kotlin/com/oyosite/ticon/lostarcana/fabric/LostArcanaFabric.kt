@@ -36,6 +36,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
@@ -78,7 +79,7 @@ class LostArcanaFabric : ModInitializer {
         FluidStorage.SIDED.registerForBlockEntity({be, dir -> WardedJarFluidStorage(be)}, WARDED_JAR_BLOCK_ENTITY.value())
 
         FluidStorage.ITEM.registerForItems({ stack, ctx -> //println("running storage for essentia bucket");
-            FullItemFluidStorage(ctx, Items.BUCKET, FluidVariant.of(
+            FullItemFluidStorage(ctx, { ItemVariant.of(Items.BUCKET, it.components.forget { it == RAW_ASPECT_COMPONENT }) }, FluidVariant.of(
             +ESSENTIA_FLUID, DataComponentPatch.builder().set(RAW_ASPECT_COMPONENT, stack.get(RAW_ASPECT_COMPONENT)?: AER).build()
         ), FluidConstants.BUCKET) }, +ESSENTIA_BUCKET_ITEM)
     }

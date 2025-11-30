@@ -37,6 +37,7 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(VIS_LIGHT)
 
         add(WARDED_JAR)
+        add(ESSENTIA_BUCKET_ITEM)
 
         add(VIS_CRYSTAL, "Vis Crystal")
         add(WAND_ITEM, "Wand")

@@ -3,9 +3,12 @@ package com.oyosite.ticon.lostarcana.item
 import dev.architectury.core.item.ArchitecturyBucketItem
 import dev.architectury.injectables.annotations.ExpectPlatform
 import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.phys.BlockHitResult
@@ -28,5 +31,14 @@ class EssentiaBucketItem(fluid: ()-> Fluid, properties: Properties) : Architectu
         return true
     }*/
 
+    override fun appendHoverText(
+        itemStack: ItemStack,
+        tooltipContext: TooltipContext,
+        list: MutableList<Component?>,
+        tooltipFlag: TooltipFlag
+    ) {
+        val aspect = itemStack.components.get(RAW_ASPECT_COMPONENT)?:return
+        list += Component.translatable(aspect.translationKey).setStyle(Style.EMPTY.withColor(aspect.color.toInt()))
+    }
 
 }

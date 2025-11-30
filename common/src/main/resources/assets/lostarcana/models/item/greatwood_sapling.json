@@ -1,0 +1,8 @@
+{
+  "type": "fusion:base",
+  "parent": "item/generated",
+  "loader": "fusion:model",
+  "textures": {
+    "layer0": "lostarcana:block/greatwood_sapling"
+  }
+}

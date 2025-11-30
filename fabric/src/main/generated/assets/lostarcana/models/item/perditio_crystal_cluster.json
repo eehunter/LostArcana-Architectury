@@ -1,8 +1,6 @@
 {
-  "type": "fusion:base",
-  "parent": "lostarcana:item/generated",
-  "loader": "fusion:model",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "base": "lostarcana:block/perditio_crystal_cluster"
+    "layer0": "lostarcana:item/perditio_crystal_cluster"
   }
 }

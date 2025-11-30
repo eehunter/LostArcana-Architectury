@@ -1,5 +1,7 @@
 {
+  "type": "fusion:base",
   "parent": "minecraft:block/cross",
+  "loader": "fusion:model",
   "textures": {
     "cross": "lostarcana:block/greatwood_sapling"
   }

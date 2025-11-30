@@ -11,6 +11,7 @@ import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.blockstates.BlockStateGenerator
 import net.minecraft.data.models.blockstates.MultiVariantGenerator
+import net.minecraft.data.models.blockstates.PropertyDispatch
 import net.minecraft.data.models.blockstates.Variant
 import net.minecraft.data.models.blockstates.VariantProperties
 import net.minecraft.data.models.model.*
@@ -74,7 +75,10 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         bsmg.createAxisAlignedPillarBlock(+GREATWOOD_LOG, TexturedModel.COLUMN)
         bsmg.createTrivialCube(+GREATWOOD_PLANKS)
         bsmg.createTrivialCube(+GREATWOOD_LEAVES)
-        bsmg.createCrossBlock(+GREATWOOD_SAPLING, BlockModelGenerators.TintState.NOT_TINTED)
+        // Creating the sapling blockstate here overwrites my item model, so I'm just adding the blockstate manually now.
+        //bsmg.createCrossBlockWithDefaultItem(+GREATWOOD_SAPLING, BlockModelGenerators.TintState.NOT_TINTED)
+        //bsmg.blockStateOutput.accept(MultiVariantGenerator.multiVariant(+GREATWOOD_SAPLING, Variant.variant().with(VariantProperties.MODEL, GREATWOOD_SAPLING.id.withPrefix("block/"))))//.with(PropertyDispatch()))
+        //bsmg.blockStateOutput.accept(Variant.variant().with(VariantProperties.MODEL, GREATWOOD_SAPLING.id.withPrefix("block/")))
 
         bsmg.blockStateOutput.accept(ARCANE_STONE_SLAB.makeSlabOf(ARCANE_STONE))
         bsmg.blockStateOutput.accept(ARCANE_STONE_TILE_SLAB.makeSlabOf(ARCANE_STONE_TILES))
@@ -111,6 +115,13 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+ALCHEMICAL_BRASS_NUGGET, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
+
+        img.generateFlatItem((+GREATWOOD_SAPLING).asItem(), ModelTemplates.FLAT_ITEM)
+        ELEMENTAL_GEODE_MATERIALS.forEach { mat ->
+            arrayOf(mat.smallBud, mat.mediumBud, mat.largeBud, mat.cluster).forEach {
+                img.generateFlatItem((+it).asItem(), ModelTemplates.FLAT_ITEM)
+            }
+        }
 
         img.register((+NITOR).asItem(), ModelTemplates.TWO_LAYERED_ITEM, "_flame", "_dot")
         img.register(+ESSENTIA_BUCKET_ITEM, ModelTemplates.TWO_LAYERED_ITEM, "", "_liquid")

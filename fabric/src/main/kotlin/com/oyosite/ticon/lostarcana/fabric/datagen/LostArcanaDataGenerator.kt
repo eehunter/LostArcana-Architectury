@@ -16,13 +16,13 @@ class LostArcanaDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(FabricBookProvider.of(ThaumonomiconBook(enUsCache)))
         pack.addProvider{ EnUsProvider(it, enUsCache) }
         pack.addProvider { output, registriesFuture -> EnglishLangProvider(output, registriesFuture, enUsCache) }
+        pack.addProvider(::FusionModels)
         pack.addProvider(::ModelProvider)
         pack.addProvider(::BlockLootTableProvider)
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::ItemTagProvider)
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::OreProvider)
-        pack.addProvider(::FusionModels)
         pack.addProvider(::FusionTextureMetadata)
         pack.addProvider(::FeatureProvider)
         pack.addProvider(::FluidTagProvider)

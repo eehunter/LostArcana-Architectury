@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.ELEMENTAL_GEODE_MATERIALS
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_SAPLING
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.supermartijn642.fusion.api.model.DefaultModelTypes
@@ -81,6 +82,8 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
 
         }
 
+        GREATWOOD_SAPLING.cross()
+
         //val visCrystalData = BaseModelData.builder().parent(Identifier.parse("item/generated"))
         //    .texture("layer0", Identifier.parse("lostarcana:item/vis_crystal"))
         //    .build()
@@ -101,11 +104,11 @@ class FusionModels(output: FabricDataOutput) : FusionModelProvider(LostArcana.MO
         val instance = ModelInstance.of(DefaultModelTypes.BASE, data)
         addModel(id.withPrefix("block/"), instance)
 
-        val data1 = BaseModelData.builder()
+        /*val data1 = BaseModelData.builder()
             .parent(LostArcana.id("item/generated"))
             .texture("base", id.withPrefix("block/"))
             .build()
         val instance1 = ModelInstance.of(DefaultModelTypes.BASE, data1)
-        addModel(id.withPrefix("item/"), instance1)
+        addModel(id.withPrefix("item/"), instance1)*/
     }
 }

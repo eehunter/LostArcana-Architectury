@@ -1,8 +1,6 @@
 {
-  "type": "fusion:base",
-  "parent": "lostarcana:item/generated",
-  "loader": "fusion:model",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "base": "lostarcana:block/large_ignis_crystal_bud"
+    "layer0": "lostarcana:item/large_ignis_crystal_bud"
   }
 }

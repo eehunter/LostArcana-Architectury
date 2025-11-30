@@ -68,7 +68,7 @@ dependencies {
         exclude(group: "net.neoforged.fancymodloader")
     }
 
-    modImplementation ("maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-neoforge-mc$rootProject.fusion_mc_version")
+    modImplementation ("maven.modrinth:fusion-connected-textures:$rootProject.fusion_version_neo-neoforge-mc$rootProject.fusion_mc_version")
 
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 

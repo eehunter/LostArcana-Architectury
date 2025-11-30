@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.ELEMENTAL_GEODE_MATERIALS
+import com.oyosite.ticon.lostarcana.block.GREATWOOD_SAPLING
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.supermartijn642.fusion.api.provider.FusionTextureMetadataProvider
@@ -31,5 +32,8 @@ class FusionTextureMetadata(output: FabricDataOutput) : FusionTextureMetadataPro
                     DefaultTextureTypes.BASE, infusedCrystalTexData)
             }
         }
+
+        addTextureMetadata(GREATWOOD_SAPLING.id.withPrefix("block/"), DefaultTextureTypes.BASE, BaseTextureData.builder().renderType(
+            BaseTextureData.RenderType.CUTOUT).build())
     }
 }

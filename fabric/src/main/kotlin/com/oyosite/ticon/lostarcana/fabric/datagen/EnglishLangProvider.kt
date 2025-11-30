@@ -57,17 +57,23 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
 
         add(GREATWOOD_PLANKS)
         add(GREATWOOD_LOG)
+        add(GREATWOOD_LEAVES)
+        add(GREATWOOD_SAPLING)
 
         add(WOOD_WAND_CORE)
         add(GREATWOOD_WAND_CORE)
 
         add(IRON_WAND_CAP)
         add(GOLD_WAND_CAP)
+        add(THAUMIUM_WAND_CAP)
 
         add(CASTER_GAUNTLET)
+        add(FOCUS)
 
         add(ARCANE_WORKBENCH)
         add(ArcaneWorkbench.TITLE_KEY, "Arcane Workbench")
+        add(CRUCIBLE)
+        add(ESSENTIA_SMELTERY)
         add(ARCANE_PEDESTAL)
         add(RECHARGE_PEDESTAL)
 
@@ -95,14 +101,18 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_3, "You do not need to replace all three parts at once, as is shown here.")
         add(LostArcanaEmiPlugin.MODIFIED_WAND_TOOLTIP_4, "Any Vis stored in the wand will be lost.")
 
+        ELEMENTAL_GEODE_MATERIALS.forEach { mat ->
+            arrayOf(mat.block, mat.cluster, mat.largeBud, mat.mediumBud, mat.smallBud, mat.buddingBlock).forEach { add(it) }
+        }
+
         cache.data(::add)
     }
 
-    inline fun <reified T> TranslationBuilder.add(tag: TagKey<T>) = add(tag, tag.location.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
+    fun <T> TranslationBuilder.add(tag: TagKey<T>) = add(tag, tag.location.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
 
-    inline fun <reified T> TranslationBuilder.add(holder: RegistrySupplier<T>) = add(holder, holder.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
+    fun <T> TranslationBuilder.add(holder: RegistrySupplier<T>) = add(holder, holder.id.path.split("_").joinToString(" ") { s -> s.replaceFirstChar { c -> if (c.isLowerCase()) c.titlecase(getDefault()) else c.toString() } })
 
-    inline fun <reified T> TranslationBuilder.add(holder: RegistrySupplier<T>, name: String) = holder.get().let {
+    fun <T> TranslationBuilder.add(holder: RegistrySupplier<T>, name: String) = holder.get().let {
         when (it) {
             is Item -> add(it, name)
             is Block -> add(it, name)

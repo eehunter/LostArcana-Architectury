@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-30T14:50:36.632141752	Lost Arcana/Block Loot Tables
+// 1.21.1	2025-11-30T14:53:35.45052543	Lost Arcana/Block Loot Tables
 0751637753153935cab0bfab60daed615324aa2e data/lostarcana/loot_table/blocks/greatwood_log.json
 c664186f745618430a1cf8a4b9aa50911ff6ff80 data/lostarcana/loot_table/blocks/multiblock/dissolver.json
 06b3eff914df3e3ad24039487f2190fb77140200 data/lostarcana/loot_table/blocks/arcane_stone_tiles.json
@@ -56,6 +56,6 @@ ffa4d1c3419436bc7d356d5e3968c7cdf16e1726 data/lostarcana/loot_table/blocks/small
 1cca1b491e95f3499e2d1efc02611ab01a5b9425 data/lostarcana/loot_table/blocks/small_ignis_crystal_bud.json
 a0a9894f664c7e48fd5b4783f77ea166a147a94d data/lostarcana/loot_table/blocks/budding_perditio_crystal.json
 f4bb142a5b5e141eb215e32bade9adeb83d2e1c1 data/lostarcana/loot_table/blocks/perditio_crystal_cluster.json
-60214ef2ca040051f42465086b8151dfdab1de8b data/lostarcana/loot_table/blocks/medium_perditio_crystal_bud.json
 ff51a08686028fbea21bb690cd71366f882353dd data/lostarcana/loot_table/blocks/ignis_infused_stone.json
+60214ef2ca040051f42465086b8151dfdab1de8b data/lostarcana/loot_table/blocks/medium_perditio_crystal_bud.json
 9f82aa80c25ccff6a5e50b822e3b8d9efa3ea081 data/lostarcana/loot_table/blocks/greatwood_planks.json

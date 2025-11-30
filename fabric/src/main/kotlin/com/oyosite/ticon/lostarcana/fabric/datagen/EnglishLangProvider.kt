@@ -105,6 +105,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
             arrayOf(mat.block, mat.cluster, mat.largeBud, mat.mediumBud, mat.smallBud, mat.buddingBlock).forEach { add(it) }
         }
 
+        add("emi.category.lostarcana.arcane_workbench", "Arcane Workbench")
+
         cache.data(::add)
     }
 

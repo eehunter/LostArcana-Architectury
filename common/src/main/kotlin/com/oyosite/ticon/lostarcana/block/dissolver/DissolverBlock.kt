@@ -1,9 +1,11 @@
 package com.oyosite.ticon.lostarcana.block.dissolver
 
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.block.DISSOLVER_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.MultiblockController
 import com.oyosite.ticon.lostarcana.block.MultiblockPlaceholder
+import com.oyosite.ticon.lostarcana.block.ShapeDelegate
 import com.oyosite.ticon.lostarcana.blockentity.PlaceholderBlockEntity
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
@@ -12,10 +14,12 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.stats.Stats
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
@@ -60,13 +64,26 @@ class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, M
     ) {
         super.onPlace(blockState, level, blockPos, blockState2, bl)
         if (!level.getBlockState(blockPos.above()).canBeReplaced()) return
-        level.setBlock(blockPos.above(), MULTIBLOCK_PLACEHOLDER.get().defaultBlockState(), 3)
-        level.setBlockEntity(PlaceholderBlockEntity(blockPos.above()).apply { linkedPos = blockPos; linkedBlock = this@DissolverBlock })
+        level.setBlock(blockPos.above(), DISSOLVER_PLACEHOLDER.get().defaultBlockState(), 3)
+        level.setBlockEntity(PlaceholderBlockEntity(blockPos.above(), DISSOLVER_PLACEHOLDER.get().defaultBlockState()).apply { linkedPos = blockPos; linkedBlock = this@DissolverBlock })
     }
 
     override fun canSurvive(blockState: BlockState, levelReader: LevelReader, blockPos: BlockPos): Boolean {
         //if ((levelReader.getBlockEntity(blockPos.above()) as? PlaceholderBlockEntity)?.linkedPos != blockPos) return false
         return super.canSurvive(blockState, levelReader, blockPos)
+    }
+
+    override fun playerDestroy(
+        level: Level,
+        player: Player,
+        blockPos: BlockPos,
+        blockState: BlockState,
+        blockEntity: BlockEntity?,
+        itemStack: ItemStack
+    ) {
+        player.awardStat(Stats.BLOCK_MINED.get(this))
+        player.causeFoodExhaustion(0.005f)
+        if(level is ServerLevel) generateDrops(level, blockPos, blockPos, player, itemStack)
     }
 
     override fun onRemove(
@@ -90,11 +107,27 @@ class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, M
         val (x,y,z) = pos.center
         level.server.reloadableRegistries().getLootTable(multiblockLootTable).getRandomItems(
             LootParams.Builder(level).withParameter(LootContextParams.ORIGIN, corePos.center).withParameter(LootContextParams.TOOL, tool).withOptionalParameter(LootContextParams.THIS_ENTITY, player).withOptionalParameter(
-                LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(LootContextParamSet.builder().build()))?.map { ItemEntity(level, x,y,z, it) }
+                LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(MultiblockPlaceholder.lootParamSet))?.map { ItemEntity(level, x,y,z, it) }
             ?.forEach(level::addFreshEntity)
     }
 
+    /*override fun getShape(
+        blockState: BlockState,
+        blockGetter: BlockGetter,
+        blockPos: BlockPos,
+        collisionContext: CollisionContext
+    ): VoxelShape? {
+        return shape//super.getShape(blockState, blockGetter, blockPos, collisionContext)
+    }*/
+
+    /*override fun shape(
+        pos: BlockPos,
+        controllerPos: BlockPos
+    ): VoxelShape = shape*/
+
     companion object{
         val multiblockLootTable: ResourceKey<LootTable> = ResourceKey.create(Registries.LOOT_TABLE, LostArcana.id("blocks/multiblock/dissolver"))
+
+    //Shapes.join(box(4.0,16.0,4.0,12.0,24.0,12.0), Shapes.block(), BooleanOp.OR)
     }
 }

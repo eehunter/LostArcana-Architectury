@@ -79,7 +79,7 @@ class ArcaneColumn(properties: Properties) : Block(properties), EntityBlock, Mul
         val (x,y,z) = pos.center
         level.server.reloadableRegistries().getLootTable(multiblockLootTable).getRandomItems(
             LootParams.Builder(level).withParameter(LootContextParams.ORIGIN, corePos.center).withParameter(LootContextParams.TOOL, tool).withOptionalParameter(LootContextParams.THIS_ENTITY, player).withOptionalParameter(
-                LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(LootContextParamSet.builder().build()))?.map { ItemEntity(level, x,y,z, it) }
+                LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(MultiblockPlaceholder.lootParamSet))?.map { ItemEntity(level, x,y,z, it) }
             ?.forEach(level::addFreshEntity)
     }
 

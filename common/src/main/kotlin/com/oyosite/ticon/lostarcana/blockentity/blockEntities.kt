@@ -5,6 +5,7 @@ import com.oyosite.ticon.lostarcana.block.ARCANE_PEDESTAL
 import com.oyosite.ticon.lostarcana.block.ARCANE_WORKBENCH
 import com.oyosite.ticon.lostarcana.block.CRUCIBLE
 import com.oyosite.ticon.lostarcana.block.DISSOLVER_BLOCK
+import com.oyosite.ticon.lostarcana.block.DISSOLVER_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.ESSENTIA_FLUID_BLOCK
 import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
@@ -28,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState
 val MAGIC_BRICKS_BLOCK_ENTITY = "magic_bricks"(::MagicBricksBlockEntity, MAGIC_BRICKS)
 val ARCANE_COLUMN_BLOCK_ENTITY = "arcane_column"(::ArcaneColumnBlockEntity, ARCANE_COLUMN)
 
-val PLACEHOLDER_BLOCK_ENTITY = "multiblock_placeholder"(::PlaceholderBlockEntity, MULTIBLOCK_PLACEHOLDER)
+val PLACEHOLDER_BLOCK_ENTITY = "multiblock_placeholder"(::PlaceholderBlockEntity, MULTIBLOCK_PLACEHOLDER, DISSOLVER_PLACEHOLDER)
 
 val ARCANE_WORKBENCH_BLOCK_ENTITY = "arcane_workbench"(::ArcaneWorkbenchBlockEntity, ARCANE_WORKBENCH)
 val ARCANE_WORKBENCH_MENU_SCREEN = "arcane_workbench"(::ArcaneWorkbenchMenu, FeatureFlagSet.of())

@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-01T14:38:23.358835486	Lost Arcana/Block Loot Tables
+// 1.21.1	2025-12-01T17:43:04.997335515	Lost Arcana/Block Loot Tables
 0751637753153935cab0bfab60daed615324aa2e data/lostarcana/loot_table/blocks/greatwood_log.json
 c664186f745618430a1cf8a4b9aa50911ff6ff80 data/lostarcana/loot_table/blocks/multiblock/dissolver.json
 06b3eff914df3e3ad24039487f2190fb77140200 data/lostarcana/loot_table/blocks/arcane_stone_tiles.json
@@ -7,8 +7,8 @@ b9c9516bd33268455c56fb9acced91600dbce42e data/lostarcana/loot_table/blocks/arcan
 053a7e3dcf91cc6d0cea296462744217b60228de data/lostarcana/loot_table/blocks/recharge_pedestal.json
 f65ad4801f1c8b41eead01e0f9f862fc9de635ca data/lostarcana/loot_table/blocks/budding_terra_crystal.json
 0d885ad18edd46393a63b1a2b48d0bc09c21dd22 data/lostarcana/loot_table/blocks/perditio_crystal_block.json
-bd2dcedcdbae2702a2125387aeaf9954668750f0 data/lostarcana/loot_table/blocks/greatwood_leaves.json
 1d77af4f66947c20b49b9b7d64e9c7887ad28e97 data/lostarcana/loot_table/blocks/aqua_crystal_block.json
+bd2dcedcdbae2702a2125387aeaf9954668750f0 data/lostarcana/loot_table/blocks/greatwood_leaves.json
 bf78b7dd4f5123494da3c93365d3d02668cd0fd8 data/lostarcana/loot_table/blocks/budding_ignis_crystal.json
 69f9f8ab809be439f265f8d3db3aa67ff0b4480f data/lostarcana/loot_table/blocks/medium_ordo_crystal_bud.json
 a1745851b313ed8bf84640b68019a99401eba09c data/lostarcana/loot_table/blocks/multiblock/arcane_column.json

@@ -48,6 +48,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(THAUMOMETER, "Thaumometer")
         add(GOGGLES_OF_REVEALING, "Goggles of Revealing")
 
+        add(FLUXER)
+
         add(ARCANE_STONE)
         add(ARCANE_STONE_TILES)
         add(ARCANE_STONE_PILLAR)
@@ -79,6 +81,8 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         add(RECHARGE_PEDESTAL)
 
         add(ThaumometerItem.AURA_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
+        add(ThaumometerItem.FLUX_LEVEL_TRANSLATION_KEY, $$"%1$s μv")
+        //add(ThaumometerItem.FLUX_LEVEL_TRANSLATION_KEY, $$"{content: {text: '%1$s μv'}, color: 'dark_purple'}")
         add(ThaumometerItem.NO_AURA_TRANSLATION_KEY, "No Aura detected.")
         AspectRegistry.ASPECTS.registrar.entrySet().forEach { (key, value) ->
             add(value.translationKey, value.id.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() })

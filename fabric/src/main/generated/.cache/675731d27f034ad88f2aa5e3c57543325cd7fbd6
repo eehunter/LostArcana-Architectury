@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-01T14:38:23.363466859	Lost Arcana/Fusion Texture Metadata Provider: Lost Arcana
+// 1.21.1	2025-12-01T17:43:04.999640644	Lost Arcana/Fusion Texture Metadata Provider: Lost Arcana
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/small_ignis_crystal_bud.png.mcmeta
 3803479f4c46d43f119baf2cded20dacb26d39d0 assets/lostarcana/textures/block/infused_edge_overlay_aer_crystal_block.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/small_aqua_crystal_bud.png.mcmeta
@@ -21,8 +21,8 @@
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/small_terra_crystal_bud.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/small_ordo_crystal_bud.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/large_ignis_crystal_bud.png.mcmeta
-3803479f4c46d43f119baf2cded20dacb26d39d0 assets/lostarcana/textures/block/infused_edge_overlay_ignis_crystal_block.png.mcmeta
 3803479f4c46d43f119baf2cded20dacb26d39d0 assets/lostarcana/textures/block/infused_stone_edge_overlay_terra.png.mcmeta
+3803479f4c46d43f119baf2cded20dacb26d39d0 assets/lostarcana/textures/block/infused_edge_overlay_ignis_crystal_block.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/large_terra_crystal_bud.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/small_perditio_crystal_bud.png.mcmeta
 267b5b13b7d98734920e651949e94953ecd3ec89 assets/lostarcana/textures/block/medium_aqua_crystal_bud.png.mcmeta

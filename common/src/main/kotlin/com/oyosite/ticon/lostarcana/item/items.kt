@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.item
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.AER
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
+import com.oyosite.ticon.lostarcana.item.aura.FluxerItem
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusItem
 import com.oyosite.ticon.lostarcana.item.focus.VisLightEffect
 import com.oyosite.ticon.lostarcana.itemTag
@@ -57,6 +58,8 @@ val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
 val GOGGLES_OF_REVEALING = "goggles_of_revealing" * { GogglesOfRevealingItem(Item.Properties().stacksTo(1), GOGGLES_OF_REVEALING_MATERIAL) }
 
 val THAUMOMETER = "thaumometer" * { ThaumometerItem(Item.Properties().stacksTo(1)) }
+
+val FLUXER = "fluxer" * { FluxerItem(Item.Properties()) }
 
 @ExpectPlatform
 fun platformRegisterArmorMaterial(name: String, materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = throw AssertionError()

@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.util.ThaumometerScannable
 import com.oyosite.ticon.lostarcana.util.auraSources
 import com.oyosite.ticon.lostarcana.util.getAuraAtLocation
+import com.oyosite.ticon.lostarcana.util.getFluxAtLocation
 import com.oyosite.ticon.lostarcana.util.getNearestAuraSourceInRange
 import com.oyosite.ticon.lostarcana.util.platformGetInventoryContentsIfPresent
 import net.minecraft.core.registries.BuiltInRegistries
@@ -73,11 +74,17 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
         }
         if(!level.isClientSide)return super.useOn(context)
         println(level.auraSources)
-        val aura = getAuraAtLocation(level, pos)
-        context.player?.sendSystemMessage(
-            if(aura > 0) Component.translatable(AURA_LEVEL_TRANSLATION_KEY, AURA_LEVEL_FORMAT(aura))
-            else Component.translatable(NO_AURA_TRANSLATION_KEY)
-        )
+        context.player?.let{ player->
+            val aura = getAuraAtLocation(level, pos)
+            player.sendSystemMessage(
+                if(aura > 0) Component.translatable(AURA_LEVEL_TRANSLATION_KEY, AURA_LEVEL_FORMAT(aura))
+                else Component.translatable(NO_AURA_TRANSLATION_KEY)
+            )
+            val flux = getFluxAtLocation(level, pos)
+            if(flux > 0) player.sendSystemMessage(
+                Component.translatable(FLUX_LEVEL_TRANSLATION_KEY, FLUX_LEVEL_FORMAT(flux)).withColor(0xAA00AA)
+            )
+        }
         return InteractionResult.SUCCESS_NO_ITEM_USED
     }
 
@@ -95,7 +102,9 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
     companion object{
         val AURA_LEVEL_TRANSLATION_KEY = "info.lostarcana.thaumometer.aura_level"
         val NO_AURA_TRANSLATION_KEY = "info.lostarcana.thaumometer.no_aura"
+        val FLUX_LEVEL_TRANSLATION_KEY = "info.lostarcana.thaumometer.flux_level"
         val AURA_LEVEL_FORMAT = { f: Float -> String.format("%.2f", f) }
+        val FLUX_LEVEL_FORMAT = AURA_LEVEL_FORMAT
 
         val THAUMOMETER_RANGE = 10.0
         val THAUMOMETER_SCAN_RANGE = 1.75

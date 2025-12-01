@@ -116,6 +116,8 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
         img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_NUGGET, ModelTemplates.FLAT_ITEM)
 
+        img.generateFlatItem(+FLUXER, ModelTemplates.FLAT_ITEM)
+
         img.generateFlatItem((+GREATWOOD_SAPLING).asItem(), ModelTemplates.FLAT_ITEM)
         ELEMENTAL_GEODE_MATERIALS.forEach { mat ->
             arrayOf(mat.smallBud, mat.mediumBud, mat.largeBud, mat.cluster).forEach {

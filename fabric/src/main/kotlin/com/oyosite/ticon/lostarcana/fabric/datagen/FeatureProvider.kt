@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.mojang.serialization.JsonOps
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_LEAVES
@@ -50,6 +51,8 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
             GREATWOOD_SAPLING.get().defaultBlockState(),
         )
 
+        neoforgeBiomeModification("sparse_greatwood_features", "neoforge:add_features", "'#c:is_forest'", "['lostarcana:trees_greatwood_sparse']", "vegetal_decoration")
+
         future
     }
 
@@ -94,6 +97,26 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
         jsonObject.add("config", cfg)
 
         return jsonObject
+    }
+
+    private fun CachedOutput.neoforgeBiomeModification(name: String, type: Any, biomes: Any?, features: Any?, step: Any?){
+        future = future.thenCompose {
+            var str = "{\n"
+            str += "    \"type\": \"$type\""
+            if(biomes!=null)str += ",\n    \"biomes\": $biomes"
+            if(features!=null)str += ",\n    \"features\": $features"
+            if(step!=null)str += ",\n    \"step\": \"$step\""
+            str += "\n}"
+            val json = JsonParser.parseString(str)
+
+            DataProvider.saveStable(this, json, getNeoforgeBiomeModifierPath(name))
+        }
+    }
+
+    private fun getNeoforgeBiomeModifierPath(name: String): Path {
+        return dataOutput
+            .createPathProvider(PackOutput.Target.DATA_PACK, "neoforge/biome_modifier")
+            .json(ResourceLocation.fromNamespaceAndPath(dataOutput.modId, name))
     }
 
     private val DIRT_PROVIDER: JsonElement = BlockStateProvider.CODEC.encodeStart(JsonOps.INSTANCE, SimpleStateProvider.simple(Blocks.DIRT)).getOrThrow()

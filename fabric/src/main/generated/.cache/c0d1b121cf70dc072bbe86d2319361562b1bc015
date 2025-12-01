@@ -1,11 +1,11 @@
-// 1.21.1	2025-11-30T17:39:02.832304178	Lost Arcana/Fusion Model Provider: Lost Arcana
+// 1.21.1	2025-11-30T19:28:13.276076505	Lost Arcana/Fusion Model Provider: Lost Arcana
 502077924a2e8bb5b3c7538f74489a3288250e6a assets/lostarcana/models/block/large_aer_crystal_bud.json
 005a4302c92a888779c9e6043b92dd513a24c5bb assets/lostarcana/models/block/perditio_crystal_block.json
 4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/ignis_infused_stone.json
 070db272b7ab7b31e977fea3cd25047bc866490a assets/lostarcana/models/block/ignis_infused_stone.json
 ebb3be7b97e0611af828120ae6e86a61db80fa0f assets/lostarcana/models/block/small_ordo_crystal_bud.json
-4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/ordo_infused_stone.json
 33883cd4e161fdad376cbf9e62b866a19deb23a4 assets/lostarcana/models/block/small_aer_crystal_bud.json
+4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/ordo_infused_stone.json
 9dc44e21ab358acaa97a8d6645173e178d7a2847 assets/lostarcana/models/item/budding_aqua_crystal.json
 e0c49c5d8c1d3cde4bdee371a4aa0e0ecd884eed assets/lostarcana/models/block/medium_ignis_crystal_bud.json
 591d737fb8ca1a373f5b90448e5a096217e941d1 assets/lostarcana/models/block/small_terra_crystal_bud.json
@@ -56,8 +56,8 @@ bdbb2fb16548e2a0ab5f5761db51f6b2afa36648 assets/lostarcana/models/block/small_ig
 4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/aer_infused_stone.json
 c47e2b06466436e1fbbfe7a51efc36fe1ed7231b assets/lostarcana/models/block/aqua_infused_stone_overlay.json
 a2d4712cf163c05dccd504cdaa7a5fc12271e4c6 assets/lostarcana/models/block/terra_crystal_cluster.json
-4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/terra_infused_stone.json
 233c289171f6d2486ef668ec554e63ff1f3efada assets/lostarcana/models/block/budding_aer_crystal.json
+4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/terra_infused_stone.json
 b93765bc89ba6c8fea7252cbe28919d6b92dd025 assets/lostarcana/models/block/perditio_crystal_cluster.json
 4c6f5020282f622864b25a0b046d840f311316d2 assets/lostarcana/models/item/aqua_infused_stone.json
 71891063bd21b008cd4b4b9d7232f2adec1bb4c3 assets/lostarcana/models/block/terra_crystal_block.json

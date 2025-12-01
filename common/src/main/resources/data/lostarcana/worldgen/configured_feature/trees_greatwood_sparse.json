@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "lostarcana:greatwood_checked",
+    "features": [
+        {
+          "chance": 0.0125,
+          "feature": "lostarcana:greatwood_checked"
+        }
+    ]
+  }
+}

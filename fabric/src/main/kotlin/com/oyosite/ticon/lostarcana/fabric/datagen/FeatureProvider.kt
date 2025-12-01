@@ -119,7 +119,7 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
     private fun getPlacedFeaturePath(name: String): Path {
         return dataOutput
             .createPathProvider(PackOutput.Target.DATA_PACK, "worldgen/placed_feature")
-            .json(ResourceLocation.fromNamespaceAndPath(dataOutput.modId, name))
+            .json(ResourceLocation.fromNamespaceAndPath(dataOutput.modId, name).withSuffix("_checked"))
     }
 
     override fun getName(): String = "Lost Arcana Feature Generator"

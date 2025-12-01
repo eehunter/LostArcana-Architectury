@@ -25,6 +25,7 @@ import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.worldgen.feature.INFUSED_STONE_FEATURES
+import com.oyosite.ticon.lostarcana.worldgen.feature.SPARSE_GREATWOOD_FEATURE
 import dev.architectury.core.item.ArchitecturyBucketItem
 import dev.architectury.registry.registries.DeferredRegister
 import net.fabricmc.api.ModInitializer
@@ -40,9 +41,13 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
+import net.minecraft.tags.BiomeTags
 import net.minecraft.world.item.BucketItem
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.levelgen.GenerationStep
+import org.spongepowered.include.com.google.common.base.Predicates
+import java.util.function.Predicate
 
 class LostArcanaFabric : ModInitializer {
     val DATA_COMPONENT_REGISTRAR: DeferredRegister<DataComponentType<*>> = DeferredRegister.create(LostArcana.MOD_ID, Registries.DATA_COMPONENT_TYPE)
@@ -72,6 +77,10 @@ class LostArcanaFabric : ModInitializer {
         INFUSED_STONE_FEATURES.forEach{
             BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.UNDERGROUND_ORES, it)
         }
+
+        BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_FOREST).or(BiomeSelectors.tag(
+            BiomeTags.IS_HILL)).or(BiomeSelectors.tag(BiomeTags.HAS_VILLAGE_PLAINS)), GenerationStep.Decoration.VEGETAL_DECORATION, SPARSE_GREATWOOD_FEATURE)
+
 
         DATA_COMPONENT_REGISTRAR.register()
         init()

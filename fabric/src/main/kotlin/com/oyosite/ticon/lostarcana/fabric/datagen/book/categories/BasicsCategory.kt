@@ -6,6 +6,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel
 import com.klikli_dev.modonomicon.registry.DataComponentRegistry
 import com.klikli_dev.modonomicon.registry.ItemRegistry
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.fabric.datagen.book.basics.GettingStarted
 import com.oyosite.ticon.lostarcana.util.thaumonomiconStack
 import net.minecraft.world.item.ItemStack
 
@@ -15,7 +16,7 @@ class BasicsCategory(parent: SingleBookSubProvider): CategoryProvider(parent) {
         "____________",
         "____________",
         "____________",
-        "____________",
+        "_____s______",
         "____________",
         "____________",
         "____________",
@@ -23,7 +24,7 @@ class BasicsCategory(parent: SingleBookSubProvider): CategoryProvider(parent) {
     )
 
     override fun generateEntries() {
-
+        val gettingStarted = add(GettingStarted(this).generate('s'))
     }
 
     override fun categoryName(): String = "Basics"

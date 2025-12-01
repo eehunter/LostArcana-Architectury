@@ -1,0 +1,31 @@
+{
+  "background_u_index": 1,
+  "background_v_index": 0,
+  "category": "basics",
+  "description": "book.lostarcana.thaumonomicon.basics.getting_started.description",
+  "hide_while_locked": false,
+  "icon": {
+    "components": {
+      "modonomicon:book_id": "lostarcana:thaumonomicon"
+    },
+    "item": "modonomicon:modonomicon"
+  },
+  "name": "book.lostarcana.thaumonomicon.basics.getting_started.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "",
+      "title": "Getting Started",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 0,
+  "x": -1,
+  "y": -1
+}

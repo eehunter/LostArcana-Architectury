@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.block.scrubber.DefluxerProperties
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusHolder
 import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack
@@ -67,3 +68,5 @@ val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = DataComponentType.buil
 val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = DataComponentType.builder<CastingFocusHolder>().persistent(CastingFocusHolder.CODEC).networkSynchronized(CastingFocusHolder.STREAM_CODEC).build()
 
 val SINGLE_FLUID_STORAGE_COMPONENT: DataComponentType<ImmutableFluidStack> = DataComponentType.builder<ImmutableFluidStack>().persistent(ImmutableFluidStack.CODEC).networkSynchronized(ImmutableFluidStack.STREAM_CODEC).build()
+
+val DEFLUXER_PROPERTIES: DataComponentType<DefluxerProperties> = DataComponentType.builder<DefluxerProperties>().persistent(DefluxerProperties.CODEC).networkSynchronized(DefluxerProperties.STREAM_CODEC).build()

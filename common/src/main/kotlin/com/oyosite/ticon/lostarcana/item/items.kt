@@ -3,6 +3,7 @@ package com.oyosite.ticon.lostarcana.item
 import com.oyosite.ticon.lostarcana.LostArcana.MOD_ID
 import com.oyosite.ticon.lostarcana.aspect.AER
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
+import com.oyosite.ticon.lostarcana.block.scrubber.DefluxerProperties
 import com.oyosite.ticon.lostarcana.item.aura.FluxerItem
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusItem
 import com.oyosite.ticon.lostarcana.item.focus.VisLightEffect
@@ -61,8 +62,8 @@ val THAUMOMETER = "thaumometer" * { ThaumometerItem(Item.Properties().stacksTo(1
 
 val FLUXER = "fluxer" * { FluxerItem(Item.Properties()) }
 
-val PRISTINE_DEFLUXER = "pristine_defluxer" * { Item(Item.Properties().stacksTo(1)) }
-val INTACT_DEFLUXER = "intact_defluxer" * { Item(Item.Properties().stacksTo(1)) }
+val PRISTINE_DEFLUXER = "pristine_defluxer" * { Item(Item.Properties().stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties(clogChance = 0.0))) }
+val INTACT_DEFLUXER = "intact_defluxer" * { Item(Item.Properties().stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties())) }
 
 @ExpectPlatform
 fun platformRegisterArmorMaterial(name: String, materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = throw AssertionError()

@@ -3,6 +3,9 @@ package com.oyosite.ticon.lostarcana.block.scrubber
 import com.oyosite.ticon.lostarcana.aura.AuraSource
 import com.oyosite.ticon.lostarcana.blockentity.FLUX_SCRUBBER_BLOCK_ENTITY
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
@@ -15,6 +18,7 @@ import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
+import kotlin.jvm.optionals.getOrNull
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -25,6 +29,22 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
     val drainAmount = 1f
 
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
+
+    val items = Array(4){ ItemStack.EMPTY }
+
+    override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
+        items.forEachIndexed { i, stack ->
+            if (stack.isEmpty)return@forEachIndexed
+            compoundTag.put("slot$i", stack.save(provider))
+        }
+    }
+
+    override fun loadAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
+        for(i in 0 until 4){
+            if(!compoundTag.contains("slot$i"))continue
+            ItemStack.parse(provider, compoundTag.get("slot$i")?:continue).getOrNull()?.let{ items[i] = it }
+        }
+    }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(AnimationController(this) { anim: AnimationState<ScrubberBaseBlockEntity> -> anim.setAndContinue(ANIMATION) })

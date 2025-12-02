@@ -8,9 +8,7 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer
 
 class ScrubberRenderer: GeoBlockRenderer<ScrubberBaseBlockEntity>(MODEL) {
 
-    override fun getTextureLocation(animatable: ScrubberBaseBlockEntity?): ResourceLocation? {
-        return LostArcana.id("block/flux_scrubber")
-    }
+    
     companion object{
         val MODEL = DefaultedBlockGeoModel<ScrubberBaseBlockEntity>(LostArcana.id("flux_scrubber"))
     }

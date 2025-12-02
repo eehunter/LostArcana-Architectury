@@ -6,6 +6,7 @@ import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.block.WARDED_JAR
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID_FLOWING
+import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlockEntity
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
@@ -15,6 +16,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRender
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ScrubberRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.VisGeneratorRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
 import com.oyosite.ticon.lostarcana.item.ESSENTIA_BUCKET_ITEM
 import com.oyosite.ticon.lostarcana.item.GOGGLES_OF_REVEALING
@@ -61,6 +63,7 @@ class LostArcanaFabricClient : ClientModInitializer {
         BlockEntityRendererRegistry.register(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
         BlockEntityRendererRegistry.register(WARDED_JAR_BLOCK_ENTITY.value()) { WardedJarRenderer() }
         BlockEntityRendererRegistry.register(FLUX_SCRUBBER_BLOCK_ENTITY.value()) { ScrubberRenderer() as BlockEntityRenderer<ScrubberBaseBlockEntity> }
+        BlockEntityRendererRegistry.register(VIS_GENERATOR_BLOCK_ENTITY.value()) { VisGeneratorRenderer() as BlockEntityRenderer<VisGeneratorBlockEntity> }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), WARDED_JAR.value())

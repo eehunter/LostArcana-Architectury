@@ -21,6 +21,7 @@ import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.FLUX_SCRUBBER_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.RECHARGE_PEDESTAL_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.VIS_GENERATOR_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.WARDED_JAR_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
@@ -30,6 +31,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRender
 import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.ScrubberRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.VisGeneratorRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
@@ -206,6 +208,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.registerBlockEntityRenderer(CRUCIBLE_BLOCK_ENTITY.value()) { CrucibleBlockEntityRenderer(it) }
             event.registerBlockEntityRenderer(WARDED_JAR_BLOCK_ENTITY.value()) { WardedJarRenderer() }
             event.registerBlockEntityRenderer(FLUX_SCRUBBER_BLOCK_ENTITY.value()) { ScrubberRenderer() }
+            event.registerBlockEntityRenderer(VIS_GENERATOR_BLOCK_ENTITY.value()) { VisGeneratorRenderer() }
         }
 
         @SubscribeEvent

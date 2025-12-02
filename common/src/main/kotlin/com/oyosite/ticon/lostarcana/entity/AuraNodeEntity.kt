@@ -82,8 +82,9 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
             vis = entityData.get(VIS_DATA)
             flux = entityData.get(FLUX_DATA)
         }
-        vis += .01f
-        if (vis > maxVis) vis = maxVis
+        if(vis < maxVis)
+            vis += .01f
+        //if (vis > maxVis) vis = maxVis
 
         if(level().gameTime % 20L == 0L) {
             if (flux > 5 && random.nextFloat() < (.25f - 1f / flux) / 4)

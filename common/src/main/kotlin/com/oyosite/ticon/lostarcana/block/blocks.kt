@@ -10,29 +10,20 @@ import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlockItem
 import com.oyosite.ticon.lostarcana.block.dissolver.DissolverPlaceholder
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.EssentiaLiquidBlock
+import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlock
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlock
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack.Companion.immutableCopy
-import dev.architectury.core.block.ArchitecturyLiquidBlock
 import dev.architectury.fluid.FluidStack
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
-import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.component.DyedItemColor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.LeavesBlock
-import net.minecraft.world.level.block.RotatedPillarBlock
-import net.minecraft.world.level.block.SaplingBlock
-import net.minecraft.world.level.block.SlabBlock
-import net.minecraft.world.level.block.StairBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate
 import net.minecraft.world.level.material.MapColor
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
@@ -92,6 +83,7 @@ val DISSOLVER_BLOCK = ("dissolver" % { DissolverBlock(prop.noOcclusion().isViewB
 val DISSOLVER_PLACEHOLDER = ("dissolver_placeholder" % { DissolverPlaceholder(prop.noOcclusion().isViewBlocking { _, _, _ -> false }) })
 
 val FLUX_SCRUBBER_BASE = ("flux_scrubber"  % { ScrubberBaseBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) }) % {}
+val VIS_GENERATOR_BLOCK = "vis_generator" % { VisGeneratorBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) } % {}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

@@ -10,6 +10,7 @@ import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlockItem
 import com.oyosite.ticon.lostarcana.block.dissolver.DissolverPlaceholder
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.EssentiaLiquidBlock
+import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlock
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -31,11 +32,13 @@ import net.minecraft.world.level.block.SaplingBlock
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate
 import net.minecraft.world.level.material.MapColor
 
 val BLOCK_REGISTRY: DeferredRegister<Block> = DeferredRegister.create(MOD_ID, Registries.BLOCK)
 /** Returns a new instance of BlockBehaviour.Properties each time it is referenced.*/
 val prop: BlockProperties get() = BlockBehaviour.Properties.of()
+val alwaysFalseStatePredicate: BlockBehaviour.StatePredicate = BlockBehaviour.StatePredicate{ _,_,_ -> false }
 
 // Why do I make stuff so cursed?
 val TEST_BLOCK = "test_block" % { Block(prop) } % {}
@@ -88,6 +91,7 @@ val ELEMENTAL_GEODE_MATERIALS = List(PRIMAL_ASPECTS.size){
 val DISSOLVER_BLOCK = ("dissolver" % { DissolverBlock(prop.noOcclusion().isViewBlocking { _, _, _ -> false }) }).customItem<DissolverBlock>(::DissolverBlockItem){}
 val DISSOLVER_PLACEHOLDER = ("dissolver_placeholder" % { DissolverPlaceholder(prop.noOcclusion().isViewBlocking { _, _, _ -> false }) })
 
+val FLUX_SCRUBBER_BASE = ("flux_scrubber"  % { ScrubberBaseBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) }) % {}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

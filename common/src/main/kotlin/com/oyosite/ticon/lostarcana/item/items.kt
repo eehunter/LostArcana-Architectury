@@ -61,6 +61,9 @@ val THAUMOMETER = "thaumometer" * { ThaumometerItem(Item.Properties().stacksTo(1
 
 val FLUXER = "fluxer" * { FluxerItem(Item.Properties()) }
 
+val PRISTINE_DEFLUXER = "pristine_defluxer" * { Item(Item.Properties().stacksTo(1)) }
+val INTACT_DEFLUXER = "intact_defluxer" * { Item(Item.Properties().stacksTo(1)) }
+
 @ExpectPlatform
 fun platformRegisterArmorMaterial(name: String, materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = throw AssertionError()
 

@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.block.fluid.FLUID_REGISTRY
+import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlockEntity
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
@@ -65,6 +66,9 @@ object LostArcana {
 
         (0 until 4).forEach{
             MolangQueries.setActorVariable<ScrubberBaseBlockEntity>("query.defluxer$it") { actor ->
+                if (actor.animatable.items[it].isEmpty) 0.0 else 1.0
+            }
+            MolangQueries.setActorVariable<VisGeneratorBlockEntity>("query.virial_engine$it") { actor ->
                 if (actor.animatable.items[it].isEmpty) 0.0 else 1.0
             }
         }

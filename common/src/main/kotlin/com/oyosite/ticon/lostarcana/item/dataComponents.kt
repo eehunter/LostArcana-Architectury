@@ -9,6 +9,7 @@ import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
 import com.oyosite.ticon.lostarcana.aspect.times
+import com.oyosite.ticon.lostarcana.block.generator.VirialEngineProperties
 import com.oyosite.ticon.lostarcana.block.scrubber.DefluxerProperties
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusHolder
@@ -70,3 +71,4 @@ val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = DataComponentType.b
 val SINGLE_FLUID_STORAGE_COMPONENT: DataComponentType<ImmutableFluidStack> = DataComponentType.builder<ImmutableFluidStack>().persistent(ImmutableFluidStack.CODEC).networkSynchronized(ImmutableFluidStack.STREAM_CODEC).build()
 
 val DEFLUXER_PROPERTIES: DataComponentType<DefluxerProperties> = DataComponentType.builder<DefluxerProperties>().persistent(DefluxerProperties.CODEC).networkSynchronized(DefluxerProperties.STREAM_CODEC).build()
+val VIRIAL_ENGINE_PROPERTIES: DataComponentType<VirialEngineProperties> = DataComponentType.builder<VirialEngineProperties>().persistent(VirialEngineProperties.CODEC).networkSynchronized(VirialEngineProperties.STREAM_CODEC).build()

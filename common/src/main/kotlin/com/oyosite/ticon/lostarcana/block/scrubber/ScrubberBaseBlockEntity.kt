@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.block.scrubber
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
 import com.oyosite.ticon.lostarcana.blockentity.FLUX_SCRUBBER_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.item.DEFLUXER_PROPERTIES
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -30,7 +31,16 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
     var attachedSource: AuraSource? = null
 
-    val drainAmount = 1f
+    val drainAmount: Float get() {
+        var s = 0f
+        val d0 = items[0].get(DEFLUXER_PROPERTIES)
+        val d1 = items[1].get(DEFLUXER_PROPERTIES)
+        if(d0 != null && d1 != null) s+= (d0.fluxRemoval + d1.fluxRemoval).toFloat()
+        val d2 = items[2].get(DEFLUXER_PROPERTIES)
+        val d3 = items[3].get(DEFLUXER_PROPERTIES)
+        if(d2 != null && d3 != null) s+= (d2.fluxRemoval + d3.fluxRemoval).toFloat()
+        return s
+    }
 
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 

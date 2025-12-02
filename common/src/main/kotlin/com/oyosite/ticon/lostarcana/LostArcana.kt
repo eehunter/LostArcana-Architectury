@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
 import com.oyosite.ticon.lostarcana.block.BLOCK_REGISTRY
 import com.oyosite.ticon.lostarcana.block.fluid.FLUID_REGISTRY
+import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
@@ -24,6 +25,7 @@ import dev.architectury.platform.Platform
 import dev.architectury.registry.level.entity.EntityAttributeRegistry
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.player.Player
+import software.bernie.geckolib.loading.math.MolangQueries
 
 object LostArcana {
     const val MOD_ID: String = "lostarcana"
@@ -61,6 +63,11 @@ object LostArcana {
 
         MAGIC_BRICKS_BLOCK_ENTITY
 
+        (0 until 4).forEach{
+            MolangQueries.setActorVariable<ScrubberBaseBlockEntity>("query.defluxer$it") { actor ->
+                if (actor.animatable.items[it].isEmpty) 0.0 else 1.0
+            }
+        }
         if(Platform.isFabric())EntityAttributeRegistry.register({ EntityType.PLAYER }){Player.createAttributes().add(ARCANE_SIGHT).add(ARCANE_INSIGHT)}
     }
 }

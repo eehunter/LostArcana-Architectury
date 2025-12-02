@@ -41,6 +41,8 @@ class ScrubberBaseBlock(properties: Properties) : Block(properties), EntityBlock
         if(itemStack.components.get(DEFLUXER_PROPERTIES)==null) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
         be.items[i] = itemStack.copyWithCount(1)
         itemStack.shrink(1)
+        be.onUpdateDefluxers(i)
+        be.setChanged()
         return ItemInteractionResult.sidedSuccess(level.isClientSide)
     }
 
@@ -57,6 +59,8 @@ class ScrubberBaseBlock(properties: Properties) : Block(properties), EntityBlock
         if (i < 0 || be.items[i].isEmpty) return InteractionResult.PASS
         player.setItemInHand(InteractionHand.MAIN_HAND, be.items[i])
         be.items[i] = ItemStack.EMPTY
+        be.onUpdateDefluxers(i)
+        be.setChanged()
 
         return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult)
     }

@@ -55,17 +55,11 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
     var animationController: AnimationController<ScrubberBaseBlockEntity>? = null
 
-    val defluxerAnimationControllers = mutableListOf<AnimationController<ScrubberBaseBlockEntity>>()
-
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(AnimationController(this) { anim: AnimationState<ScrubberBaseBlockEntity> ->
-            //DEFLUXER_DATA.forEachIndexed { i, dat -> anim.setData(dat, (if(items[i].isEmpty) 1 else 1) as Integer) }
             anim.resetCurrentAnimation()
             anim.setAndContinue(ANIMATION)
         }.also { animationController = it })
-        //HIDE_DEFLUXER_ANIMATIONS.forEach { defluxerAnimationControllers.add(AnimationController(this) { anim: AnimationState<ScrubberBaseBlockEntity> -> anim.setAndContinue(it) } ) }
-        //defluxerAnimationControllers.add(AnimationController(this) { anim: AnimationState<ScrubberBaseBlockEntity> -> anim.setAndContinue(HIDE_DEFLUXER_ANIMATIONS[0]) } )
-        //defluxerAnimationControllers.forEach(controllers::add)
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache = cache
@@ -88,26 +82,7 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
     fun onUpdateDefluxers(index: Int? = null){
         animationController?.forceAnimationReset()
-        /*val a = animationController?:return
-        (index?.let(::listOf)?:(0 until 4)).forEach {
 
-        }*/
-
-        //defluxerAnimationControllers.getOrNull(0)?.setAnimation((if (items[0].isEmpty) HIDE_DEFLUXER_ANIMATIONS else SHOW_DEFLUXER_ANIMATIONS)[0])
-        /*if(defluxerAnimationControllers.size < 4)return
-        if(index!=null) {
-            defluxerAnimationControllers[index].setAnimation(
-                (if (items[index].isEmpty) HIDE_DEFLUXER_ANIMATIONS else SHOW_DEFLUXER_ANIMATIONS)[index]
-            )
-        } else {
-            (0 until 4).forEach {
-                defluxerAnimationControllers[it].setAnimation(
-                    (if (items[it].isEmpty) HIDE_DEFLUXER_ANIMATIONS else SHOW_DEFLUXER_ANIMATIONS)[it]
-                )
-
-            }
-        }*/
-        //DEFLUXER_ANIMATIONS[index].thenPlayAndHold("animation.flux_scrubber.${if(items[index].isEmpty) "hide" else "show"}_defluxer_$index")
     }
 
     override fun getUpdateTag(provider: HolderLookup.Provider): CompoundTag =
@@ -118,14 +93,7 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
     companion object: BlockEntityTicker<ScrubberBaseBlockEntity>{
         val ANIMATION = RawAnimation.begin().thenLoop("animation.flux_scrubber.idle")
-        //val DEFLUXER_DATA = Array(4) { DataTicket("defluxer$it", Integer::class.java) }
 
-        val HIDE_DEFLUXER_ANIMATIONS = Array(4){
-            RawAnimation.begin().thenPlayAndHold("animation.flux_scrubber.hide_defluxer_$it")
-        }
-        val SHOW_DEFLUXER_ANIMATIONS = Array(4){
-            RawAnimation.begin().thenPlayAndHold("animation.flux_scrubber.show_defluxer_$it")
-        }
 
         override fun tick(
             level: Level,
@@ -137,10 +105,6 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
 
             if (level.gameTime % 10L != 0L) return
 
-            if(level.isClientSide){
-                blockEntity.defluxerAnimationControllers.getOrNull(0)?.setAnimation(if((level.gameTime % 20L != 0L))HIDE_DEFLUXER_ANIMATIONS[0] else SHOW_DEFLUXER_ANIMATIONS[0])
-            }
-
             val source = blockEntity.attachedSource?:return
             if (Random.nextFloat() > .25f) return
             val f = source.flux
@@ -148,7 +112,6 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
             source.flux -= d
             blockEntity.onDrain(d)
             blockEntity.setChanged()
-            //if(level.isClientSide)blockEntity.defluxerAnimationControllers.getOrNull(0)?.setAnimation(if(Random.nextBoolean())HIDE_DEFLUXER_ANIMATIONS[0] else SHOW_DEFLUXER_ANIMATIONS[0])
         }
     }
 }

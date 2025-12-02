@@ -8,7 +8,7 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer
 
 class ScrubberRenderer: GeoBlockRenderer<ScrubberBaseBlockEntity>(MODEL) {
 
-    
+
     companion object{
         val MODEL = DefaultedBlockGeoModel<ScrubberBaseBlockEntity>(LostArcana.id("flux_scrubber"))
     }

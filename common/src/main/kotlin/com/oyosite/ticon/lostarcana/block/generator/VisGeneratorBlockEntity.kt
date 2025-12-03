@@ -1,6 +1,8 @@
 package com.oyosite.ticon.lostarcana.block.generator
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
+import com.oyosite.ticon.lostarcana.block.virial.VirialNodeBlock
+import com.oyosite.ticon.lostarcana.block.virial.VirialNodeBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.VIS_GENERATOR_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.entity.AuraNodeEntity
 import com.oyosite.ticon.lostarcana.item.DEFLUXER_PROPERTIES
@@ -25,6 +27,7 @@ import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.min
 import kotlin.random.Random
 
 class VisGeneratorBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEntity(VIS_GENERATOR_BLOCK_ENTITY.value(), blockPos, blockState), GeoBlockEntity {
@@ -115,6 +118,12 @@ class VisGeneratorBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
             (source as? AuraNodeEntity)?.let { node ->
                 if (node.vis < 1.2f * node.maxVis) {
                     node.vis += blockEntity.generateAmount
+                    blockEntity.onGenerate()
+                }
+            }
+            (source as? VirialNodeBlockEntity)?.let { node ->
+                if (node.vis < node.maxVis){
+                    node.vis = min(node.maxVis, node.vis+blockEntity.generateAmount)
                     blockEntity.onGenerate()
                 }
             }

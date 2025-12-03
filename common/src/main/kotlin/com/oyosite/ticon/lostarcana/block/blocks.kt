@@ -12,6 +12,7 @@ import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.EssentiaLiquidBlock
 import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlock
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlock
+import com.oyosite.ticon.lostarcana.block.virial.VirialNodeBlock
 import com.oyosite.ticon.lostarcana.item.SINGLE_FLUID_STORAGE_COMPONENT
 import com.oyosite.ticon.lostarcana.item.times
 import com.oyosite.ticon.lostarcana.unaryPlus
@@ -84,6 +85,7 @@ val DISSOLVER_PLACEHOLDER = ("dissolver_placeholder" % { DissolverPlaceholder(pr
 
 val FLUX_SCRUBBER_BASE = ("flux_scrubber"  % { ScrubberBaseBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) }) % {}
 val VIS_GENERATOR_BLOCK = "vis_generator" % { VisGeneratorBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) } % {}
+val VIRIAL_NODE = "virial_node" % { VirialNodeBlock(prop.noOcclusion().isViewBlocking(alwaysFalseStatePredicate)) } % {}
 
 inline operator fun <reified T: Block> String.rem(noinline blockSupplier: ()->T): RegistrySupplier<T> =
     BLOCK_REGISTRY.register(this, blockSupplier)

@@ -12,12 +12,14 @@ import com.oyosite.ticon.lostarcana.block.MAGIC_BRICKS
 import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.RECHARGE_PEDESTAL
+import com.oyosite.ticon.lostarcana.block.VIRIAL_NODE
 import com.oyosite.ticon.lostarcana.block.VIS_GENERATOR_BLOCK
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.block.WARDED_JAR
 import com.oyosite.ticon.lostarcana.block.dissolver.DissolverBlockEntity
 import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlockEntity
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
+import com.oyosite.ticon.lostarcana.block.virial.VirialNodeBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterBlockEntity
 import com.oyosite.ticon.lostarcana.util.platformRegisterMenuScreen
 import net.minecraft.core.BlockPos
@@ -50,6 +52,7 @@ val DISSOLVER_BLOCK_ENTITY = "dissolver"(::DissolverBlockEntity, DISSOLVER_BLOCK
 
 val FLUX_SCRUBBER_BLOCK_ENTITY = "flux_scrubber"(::ScrubberBaseBlockEntity, FLUX_SCRUBBER_BASE)
 val VIS_GENERATOR_BLOCK_ENTITY = "vis_generator"(::VisGeneratorBlockEntity, VIS_GENERATOR_BLOCK)
+val VIRIAL_NODE_BLOCK_ENTITY = "virial_node"(::VirialNodeBlockEntity, VIRIAL_NODE)
 
 operator fun <T: BlockEntity, R: BlockEntityType<T>> String.invoke(blockEntityFactory: (BlockPos, BlockState)->T, vararg blocks: Holder<out Block>): Holder<BlockEntityType<T>> =
     platformRegisterBlockEntity(this) { BlockEntityType.Builder.of(blockEntityFactory, *blocks.map(Holder<out Block>::value).toTypedArray()) }

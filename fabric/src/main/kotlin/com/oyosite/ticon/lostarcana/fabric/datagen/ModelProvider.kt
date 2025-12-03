@@ -118,6 +118,11 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
         img.generateFlatItem(+FLUXER, ModelTemplates.FLAT_ITEM)
 
+        img.generateFlatItem(+PRISTINE_DEFLUXER, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+INTACT_DEFLUXER, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+PRISTINE_VIRIAL_ENGINE, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+INTACT_VIRIAL_ENGINE, ModelTemplates.FLAT_ITEM)
+
         img.generateFlatItem((+GREATWOOD_SAPLING).asItem(), ModelTemplates.FLAT_ITEM)
         ELEMENTAL_GEODE_MATERIALS.forEach { mat ->
             arrayOf(mat.smallBud, mat.mediumBud, mat.largeBud, mat.cluster).forEach {

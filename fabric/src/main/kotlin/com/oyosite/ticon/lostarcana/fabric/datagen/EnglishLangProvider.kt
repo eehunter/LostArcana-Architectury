@@ -112,6 +112,15 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
 
         add("emi.category.lostarcana.arcane_workbench", "Arcane Workbench")
 
+        add(PRISTINE_DEFLUXER)
+        add(INTACT_DEFLUXER)
+        add(PRISTINE_VIRIAL_ENGINE)
+        add(INTACT_VIRIAL_ENGINE)
+
+        add(FLUX_SCRUBBER_BASE)
+        add(VIS_GENERATOR_BLOCK)
+        add(VIRIAL_NODE)
+
         cache.data(::add)
     }
 

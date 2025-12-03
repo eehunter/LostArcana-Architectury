@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.block.scrubber
 
 import com.oyosite.ticon.lostarcana.aura.AuraSource
 import com.oyosite.ticon.lostarcana.blockentity.FLUX_SCRUBBER_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.entity.AuraNodeEntity
 import com.oyosite.ticon.lostarcana.item.DEFLUXER_PROPERTIES
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -9,6 +10,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.entity.MoverType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -113,9 +115,22 @@ class ScrubberBaseBlockEntity(blockPos: BlockPos, blockState: BlockState) : Bloc
         ) {
             blockEntity.tryConnectSource()
 
+            if (level.gameTime % 2L != 0L) return
+            val source = blockEntity.attachedSource?:return
+            (source as? AuraNodeEntity)?.let{ node ->
+                val p = blockPos.above().center
+                if(node.pos != p){
+                    val p1 = p.subtract(node.pos)
+
+                    node.move(MoverType.SELF, if(p1.lengthSqr() < 0.001) p1 else p1.scale(0.01))
+                }
+            }
+
             if (level.gameTime % 10L != 0L) return
 
-            val source = blockEntity.attachedSource?:return
+
+
+
             if (Random.nextFloat() > .25f) return
             val f = source.flux
             val d = min(blockEntity.drainAmount, f)

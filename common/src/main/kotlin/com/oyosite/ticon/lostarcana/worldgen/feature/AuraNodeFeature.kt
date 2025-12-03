@@ -35,7 +35,7 @@ class AuraNodeFeature(codec: Codec<Config>) : Feature<Config>(codec) {
         companion object{
             val CODEC: Codec<Config> = RecordCodecBuilder.create { it.group(
                 Codec.INT.optionalFieldOf("min_height",  1).forGetter(Config::minHeight),
-                Codec.INT.optionalFieldOf("max_height",  1).forGetter(Config::maxHeight),
+                Codec.INT.optionalFieldOf("max_height",  5).forGetter(Config::maxHeight),
                 Codec.FLOAT.optionalFieldOf("min_capacity",  30f).forGetter(Config::minCapacity),
                 Codec.FLOAT.optionalFieldOf("max_capacity",  150f).forGetter(Config::maxCapacity),
                 Codec.FLOAT.optionalFieldOf("min_flux_affinity",  60f).forGetter(Config::minFluxAffinity),

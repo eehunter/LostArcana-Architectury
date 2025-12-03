@@ -4,5 +4,5 @@
   "features": [
     "lostarcana:placed_aura_node"
   ],
-  "step": "top_layer_modification"
+  "step": "surface_structures"
 }

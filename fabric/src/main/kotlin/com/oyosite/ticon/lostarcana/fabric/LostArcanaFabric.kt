@@ -83,7 +83,7 @@ class LostArcanaFabric : ModInitializer {
             //.or(BiomeSelectors.tag(BiomeTags.IS_HILL)).or(BiomeSelectors.tag(BiomeTags.HAS_VILLAGE_PLAINS))
             , GenerationStep.Decoration.VEGETAL_DECORATION, SPARSE_GREATWOOD_FEATURE)
 
-        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, PLACED_AURA_NODE)
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.SURFACE_STRUCTURES, PLACED_AURA_NODE)
 
         DATA_COMPONENT_REGISTRAR.register()
         init()

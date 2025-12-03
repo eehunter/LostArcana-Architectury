@@ -19,7 +19,7 @@ class AuraNodeFeature(codec: Codec<Config>) : Feature<AuraNodeFeature.Config>(co
 
         val p = blockPos.above(randomSource.nextIntBetweenInclusive(1,5))
         if(level.getBlockState(p).isAir){
-            level.addFreshEntity(AuraNodeEntity(level.level).apply{moveTo(p.center)})
+            level.addFreshEntity(AuraNodeEntity(level.level).apply{moveTo(p.center); visCapacity = 30+120*random.nextFloat(); vis = visCapacity})
             return true
         }
         return false

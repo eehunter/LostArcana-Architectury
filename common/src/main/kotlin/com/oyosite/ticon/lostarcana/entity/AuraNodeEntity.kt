@@ -19,6 +19,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.max
 import kotlin.math.min
 
 class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level), AuraSource {
@@ -26,8 +27,8 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
 
     override var vis: Float = 0f
     override var flux: Float =  0f
-    private var visCapacity = 100f
-    val maxVis = min(visCapacity-flux*.8f, 10f)
+    var visCapacity = 100f
+    val maxVis get() = max(visCapacity-flux*.8f, visCapacity * 0.1f)
 
     override fun setLevel(level: Level) {
         if(level!=this.level()) {

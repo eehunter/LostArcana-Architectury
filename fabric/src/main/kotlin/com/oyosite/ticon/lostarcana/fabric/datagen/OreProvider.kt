@@ -24,8 +24,8 @@ class OreProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Comple
         INFUSED_STONES.forEach {
             val name = "${it.id.path}_ore_feature"
             infusedStoneOreFeatureNames+=name
-            createOre(name, 12, it, it)
-            placeOre(name, 20, -64, 128)
+            createOre(name, 8, it, it)
+            placeOre(name, 4, -64, 128)
         }
         neoforgeBiomeModification("infused_stone_ore_features", "neoforge:add_features", "'#c:is_overworld'", infusedStoneOreFeatureNames.joinToString("', '", "['", "']", transform = { LostArcana.id(it).toString() }), "underground_ores")
 

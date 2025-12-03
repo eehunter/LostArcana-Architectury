@@ -1,5 +1,5 @@
-// 1.21.1	2025-12-02T22:28:26.288618644	Lost Arcana/Lost Arcana Feature Generator
+// 1.21.1	2025-12-02T22:52:19.066835449	Lost Arcana/Lost Arcana Feature Generator
 4476e4e68eaec5b1b85265a7cec44cb1cf1e2448 data/lostarcana/worldgen/configured_feature/greatwood.json
 9b846ad5892c9a02e264c462bb526372deb22dff data/lostarcana/neoforge/biome_modifier/sparse_greatwood_features.json
-b19798a35583cf7fd2a1558e5618406b90f63b77 data/lostarcana/neoforge/biome_modifier/overworld_aura_node.json
+daef9f2c13106ca92d50e1a0f3a14a73ab052c78 data/lostarcana/neoforge/biome_modifier/overworld_aura_node.json
 98ff8d681b0fd816faa64b5ba6204ac2275b42a8 data/lostarcana/worldgen/placed_feature/greatwood_checked.json

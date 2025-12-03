@@ -1,7 +1,7 @@
-// 1.21.1	2025-12-02T22:28:26.291003992	Lost Arcana/Tags for minecraft:block
+// 1.21.1	2025-12-02T22:52:19.069885185	Lost Arcana/Tags for minecraft:block
 ea5a6b47890c493b5b49f80ef6d2564656c5442e data/minecraft/tags/block/mineable/pickaxe.json
 63e1a2010683766ccbcdcaf62f55b7cff28798e3 data/minecraft/tags/block/mineable/axe.json
-9ef70a83abb6e3515dd6c3f64794c2f570729818 data/minecraft/tags/block/planks.json
 b5ba8bde0d20034f89fb652ba6df035b6aedbdfd data/minecraft/tags/block/logs.json
+9ef70a83abb6e3515dd6c3f64794c2f570729818 data/minecraft/tags/block/planks.json
 defc8ebb27ac4536f25df14fb9fd2e60634b293f data/lostarcana/tags/block/crucible_heat_sources.json
 ad7be10f1731406a9d55a1b0b51445299343065c data/c/tags/block/ores.json

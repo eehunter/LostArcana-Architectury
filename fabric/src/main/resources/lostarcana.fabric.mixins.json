@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
+    "AbstractTextureFabricMixin",
     "ArchitecturyFluidRenderingFabricMixin",
     "BlockRenderDispatcherAccessor",
-    "LiquidBlockRendererAccessor"
+    "LiquidBlockRendererAccessor",
+    "ParticleEngineFabricMixin"
   ],
   "mixins": [
     "EmptyBucketStorageMixin",

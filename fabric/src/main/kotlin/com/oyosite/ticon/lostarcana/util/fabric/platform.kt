@@ -1,6 +1,7 @@
 @file:JvmName("PlatformKtImpl")
 package com.oyosite.ticon.lostarcana.util.fabric
 
+import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
@@ -14,7 +15,10 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
+import net.minecraft.core.particles.ParticleOptions
+import net.minecraft.core.particles.ParticleType
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.world.Container
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
@@ -32,6 +36,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
+
+fun <U: ParticleOptions, T: ParticleType<U>>platformRegisterParticleType(id: Identifier, particle: T): Holder<T> =
+    Registry.registerForHolder(BuiltInRegistries.PARTICLE_TYPE, id, particle) as Holder<T>
 
 fun platformCreateAspectRegistry(): Registry<Aspect> = FabricRegistryBuilder.createSimple(ASPECT_REGISTRY_KEY)
     .attribute(RegistryAttribute.SYNCED)

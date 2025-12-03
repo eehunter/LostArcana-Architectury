@@ -34,6 +34,7 @@ import com.oyosite.ticon.lostarcana.client.blockentity.ScrubberRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.VisGeneratorRenderer
 import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
+import com.oyosite.ticon.lostarcana.client.fx.registerParticlesClient
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
@@ -65,6 +66,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent
@@ -93,6 +95,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_ASPECTS.register(modEventBus)
         NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
         NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
+        NEOFORGE_PARTICLE_TYPES.register(modEventBus)
 
         FLUID_TYPES.register(modEventBus)
 
@@ -107,7 +110,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
 
         NEOFORGE_ADVANCEMENT_TRIGGERS.register(modEventBus)
 
-
+        registerParticlesClient()
 
         DATA_COMPONENT_REGISTRAR.register("aspect", Supplier { ASPECT_COMPONENT })
         DATA_COMPONENT_REGISTRAR.register("aspects", Supplier { ASPECTS_COMPONENT })
@@ -142,6 +145,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_CASTING_EFFECT_TYPES = DeferredRegister.create(CastingFocusEffectType.REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
+        val NEOFORGE_PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, LostArcana.MOD_ID)
 
         val FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, LostArcana.MOD_ID)
 
@@ -173,6 +177,13 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.register(LostArcanaClient.NITOR_BLOCK_COLOR, +NITOR, +VIS_LIGHT)
         }
 
+        val factoryRegistrationCallbacks = mutableListOf<(RegisterParticleProvidersEvent)->Unit>()
+
+        @SubscribeEvent
+        @JvmStatic
+        fun registerParticleFactories(event: RegisterParticleProvidersEvent){
+            factoryRegistrationCallbacks.forEach { it(event) }
+        }
 
         @SubscribeEvent // on the mod event bus
         @JvmStatic

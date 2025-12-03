@@ -11,6 +11,7 @@ import com.oyosite.ticon.lostarcana.block.fluid.FLUID_REGISTRY
 import com.oyosite.ticon.lostarcana.block.generator.VisGeneratorBlockEntity
 import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.client.fx.registerParticles
 import com.oyosite.ticon.lostarcana.entity.ENTITY_REGISTRY
 import com.oyosite.ticon.lostarcana.item.ITEM_REGISTRY
 import com.oyosite.ticon.lostarcana.loot.CopyDyedBlockColorFunction
@@ -36,6 +37,7 @@ object LostArcana {
     @JvmStatic
     fun init() {
         println("Hello world")
+        registerParticles()
         FLUID_REGISTRY
         registerAspectsForVanillaItems()
         THAUMOMETER_SCAN_TRIGGER

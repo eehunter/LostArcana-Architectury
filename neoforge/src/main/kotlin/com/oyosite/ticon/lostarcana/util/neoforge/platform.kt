@@ -2,6 +2,7 @@
 package com.oyosite.ticon.lostarcana.util.neoforge
 
 import com.mojang.datafixers.types.Type
+import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
@@ -9,9 +10,12 @@ import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
+import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.Registry
+import net.minecraft.core.particles.ParticleOptions
+import net.minecraft.core.particles.ParticleType
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
@@ -33,6 +37,11 @@ import net.neoforged.neoforge.fluids.FluidUtil
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
+
+//val holderCache = mutableMapOf<ParticleType<*>, RegistrySupplier<ParticleType<*>>>()
+
+fun <U: ParticleOptions, T: ParticleType<U>>platformRegisterParticleType(id: Identifier, particle: T): Holder<T> =
+    LostArcanaNeoForge.NEOFORGE_PARTICLE_TYPES.register(id.path, Supplier{ particle }) as Holder<T>
 
 fun platformCreateAspectRegistry(): Registry<Aspect> = RegistryBuilder(ASPECT_REGISTRY_KEY).sync(true).defaultKey(PRIMAL_ASPECTS[0].id).create()//LostArcanaNeoForge.NEOFORGE_ASPECT_REGISTRY
 

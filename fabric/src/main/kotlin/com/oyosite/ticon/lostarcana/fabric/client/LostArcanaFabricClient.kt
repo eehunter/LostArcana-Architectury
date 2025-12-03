@@ -35,6 +35,7 @@ import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRenderHandle
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.minecraft.client.gui.screens.MenuScreens
+import net.minecraft.client.particle.ParticleRenderType
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.core.BlockPos
@@ -69,6 +70,8 @@ class LostArcanaFabricClient : ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), WARDED_JAR.value())
 
         MenuScreens.register(ARCANE_WORKBENCH_MENU_SCREEN.value(), ::ArcaneWorkbenchScreen)
+
+
 
         LostArcanaClient.initClient()
     }

@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.VisLightBlockEntity
 import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
+import com.oyosite.ticon.lostarcana.client.fx.registerParticlesClient
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.RAW_ASPECT_COMPONENT
 import com.oyosite.ticon.lostarcana.item.WandItem
@@ -40,6 +41,7 @@ object LostArcanaClient {
         EntityModelLayerRegistry.register(CRUCIBLE_CONTENTS_MODEL_LAYER, CrucibleBlockEntityRenderer::getTexturedModelData)
         EntityRendererRegistry.register(AURA_NODE, ::AuraNodeEntityRenderer)
 
+        registerParticlesClient()
 
         /*(0 until 4).forEach {
             MolangQueries.setActorVariable<ScrubberBaseBlockEntity>("query.defluxer$it") { actor ->

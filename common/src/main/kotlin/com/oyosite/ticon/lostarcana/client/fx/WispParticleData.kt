@@ -13,7 +13,7 @@ import net.minecraft.network.codec.StreamEncoder
 /*Based on Botania code*/
 class WispParticleData(
     val pSize: Float,
-    val red: Float, val green: Float, val blue: Float,
+    val red: Float, val green: Float, val blue: Float, val alpha: Float,
     val maxAgeMultiplier: Float = 1f,
     val depthTest: Boolean = true,
     val noClip: Boolean = true,
@@ -34,6 +34,7 @@ class WispParticleData(
                     Codec.FLOAT.optionalFieldOf("r", 1f).forGetter(WispParticleData::red),
                     Codec.FLOAT.optionalFieldOf("g", 1f).forGetter(WispParticleData::green),
                     Codec.FLOAT.optionalFieldOf("b", 1f).forGetter(WispParticleData::blue),
+                    Codec.FLOAT.optionalFieldOf("a", 1f).forGetter(WispParticleData::alpha),
                     Codec.FLOAT.optionalFieldOf("maxAgeMul", 2f).forGetter(WispParticleData::maxAgeMultiplier),
                     Codec.BOOL.optionalFieldOf("depthTest", true).forGetter(WispParticleData::depthTest),
                     Codec.BOOL.optionalFieldOf("noClip", true).forGetter(WispParticleData::noClip),
@@ -48,6 +49,7 @@ class WispParticleData(
                 buf.writeFloat(d.red)
                 buf.writeFloat(d.green)
                 buf.writeFloat(d.blue)
+                buf.writeFloat(d.alpha)
                 buf.writeFloat(d.maxAgeMultiplier)
                 buf.writeBoolean(d.depthTest)
                 buf.writeBoolean(d.noClip)
@@ -56,6 +58,7 @@ class WispParticleData(
             },
             { buf: ByteBuf ->
                 WispParticleData(
+                    buf.readFloat(),
                     buf.readFloat(),
                     buf.readFloat(),
                     buf.readFloat(),

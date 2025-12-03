@@ -17,7 +17,7 @@ class WispParticleTypeFactory(val sprite: SpriteSet) : ParticleProvider<WispPart
         mz: Double
     ): Particle {
         println("Particle factory called")
-        val otpt = FXWisp(clientLevel, x, y, z, mx, my, mz, particleOptions.pSize, particleOptions.red, particleOptions.green, particleOptions.blue, particleOptions.depthTest, particleOptions.maxAgeMultiplier, particleOptions.noClip, particleOptions.gravity, particleOptions.needsRevealing)
+        val otpt = FXWisp(clientLevel, x, y, z, mx, my, mz, particleOptions.pSize, particleOptions.red, particleOptions.green, particleOptions.blue, particleOptions.alpha, particleOptions.depthTest, particleOptions.maxAgeMultiplier, particleOptions.noClip, particleOptions.gravity, particleOptions.needsRevealing)
         otpt.pickSprite(sprite)
         return otpt
     }

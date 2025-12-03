@@ -28,7 +28,7 @@ class FXWisp(
     d: Double, d1: Double, d2: Double,
     xSpeed: Double,ySpeed: Double, zSpeed: Double,
     pSize: Float,
-    red: Float, green: Float, blue: Float,
+    red: Float, green: Float, blue: Float, alpha: Float,
     val depthTest: Boolean, maxAgeMultiplier: Float,
     noClip: Boolean, pGravity: Float,
     val needsRevealing: Boolean
@@ -41,7 +41,7 @@ class FXWisp(
         rCol = red
         gCol = green
         bCol = blue
-        //alpha = 0.375F
+        this.alpha = alpha//alpha = 0.375F
 
         gravity = pGravity
 
@@ -57,7 +57,9 @@ class FXWisp(
     }
 
 
-    var quadSize = (this.random.nextFloat() * 0.5F + 0.5F) * 2.0F * pSize;
+    init {
+        quadSize = (this.random.nextFloat() * 0.5F + 0.5F) * 2.0F * pSize
+    }
     val moteParticleScale = quadSize
     val moteHalfLife = lifetime / 2
 

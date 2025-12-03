@@ -101,7 +101,7 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
                     Minecraft.getInstance().particleEngine.add(p)
                 }*/
             }
-            level().addParticle(WispParticleData(1f, 1f, 1f, 1f, needsRevealing = true), pos.x, pos.y, pos.z, 0.0, 0.0, 0.0)
+            level().addParticle(WispParticleData(0.5f, 1f, 1f, 1f, 0.25f, 4f, needsRevealing = true), pos.x, pos.y, pos.z, 0.0, 0.0, 0.0)
             if (flux > 5 && random.nextFloat() < (.25f - 1f / flux) / 4)
                 if (releaseFluxAtLocation(level(), pos, 1f, listOf(this)))
                     flux--

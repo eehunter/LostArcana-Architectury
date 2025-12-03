@@ -22,6 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 import kotlin.math.min
 
 class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityType, level), AuraSource {
+    constructor(level: Level): this(AURA_NODE.value(), level)
 
     override var vis: Float = 0f
     override var flux: Float =  0f

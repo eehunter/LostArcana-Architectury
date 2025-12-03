@@ -29,6 +29,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
@@ -39,6 +41,9 @@ import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
 
 //val holderCache = mutableMapOf<ParticleType<*>, RegistrySupplier<ParticleType<*>>>()
+
+fun <C: FeatureConfiguration, T: Feature<C>>platformRegisterFeature(id: String, featureSupplier: ()->T): Holder<T> =
+    LostArcanaNeoForge.NEOFORGE_FEATURES.register(id, featureSupplier) as Holder<T>
 
 fun <U: ParticleOptions, T: ParticleType<U>>platformRegisterParticleType(id: Identifier, particle: T): Holder<T> =
     LostArcanaNeoForge.NEOFORGE_PARTICLE_TYPES.register(id.path, Supplier{ particle }) as Holder<T>

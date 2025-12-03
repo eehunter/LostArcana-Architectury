@@ -23,6 +23,7 @@ import com.oyosite.ticon.lostarcana.recipe.SalisMundisTransformRecipe
 import com.oyosite.ticon.lostarcana.recipe.SpecialCastingItemModificationRecipe
 import com.oyosite.ticon.lostarcana.recipe.UniqueVisCrystalRecipe
 import com.oyosite.ticon.lostarcana.util.invoke
+import com.oyosite.ticon.lostarcana.worldgen.feature.AURA_NODE_FEATURE
 import dev.architectury.platform.Platform
 import dev.architectury.registry.level.entity.EntityAttributeRegistry
 import net.minecraft.world.entity.EntityType
@@ -47,6 +48,8 @@ object LostArcana {
         ITEM_REGISTRY.register()
         if(Platform.isFabric())ATTRIBUTE_REGISTRY.register()
         ENTITY_REGISTRY.register()
+
+        AURA_NODE_FEATURE
 
         ArcaneWorkbenchRecipe.Type("arcane_workbench")
         ArcaneWorkbenchRecipe.Serializer("arcane_workbench")

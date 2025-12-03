@@ -52,6 +52,7 @@ class FeatureProvider(val dataOutput: FabricDataOutput, registryLookupFuture: Co
         )
 
         neoforgeBiomeModification("sparse_greatwood_features", "neoforge:add_features", "'#c:is_forest'", "['lostarcana:trees_greatwood_sparse']", "vegetal_decoration")
+        neoforgeBiomeModification("overworld_aura_node", "neoforge:add_features", "'#c:is_overworld'", "['lostarcana:placed_aura_node']", "top_layer_modification")
 
         future
     }

@@ -1,6 +1,7 @@
 @file:JvmName("PlatformKtImpl")
 package com.oyosite.ticon.lostarcana.util.fabric
 
+import com.google.common.base.Supplier
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
@@ -33,9 +34,14 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
+
+fun <C: FeatureConfiguration, T: Feature<C>>platformRegisterFeature(id: String, featureSupplier: ()->T): Holder<T> =
+    Registry.registerForHolder(BuiltInRegistries.FEATURE, LostArcana.id(id), featureSupplier()) as Holder<T>
 
 fun <U: ParticleOptions, T: ParticleType<U>>platformRegisterParticleType(id: Identifier, particle: T): Holder<T> =
     Registry.registerForHolder(BuiltInRegistries.PARTICLE_TYPE, id, particle) as Holder<T>

@@ -96,6 +96,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_CASTING_EFFECT_TYPES.register(modEventBus)
         NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
         NEOFORGE_PARTICLE_TYPES.register(modEventBus)
+        NEOFORGE_FEATURES.register(modEventBus)
 
         FLUID_TYPES.register(modEventBus)
 
@@ -146,6 +147,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_ASPECTS = DeferredRegister.create(ASPECT_REGISTRY_KEY, LostArcana.MOD_ID)
         val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, LostArcana.MOD_ID)
+        val NEOFORGE_FEATURES = DeferredRegister.create(Registries.FEATURE, LostArcana.MOD_ID)
 
         val FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, LostArcana.MOD_ID)
 

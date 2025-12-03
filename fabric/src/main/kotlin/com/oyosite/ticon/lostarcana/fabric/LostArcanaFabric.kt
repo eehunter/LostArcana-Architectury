@@ -25,6 +25,7 @@ import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
 import com.oyosite.ticon.lostarcana.unaryPlus
 import com.oyosite.ticon.lostarcana.worldgen.feature.INFUSED_STONE_FEATURES
+import com.oyosite.ticon.lostarcana.worldgen.feature.PLACED_AURA_NODE
 import com.oyosite.ticon.lostarcana.worldgen.feature.SPARSE_GREATWOOD_FEATURE
 import dev.architectury.core.item.ArchitecturyBucketItem
 import dev.architectury.registry.registries.DeferredRegister
@@ -82,6 +83,7 @@ class LostArcanaFabric : ModInitializer {
             //.or(BiomeSelectors.tag(BiomeTags.IS_HILL)).or(BiomeSelectors.tag(BiomeTags.HAS_VILLAGE_PLAINS))
             , GenerationStep.Decoration.VEGETAL_DECORATION, SPARSE_GREATWOOD_FEATURE)
 
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, PLACED_AURA_NODE)
 
         DATA_COMPONENT_REGISTRAR.register()
         init()

@@ -37,11 +37,11 @@ class AuraNodeEntityRenderer(context: EntityRendererProvider.Context) : EntityRe
         multiBufferSource: MultiBufferSource,
         i: Int
     ) {
-        val player = Minecraft.getInstance().player?:return
+        /*val player = Minecraft.getInstance().player?:return
         if (!player.canSeeAuraNode) return
         poseStack {
             root.render(poseStack,multiBufferSource.getBuffer(RENDER_TYPE), i, OverlayTexture.NO_OVERLAY)
-        }
+        }*/
     }
 
     companion object{

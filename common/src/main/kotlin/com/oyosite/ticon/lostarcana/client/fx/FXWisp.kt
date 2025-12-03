@@ -4,10 +4,13 @@ import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.BufferBuilder
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.Tesselator
+import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.blaze3d.vertex.VertexFormat
 import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.canSeeAuraNode
 import com.oyosite.ticon.lostarcana.client.restoreLastFilter
 import com.oyosite.ticon.lostarcana.client.setFilterSave
+import net.minecraft.client.Camera
 import net.minecraft.client.Minecraft
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.ParticleRenderType
@@ -28,6 +31,7 @@ class FXWisp(
     red: Float, green: Float, blue: Float,
     val depthTest: Boolean, maxAgeMultiplier: Float,
     noClip: Boolean, pGravity: Float,
+    val needsRevealing: Boolean
 ) : TextureSheetParticle(level, d, d1, d2) {
 
     init {
@@ -83,6 +87,13 @@ class FXWisp(
             this.yd *= 0.98
             this.zd *= 0.98
         }
+    }
+
+    override fun render(vertexConsumer: VertexConsumer, camera: Camera, f: Float) {
+        if(needsRevealing){
+            if(Minecraft.getInstance().player?.canSeeAuraNode == false) return
+        }
+        super.render(vertexConsumer, camera, f)
     }
 
     override fun getRenderType(): ParticleRenderType = //ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT//

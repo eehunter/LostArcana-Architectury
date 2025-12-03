@@ -17,6 +17,7 @@ class WispParticleData(
     val maxAgeMultiplier: Float = 1f,
     val depthTest: Boolean = true,
     val noClip: Boolean = true,
+    val needsRevealing: Boolean = false,
     val gravity: Float = 0f,
 ) : ParticleOptions {
 
@@ -36,6 +37,7 @@ class WispParticleData(
                     Codec.FLOAT.optionalFieldOf("maxAgeMul", 2f).forGetter(WispParticleData::maxAgeMultiplier),
                     Codec.BOOL.optionalFieldOf("depthTest", true).forGetter(WispParticleData::depthTest),
                     Codec.BOOL.optionalFieldOf("noClip", true).forGetter(WispParticleData::noClip),
+                    Codec.BOOL.optionalFieldOf("needsRevealing", false).forGetter(WispParticleData::needsRevealing),
                     Codec.FLOAT.optionalFieldOf("gravity", 0.0f).forGetter(WispParticleData::gravity)
                 ).apply(it, ::WispParticleData)
             }
@@ -49,6 +51,7 @@ class WispParticleData(
                 buf.writeFloat(d.maxAgeMultiplier)
                 buf.writeBoolean(d.depthTest)
                 buf.writeBoolean(d.noClip)
+                buf.writeBoolean(d.needsRevealing)
                 buf.writeFloat(d.gravity)
             },
             { buf: ByteBuf ->
@@ -58,6 +61,7 @@ class WispParticleData(
                     buf.readFloat(),
                     buf.readFloat(),
                     buf.readFloat(),
+                    buf.readBoolean(),
                     buf.readBoolean(),
                     buf.readBoolean(),
                     buf.readFloat()

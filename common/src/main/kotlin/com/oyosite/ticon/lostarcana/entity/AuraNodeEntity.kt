@@ -29,6 +29,8 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
     override var flux: Float =  0f
     var visCapacity = 100f
     val maxVis get() = max(visCapacity-flux*.8f, visCapacity * 0.1f)
+    var fluxAffinityInternal: Float = 100f
+    override val fluxAffinity: Float get() = fluxAffinityInternal
 
     override fun setLevel(level: Level) {
         if(level!=this.level()) {
@@ -56,6 +58,7 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
         flux = compoundTag.getFloat("flux")
         if(compoundTag.contains("visCap"))visCapacity = compoundTag.getFloat("visCap")
         vis = if(compoundTag.contains("storedVis")) compoundTag.getFloat("storedVis") else maxVis
+        if(compoundTag.contains("fluxAffinity"))fluxAffinityInternal = compoundTag.getFloat("fluxAffinity")
 
         level()?.auraSources?.add(this)
     }
@@ -74,6 +77,7 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
         compoundTag.putFloat("visCap", visCapacity)
         compoundTag.putFloat("storedVis", vis)
         compoundTag.putFloat("flux", flux)
+        compoundTag.putFloat("fluxAffinity", fluxAffinity)
     }
 
     //TODO: Make aura nodes pickable

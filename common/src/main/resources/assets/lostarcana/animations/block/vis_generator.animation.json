@@ -16,12 +16,12 @@
 				},
 				"bone3": {
 					"scale": {
-						"vector": ["query.virial_engine3", "query.virial_engine3", "query.virial_engine3"]
+						"vector": ["query.virial_engine2", "query.virial_engine2", "query.virial_engine2"]
 					}
 				},
 				"bone4": {
 					"scale": {
-						"vector": ["query.virial_engine2", "query.virial_engine2", "query.virial_engine2"]
+						"vector": ["query.virial_engine3", "query.virial_engine3", "query.virial_engine3"]
 					}
 				}
 			}

@@ -32,7 +32,6 @@ class ArcaneWorkbenchRecipeContainer(): Container, RecipeInput {
 
     override fun removeItem(i: Int, j: Int): ItemStack {
         val stack = ContainerHelper.removeItem(inputStacks, i, j)
-        //if(!stack.isEmpty)
         setChanged()
         return stack
     }

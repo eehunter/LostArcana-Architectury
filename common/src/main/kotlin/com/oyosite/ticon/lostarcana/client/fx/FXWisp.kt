@@ -1,11 +1,7 @@
 package com.oyosite.ticon.lostarcana.client.fx
 
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.BufferBuilder
-import com.mojang.blaze3d.vertex.DefaultVertexFormat
-import com.mojang.blaze3d.vertex.Tesselator
-import com.mojang.blaze3d.vertex.VertexConsumer
-import com.mojang.blaze3d.vertex.VertexFormat
+import com.mojang.blaze3d.vertex.*
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.canSeeAuraNode
 import com.oyosite.ticon.lostarcana.client.restoreLastFilter
@@ -19,7 +15,6 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.texture.TextureAtlas
 import net.minecraft.client.renderer.texture.TextureManager
 import org.lwjgl.opengl.GL11
-import java.util.function.Supplier
 
 
 /*Based on Botania code*/
@@ -41,7 +36,7 @@ class FXWisp(
         rCol = red
         gCol = green
         bCol = blue
-        this.alpha = alpha//alpha = 0.375F
+        this.alpha = alpha
 
         gravity = pGravity
 
@@ -98,33 +93,26 @@ class FXWisp(
         super.render(vertexConsumer, camera, f)
     }
 
-    override fun getRenderType(): ParticleRenderType = //ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT//
-        (if(depthTest) NORMAL_RENDER else DIW_RENDER).also{ println("Fetching render type") }
+    override fun getRenderType(): ParticleRenderType =
+        (if(depthTest) NORMAL_RENDER else DIW_RENDER)
 
     companion object{
-        private var testFlag = true
         private fun beginRenderCommon(tesselator: Tesselator, textureManager: TextureManager): BufferBuilder {
             Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer()
             RenderSystem.depthMask(false)
             RenderSystem.enableBlend()
             RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE)
 
-            if(testFlag){
-                println("Beginning particle render")
-                testFlag = false
-            }
             RenderSystem.setShader { GameRenderer.getParticleShader() }
 
             RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES)
             val tex = textureManager.getTexture(TextureAtlas.LOCATION_PARTICLES)
-            //ClientXplatAbstractions.INSTANCE.setFilterSave(tex, true, false)
             setFilterSave(tex, filter = true, mipmap = false)
             return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE)
         }
 
         private fun endRenderCommon() {
-            val tex = Minecraft.getInstance().getTextureManager().getTexture(TextureAtlas.LOCATION_PARTICLES)
-            //ClientXplatAbstractions.INSTANCE.restoreLastFilter(tex)
+            val tex = Minecraft.getInstance().textureManager.getTexture(TextureAtlas.LOCATION_PARTICLES)
             restoreLastFilter(tex)
             RenderSystem.disableBlend()
             RenderSystem.depthMask(true)

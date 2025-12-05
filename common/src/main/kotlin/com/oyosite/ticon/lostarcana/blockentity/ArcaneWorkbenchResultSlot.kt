@@ -35,7 +35,6 @@ class ArcaneWorkbenchResultSlot(
                 if(be.level==null)return@also
                 input.drainAura(be.level!!, recipe.auraCost)
             }
-            //remainder = recipe.getRemainingItems(input)
         }
         for(ly in 0 until craftInput.height())for (lx in 0 until craftInput.width()) {
             val i = lx + left + (ly + top) * 3

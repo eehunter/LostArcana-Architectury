@@ -1,11 +1,9 @@
 package com.oyosite.ticon.lostarcana.block
 
-import com.oyosite.ticon.lostarcana.blockentity.VIS_LIGHT_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.VisLightBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.particles.DustParticleOptions
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
 import net.minecraft.world.item.component.DyedItemColor
 import net.minecraft.world.level.BlockGetter
@@ -14,8 +12,6 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.RenderShape
 import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.entity.BlockEntityTicker
-import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
 import net.minecraft.world.phys.shapes.CollisionContext

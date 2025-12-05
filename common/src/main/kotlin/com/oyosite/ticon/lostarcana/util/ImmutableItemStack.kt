@@ -36,7 +36,7 @@ interface ImmutableItemStack {
             ).apply(it){ stack: ItemStack -> stack.immutableCopy }
         }
 
-        val STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, ImmutableItemStack>({buf, immutableStack ->
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ImmutableItemStack> = StreamCodec.of<RegistryFriendlyByteBuf, ImmutableItemStack>({ buf, immutableStack ->
             ItemStack.STREAM_CODEC.encode(buf, immutableStack.copy)
         }){ buf ->
             ItemStack.STREAM_CODEC.decode(buf).immutableCopy

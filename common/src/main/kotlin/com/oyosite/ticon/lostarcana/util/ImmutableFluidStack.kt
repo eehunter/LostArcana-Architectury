@@ -1,9 +1,7 @@
 package com.oyosite.ticon.lostarcana.util
 
 import com.mojang.serialization.Codec
-import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.architectury.fluid.FluidStack
-import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.component.PatchedDataComponentMap
 import net.minecraft.network.RegistryFriendlyByteBuf
@@ -43,7 +41,6 @@ interface ImmutableFluidStack {
             override fun equals(other: Any?): Boolean {
                 if(other !is ImmutableFluidStack)return false
                 return other.amount == amount && other.fluid == fluid && other.components == components
-                //(other as? ImmutableFluidStack)?.copy?.equals(stack) ?: (other as? FluidStack)?.equals(stack) ?: false
             }
 
             override fun hashCode(): Int = stack.hashCode()
@@ -52,17 +49,7 @@ interface ImmutableFluidStack {
         }
 
         val CODEC: Codec<ImmutableFluidStack> = FluidStack.CODEC.xmap({it.immutableCopy}, ImmutableFluidStack::copy)
-            /*RecordCodecBuilder.create {
-            it.group(
-                FluidStack.CODEC.fieldOf("stack").forGetter(ImmutableFluidStack::copy)
-            ).apply(it){ stack: FluidStack -> stack.immutableCopy }
-        }*/
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ImmutableFluidStack> = FluidStack.STREAM_CODEC.map({ it.immutableCopy }, ImmutableFluidStack::copy)
-            /*StreamCodec.of<RegistryFriendlyByteBuf, ImmutableFluidStack>({ buf, immutableStack ->
-            FluidStack.STREAM_CODEC.encode(buf, immutableStack.copy)
-        }){ buf ->
-            FluidStack.STREAM_CODEC.decode(buf).immutableCopy
-        }*/
     }
 }

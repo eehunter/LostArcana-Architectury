@@ -11,7 +11,7 @@ import net.minecraft.world.entity.MobCategory
 import java.util.function.Supplier
 
 
-val ENTITY_REGISTRY = DeferredRegister.create(LostArcana.MOD_ID, Registries.ENTITY_TYPE)
+val ENTITY_REGISTRY: DeferredRegister<EntityType<*>> = DeferredRegister.create(LostArcana.MOD_ID, Registries.ENTITY_TYPE)
 
 
 

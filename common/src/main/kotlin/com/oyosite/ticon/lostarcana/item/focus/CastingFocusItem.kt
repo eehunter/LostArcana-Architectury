@@ -1,13 +1,11 @@
 package com.oyosite.ticon.lostarcana.item.focus
 
 import com.oyosite.ticon.lostarcana.item.CastingItem
-import com.oyosite.ticon.lostarcana.item.FOCUS
 import com.oyosite.ticon.lostarcana.item.FOCUS_COMPONENT
 import com.oyosite.ticon.lostarcana.item.FOCUS_EFFECT
 import com.oyosite.ticon.lostarcana.util.ImmutableItemStack.Companion.immutableCopy
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack

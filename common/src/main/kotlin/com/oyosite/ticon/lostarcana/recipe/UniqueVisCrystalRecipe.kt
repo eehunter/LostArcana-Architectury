@@ -43,13 +43,11 @@ class UniqueVisCrystalRecipe(val base: ShapelessRecipe): CraftingRecipe {
     override fun getSerializer(): RecipeSerializer<*> = Serializer
 
     object Serializer: RecipeSerializer<UniqueVisCrystalRecipe>{
-        val CODEC = MapCodec.of(
+        val CODEC: MapCodec<UniqueVisCrystalRecipe> = MapCodec.of(
             RecipeSerializer.SHAPELESS_RECIPE.codec().comap(UniqueVisCrystalRecipe::base),
             RecipeSerializer.SHAPELESS_RECIPE.codec().map(::UniqueVisCrystalRecipe),
         )
-        //.of(UniqueVisCrystalRecipe::base, MapCodec.assumeMapUnsafe(ShapelessRecipe.CODEC))
-
-        val STREAM_CODEC = RecipeSerializer.SHAPELESS_RECIPE.streamCodec().map(::UniqueVisCrystalRecipe, UniqueVisCrystalRecipe::base)
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, UniqueVisCrystalRecipe> = RecipeSerializer.SHAPELESS_RECIPE.streamCodec().map(::UniqueVisCrystalRecipe, UniqueVisCrystalRecipe::base)
 
         override fun codec(): MapCodec<UniqueVisCrystalRecipe> = CODEC
 

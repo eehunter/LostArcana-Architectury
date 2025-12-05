@@ -1,7 +1,6 @@
 package com.oyosite.ticon.lostarcana.block
 
 import com.oyosite.ticon.lostarcana.blockentity.AbstractPedestalBlockEntity
-import com.oyosite.ticon.lostarcana.blockentity.RechargePedestalBlockEntity
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
 import com.oyosite.ticon.lostarcana.util.component3

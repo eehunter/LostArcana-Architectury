@@ -4,15 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.oyosite.ticon.lostarcana.blockentity.WardedJarBlockEntity
 import com.oyosite.ticon.lostarcana.client.drawArbitraryCuboid
 import dev.architectury.hooks.fluid.FluidStackHooks
-import net.minecraft.client.model.geom.PartPose
-import net.minecraft.client.model.geom.builders.CubeListBuilder
-import net.minecraft.client.model.geom.builders.LayerDefinition
-import net.minecraft.client.model.geom.builders.MeshDefinition
-import net.minecraft.client.model.geom.builders.PartDefinition
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
-import net.minecraft.core.Direction
 
 class WardedJarRenderer: BlockEntityRenderer<WardedJarBlockEntity> {
     override fun render(
@@ -25,7 +19,6 @@ class WardedJarRenderer: BlockEntityRenderer<WardedJarBlockEntity> {
     ) {
         val fluidStack = blockEntity.fluidContents
         if(fluidStack.isEmpty)return
-        val level = blockEntity.level
         val color = FluidStackHooks.getColor(fluidStack)
         val sprite = FluidStackHooks.getStillTexture(blockEntity.fluidContents)?:return
         val buffer = multiBufferSource.getBuffer(RenderType.translucent())

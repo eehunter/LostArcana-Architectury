@@ -44,13 +44,13 @@ open class CrucibleRecipe(val result: ItemStack, val catalyst: Ingredient, val a
     }
 
     object Serializer: RecipeSerializer<CrucibleRecipe>{
-        val CODEC = MapCodec.assumeMapUnsafe(RecordCodecBuilder.create { it.group(
+        val CODEC: MapCodec<CrucibleRecipe> = MapCodec.assumeMapUnsafe(RecordCodecBuilder.create { it.group(
             ItemStack.CODEC.fieldOf("result").forGetter(CrucibleRecipe::result),
             Ingredient.CODEC.fieldOf("catalyst").forGetter(CrucibleRecipe::catalyst),
             ASPECTS_CODEC.fieldOf("aspects").forGetter(CrucibleRecipe::aspects)
             ).apply(it, ::CrucibleRecipe) })
 
-        val STREAM_CODEC = StreamCodec.composite(
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, CrucibleRecipe> = StreamCodec.composite(
             ItemStack.STREAM_CODEC, CrucibleRecipe::result,
             Ingredient.CONTENTS_STREAM_CODEC, CrucibleRecipe::catalyst,
             ASPECTS_STREAM_CODEC, CrucibleRecipe::aspects,

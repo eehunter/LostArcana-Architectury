@@ -7,8 +7,6 @@ import io.netty.buffer.ByteBuf
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.network.codec.StreamDecoder
-import net.minecraft.network.codec.StreamEncoder
 
 /*Based on Botania code*/
 class WispParticleData(

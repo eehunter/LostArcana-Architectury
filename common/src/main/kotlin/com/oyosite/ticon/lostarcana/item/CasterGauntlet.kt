@@ -1,6 +1,5 @@
 package com.oyosite.ticon.lostarcana.item
 
-import com.oyosite.ticon.lostarcana.util.drainAuraAtLocation
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.item.ItemStack

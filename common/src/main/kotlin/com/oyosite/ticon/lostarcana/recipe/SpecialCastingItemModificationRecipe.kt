@@ -1,33 +1,21 @@
 package com.oyosite.ticon.lostarcana.recipe
 
-import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
-import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.item.CastingItem
-import com.oyosite.ticon.lostarcana.item.CastingItemComponent
 import com.oyosite.ticon.lostarcana.item.ModularCastingItemPart
 import com.oyosite.ticon.lostarcana.item.WAND_ITEM
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.client.Minecraft
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.NonNullList
-import net.minecraft.core.component.DataComponentType
-import net.minecraft.core.registries.Registries
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.TransientCraftingContainer
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.CraftingBookCategory
-import net.minecraft.world.item.crafting.CraftingInput
-import net.minecraft.world.item.crafting.CraftingRecipe
-import net.minecraft.world.item.crafting.RecipeManager
-import net.minecraft.world.item.crafting.RecipeSerializer
-import net.minecraft.world.item.crafting.RecipeType
+import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.Level
 
-class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): CraftingRecipe {
+class SpecialCastingItemModificationRecipe(): CraftingRecipe {
     override fun category(): CraftingBookCategory = CraftingBookCategory.EQUIPMENT
 
     // This is probably a terrible idea.
@@ -46,7 +34,6 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
                 y = j
                 break
             }
-            //if(i == recipeInput.width()-1 && j == recipeInput.height()-1) return false
         }
         if(castingItem.isEmpty) return false
 
@@ -65,10 +52,6 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
         recipeInput: CraftingInput,
         provider: HolderLookup.Provider
     ): ItemStack? {
-        /*return ctx.evaluate { level, pos -> assembleWithLevel(recipeInput, provider, level) }.orElseGet {
-            Minecraft.getInstance().level?.let { assembleWithLevel(recipeInput, provider, it) }?:
-            ItemStack.EMPTY
-        }*/
         return assembleWithRecipeManager(recipeInput, provider, recipeManager?: Minecraft.getInstance().level?.recipeManager ?: return null)
     }
 
@@ -76,7 +59,7 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
         recipeInput: CraftingInput,
         provider: HolderLookup.Provider,
         recipeManager: RecipeManager
-    ): ItemStack?{
+    ): ItemStack{
         var castingItem: ItemStack = ItemStack.EMPTY
         var (x, y) = -1 to -1
         for(i in 0 until recipeInput.width()) for(j in 0 until recipeInput.height()){
@@ -133,8 +116,12 @@ class SpecialCastingItemModificationRecipe(/*val ctx: ContainerLevelAccess*/): C
 
         override fun codec(): MapCodec<SpecialCastingItemModificationRecipe> = CODEC
 
-        val STREAM_CODEC = StreamCodec.unit<RegistryFriendlyByteBuf, SpecialCastingItemModificationRecipe> ( (SpecialCastingItemModificationRecipe()) )
+        val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, SpecialCastingItemModificationRecipe> = StreamCodec.unit<RegistryFriendlyByteBuf, SpecialCastingItemModificationRecipe> ( (SpecialCastingItemModificationRecipe()) )
 
         override fun streamCodec(): StreamCodec<RegistryFriendlyByteBuf, SpecialCastingItemModificationRecipe> = STREAM_CODEC
+    }
+
+    override fun hashCode(): Int {
+        return recipeManager?.hashCode() ?: 0
     }
 }

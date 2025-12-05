@@ -65,7 +65,6 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
 
     override fun onSyncedDataUpdated(list: List<SynchedEntityData.DataValue<*>>) {
         super.onSyncedDataUpdated(list)
-        //list.forEach { if(it.id == VIS_DATA.id) vis = it.value as Float }
         level()?.auraSources?.add(this)
     }
 
@@ -97,16 +96,8 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
         }
         if(vis < maxVis)
             vis += .01f
-        //if (vis > maxVis) vis = maxVis
 
         if(level().gameTime % 20L == 0L) {
-            if(level().isClientSide){
-                /*val d = WispParticleData.CODEC.codec().parse(JsonOps.INSTANCE, JsonObject()).resultOrPartial().getOrNull()
-                if(d != null) {
-                    val p = FXWisp(Minecraft.getInstance().level!!, pos.x, pos.y, pos.z, 0.0, 0.0, 0.0, d.pSize, d.red, d.green, d.blue, d.depthTest, d.maxAgeMultiplier, d.noClip, d.gravity)
-                    Minecraft.getInstance().particleEngine.add(p)
-                }*/
-            }
             level().addParticle(WispParticleData(0.2f + visCapacity/150f, 1f, 1f, 1f, 0.25f, 4f, needsRevealing = true), pos.x, pos.y, pos.z, 0.0, 0.0, 0.0)
             if (flux > 5 && random.nextFloat() < (.25f - 1f / flux) / 4)
                 if (releaseFluxAtLocation(level(), pos, 1f, listOf(this)))

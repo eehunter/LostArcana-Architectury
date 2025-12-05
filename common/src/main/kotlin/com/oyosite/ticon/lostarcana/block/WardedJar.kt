@@ -36,11 +36,6 @@ class WardedJar(properties: Properties) : Block(properties), EntityBlock {
         interactionHand: InteractionHand,
         blockHitResult: BlockHitResult
     ): ItemInteractionResult {
-        /*val be = (level.getBlockEntity(blockPos) as? WardedJarBlockEntity)?:return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
-        val heldStack = player.getItemInHand(interactionHand)
-        if(heldStack.item == Items.BUCKET){
-
-        }*/
         return handleTankBucketInteraction(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult)
     }
 

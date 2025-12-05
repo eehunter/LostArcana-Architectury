@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.item.focus
 
+import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
@@ -20,11 +21,7 @@ abstract class CastingFocusEffectType<T: CastingFocusEffect> {
         val REGISTRY_KEY: ResourceKey<Registry<CastingFocusEffectType<*>>> = ResourceKey.createRegistryKey(LostArcana.id("casting_focus_effects"))
         val REGISTRY: Registry<CastingFocusEffectType<*>> = platformCreateCastingFocusEffectTypeRegistry()
         
-        val CODEC = REGISTRY.byNameCodec()
+        val CODEC: Codec<CastingFocusEffectType<*>> = REGISTRY.byNameCodec()
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, CastingFocusEffectType<*>> = StreamCodec.composite(Identifier.STREAM_CODEC, REGISTRY::getKey, REGISTRY::get)
-        
-        init {
-
-        }
     }
 }

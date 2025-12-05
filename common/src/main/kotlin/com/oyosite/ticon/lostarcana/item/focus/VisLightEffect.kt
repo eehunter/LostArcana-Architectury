@@ -54,28 +54,7 @@ data class VisLightEffect(val optionalLightLevel: Optional<Byte>, val optionalCo
                 ByteBufCodecs.optional(ByteBufCodecs.BYTE), VisLightEffect::optionalLightLevel,
                 ByteBufCodecs.optional(ByteBufCodecs.INT), VisLightEffect::optionalColor,
                 ::VisLightEffect
-                )
-            /*get() = StreamCodec.of({ buf, effect ->
-                var mask = 0
-                var a = false
-                var b = false
-                if(effect.lightLevel != 15.toByte()) {
-                    mask = mask or 1
-                    a = true
-                }
-                if(effect.color != DEFAULT_COLOR) {
-                    mask = mask or 2
-                    b = true
-                }
-                buf.writeByte(mask)
-                if(a)buf.writeByte(effect.lightLevel.toInt())
-                if(b)buf.writeInt(effect.color.toInt())
-            }){ buf ->
-                val mask = buf.readByte().toInt()
-                val lightLevel = Optional.ofNullable(if (mask and 1 != 0)buf.readByte() else null)
-                val color = Optional.ofNullable(if (mask and 2 != 0)buf.readInt() else null)
-                VisLightEffect(lightLevel, color)
-            }*/
+            )
 
     }
 

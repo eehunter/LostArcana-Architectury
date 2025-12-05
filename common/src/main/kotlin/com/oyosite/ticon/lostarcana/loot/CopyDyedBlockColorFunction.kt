@@ -1,5 +1,6 @@
 package com.oyosite.ticon.lostarcana.loot
 
+import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.oyosite.ticon.lostarcana.util.ColorableBlockEntity
 import net.minecraft.core.component.DataComponents
@@ -22,7 +23,7 @@ class CopyDyedBlockColorFunction(list: List<LootItemCondition>) : LootItemCondit
     }
 
     companion object{
-        val CODEC = RecordCodecBuilder.mapCodec { commonFields(it).apply(it, ::CopyDyedBlockColorFunction) }
+        val CODEC: MapCodec<CopyDyedBlockColorFunction> = RecordCodecBuilder.mapCodec { commonFields(it).apply(it, ::CopyDyedBlockColorFunction) }
         val TYPE = LootItemFunctionType(CODEC)
     }
 }

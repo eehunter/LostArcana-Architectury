@@ -65,7 +65,7 @@ open class ThaumometerItem(properties: Properties) : Item(properties) {
             items.addAll(itemEntities.map(ItemEntity::getItem))
             items.addAll(platformGetInventoryContentsIfPresent(level,context.clickedPos))
             items.forEach {
-                println(it)
+                //println(it)
                 (it.item as? ThaumometerScannable)?.onScan(context)
                 THAUMOMETER_SCAN_TRIGGER.value().trigger(player, BuiltInRegistries.ITEM.getKey(it.item), Registries.ITEM.location())
                 if(it.item is BlockItem)

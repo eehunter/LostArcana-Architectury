@@ -4,7 +4,6 @@ import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.aspects
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.VisLight
-import com.oyosite.ticon.lostarcana.block.scrubber.ScrubberBaseBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.VisLightBlockEntity
 import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
@@ -16,12 +15,9 @@ import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry
 import net.minecraft.client.color.block.BlockColor
 import net.minecraft.client.color.item.ItemColor
-import net.minecraft.client.color.item.ItemColors
 import net.minecraft.client.model.geom.ModelLayerLocation
 import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.component.DyedItemColor
-import net.minecraft.world.level.block.entity.BlockEntity
-import software.bernie.geckolib.loading.math.MolangQueries
 
 object LostArcanaClient {
     val VIS_CRYSTAL_ITEM_COLOR = ItemColor{ stack, _ -> (stack.aspects[0].aspect.color or 0xFF000000u).toInt()  }

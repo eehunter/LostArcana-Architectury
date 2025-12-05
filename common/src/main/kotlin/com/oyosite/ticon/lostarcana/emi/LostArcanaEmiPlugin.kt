@@ -33,8 +33,8 @@ import net.minecraft.world.item.crafting.RecipeType
 
 @EmiEntrypoint
 class LostArcanaEmiPlugin: EmiPlugin {
-    val E = EmiIngredient.of(Ingredient.EMPTY)
-    val visCrystal = EmiIngredient.of(PRIMAL_ASPECTS.map(Aspect::unaryPlus).map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, it) } }.map{ Ingredient.of(it) }.map(EmiIngredient::of))
+    val E: EmiIngredient = EmiIngredient.of(Ingredient.EMPTY)
+    val visCrystal: EmiIngredient = EmiIngredient.of(PRIMAL_ASPECTS.map(Aspect::unaryPlus).map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, it) } }.map{ Ingredient.of(it) }.map(EmiIngredient::of))
 
     val allVisCrystals = ASPECT_REGISTRY.map { ItemStack(+VIS_CRYSTAL).apply{ set(ASPECT_COMPONENT, +it) } }.map(EmiStack::of)
 
@@ -63,7 +63,6 @@ class LostArcanaEmiPlugin: EmiPlugin {
             Component.translatable(UNIQUE_VIS_CRYSTAL_TOOLTIP)
         ))
         for (recipe in recipeManager.getAllRecipesFor(RecipeType.CRAFTING).filter { it.value is UniqueVisCrystalRecipe }){
-            //if(recipe.value !is UniqueVisCrystalRecipe)continue
             emiRegistry.removeRecipes(recipe.id)
             emiRegistry.addDeferredRecipes{
                 it.accept(EmiCraftingRecipe(

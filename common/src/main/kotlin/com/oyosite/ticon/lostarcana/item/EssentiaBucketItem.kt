@@ -1,18 +1,11 @@
 package com.oyosite.ticon.lostarcana.item
 
 import dev.architectury.core.item.ArchitecturyBucketItem
-import dev.architectury.injectables.annotations.ExpectPlatform
-import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluid
-import net.minecraft.world.phys.BlockHitResult
-import java.util.function.Supplier
 
 class EssentiaBucketItem(fluid: ()-> Fluid, properties: Properties) : ArchitecturyBucketItem(fluid, properties) {
 

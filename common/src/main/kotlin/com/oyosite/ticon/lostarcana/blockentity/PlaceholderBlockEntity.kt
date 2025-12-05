@@ -28,14 +28,11 @@ class PlaceholderBlockEntity(pos: BlockPos, state: BlockState = (+MULTIBLOCK_PLA
             field = value
         }
 
-    //var shapeDelegate: ShapeDelegate? = null
-
     override fun loadAdditional(tag: CompoundTag, provider: HolderLookup.Provider) {
         linkedPos = BlockPos.of(tag.getLong("linkPos"))
         val linkBlockId = Identifier.parse(tag.getString("linkBlock"))
         val linkBlock = linkBlockId.takeIf(BuiltInRegistries.BLOCK::containsKey)?.let(BuiltInRegistries.BLOCK::get)
         linkedBlock = linkBlock as? MultiblockController
-        //shapeDelegate = linkBlock as? ShapeDelegate
     }
 
     override fun saveAdditional(tag: CompoundTag, provider: HolderLookup.Provider) {

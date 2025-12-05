@@ -17,25 +17,40 @@ import com.oyosite.ticon.lostarcana.util.ImmutableFluidStack
 import io.netty.buffer.ByteBuf
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 
-val ASPECT_CODEC: Codec<AspectStack> = RecordCodecBuilder.create { it.group(
+
+val RAW_ASPECT_CODEC: Codec<Aspect> = ASPECT_REGISTRY.byNameCodec()
+val RAW_ASPECT_STREAM_CODEC: StreamCodec<ByteBuf, Aspect> = StreamCodec.composite(Identifier.STREAM_CODEC, ASPECT_REGISTRY::getKey, ASPECT_REGISTRY::get)
+val RAW_ASPECT_COMPONENT: DataComponentType<Aspect> = dataComponentType(RAW_ASPECT_CODEC, RAW_ASPECT_STREAM_CODEC)
+
+
+val ASPECT_CODEC: Codec<AspectStack> = RecordCodecBuilder.create { b -> b.group(
     Codec.STRING.fieldOf("aspect").forGetter{ it.aspect.id.toString() },
-        Codec.INT.fieldOf("amount").forGetter{ it.amount },
-    ).apply(it, ::AspectStack) }
+        Codec.INT.fieldOf("amount").forGetter(AspectStack::amount),
+    ).apply(b, ::AspectStack) }
 
-val ASPECTS_CODEC = Codec.list(ASPECT_CODEC)
+val ASPECTS_CODEC: Codec<List<AspectStack>> = Codec.list(ASPECT_CODEC)
 
-val ASPECT_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStack>({ buf, aspectStack ->
+val ASPECT_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, AspectStack> = StreamCodec.composite(
+    RAW_ASPECT_STREAM_CODEC, AspectStack::aspect,
+    ByteBufCodecs.INT, AspectStack::amount,
+    ::AspectStack
+)
+
+
+    /*StreamCodec.of<RegistryFriendlyByteBuf, AspectStack>({ buf, aspectStack ->
     buf.writeInt(aspectStack.amount)
     Identifier.STREAM_CODEC.encode(buf, aspectStack.aspect.id)
 }){ buf ->
     val amount = buf.readInt()
     val id = Identifier.STREAM_CODEC.decode(buf)
     amount * buf.registryAccess().registry(ASPECT_REGISTRY_KEY).get().get(id)!!
-}
+}*/
 
-val ASPECTS_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>({ buf, aspects ->
+val ASPECTS_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, List<AspectStack>> = ASPECT_STREAM_CODEC.apply(ByteBufCodecs.list())
+    /*StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>({ buf, aspects ->
     buf.writeInt(aspects.size)
     for(aspect in aspects){
         ASPECT_STREAM_CODEC.encode(buf, aspect)
@@ -46,29 +61,32 @@ val ASPECTS_STREAM_CODEC = StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>
         aspects += ASPECT_STREAM_CODEC.decode(buf)
     }
     aspects
+}*/
+
+val ASPECT_COMPONENT: DataComponentType<AspectStack> = dataComponentType(ASPECT_CODEC, ASPECT_STREAM_CODEC)
+val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = dataComponentType(ASPECTS_CODEC, ASPECTS_STREAM_CODEC)
+
+val VIS_STORAGE_COMPONENT: DataComponentType<Float> = dataComponentType(Codec.FLOAT, ByteBufCodecs.FLOAT)
+
+val WAND_CAP: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
+val WAND_CAP_2: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
+val WAND_CAP_3: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
+val WAND_CORE: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
+
+val RESONATOR: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
+
+val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = dataComponentType(CastingFocusEffect.CODEC, CastingFocusEffect.STREAM_CODEC)
+
+val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = dataComponentType(CastingFocusHolder.CODEC, CastingFocusHolder.STREAM_CODEC)
+
+val SINGLE_FLUID_STORAGE_COMPONENT: DataComponentType<ImmutableFluidStack> = dataComponentType(ImmutableFluidStack.CODEC, ImmutableFluidStack.STREAM_CODEC)
+
+val DEFLUXER_PROPERTIES: DataComponentType<DefluxerProperties> = dataComponentType(DefluxerProperties.CODEC, DefluxerProperties.STREAM_CODEC)
+val VIRIAL_ENGINE_PROPERTIES: DataComponentType<VirialEngineProperties> = dataComponentType(VirialEngineProperties.CODEC, VirialEngineProperties.STREAM_CODEC)
+
+inline fun <reified T>dataComponentType(codec: Codec<T>? = null, streamCodec: StreamCodec<in RegistryFriendlyByteBuf, T>? = null): DataComponentType<T>{
+    val t: DataComponentType.Builder<T> = DataComponentType.builder()
+    codec?.let(t::persistent)
+    streamCodec?.let(t::networkSynchronized)
+    return t.build()
 }
-
-val ASPECT_COMPONENT: DataComponentType<AspectStack> = DataComponentType.builder<AspectStack>().networkSynchronized(ASPECT_STREAM_CODEC).persistent(ASPECT_CODEC).build()
-val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = DataComponentType.builder<AspectStacks>().networkSynchronized(ASPECTS_STREAM_CODEC).persistent(ASPECTS_CODEC).build()
-
-val RAW_ASPECT_CODEC = ASPECT_REGISTRY.byNameCodec()
-val RAW_ASPECT_STREAM_CODEC = StreamCodec.composite(Identifier.STREAM_CODEC, ASPECT_REGISTRY::getKey, ASPECT_REGISTRY::get)
-val RAW_ASPECT_COMPONENT: DataComponentType<Aspect> = DataComponentType.builder<Aspect>().persistent(RAW_ASPECT_CODEC).networkSynchronized(RAW_ASPECT_STREAM_CODEC).build()
-
-val VIS_STORAGE_COMPONENT: DataComponentType<Float> = DataComponentType.builder<Float>().persistent(Codec.FLOAT).networkSynchronized(StreamCodec.of(ByteBuf::writeFloat, ByteBuf::readFloat)).build()
-
-val WAND_CAP: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-val WAND_CAP_2: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-val WAND_CAP_3: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-val WAND_CORE: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-
-val RESONATOR: DataComponentType<CastingItemComponent> = DataComponentType.builder<CastingItemComponent>().persistent(CastingItemComponent.CODEC).networkSynchronized(CastingItemComponent.STREAM_CODEC).build()
-
-val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = DataComponentType.builder<CastingFocusEffect>().persistent(CastingFocusEffect.CODEC).networkSynchronized(CastingFocusEffect.STREAM_CODEC).build()
-
-val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = DataComponentType.builder<CastingFocusHolder>().persistent(CastingFocusHolder.CODEC).networkSynchronized(CastingFocusHolder.STREAM_CODEC).build()
-
-val SINGLE_FLUID_STORAGE_COMPONENT: DataComponentType<ImmutableFluidStack> = DataComponentType.builder<ImmutableFluidStack>().persistent(ImmutableFluidStack.CODEC).networkSynchronized(ImmutableFluidStack.STREAM_CODEC).build()
-
-val DEFLUXER_PROPERTIES: DataComponentType<DefluxerProperties> = DataComponentType.builder<DefluxerProperties>().persistent(DefluxerProperties.CODEC).networkSynchronized(DefluxerProperties.STREAM_CODEC).build()
-val VIRIAL_ENGINE_PROPERTIES: DataComponentType<VirialEngineProperties> = DataComponentType.builder<VirialEngineProperties>().persistent(VirialEngineProperties.CODEC).networkSynchronized(VirialEngineProperties.STREAM_CODEC).build()

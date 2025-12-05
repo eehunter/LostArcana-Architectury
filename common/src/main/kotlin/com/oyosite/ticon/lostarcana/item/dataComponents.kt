@@ -7,8 +7,6 @@ import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.AspectStack
-import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
-import com.oyosite.ticon.lostarcana.aspect.times
 import com.oyosite.ticon.lostarcana.block.generator.VirialEngineProperties
 import com.oyosite.ticon.lostarcana.block.scrubber.DefluxerProperties
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
@@ -39,29 +37,7 @@ val ASPECT_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, AspectStack> = Str
     ::AspectStack
 )
 
-
-    /*StreamCodec.of<RegistryFriendlyByteBuf, AspectStack>({ buf, aspectStack ->
-    buf.writeInt(aspectStack.amount)
-    Identifier.STREAM_CODEC.encode(buf, aspectStack.aspect.id)
-}){ buf ->
-    val amount = buf.readInt()
-    val id = Identifier.STREAM_CODEC.decode(buf)
-    amount * buf.registryAccess().registry(ASPECT_REGISTRY_KEY).get().get(id)!!
-}*/
-
 val ASPECTS_STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, List<AspectStack>> = ASPECT_STREAM_CODEC.apply(ByteBufCodecs.list())
-    /*StreamCodec.of<RegistryFriendlyByteBuf, AspectStacks>({ buf, aspects ->
-    buf.writeInt(aspects.size)
-    for(aspect in aspects){
-        ASPECT_STREAM_CODEC.encode(buf, aspect)
-    }
-}){ buf ->
-    val aspects = mutableListOf<AspectStack>()
-    for(i in 0 until buf.readInt()){
-        aspects += ASPECT_STREAM_CODEC.decode(buf)
-    }
-    aspects
-}*/
 
 val ASPECT_COMPONENT: DataComponentType<AspectStack> = dataComponentType(ASPECT_CODEC, ASPECT_STREAM_CODEC)
 val ASPECTS_COMPONENT: DataComponentType<AspectStacks> = dataComponentType(ASPECTS_CODEC, ASPECTS_STREAM_CODEC)

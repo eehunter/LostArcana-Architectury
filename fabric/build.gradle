@@ -47,7 +47,7 @@ dependencies {
 
     modImplementation "maven.modrinth:fusion-connected-textures:$rootProject.fusion_version-fabric-mc$rootProject.fusion_mc_version"
 
-    modRuntimeOnly "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
 
     modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${emi_version}"

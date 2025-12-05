@@ -2,8 +2,8 @@ package com.oyosite.ticon.lostarcana.neoforge
 
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY
-import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
+import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
 import com.oyosite.ticon.lostarcana.aspect.registerBuiltinAspects
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
@@ -14,38 +14,19 @@ import com.oyosite.ticon.lostarcana.block.NITOR
 import com.oyosite.ticon.lostarcana.block.VIS_LIGHT
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID_ATTRIBUTES
-import com.oyosite.ticon.lostarcana.blockentity.ARCANE_COLUMN_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.ARCANE_PEDESTAL_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.ARCANE_WORKBENCH_MENU_SCREEN
-import com.oyosite.ticon.lostarcana.blockentity.CRUCIBLE_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.FLUX_SCRUBBER_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.MAGIC_BRICKS_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.RECHARGE_PEDESTAL_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.VIRIAL_NODE_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.VIS_GENERATOR_BLOCK_ENTITY
-import com.oyosite.ticon.lostarcana.blockentity.WARDED_JAR_BLOCK_ENTITY
+import com.oyosite.ticon.lostarcana.blockentity.*
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient
 import com.oyosite.ticon.lostarcana.client.LostArcanaClient.AURA_NODE_MODEL_LAYER
-import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneColumnRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.ArcaneWorkbenchScreen
-import com.oyosite.ticon.lostarcana.client.blockentity.CrucibleBlockEntityRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.MagicBricksBlockEntityRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.PedestalRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.ScrubberRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.VirialNodeRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.VisGeneratorRenderer
-import com.oyosite.ticon.lostarcana.client.blockentity.WardedJarRenderer
+import com.oyosite.ticon.lostarcana.client.blockentity.*
 import com.oyosite.ticon.lostarcana.client.entity.AuraNodeEntityRenderer
 import com.oyosite.ticon.lostarcana.client.fx.registerParticlesClient
 import com.oyosite.ticon.lostarcana.entity.AURA_NODE
 import com.oyosite.ticon.lostarcana.item.*
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.item.focus.registerBuiltinEffectTypes
-import com.oyosite.ticon.lostarcana.item.neoforge.EssentiaBucketWrapper
 import com.oyosite.ticon.lostarcana.neoforge.block.EssentiaFluidType
 import com.oyosite.ticon.lostarcana.neoforge.block.WardedJarFluidHandler
 import com.oyosite.ticon.lostarcana.unaryPlus
-import dev.architectury.hooks.fluid.LiquidBlockHooks
 import dev.architectury.hooks.fluid.forge.FluidStackHooksForge
 import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.core.BlockPos
@@ -194,8 +175,8 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @Suppress("unchecked_cast")
         fun createDefaultAttributes(event: EntityAttributeModificationEvent) {
             event.types.forEach {
-                event.add(it, ARCANE_INSIGHT as Holder<Attribute>)
-                event.add(it, ARCANE_SIGHT as Holder<Attribute>)
+                event.add(it, ARCANE_INSIGHT)
+                event.add(it, ARCANE_SIGHT)
             }
 
 
@@ -250,10 +231,6 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             }, ESSENTIA_FLUID.value().fluidType)
         }
 
-        //fun registerCommonExtensions(event: )
-
-        //fun registerFluidTypes(event: FluidType)
-
         @SubscribeEvent
         @JvmStatic
         fun onCommonSetup(event: FMLCommonSetupEvent) {
@@ -262,7 +239,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @SubscribeEvent
         @JvmStatic
         fun onClientSetup(event: FMLClientSetupEvent){
-            //LostArcanaClient.initClient()
+
         }
 
     }

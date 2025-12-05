@@ -3,8 +3,6 @@ package com.oyosite.ticon.lostarcana.client.neoforge
 
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
-import dev.architectury.registry.client.particle.ParticleProviderRegistry
-import dev.architectury.registry.registries.RegistrySupplier
 import net.minecraft.client.particle.ParticleProvider
 import net.minecraft.client.particle.SpriteSet
 import net.minecraft.client.renderer.texture.AbstractTexture
@@ -13,7 +11,6 @@ import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 import net.neoforged.neoforge.client.textures.FluidSpriteCache
-import java.util.function.Consumer
 
 
 fun setFilterSave(texture: AbstractTexture, filter: Boolean, mipmap: Boolean){

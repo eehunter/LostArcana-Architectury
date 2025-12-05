@@ -8,6 +8,7 @@ import com.oyosite.ticon.lostarcana.item.CastingItem
 import com.oyosite.ticon.lostarcana.unaryPlus
 import net.minecraft.core.Vec3i
 import net.minecraft.network.RegistryFriendlyByteBuf
+import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.level.GameType
 import java.util.Optional
@@ -48,8 +49,13 @@ data class VisLightEffect(val optionalLightLevel: Optional<Byte>, val optionalCo
             Codec.BYTE.optionalFieldOf("light").forGetter(VisLightEffect::optionalLightLevel),
             Codec.INT.optionalFieldOf("color").forGetter(VisLightEffect::optionalColor)
         ).apply(it, ::VisLightEffect) })
-        override val streamCodec: StreamCodec<RegistryFriendlyByteBuf, VisLightEffect>
-            get() = StreamCodec.of({ buf, effect ->
+        override val streamCodec: StreamCodec<RegistryFriendlyByteBuf, VisLightEffect> =
+            StreamCodec.composite(
+                ByteBufCodecs.optional(ByteBufCodecs.BYTE), VisLightEffect::optionalLightLevel,
+                ByteBufCodecs.optional(ByteBufCodecs.INT), VisLightEffect::optionalColor,
+                ::VisLightEffect
+                )
+            /*get() = StreamCodec.of({ buf, effect ->
                 var mask = 0
                 var a = false
                 var b = false
@@ -69,7 +75,7 @@ data class VisLightEffect(val optionalLightLevel: Optional<Byte>, val optionalCo
                 val lightLevel = Optional.ofNullable(if (mask and 1 != 0)buf.readByte() else null)
                 val color = Optional.ofNullable(if (mask and 2 != 0)buf.readInt() else null)
                 VisLightEffect(lightLevel, color)
-            }
+            }*/
 
     }
 

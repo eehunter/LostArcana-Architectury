@@ -51,7 +51,7 @@ val WAND_CORE: DataComponentType<CastingItemComponent> = dataComponentType(Casti
 
 val RESONATOR: DataComponentType<CastingItemComponent> = dataComponentType(CastingItemComponent.CODEC, CastingItemComponent.STREAM_CODEC)
 
-val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = dataComponentType(CastingFocusEffect.CODEC, CastingFocusEffect.STREAM_CODEC)
+val FOCUS_EFFECT: DataComponentType<CastingFocusEffect> = dataComponentType(CastingFocusEffect.CODEC.codec(), CastingFocusEffect.STREAM_CODEC)
 
 val FOCUS_COMPONENT: DataComponentType<CastingFocusHolder> = dataComponentType(CastingFocusHolder.CODEC, CastingFocusHolder.STREAM_CODEC)
 

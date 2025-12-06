@@ -26,7 +26,7 @@ interface CastingFocusEffect {
             }
         }
 
-        val CODEC: Codec<CastingFocusEffect> = CastingFocusEffectType.CODEC.dispatch<CastingFocusEffect>("type", {it.type}, {it.codec})
+        val CODEC: MapCodec<CastingFocusEffect> = CastingFocusEffectType.CODEC.dispatchMap<CastingFocusEffect>("type", {it.type}, {it.codec})
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, CastingFocusEffect> = CastingFocusEffectType.STREAM_CODEC.dispatch<CastingFocusEffect>( {it.type} ){it.streamCodec}
 

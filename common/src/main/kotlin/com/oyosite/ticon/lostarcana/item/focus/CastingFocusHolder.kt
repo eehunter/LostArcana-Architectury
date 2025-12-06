@@ -12,7 +12,7 @@ data class CastingFocusHolder(val stack: ImmutableItemStack, val effect: Casting
     val asPair = MCPair(stack, effect)
 
     companion object{
-        val PAIR_CODEC: Codec<MCPair<ImmutableItemStack, CastingFocusEffect>> = Codec.pair(ImmutableItemStack.CODEC, CastingFocusEffect.CODEC)
+        val PAIR_CODEC: Codec<MCPair<ImmutableItemStack, CastingFocusEffect>> = Codec.pair(ImmutableItemStack.CODEC, CastingFocusEffect.CODEC.codec())
         val CODEC: Codec<CastingFocusHolder> = Codec.of(PAIR_CODEC.comap(CastingFocusHolder::asPair), PAIR_CODEC.map(::CastingFocusHolder))
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, CastingFocusHolder> = StreamCodec.composite(ImmutableItemStack.STREAM_CODEC, CastingFocusHolder::stack, CastingFocusEffect.STREAM_CODEC, CastingFocusHolder::effect, ::CastingFocusHolder)

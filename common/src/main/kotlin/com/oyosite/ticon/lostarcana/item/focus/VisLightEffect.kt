@@ -12,6 +12,7 @@ import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.level.GameType
 import java.util.Optional
+import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrElse
 import kotlin.jvm.optionals.getOrNull
 
@@ -48,7 +49,7 @@ data class VisLightEffect(val optionalLightLevel: Optional<Byte>, val optionalCo
         override val codec: MapCodec<VisLightEffect> = MapCodec.assumeMapUnsafe(RecordCodecBuilder.create { it.group(
             Codec.BYTE.optionalFieldOf("light").forGetter(VisLightEffect::optionalLightLevel),
             Codec.INT.optionalFieldOf("color").forGetter(VisLightEffect::optionalColor)
-        ).apply(it, ::VisLightEffect) })
+        ).apply(it, ::VisLightEffect) }).orElse(Consumer{ i: String -> println(i) }, VisLightEffect())
         override val streamCodec: StreamCodec<RegistryFriendlyByteBuf, VisLightEffect> =
             StreamCodec.composite(
                 ByteBufCodecs.optional(ByteBufCodecs.BYTE), VisLightEffect::optionalLightLevel,

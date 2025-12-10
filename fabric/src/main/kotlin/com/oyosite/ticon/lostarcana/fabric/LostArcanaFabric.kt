@@ -5,6 +5,8 @@ import com.oyosite.ticon.lostarcana.LostArcana.init
 import com.oyosite.ticon.lostarcana.aspect.AER
 import com.oyosite.ticon.lostarcana.aspect.registerBuiltinAspects
 import com.oyosite.ticon.lostarcana.aspect.registry.AspectRegistry
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY_INTERNAL
+import com.oyosite.ticon.lostarcana.aura.registerBuiltinNodeTraits
 import com.oyosite.ticon.lostarcana.block.fluid.ESSENTIA_FLUID
 import com.oyosite.ticon.lostarcana.blockentity.WARDED_JAR_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
@@ -61,6 +63,7 @@ class LostArcanaFabric : ModInitializer {
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
         registerBuiltinAspects()
+        registerBuiltinNodeTraits()
 
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspect")) { ASPECT_COMPONENT }
         DATA_COMPONENT_REGISTRAR.register(LostArcana.id("aspects")) { ASPECTS_COMPONENT }

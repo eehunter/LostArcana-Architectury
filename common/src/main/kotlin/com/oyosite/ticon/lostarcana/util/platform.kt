@@ -2,6 +2,7 @@ package com.oyosite.ticon.lostarcana.util
 
 import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.aspect.Aspect
+import com.oyosite.ticon.lostarcana.aura.AuraNodeTrait
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import dev.architectury.injectables.annotations.ExpectPlatform
@@ -10,6 +11,7 @@ import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
@@ -29,6 +31,11 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
 
+@ExpectPlatform
+fun <T: AuraNodeTrait>platformRegisterNodeTrait(id: String, nodeTrait: T): Holder<T> = throw AssertionError("No platform implementation.")
+
+@ExpectPlatform
+fun <T>platformCreateSyncedRegistry(key: ResourceKey<Registry<T>>): Registry<T> = throw AssertionError("No platform implementation.")
 
 @ExpectPlatform
 fun <C: FeatureConfiguration, T: Feature<C>>platformRegisterFeature(id: String, featureSupplier: ()->T): Holder<T> = throw AssertionError("No platform implementation.")

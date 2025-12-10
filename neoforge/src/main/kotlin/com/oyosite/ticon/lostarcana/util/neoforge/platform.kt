@@ -7,6 +7,7 @@ import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.PRIMAL_ASPECTS
+import com.oyosite.ticon.lostarcana.aura.AuraNodeTrait
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffectType
 import com.oyosite.ticon.lostarcana.neoforge.LostArcanaNeoForge
@@ -15,6 +16,7 @@ import net.minecraft.core.Holder
 import net.minecraft.core.Registry
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.player.Player
@@ -38,6 +40,11 @@ import net.neoforged.neoforge.fluids.FluidUtil
 import net.neoforged.neoforge.items.IItemHandler
 import net.neoforged.neoforge.registries.RegistryBuilder
 import java.util.function.Supplier
+
+fun <T: AuraNodeTrait>platformRegisterNodeTrait(id: String, nodeTrait: T): Holder<T> =
+    LostArcanaNeoForge.NEOFORGE_NODE_TRAITS.register(id, Supplier{ nodeTrait }) as Holder<T>
+
+fun <T>platformCreateSyncedRegistry(key: ResourceKey<Registry<T>>): Registry<T> = RegistryBuilder(key).sync(true).create()
 
 fun <C: FeatureConfiguration, T: Feature<C>>platformRegisterFeature(id: String, featureSupplier: ()->T): Holder<T> =
     LostArcanaNeoForge.NEOFORGE_FEATURES.register(id, featureSupplier) as Holder<T>

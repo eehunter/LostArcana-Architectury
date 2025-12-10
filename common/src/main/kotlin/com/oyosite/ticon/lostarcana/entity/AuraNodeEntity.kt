@@ -3,7 +3,11 @@ package com.oyosite.ticon.lostarcana.entity
 import com.google.gson.JsonObject
 import com.mojang.serialization.DynamicOps
 import com.mojang.serialization.JsonOps
+import com.oyosite.ticon.lostarcana.LostArcana
+import com.oyosite.ticon.lostarcana.aura.AuraNodeTrait
 import com.oyosite.ticon.lostarcana.aura.AuraSource
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY_INTERNAL
 import com.oyosite.ticon.lostarcana.client.fx.FXWisp
 import com.oyosite.ticon.lostarcana.client.fx.WispParticleData
 import com.oyosite.ticon.lostarcana.util.auraSources
@@ -11,6 +15,10 @@ import com.oyosite.ticon.lostarcana.util.releaseFluxAtLocation
 import com.oyosite.ticon.lostarcana.util.triggerFluxEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.ListTag
+import net.minecraft.nbt.NbtOps
+import net.minecraft.nbt.StringTag
+import net.minecraft.nbt.Tag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -31,6 +39,8 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
     val maxVis get() = max(visCapacity-flux*.8f, visCapacity * 0.1f)
     var fluxAffinityInternal: Float = 100f
     override val fluxAffinity: Float get() = fluxAffinityInternal
+
+    val traits = mutableListOf<AuraNodeTrait>()
 
     override fun setLevel(level: Level) {
         if(level!=this.level()) {
@@ -60,6 +70,11 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
         vis = if(compoundTag.contains("storedVis")) compoundTag.getFloat("storedVis") else maxVis
         if(compoundTag.contains("fluxAffinity"))fluxAffinityInternal = compoundTag.getFloat("fluxAffinity")
 
+        if(compoundTag.contains("traits")){
+            traits.clear()
+            compoundTag.getList("traits", Tag.TAG_STRING.toInt()).forEach { NODE_TRAIT_REGISTRY_INTERNAL.get(LostArcana.id(it.asString))?.run(traits::add) }
+        }
+
         level()?.auraSources?.add(this)
     }
 
@@ -77,6 +92,14 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
         compoundTag.putFloat("storedVis", vis)
         compoundTag.putFloat("flux", flux)
         compoundTag.putFloat("fluxAffinity", fluxAffinity)
+
+        if(!traits.isEmpty()) {
+            val traitsList = ListTag()
+            traits.forEach { traitsList.add(StringTag.valueOf(NODE_TRAIT_REGISTRY_INTERNAL.getKey(it).toString())) }
+            compoundTag.put("traits", traitsList)
+            //val traitsTag = CompoundTag()
+            //AuraNodeTrait.LIST_CODEC.encode(traits, NbtOps.INSTANCE, traitsTag)
+        }
     }
 
     //TODO: Make aura nodes pickable
@@ -95,7 +118,9 @@ class AuraNodeEntity(entityType: EntityType<*>, level: Level) : Entity(entityTyp
             flux = entityData.get(FLUX_DATA)
         }
         if(vis < maxVis)
-            vis += .01f
+            vis += traits.fold(max(0f, min(.01f, maxVis-vis))){ l, t -> t.onGenerateVis(level(), this, l) }
+
+        traits.forEach { it.onTick(level(), this) }
 
         if(level().gameTime % 20L == 0L) {
             level().addParticle(WispParticleData(0.2f + visCapacity/150f, 1f, 1f, 1f, 0.25f, 4f, needsRevealing = true), pos.x, pos.y, pos.z, 0.0, 0.0, 0.0)

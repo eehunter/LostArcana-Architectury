@@ -8,6 +8,9 @@ import com.oyosite.ticon.lostarcana.aspect.registerBuiltinAspects
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_INSIGHT
 import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.attribute.ATTRIBUTE_REGISTRY
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY_INTERNAL
+import com.oyosite.ticon.lostarcana.aura.registerBuiltinNodeTraits
 import com.oyosite.ticon.lostarcana.block.INFUSED_STONES
 import com.oyosite.ticon.lostarcana.block.InfusedStoneBlock
 import com.oyosite.ticon.lostarcana.block.NITOR
@@ -80,12 +83,14 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         NEOFORGE_LOOT_FUNCTIONS.register(modEventBus)
         NEOFORGE_PARTICLE_TYPES.register(modEventBus)
         NEOFORGE_FEATURES.register(modEventBus)
+        NEOFORGE_NODE_TRAITS.register(modEventBus)
 
         FLUID_TYPES.register(modEventBus)
 
         CastingFocusEffectType.REGISTRY
         registerBuiltinEffectTypes()
         registerBuiltinAspects()
+        registerBuiltinNodeTraits()
 
         PRIMAL_ASPECTS
         ATTRIBUTE_REGISTRY
@@ -131,6 +136,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         val NEOFORGE_LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, LostArcana.MOD_ID)
         val NEOFORGE_FEATURES = DeferredRegister.create(Registries.FEATURE, LostArcana.MOD_ID)
+        val NEOFORGE_NODE_TRAITS = DeferredRegister.create(NODE_TRAIT_REGISTRY, LostArcana.MOD_ID)
 
         val FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, LostArcana.MOD_ID)
 
@@ -140,6 +146,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
         @JvmStatic
         fun registerRegistries(event: NewRegistryEvent) {
             event.register(ASPECT_REGISTRY)
+            event.register(NODE_TRAIT_REGISTRY_INTERNAL)
             event.register(CastingFocusEffectType.REGISTRY)
         }
 

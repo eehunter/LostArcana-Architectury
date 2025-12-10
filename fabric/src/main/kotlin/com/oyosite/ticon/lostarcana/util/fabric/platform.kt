@@ -6,6 +6,8 @@ import com.oyosite.ticon.lostarcana.Identifier
 import com.oyosite.ticon.lostarcana.LostArcana
 import com.oyosite.ticon.lostarcana.aspect.Aspect
 import com.oyosite.ticon.lostarcana.aspect.ASPECT_REGISTRY_KEY
+import com.oyosite.ticon.lostarcana.aura.AuraNodeTrait
+import com.oyosite.ticon.lostarcana.aura.NODE_TRAIT_REGISTRY_INTERNAL
 import com.oyosite.ticon.lostarcana.blockentity.WardedJarBlockEntity
 import com.oyosite.ticon.lostarcana.fabric.block.WardedJarFluidStorage
 import com.oyosite.ticon.lostarcana.item.focus.CastingFocusEffect
@@ -20,6 +22,7 @@ import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.Container
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.ItemInteractionResult
@@ -39,6 +42,13 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType
 import net.minecraft.world.phys.BlockHitResult
+
+fun <T: AuraNodeTrait>platformRegisterNodeTrait(id: String, nodeTrait: T): Holder<T> =
+    Registry.registerForHolder(NODE_TRAIT_REGISTRY_INTERNAL, LostArcana.id(id), nodeTrait) as Holder<T>
+
+fun <T>platformCreateSyncedRegistry(key: ResourceKey<Registry<T>>): Registry<T> = FabricRegistryBuilder.createSimple(key)
+    .attribute(RegistryAttribute.SYNCED)
+    .buildAndRegister()
 
 fun <C: FeatureConfiguration, T: Feature<C>>platformRegisterFeature(id: String, featureSupplier: ()->T): Holder<T> =
     Registry.registerForHolder(BuiltInRegistries.FEATURE, LostArcana.id(id), featureSupplier()) as Holder<T>

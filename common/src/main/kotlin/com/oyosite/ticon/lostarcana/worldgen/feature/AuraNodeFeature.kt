@@ -2,6 +2,8 @@ package com.oyosite.ticon.lostarcana.worldgen.feature
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.oyosite.ticon.lostarcana.aura.PureNodeTrait
+import com.oyosite.ticon.lostarcana.aura.TaintedNodeTrait
 import com.oyosite.ticon.lostarcana.entity.AuraNodeEntity
 import com.oyosite.ticon.lostarcana.worldgen.feature.AuraNodeFeature.Config
 import io.netty.buffer.ByteBuf
@@ -20,7 +22,14 @@ class AuraNodeFeature(codec: Codec<Config>) : Feature<Config>(codec) {
 
         val p = blockPos.above(randomSource.nextIntBetweenInclusive(cfg.minHeight,cfg.minHeight))
         if(level.getBlockState(p).isAir){
-            level.addFreshEntity(AuraNodeEntity(level.level).apply{moveTo(p.center); visCapacity = cfg.minCapacity+cfg.capRange*randomSource.nextFloat(); vis = visCapacity; fluxAffinityInternal = cfg.minFluxAffinity+randomSource.nextFloat()*cfg.fluxAffinityRange})
+            level.addFreshEntity(AuraNodeEntity(level.level).apply{
+                moveTo(p.center)
+                visCapacity = cfg.minCapacity+cfg.capRange*randomSource.nextFloat()
+                vis = visCapacity
+                fluxAffinityInternal = cfg.minFluxAffinity+randomSource.nextFloat()*cfg.fluxAffinityRange
+                if(randomSource.nextFloat() < 0.01) traits.add(PureNodeTrait)
+                if(randomSource.nextFloat() < 0.01) traits.add(TaintedNodeTrait)
+            })
             return true
         }
         return false

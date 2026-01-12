@@ -27,28 +27,30 @@ import java.util.*
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
-val TALLOW = "tallow" * { Item(Item.Properties()) }
+val itemProp get() = Item.Properties().`arch$tab`(TAB)
 
-val ALCHEMICAL_BRASS_INGOT = "alchemical_brass_ingot" * { Item(Item.Properties()) }
-val ALCHEMICAL_BRASS_NUGGET = "alchemical_brass_nugget" * { Item(Item.Properties()) }
-val THAUMIUM_INGOT = "thaumium_ingot" * { Item(Item.Properties()) }
-val THAUMIUM_NUGGET = "thaumium_nugget" * { Item(Item.Properties()) }
+val TALLOW = "tallow" * { Item(itemProp) }
 
-val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(Item.Properties()) }
-val SALIS_MUNDIS = "salis_mundis" * { SalisMundisItem(Item.Properties()) }
+val ALCHEMICAL_BRASS_INGOT = "alchemical_brass_ingot" * { Item(itemProp) }
+val ALCHEMICAL_BRASS_NUGGET = "alchemical_brass_nugget" * { Item(itemProp) }
+val THAUMIUM_INGOT = "thaumium_ingot" * { Item(itemProp) }
+val THAUMIUM_NUGGET = "thaumium_nugget" * { Item(itemProp) }
 
-val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1)) }
-val IRON_WAND_CAP = "iron_wand_cap" * { WandCap(Item.Properties(), 0.95f, 0xAAAAAAu) }
-val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(Item.Properties(), 1f, 0xffdb05u) }
-val THAUMIUM_WAND_CAP = "thaumium_wand_cap" * { WandCap(Item.Properties(), 1.05f, 0x6e00a0u) }
-val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(Item.Properties(), 25f, 0x75461fu) }
-val GREATWOOD_WAND_CORE = "greatwood_wand_core" * { WandCore(Item.Properties(), 50f, 0x503015u) }
+val VIS_CRYSTAL = "vis_crystal" * { VisCrystalItem(itemProp) }
+val SALIS_MUNDIS = "salis_mundis" * { SalisMundisItem(itemProp) }
 
-val WAND_ITEM = "wand" * { WandItem(Item.Properties().stacksTo(1).fireResistant(), 0f) }
-val CASTER_GAUNTLET = "caster_gauntlet" * { CasterGauntlet(Item.Properties().stacksTo(1).component(WAND_CAP, (+IRON_WAND_CAP).castingItemComponent).fireResistant()) }
+val CRUDE_CASTER_GAUNTLET = "crude_caster_gauntlet" * { CasterGauntlet(itemProp.stacksTo(1)) }
+val IRON_WAND_CAP = "iron_wand_cap" * { WandCap(itemProp, 0.95f, 0xAAAAAAu) }
+val GOLD_WAND_CAP = "gold_wand_cap" * { WandCap(itemProp, 1f, 0xffdb05u) }
+val THAUMIUM_WAND_CAP = "thaumium_wand_cap" * { WandCap(itemProp, 1.05f, 0x6e00a0u) }
+val WOOD_WAND_CORE = "wood_wand_core" * { WandCore(itemProp, 25f, 0x75461fu) }
+val GREATWOOD_WAND_CORE = "greatwood_wand_core" * { WandCore(itemProp, 50f, 0x503015u) }
 
-val FOCUS = "casting_focus" * { CastingFocusItem(Item.Properties().stacksTo(1).fireResistant()) }
-val TEST_FOCUS = "test_light_focus" * { CastingFocusItem(Item.Properties().stacksTo(1).fireResistant().component(FOCUS_EFFECT, VisLightEffect())) }
+val WAND_ITEM = "wand" * { WandItem(itemProp.stacksTo(1).fireResistant(), 0f) }
+val CASTER_GAUNTLET = "caster_gauntlet" * { CasterGauntlet(itemProp.stacksTo(1).component(WAND_CAP, (+IRON_WAND_CAP).castingItemComponent).fireResistant()) }
+
+val FOCUS = "casting_focus" * { CastingFocusItem(itemProp.stacksTo(1).fireResistant()) }
+val TEST_FOCUS = "test_light_focus" * { CastingFocusItem(itemProp.stacksTo(1).fireResistant().component(FOCUS_EFFECT, VisLightEffect())) }
 
 val WOOD_PLANKS = itemTag("minecraft:planks")
 
@@ -59,17 +61,17 @@ val GOGGLES_OF_REVEALING_MATERIAL = "goggles_of_revealing" % {
 
     }, 22, SoundEvents.ARMOR_EQUIP_LEATHER, { Ingredient.of(COMMON_GOLD_INGOTS) }, listOf(), 0f, 0f)
 }
-val GOGGLES_OF_REVEALING = "goggles_of_revealing" * { GogglesOfRevealingItem(Item.Properties().stacksTo(1), GOGGLES_OF_REVEALING_MATERIAL) }
+val GOGGLES_OF_REVEALING = "goggles_of_revealing" * { GogglesOfRevealingItem(itemProp.stacksTo(1), GOGGLES_OF_REVEALING_MATERIAL) }
 
-val THAUMOMETER = "thaumometer" * { ThaumometerItem(Item.Properties().stacksTo(1)) }
+val THAUMOMETER = "thaumometer" * { ThaumometerItem(itemProp.stacksTo(1)) }
 
-val FLUXER = "fluxer" * { FluxerItem(Item.Properties()) }
+val FLUXER = "fluxer" * { FluxerItem(itemProp) }
 
-val PRISTINE_DEFLUXER = "pristine_defluxer" * { Item(Item.Properties().stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties(clogChance = 0.0))) }
-val INTACT_DEFLUXER = "intact_defluxer" * { Item(Item.Properties().stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties())) }
+val PRISTINE_DEFLUXER = "pristine_defluxer" * { Item(itemProp.stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties(clogChance = 0.0))) }
+val INTACT_DEFLUXER = "intact_defluxer" * { Item(itemProp.stacksTo(1).component(DEFLUXER_PROPERTIES, DefluxerProperties())) }
 
-val PRISTINE_VIRIAL_ENGINE = "pristine_virial_engine" * { Item(Item.Properties().stacksTo(1).component(VIRIAL_ENGINE_PROPERTIES, VirialEngineProperties(breakdownChance = 0.0))) }
-val INTACT_VIRIAL_ENGINE = "intact_virial_engine" * { Item(Item.Properties().stacksTo(1).component(VIRIAL_ENGINE_PROPERTIES, VirialEngineProperties())) }
+val PRISTINE_VIRIAL_ENGINE = "pristine_virial_engine" * { Item(itemProp.stacksTo(1).component(VIRIAL_ENGINE_PROPERTIES, VirialEngineProperties(breakdownChance = 0.0))) }
+val INTACT_VIRIAL_ENGINE = "intact_virial_engine" * { Item(itemProp.stacksTo(1).component(VIRIAL_ENGINE_PROPERTIES, VirialEngineProperties())) }
 
 @ExpectPlatform
 fun platformRegisterArmorMaterial(name: String, materialSupplier: ()-> ArmorMaterial): Holder<ArmorMaterial> = throw AssertionError()

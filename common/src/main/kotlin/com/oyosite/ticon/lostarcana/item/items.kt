@@ -27,6 +27,8 @@ import java.util.*
 
 val ITEM_REGISTRY:  DeferredRegister<Item>  = DeferredRegister.create(MOD_ID, Registries.ITEM)
 
+val TALLOW = "tallow" * { Item(Item.Properties()) }
+
 val ALCHEMICAL_BRASS_INGOT = "alchemical_brass_ingot" * { Item(Item.Properties()) }
 val ALCHEMICAL_BRASS_NUGGET = "alchemical_brass_nugget" * { Item(Item.Properties()) }
 val THAUMIUM_INGOT = "thaumium_ingot" * { Item(Item.Properties()) }

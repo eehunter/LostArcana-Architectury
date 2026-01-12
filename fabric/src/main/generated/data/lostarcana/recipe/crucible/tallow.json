@@ -1,0 +1,16 @@
+{
+  "type": "lostarcana:crucible",
+  "aspects": [
+    {
+      "amount": 2,
+      "aspect": "lostarcana:ignis"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "result": {
+    "count": 1,
+    "id": "lostarcana:tallow"
+  }
+}

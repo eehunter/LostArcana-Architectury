@@ -26,6 +26,9 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
         registryLookup: HolderLookup.Provider,
         translationBuilder: TranslationBuilder
     ) = translationBuilder.run{
+
+        add(TALLOW, "Magic Tallow")
+
         add(ALCHEMICAL_BRASS_INGOT)
         add(ALCHEMICAL_BRASS_NUGGET)
         add(ALCHEMICAL_BRASS_BLOCK)

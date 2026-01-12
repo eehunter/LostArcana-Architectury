@@ -111,6 +111,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
 
     override fun generateItemModels(img: ItemModelGenerators) {
+
+        img.generateFlatItem(+TALLOW, ModelTemplates.FLAT_ITEM)
+
         img.generateFlatItem(+ALCHEMICAL_BRASS_INGOT, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+ALCHEMICAL_BRASS_NUGGET, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+THAUMIUM_INGOT, ModelTemplates.FLAT_ITEM)

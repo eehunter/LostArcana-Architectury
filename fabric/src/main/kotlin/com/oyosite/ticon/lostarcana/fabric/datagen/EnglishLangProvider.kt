@@ -8,7 +8,9 @@ import com.oyosite.ticon.lostarcana.attribute.ARCANE_SIGHT
 import com.oyosite.ticon.lostarcana.block.*
 import com.oyosite.ticon.lostarcana.emi.LostArcanaEmiPlugin
 import com.oyosite.ticon.lostarcana.item.*
+import com.oyosite.ticon.lostarcana.tag.ESSENTIA_JARS
 import com.oyosite.ticon.lostarcana.tag.GREATWOOD_LOGS
+import com.oyosite.ticon.lostarcana.tag.VIS_CRYSTALS
 import com.oyosite.ticon.lostarcana.tag.WAND_CAPS
 import com.oyosite.ticon.lostarcana.tag.WAND_CORES
 import dev.architectury.registry.registries.RegistrySupplier
@@ -41,8 +43,14 @@ class EnglishLangProvider( dataOutput: FabricDataOutput,  registryLookup: Comple
 
         add(WARDED_JAR)
         add(ESSENTIA_BUCKET_ITEM)
+        add(DISSOLVER_BLOCK, "Essence Dissolver")
+        add(DISSOLVER_PLACEHOLDER, "Essence Dissolver")
+
+        add("category.lostarcana", "Lost Arcana")
+        add(ESSENTIA_JARS, "Essentia Jars")
 
         add(VIS_CRYSTAL, "Vis Crystal")
+        add(VIS_CRYSTALS, "Vis Crystals")
         add(WAND_ITEM, "Wand")
         add(WandItem.STORED_VIS_TOOLTIP, $$"%1$s Vis")
         add(CastingItem.VIS_EFFICIENCY_TOOLTIP, $$"%1$s%%")

@@ -6,6 +6,7 @@ import com.oyosite.ticon.lostarcana.block.MULTIBLOCK_PLACEHOLDER
 import com.oyosite.ticon.lostarcana.block.MultiblockController
 import com.oyosite.ticon.lostarcana.block.MultiblockPlaceholder
 import com.oyosite.ticon.lostarcana.block.ShapeDelegate
+import com.oyosite.ticon.lostarcana.blockentity.AbstractPedestalBlockEntity
 import com.oyosite.ticon.lostarcana.blockentity.PlaceholderBlockEntity
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
@@ -15,6 +16,8 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -32,6 +35,7 @@ import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams
+import net.minecraft.world.phys.BlockHitResult
 
 class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, MultiblockController  {
 
@@ -109,6 +113,22 @@ class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, M
             LootParams.Builder(level).withParameter(LootContextParams.ORIGIN, corePos.center).withParameter(LootContextParams.TOOL, tool).withOptionalParameter(LootContextParams.THIS_ENTITY, player).withOptionalParameter(
                 LootContextParams.BLOCK_ENTITY, level.getBlockEntity(corePos)).create(MultiblockPlaceholder.lootParamSet))?.map { ItemEntity(level, x,y,z, it) }
             ?.forEach(level::addFreshEntity)
+    }
+
+    override fun useItemOn(
+        itemStack: ItemStack,
+        blockState: BlockState,
+        level: Level,
+        blockPos: BlockPos,
+        player: Player,
+        interactionHand: InteractionHand,
+        blockHitResult: BlockHitResult
+    ): ItemInteractionResult {
+        if(interactionHand != InteractionHand.MAIN_HAND) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+        if(level.isClientSide)return ItemInteractionResult.SUCCESS
+        val be = level.getBlockEntity(blockPos) as? DissolverBlockEntity ?: return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION
+
+        return be.inventoryHelper.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult)
     }
 
     /*override fun getShape(

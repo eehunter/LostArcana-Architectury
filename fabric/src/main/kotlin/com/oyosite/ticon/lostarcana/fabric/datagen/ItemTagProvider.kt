@@ -4,9 +4,11 @@ package com.oyosite.ticon.lostarcana.fabric.datagen
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_LOG
 import com.oyosite.ticon.lostarcana.block.GREATWOOD_PLANKS
 import com.oyosite.ticon.lostarcana.block.NITOR
+import com.oyosite.ticon.lostarcana.block.WARDED_JAR
 import com.oyosite.ticon.lostarcana.item.GOLD_WAND_CAP
 import com.oyosite.ticon.lostarcana.item.GREATWOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.item.IRON_WAND_CAP
+import com.oyosite.ticon.lostarcana.item.VIS_CRYSTAL
 import com.oyosite.ticon.lostarcana.item.WOOD_PLANKS
 import com.oyosite.ticon.lostarcana.item.WOOD_WAND_CORE
 import com.oyosite.ticon.lostarcana.tag.*
@@ -28,6 +30,9 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         GREATWOOD_LOGS(+GREATWOOD_LOG)
         WOOD_PLANKS(+GREATWOOD_PLANKS)
+
+        ESSENTIA_JARS(+WARDED_JAR)
+        VIS_CRYSTALS(+VIS_CRYSTAL)
 
         ItemTags.DYEABLE(+NITOR)
 

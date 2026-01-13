@@ -7,6 +7,7 @@ import com.oyosite.ticon.lostarcana.block.MultiblockController
 import com.oyosite.ticon.lostarcana.block.MultiblockPlaceholder
 import com.oyosite.ticon.lostarcana.block.ShapeDelegate
 import com.oyosite.ticon.lostarcana.blockentity.AbstractPedestalBlockEntity
+import com.oyosite.ticon.lostarcana.blockentity.DISSOLVER_BLOCK_ENTITY
 import com.oyosite.ticon.lostarcana.blockentity.PlaceholderBlockEntity
 import com.oyosite.ticon.lostarcana.util.component1
 import com.oyosite.ticon.lostarcana.util.component2
@@ -30,6 +31,8 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.LootTable
@@ -131,6 +134,14 @@ class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, M
         return be.inventoryHelper.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult)
     }
 
+    override fun <T : BlockEntity> getTicker(
+        level: Level,
+        blockState: BlockState,
+        blockEntityType: BlockEntityType<T>
+    ): BlockEntityTicker<T>? {
+        return if (blockEntityType == DISSOLVER_BLOCK_ENTITY.value()) DissolverBlockEntity as BlockEntityTicker<T> else null
+    }
+
     /*override fun getShape(
         blockState: BlockState,
         blockGetter: BlockGetter,
@@ -147,6 +158,8 @@ class DissolverBlock(properties: Properties) : Block(properties), EntityBlock, M
 
     companion object{
         val multiblockLootTable: ResourceKey<LootTable> = ResourceKey.create(Registries.LOOT_TABLE, LostArcana.id("blocks/multiblock/dissolver"))
+
+
 
     //Shapes.join(box(4.0,16.0,4.0,12.0,24.0,12.0), Shapes.block(), BooleanOp.OR)
     }

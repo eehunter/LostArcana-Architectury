@@ -37,7 +37,8 @@ class DissolverBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEn
 
     val inventoryHelper = NonGuiInventoryHelper<DissolverBlockEntity>(this, items,
         { it.itemHolder.`is`(ESSENTIA_JARS) },
-        { it.item == VIS_CRYSTAL.get() }
+        { it.item == VIS_CRYSTAL.get() },
+        maxSlotAmount = { i:Int -> if(i==0) 1 else 64 }
     )
 
     /*var fluidContents: FluidStack

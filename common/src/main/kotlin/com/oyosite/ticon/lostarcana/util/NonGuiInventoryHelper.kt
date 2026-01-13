@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
 import kotlin.jvm.optionals.getOrNull
 
-class NonGuiInventoryHelper<T: BlockEntity>(val be: T, val items: MutableList<ItemStack>, vararg val slotRestrictions: (ItemStack)->Boolean, val maxSlotAmount: Int = 64) {
+class NonGuiInventoryHelper<T: BlockEntity>(val be: T, val items: MutableList<ItemStack>, vararg val slotRestrictions: (ItemStack)->Boolean, val maxSlotAmount: (Int)->Int = { 64 }) {
 
 
     fun useItemOn(
@@ -47,7 +47,7 @@ class NonGuiInventoryHelper<T: BlockEntity>(val be: T, val items: MutableList<It
                     val (x, y, z) = player.position()
                     level.addFreshEntity(ItemEntity(level, x, y, z, items[i]))
                 }
-                items[i] = player.inventory.removeItem(player.inventory.selected, maxSlotAmount)
+                items[i] = player.inventory.removeItem(player.inventory.selected, maxSlotAmount(i))
                 be.setChanged()
                 return ItemInteractionResult.SUCCESS
             }

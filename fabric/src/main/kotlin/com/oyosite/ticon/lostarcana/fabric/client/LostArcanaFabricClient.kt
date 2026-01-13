@@ -41,6 +41,7 @@ class LostArcanaFabricClient : ClientModInitializer {
         BlockEntityRendererRegistry.register(FLUX_SCRUBBER_BLOCK_ENTITY.value()) { ScrubberRenderer() }
         BlockEntityRendererRegistry.register(VIS_GENERATOR_BLOCK_ENTITY.value()) { VisGeneratorRenderer() }
         BlockEntityRendererRegistry.register(VIRIAL_NODE_BLOCK_ENTITY.value()) { VirialNodeRenderer() }
+        BlockEntityRendererRegistry.register(DISSOLVER_BLOCK_ENTITY.value()) { DissolverRenderer() }
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), *INFUSED_STONES.map<RegistrySupplier<out Block>, Block>(RegistrySupplier<out Block>::get).toTypedArray())
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), WARDED_JAR.value())

@@ -213,6 +213,7 @@ class LostArcanaNeoForge(modEventBus: IEventBus) {
             event.registerBlockEntityRenderer(FLUX_SCRUBBER_BLOCK_ENTITY.value()) { ScrubberRenderer() }
             event.registerBlockEntityRenderer(VIS_GENERATOR_BLOCK_ENTITY.value()) { VisGeneratorRenderer() }
             event.registerBlockEntityRenderer(VIRIAL_NODE_BLOCK_ENTITY.value()) { VirialNodeRenderer() }
+            event.registerBlockEntityRenderer(DISSOLVER_BLOCK_ENTITY.value()) { DissolverRenderer() }
         }
 
         @SubscribeEvent

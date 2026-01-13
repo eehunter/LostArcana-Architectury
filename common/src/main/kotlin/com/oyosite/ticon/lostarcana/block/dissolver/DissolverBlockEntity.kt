@@ -21,6 +21,7 @@ import net.minecraft.world.Container
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
@@ -85,5 +86,12 @@ class DissolverBlockEntity(blockPos: BlockPos, blockState: BlockState) : BlockEn
 
     override fun saveAdditional(compoundTag: CompoundTag, provider: HolderLookup.Provider) {
         ContainerHelper.saveAllItems(compoundTag, items, provider)
+    }
+
+    override fun setChanged() {
+        super.setChanged()
+        val level = level?:return
+        val state = level.getBlockState(blockPos)
+        level.sendBlockUpdated(blockPos, state, state, Block.UPDATE_ALL_IMMEDIATE)
     }
 }

@@ -133,6 +133,9 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
             }
         }
 
+        img.generateFlatItem(+FOCUS, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+TEST_FOCUS, ModelTemplates.FLAT_ITEM)
+
         img.register((+NITOR).asItem(), ModelTemplates.TWO_LAYERED_ITEM, "_flame", "_dot")
         img.register(+ESSENTIA_BUCKET_ITEM, ModelTemplates.TWO_LAYERED_ITEM, "", "_liquid")
 
@@ -143,6 +146,7 @@ class ModelProvider(dataOutput: FabricDataOutput) : FabricModelProvider(dataOutp
 
         img.generateFlatItem(+IRON_WAND_CAP, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+GOLD_WAND_CAP, ModelTemplates.FLAT_ITEM)
+        img.generateFlatItem(+THAUMIUM_WAND_CAP, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+WOOD_WAND_CORE, ModelTemplates.FLAT_ITEM)
         img.generateFlatItem(+GREATWOOD_WAND_CORE, ModelTemplates.FLAT_ITEM)
 
